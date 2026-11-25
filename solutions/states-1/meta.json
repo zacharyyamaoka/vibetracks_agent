@@ -1,0 +1,15 @@
+{
+  "id": "states-1",
+  "parent": "live-1",
+  "change": "One state vocabulary (vibetracks PEP 0028 \u00a75): status.json words in one table (running/on_track -> Working, watching -> Idle, waiting_on_zach -> Needs you \u2026), a parent roll-up's blocked count",
+  "vibetracks_sha": "36d230214c8354999795a4cc61e94f6a1158338d",
+  "vibetracks_ref": "36d230214c8354999795a4cc61e94f6a1158338d",
+  "vibetracks_committed": "2026-11-25T09:58:32Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane S subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:58:54Z",
+  "tags": []
+}

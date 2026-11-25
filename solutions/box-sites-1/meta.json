@@ -1,0 +1,15 @@
+{
+  "id": "box-sites-1",
+  "parent": "states-1",
+  "change": "A box opens on its own site (vibetracks PEP 0028 \u00a72-\u00a74): a package box is built by blackbox build (vendored 0.1.8) at HEAD into <vt home>/cache/box-sites, served on /box/<id>/, rebuilt when HEAD moves; bounded 16 boxes / 512 MiB",
+  "vibetracks_sha": "7093b9d4c3fd35c7ba6448887048854b9068dd0f",
+  "vibetracks_ref": "7093b9d4c3fd35c7ba6448887048854b9068dd0f",
+  "vibetracks_committed": "2026-11-25T09:58:32Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane S subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:58:54Z",
+  "tags": []
+}

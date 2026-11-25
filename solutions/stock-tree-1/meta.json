@@ -1,0 +1,15 @@
+{
+  "id": "stock-tree-1",
+  "parent": "view-2",
+  "change": "Headless Tree under the sidebar's tree and drag (PEP 0028): @headless-tree/core 1.8.1 vendored and pinned, imported from vt serve's /vendor at its build; boxtree.js its settings and a drop as act/tree move; boxes.js hands it the manual tree's rows and draws its drop line; the pointer handler gone, Alt+Up/Down kept; rebased on dec7b06",
+  "vibetracks_sha": "7fc4a9518b8ab4ae8439705b373e85b749dc2376",
+  "vibetracks_ref": "7fc4a9518b8ab4ae8439705b373e85b749dc2376",
+  "vibetracks_committed": "2026-11-25T10:30:24Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane T subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T10:30:30Z",
+  "tags": []
+}

@@ -20,13 +20,14 @@ loading come first because every other item reads them.
   - Rung: boxes
   - Needs: the tree file
   - **Done in `boxes-as-tracks-1`** (above).
-- [ ] **Live box pages.** Watch each open box's folder and push a reload of the main pane only (the sidebar keeps its
+- [x] **Live box pages.** Watch each open box's folder and push a reload of the main pane only (the sidebar keeps its
   scroll and selection). Expect: S1.4 → pass; nothing else moves.
   - Rung: boxes
   - Needs: the tree file
   - **Built, still failing** in `boxes-as-tracks-1`: the reload works (it passed before the rebase), but with Claude's
     34 px rows the row S1.4 clicks sits under the account footer in its 420 px window, so the click misses. Next:
     scroll the selected row into view, or less chrome above the tree.
+  - **Done: [`live-1`](solutions/live-1/)**, S1.4 met (the list keeps its scroll on redraw; the selected row scrolls back into view).
 - [ ] **Swap the sidebar's tree model for Headless Tree's core** (vanilla, rows still drawn by `sidebar.js`): drag to
   reorder, onto a row to reparent, out to the left to un-nest; keyboard moves; refuse a drop into its own subtree.
   Spike the vanilla path for 30 minutes first (its docs are React-first); Pragmatic drag and drop is the fallback.
@@ -96,7 +97,7 @@ loading come first because every other item reads them.
     boxes.js; a pause glyph in the row's lead and a lower-opacity title in sidebar.js. How each is measured:
     [`docs/CONTRACT.md`](docs/CONTRACT.md) §7, items 24-32.
   - **Done: [`menus-2`](solutions/menus-2/)**, S2.10 met (records exactly PEP 0002's shape; a page request carrying its own `by` is refused).
-- [ ] **A real box opens on its own page, not its README.** Zach's boxes build their site with the blackbox package
+- [x] **A real box opens on its own page, not its README.** Zach's boxes build their site with the blackbox package
   (no `site/index.html` in the repo), so today a real box shows its README; the ruler's fixture boxes ship a prebuilt
   `site/index.html` (the pre-package layout), which is why S1.1 passes anyway. Build it with
   `blackbox build --box <dir> --out <vt cache>/<id>` (reads git only, never writes the box) and serve that; rebuild on
@@ -104,10 +105,17 @@ loading come first because every other item reads them.
   ([the report's hero](https://github.com/zacharyyamaoka/vibetracks_agent/blob/main/docs/build_progress_report.py)).
   - Rung: boxes
   - Needs: nothing
-- [ ] **One state vocabulary.** robot_viz_agent's status.json says "watching", agent_activity_agent's "running"; Vibe
+  - **Done: [`box-sites-2`](solutions/box-sites-2/)** (not a v2 item: proved on Zach's seven real boxes), landed on
+    [vibetracks main @ 2d3e724](https://github.com/zacharyyamaoka/vibetracks/commit/2d3e724)
+    ([PEP 0028](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0028-a-box-opens-on-its-own-site.md)):
+    a box whose workflow builds with blackbox_agent is built by the vendored release into `<vt home>/cache/box-sites`
+    (one build per box, ≤ 16 boxes and 512 MiB). claude_party_agent's build fails in blackbox_agent (a zero objective);
+    it shows its README with the reason. Ruler v3: one fixture box in the package format.
+- [x] **One state vocabulary.** robot_viz_agent's status.json says "watching", agent_activity_agent's "running"; Vibe
   Tracks shows both as Unknown. Map ai-team-status/1's words (or agree one list with the blackbox format).
   - Rung: roll-ups
   - Needs: nothing
+  - **Done: [`states-1`](solutions/states-1/)**: `core/box_states.py` maps running/on_track → Working, watching → Idle, waiting_on_zach/blocked → Needs you, keeping the box's own word.
 - [ ] **Ruler v3 candidates** (Zach's call, like any ruler change): S2.2 measures row pitch across the section header,
   so a Pinned header above the other tracks fails it (boxes-as-tracks-1 merged the headers to pass; Claude has
   separate ones); S1.4 clicks a row that sits under the account footer at its 420 px window.
@@ -118,7 +126,7 @@ loading come first because every other item reads them.
   `live` row a day from vibetracks' reader file and a per-person box-open counter (a person's click, never an agent's).
   - Rung: meta
   - Needs: ruler v2 frozen
-- [ ] **Headless `claude -p` chats count as working.** The claude-code adapter never sees a headless chat as live,
+- [x] **Headless `claude -p` chats count as working.** The claude-code adapter never sees a headless chat as live,
   though `state.json.inputs[].adapters[].sees_all` is true. Seen 2026-11-25 by the Agent Activity Agent: a `claude -p`
   chat (cwd ~/bam_ws) ran `vt brief pick-place-r1` and `vt claim pick-place-r1 …` from 08:08Z, its transcript under
   `~/.claude-personal/projects/` kept moving, and the track still read `sessions: {live: 0, working: 0}`, Stale. Expected:
@@ -126,6 +134,10 @@ loading come first because every other item reads them.
   and working, whatever its entrypoint. Bears on S3.4's agent counts for real use (the fixture has no chats).
   - Rung: roll-ups
   - Needs: nothing
+  - **Done** (not a ruler item): [vibetracks main @ bd459dc](https://github.com/zacharyyamaoka/vibetracks/commit/bd459dc).
+    Cause: Claude Code now sets `CLAUDE_CODE_CHILD_SESSION` in every shell, so `vt brief` took every chat for a subagent
+    and never bound it; a subagent is now decided on evidence (PEP 0011 §2.4, amended). `vt claim` still doesn't bind
+    (decided: binding on claim would move a chat onto any track it only audits).
 - [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`

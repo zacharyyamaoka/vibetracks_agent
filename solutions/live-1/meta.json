@@ -1,0 +1,15 @@
+{
+  "id": "live-1",
+  "parent": "view-2",
+  "change": "The sidebar keeps a row reachable at a short window (vibetracks PEP 0028 \u00a76): on a resize the selected row is scrolled back into the list's view, and a sidebar drawn anew keeps the list's scroll (app.js, any grouping)",
+  "vibetracks_sha": "b885eb1b734b2a06e4a098771cb6f6ff2eeca750",
+  "vibetracks_ref": "b885eb1b734b2a06e4a098771cb6f6ff2eeca750",
+  "vibetracks_committed": "2026-11-25T09:58:32Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane S subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:58:54Z",
+  "tags": []
+}

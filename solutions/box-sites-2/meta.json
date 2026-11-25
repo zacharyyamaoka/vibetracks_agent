@@ -1,0 +1,15 @@
+{
+  "id": "box-sites-2",
+  "parent": "box-sites-1",
+  "change": "box-sites-1 rebased on vibetracks main dec7b06 (lane M's serve memory, PEP 0017 \u00a78; vt set --why, PEP 0029) with PEP 0028 \u00a73's trust note: the same three changes (S1.4 reachability, one state vocabulary, package box sites)",
+  "vibetracks_sha": "962a0a304e7fd2508290eb32c47e1f124f2aceb6",
+  "vibetracks_ref": "962a0a304e7fd2508290eb32c47e1f124f2aceb6",
+  "vibetracks_committed": "2026-11-25T10:16:22Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane S subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T10:16:30Z",
+  "tags": []
+}
