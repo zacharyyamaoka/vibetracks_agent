@@ -14,15 +14,15 @@ Zach, 2026-11-24: *"All vieb tracks now is though is just a side bar"* and *"Its
 
 The view menu over the list (S2.6):
 
-![Claude's view menu: Group by None, Sort by Last updated, Show, New section, Reset to defaults, View all](../assets/claude-view-menu.png)
+![Claude's view menu: Group by None, Sort by Last updated, Show, New section, Reset to defaults, View all](site/assets/claude-view-menu.png)
 
 The ··· menu on a row (S2.3):
 
-![Claude's row menu: Open in, Unpin P, Mark as unread U, Rename R, Fork F, Move down, Move to section, Archive A, Delete D](../assets/claude-row-menu.png)
+![Claude's row menu: Open in, Unpin P, Mark as unread U, Rename R, Fork F, Move down, Move to section, Archive A, Delete D](site/assets/claude-row-menu.png)
 
 Vibe Tracks' sidebar on Nov 24, before the redesign:
 
-![Vibe Tracks' sidebar: Home, Review, Feedback, New track, then nested tracks with state dots and age badges](../assets/vibetracks-sidebar-2026-11-24.png)
+![Vibe Tracks' sidebar: Home, Review, Feedback, New track, then nested tracks with state dots and age badges](site/assets/vibetracks-sidebar-2026-11-24.png)
 
 ## Open tensions (defaults in force; OBJECTIVES.md §10)
 

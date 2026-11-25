@@ -76,6 +76,7 @@ def gather(root: Path | None = None) -> dict[str, Any]:
                 task = tasks.get(sid) or {}
                 title = re.sub(rf"^{re.escape(sid)}\s+", "", item.title) if item else sid
                 orders.append({"id": sid, "kind": item.kind if item else None, "title": title,
+                               "path": item.path if item else None,
                                "failed": len(task.get("failed_checks") or []), "checks": len(task.get("checks") or []),
                                "why": task.get("why")})
     return {"as_of": max((str(r.get("t") or "") for r in rows), default=None) or None, "rows": len(rows),
@@ -86,18 +87,25 @@ def gather(root: Path | None = None) -> dict[str, Any]:
             "should_total": sum(1 for i in items.values() if i.kind == "should")}
 
 
+def _sol(sid: str) -> str:
+    """A solution id as a link to its folder."""
+    return f"[`{sid}`](solutions/{sid}/)"
+
+
 def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
     shall, should = data["shall_total"], data["should_total"]
-    lines = ["# Progress", "", f"Ruler v1 (`OBJECTIVES.md` §8). Generated {generated} by `vta progress` from "
-             "`ledger.jsonl`; never edit by hand.", "", "## Where it stands", ""]
+    # WHY every id is a link (Zach, 2026-11-24: "/rate bad these files should have been linked..."): a reader opens
+    # the solution, the spec note or the ledger in one click (tests/test_docs_link_what_they_name.py holds it).
+    lines = ["# Progress", "", f"Ruler v1 ([`OBJECTIVES.md`](OBJECTIVES.md) §8). Generated {generated} by "
+             "`vta progress` from [`ledger.jsonl`](ledger.jsonl); never edit by hand.", "", "## Where it stands", ""]
     best, subject = data["best"], data["subject"]
     if best:
-        lines.append(f"- **Best admissible: `{best['solution']}`**, **{fmt(best.get('objective'))} of {shall} shall "
+        lines.append(f"- **Best admissible: {_sol(best['solution'])}**, **{fmt(best.get('objective'))} of {shall} shall "
                      f"items failing** (target 0), {fmt(best.get('tiebreak'))} of {should} should, "
                      f"{fmt(best.get('tiebreak2'))} checks failing.")
     elif subject:
         failed = ", ".join(g for g, v in (subject.get("failed_gates") or {}).items() if v) or "none"
-        lines.append(f"- **No admissible version yet.** Top of the board: `{subject['solution']}`, "
+        lines.append(f"- **No admissible version yet.** Top of the board: {_sol(subject['solution'])}, "
                      f"{fmt(subject.get('objective'))} of {shall} shall items failing, gates failed: {failed}.")
     else:
         lines.append("- **No version scored yet:** `vta new` then `vta evaluate`.")
@@ -109,24 +117,25 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
         adm = "yes" if r["admissible"] else "no (" + ", ".join(r["failed_gates"]) + ")"
         change = r["change"] or ""
         change = change if len(change) <= 80 else change[:79] + "…"
-        lines.append(f"| {r['rank']} | `{r['solution']}` | {fmt(r['shall_failing'])} | {fmt(r['should_failing'])} | "
+        lines.append(f"| {r['rank']} | {_sol(r['solution'])} | {fmt(r['shall_failing'])} | {fmt(r['should_failing'])} | "
                      f"{fmt(r['checks_failing'])} | {adm} | {fmt(r['holdout_shall_failing'])} | {_cell(change)} | "
                      f"{_cell(r['model'])} |")
     if not data["ranked"]:
         lines.append(f"| {DASH} | no version scored yet | | | | | | | |")
     lines += ["", "## Open work orders", ""]
     if subject:
-        lines += [f"The spec items `{subject['solution']}` does not meet ({len(data['work_orders'])}); each is Zach's "
-                  "own words, in `specs/`.", "", "| item | kind | what | checks failing |", "|---|---|---|---|"]
+        lines += [f"The spec items {_sol(subject['solution'])} does not meet ({len(data['work_orders'])}); each is "
+                  "Zach's own words, in [`specs/`](specs/).", "", "| item | kind | what | checks failing |", "|---|---|---|---|"]
         for w in sorted(data["work_orders"], key=lambda w: (w["kind"] != "shall", [int(p) for p in w["id"][1:].split(".")])):
-            lines.append(f"| {w['id']} | {_cell(w['kind'])} | {_cell(w['title'])} | "
+            sid = f"[{w['id']}]({w['path']})" if w.get("path") else w["id"]
+            lines.append(f"| {sid} | {_cell(w['kind'])} | {_cell(w['title'])} | "
                          f"{w['failed']} of {w['checks']}" + (f" ({_cell(w['why'])})" if not w['checks'] else "") + " |")
     else:
         lines.append("None yet: no version scored.")
     lines += ["", "## Last 10 evaluations", "", "| t | id | split | shall | should | checks | admissible | wall s |",
               "|---|---|---|---|---|---|---|---|"]
     for r in data["evaluations"]:
-        lines.append(f"| {r['t']} | `{r['solution']}` | {r['split']} | {fmt(r['objective'])} | {fmt(r['tiebreak'])} | "
+        lines.append(f"| {r['t']} | {_sol(r['solution'])} | {r['split']} | {fmt(r['objective'])} | {fmt(r['tiebreak'])} | "
                      f"{fmt(r['tiebreak2'])} | {'yes' if r['admissible'] else 'no'} | {fmt(r['wall_time_s'])} |")
     if not data["evaluations"]:
         lines.append(f"| {DASH} | | | | | | | |")

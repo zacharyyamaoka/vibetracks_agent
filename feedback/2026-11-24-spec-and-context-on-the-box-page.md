@@ -28,4 +28,4 @@ And yes its meta tracking vibetracks within vibe tracks
 ## Why
 
 > [!ai] claude-code (vibetracks_agent dispatcher), from Sources/Daily Notes/Daily Note - Nov 24 2026.md # Vibe tracks
-> This repo. Its spec is `specs/`, its context REFERENCES.md and this folder. It became S5.1.
+> This repo. Its spec is [`specs/`](../specs/), its context REFERENCES.md and this folder. It became S5.1.

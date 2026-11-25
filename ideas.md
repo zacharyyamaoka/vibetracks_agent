@@ -7,7 +7,7 @@ loading come first because every other item reads them.
 ## I'll try
 
 - [ ] **Boxes as tracks, the tree in Vibe Tracks' own file.** A per-machine tree file outside every box (id, folder,
-  parent, order, pinned, section, archived, label); `vt serve` lists each box from it and serves the box's own `site/`
+  parent, order, pinned, section, archived, label); `vt serve` lists each box from it and serves the box's own [`site/`](site/)
   in the main pane (README when it has none). Expect: S1.1, S1.2, S1.3 → pass; S2.1 stays green.
   - Rung: boxes
   - Needs: nothing
@@ -42,7 +42,7 @@ loading come first because every other item reads them.
   tracks. Expect: S3.1 → pass.
   - Rung: roll-ups
   - Needs: the tree file
-- [ ] **Roll-ups from `status.json`**: a parent's own dot plus a pip when a descendant is worse, and agents summed
+- [ ] **Roll-ups from [`status.json`](status.json)**: a parent's own dot plus a pip when a descendant is worse, and agents summed
   over its subtree, on the sidebar and Home. Expect: S3.4 → pass.
   - Rung: roll-ups
   - Needs: the tree file
@@ -68,7 +68,7 @@ loading come first because every other item reads them.
   remotes. Default: the tree file is per machine in v1. OBJECTIVES §10.2.
 - [ ] **A use number for ruler v2.** Your W2 retro found Vibe Tracks "not that helpful". Scoring only the spec could
   ship a version that passes and still goes unused; candidate: days you opened it, or boxes opened from it per day,
-  read from `vt serve`'s own log. OBJECTIVES §10.3. **Drafted:** `docs/peps/0001-ruler-v2-use-number.md`; accept it by
+  read from `vt serve`'s own log. OBJECTIVES §10.3. **Drafted:** [`docs/peps/0001-ruler-v2-use-number.md`](docs/peps/0001-ruler-v2-use-number.md); accept it by
   changing its status line.
 - [ ] **A full starter box in blackbox_agent's `template/`**, so `vt new` (and anyone) can copy one: README,
   OBJECTIVES, AGENTS, PROGRESS, ledger.jsonl, ideas.md, REFERENCES.md, status.json, specs/, feedback/, site/. This

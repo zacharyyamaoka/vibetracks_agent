@@ -1,0 +1,4 @@
+# Zach's feedback on work in this repo (newest first; the full record is in his vault)
+
+- **2026-11-25 · Bad · links** — Every file, folder, repo or note these docs name is a link a reader opens in one click: an in-repo path as a relative Markdown link, another repo as its GitHub URL, a web source as its URL, a vault note as an `obsidian://advanced-uri?vault=zach_brain&filepath=…` link (opens on his machine; elsewhere it is only the name, so the public repo leaks nothing). Never a bare `` `path` `` or a bold name. [`tests/test_docs_link_what_they_name.py`](../tests/test_docs_link_what_they_name.py) fails on a miss; OBJECTIVES.md and specs/ are the frozen ruler and gain links only in ruler v2. Generated files (PROGRESS.md) get their links from the generator.
+  <sub>rate note: `rate - Nov 25 2026, 12.01.48AM.md` · [open](obsidian://advanced-uri?vault=zach_brain&filepath=Settings%2FFeedback%2Frate%2Frate%20-%20Nov%2025%202026%2C%2012.01.48AM.md&openmode=true)</sub>
