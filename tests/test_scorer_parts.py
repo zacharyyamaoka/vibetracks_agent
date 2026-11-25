@@ -92,7 +92,8 @@ def test_verify_fails_with_no_manifest(tmp_path):
 
 def test_the_published_junit_names_no_run_dir_and_no_home():
     run_dir = Path.home() / ".cache" / "vibetracks_agent" / "x" / "runs" / "dev-1"
-    text = f'<failure message="{run_dir}/home/a and {Path.home()}/b">{run_dir}</failure>'
+    fixture_home = run_dir / "home"
+    text = f'<failure message="{fixture_home / "a"} and {Path.home() / "b"}">{run_dir}</failure>'
     out = evaluate.public_junit(text, run_dir)
     assert str(Path.home()) not in out and "&lt;fixture-home&gt;/a" in out and "~/b" in out
     # WHY: the fixture's HOME is <run>/home; "<run>/home/…" reads as a home path to the blackbox package's privacy check
@@ -148,3 +149,11 @@ def test_progress_writes_status_and_progress_from_the_ledger(tmp_path):
     assert status["schema"] == "ai-team-status/1" and status["kpi"]["value"] == 17 and status["kpi"]["target"] == 0
     assert "`s`" in (tmp_path / "PROGRESS.md").read_text()
     assert progress.write_all(tmp_path, now_s=2.0) == []
+
+
+def test_the_published_scorecard_names_no_run_dir_and_no_home():
+    run_dir = Path.home() / ".cache" / "vibetracks_agent" / "x" / "runs" / "dev-1"
+    card = json.dumps({"message": f"vt add {run_dir / 'home' / 'kestrel_agent'} exited 1", "other": str(run_dir)})
+    out = evaluate.public_text(card, [run_dir])
+    assert str(Path.home()) not in out and "/home/" not in out
+    assert json.loads(out) == {"message": "vt add <fixture-home>/kestrel_agent exited 1", "other": "<run>"}

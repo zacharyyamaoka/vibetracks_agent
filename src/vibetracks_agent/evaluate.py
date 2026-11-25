@@ -165,6 +165,16 @@ def public_junit(text: str, run_dir: Path) -> str:
     return text.replace(str(Path.home()), "~")
 
 
+def public_text(text: str, run_dirs: list[Path]) -> str:
+    """A scorecard as published: the same redaction as public_junit, with plain placeholders (it is JSON, not XML).
+    WHY: a check's failure message quotes the command it ran, which names the run dir under this machine's home; the
+    scorecard is committed to a public repo (blackbox check 0.1.7's home-path lint found it, 2026-11-25)."""
+    for run_dir in run_dirs:
+        text = text.replace(str(run_dir / "home"), "<fixture-home>").replace(str(run_dir), "<run>")
+    text = text.replace(str(paths.work_dir()), "<work>")
+    return text.replace(str(Path.home()), "~")
+
+
 def vt_gate(tree: Path, work: Path, isolate: bool, timeout_s: float = 1500) -> int | None:
     """vibetracks' own `pytest tests` on the tree (CLAUDE.md's gate): the number failed, or None if it did not run."""
     tmp = work / "vt-gate-tmp"
@@ -255,7 +265,8 @@ def evaluate(sid: str, *, split: str = "dev", runs: int = 2, timeout_s: float = 
     }
     folder = root / "solutions" / sid
     name = "scorecard.json" if split == "dev" else f"scorecard_{split}.json"
-    (folder / name).write_text(json.dumps(card, indent=1, allow_nan=False) + "\n")
+    run_dirs = [Path(r["run_dir"]) for r in results if r.get("run_dir")]
+    (folder / name).write_text(public_text(json.dumps(card, indent=1, allow_nan=False), run_dirs) + "\n")
     if first.get("junit"):
         published = public_junit(first["junit"], Path(first["run_dir"]))
         (folder / f"junit-{split}.xml").write_text(published)

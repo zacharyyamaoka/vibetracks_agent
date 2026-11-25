@@ -104,7 +104,7 @@ starter_files, blackbox: {path, ref, head}, gh: {path, log, state, remotes}, tra
 
 ## 4. CLI `vta`
 
-Run as `uv run --directory /home/bam/vibetracks_agent vta <verb>`.
+Run as `uv run --directory ~/vibetracks_agent vta <verb>`.
 
 | Verb | Does |
 |---|---|

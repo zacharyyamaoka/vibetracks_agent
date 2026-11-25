@@ -2,7 +2,7 @@
 """Builds the review report for vibetracks_agent's first day: one self-contained HTML page (media inlined), written to
 the main checkout's reports/media/ (gitignored there: it inlines a video and stills).
 
-    python3 docs/build_report.py --media <dir with the hero .webm/.mp4 + stills> --out /home/bam/vibetracks_agent/reports/media/vibetracks-agent-2026-11-24.html
+    python3 docs/build_report.py --media <dir with the hero .webm/.mp4 + stills> --out ~/vibetracks_agent/reports/media/vibetracks-agent-2026-11-24.html
 
 Every number comes from the repo's own files at HEAD (ledger.jsonl's newest dev row, the solution's scorecard and
 junit, specs/, feedback/, REFERENCES.md); nothing is typed in here except prose.
@@ -171,7 +171,7 @@ ul.why{{margin:4px 0 8px;padding-left:18px;font-size:13px;color:var(--muted)}}ul
 ul.dec li{{margin:6px 0}}
 </style></head><body><div class="wrap">
 <h1>Vibe Tracks Agent</h1>
-<p class="muted">Vibe Tracks as a black box, from Zach's Nov 24 design · <code>/home/bam/vibetracks_agent</code> @ <code>{esc(head)}</code>, private on GitHub · built by Claude Code (Opus 5.5)</p>
+<p class="muted">Vibe Tracks as a black box, from Zach's Nov 24 design · <code>~/vibetracks_agent</code> @ <code>{esc(head)}</code>, private on GitHub · built by Claude Code (Opus 5.5)</p>
 <div class="verdict"><b>The box exists and scores Vibe Tracks:</b> your Nov 24 design is 23 spec items (19 shall, 4 should) with your words,
 frozen as ruler v1, checked in a headless browser against fixture box repos. Baseline, vibetracks main @ <code>d0cb827</code>:
 <b>{esc(shall_failing)} of 19 shall items not met</b>, {esc(should_failing)} of 4 should. That's expected: the redesign isn't built yet; this is the starting line.</div>

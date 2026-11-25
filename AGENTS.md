@@ -9,7 +9,7 @@ inside the gates. You do it by proposing versions of Vibe Tracks (vibetracks com
 
 1. `pwd` and `git status`. Commit nothing you didn't write.
 2. Read [`OBJECTIVES.md`](OBJECTIVES.md), then the [`specs/`](specs/) notes for the items you will touch.
-3. `uv run --directory /home/bam/vibetracks_agent vta verify`. A failure stops everything.
+3. `uv run --directory ~/vibetracks_agent vta verify`. A failure stops everything.
 4. Read [`PROGRESS.md`](PROGRESS.md) (regenerate with `vta progress` if the ledger is newer), then [`ideas.md`](ideas.md) and [`feedback/`](feedback/).
 5. Pick one idea, or add one with the spec items it should turn green.
 6. Build it in vibetracks on a branch or worktree (that repo's [`CLAUDE.md`](https://github.com/zacharyyamaoka/vibetracks/blob/main/CLAUDE.md), its PEPs and its gate apply there; never

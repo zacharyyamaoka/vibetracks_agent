@@ -33,13 +33,13 @@ Where it stands right now: [`PROGRESS.md`](PROGRESS.md) (generated) and the [liv
 ## Run
 
 ```bash
-uv run --directory /home/bam/vibetracks_agent vta progress
+uv run --directory ~/vibetracks_agent vta progress
 ```
 
 The site (landing page and dashboard) is built by the blackbox_agent package from this repo's git history:
 
 ```bash
-uvx --from git+https://github.com/zacharyyamaoka/blackbox_agent@v0 blackbox serve --box /home/bam/vibetracks_agent
+uvx --from git+https://github.com/zacharyyamaoka/blackbox_agent@v0 blackbox serve --box ~/vibetracks_agent
 ```
 
 ## Files

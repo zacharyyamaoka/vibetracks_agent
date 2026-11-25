@@ -236,7 +236,7 @@
       "fail"
      ],
      "passed": false,
-     "message": "vt add /home/bam/.cache/vibetracks_agent/sidebar-style-1/runs/dev-20261125T071232-1/home/sanderling_grasp_agent --parent linnet_reach_agent exited 1: vt: no command 'add'. `vt --help` lists them."
+     "message": "vt add <fixture-home>/sanderling_grasp_agent --parent linnet_reach_agent exited 1: vt: no command 'add'. `vt --help` lists them."
     }
    ],
    "failed_checks": [

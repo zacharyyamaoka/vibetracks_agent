@@ -236,7 +236,7 @@
       "fail"
      ],
      "passed": false,
-     "message": "vt add /home/bam/.cache/vibetracks_agent/main-d0cb827/runs/holdout-20261125T052026-1/home/kittiwake_thermal_agent --parent skua_planner_agent exited 1: vt: no command 'add'. `vt --help` lists them."
+     "message": "vt add <fixture-home>/kittiwake_thermal_agent --parent skua_planner_agent exited 1: vt: no command 'add'. `vt --help` lists them."
     }
    ],
    "failed_checks": [

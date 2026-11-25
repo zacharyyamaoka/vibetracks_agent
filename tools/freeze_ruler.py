@@ -2,7 +2,7 @@
 """Freeze the ruler (OBJECTIVES §11): write ruler/checks.json (every check the suite declares) and ruler/manifest.json
 (a sha256 for every ruler file, OBJECTIVES.md, each spec note and the Playwright pin, plus the frozen refs).
 
-    uv run --directory /home/bam/vibetracks_agent python tools/freeze_ruler.py --blackbox-ref b25a20c [--force]
+    uv run --directory ~/vibetracks_agent python tools/freeze_ruler.py --blackbox-ref b25a20c [--force]
 
 Run once per ruler version. It refuses to overwrite an existing manifest without --force: changing the ruler is a new
 version (a section in OBJECTIVES.md), and every solution is re-scored on it.
