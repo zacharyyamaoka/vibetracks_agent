@@ -74,6 +74,23 @@ loading come first because every other item reads them.
   Expect (ruler v2): S2.10 → pass, S2.3 stays green. Spec: [PEP 0002](docs/peps/0002-ruler-v2-pause-resume.md).
   - Rung: sidebar
   - Needs: the tree file (boxes-as-tracks) and ruler v2 frozen
+- [ ] **A real box opens on its own page, not its README.** Zach's boxes build their site with the blackbox package
+  (no `site/index.html` in the repo), so today a real box shows its README; the ruler's fixture boxes ship a prebuilt
+  `site/index.html` (the pre-package layout), which is why S1.1 passes anyway. Build it with
+  `blackbox build --box <dir> --out <vt cache>/<id>` (reads git only, never writes the box) and serve that; rebuild on
+  a new commit. Ruler v3: fixture boxes in the package format. Seen 2026-11-25 on six real boxes
+  ([the report's hero](https://github.com/zacharyyamaoka/vibetracks_agent/blob/main/docs/build_progress_report.py)).
+  - Rung: boxes
+  - Needs: nothing
+- [ ] **One state vocabulary.** robot_viz_agent's status.json says "watching", agent_activity_agent's "running"; Vibe
+  Tracks shows both as Unknown. Map ai-team-status/1's words (or agree one list with the blackbox format).
+  - Rung: roll-ups
+  - Needs: nothing
+- [ ] **Ruler v3 candidates** (Zach's call, like any ruler change): S2.2 measures row pitch across the section header,
+  so a Pinned header above the other tracks fails it (boxes-as-tracks-1 merged the headers to pass; Claude has
+  separate ones); S1.4 clicks a row that sits under the account footer at its 420 px window.
+  - Rung: meta
+  - Needs: Zach
 - [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`
