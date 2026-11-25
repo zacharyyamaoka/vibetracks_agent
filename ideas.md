@@ -142,9 +142,13 @@ loading come first because every other item reads them.
     Cause: Claude Code now sets `CLAUDE_CODE_CHILD_SESSION` in every shell, so `vt brief` took every chat for a subagent
     and never bound it; a subagent is now decided on evidence (PEP 0011 §2.4, amended). `vt claim` still doesn't bind
     (decided: binding on claim would move a chat onto any track it only audits).
-- [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
+- [x] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`
+  - **Done by hand 2026-11-25** (S5.1 has no automated check): `vt add` of Zach's eight boxes into his real
+    `~/.vibetracks/tree.json` (flat: no parent invented; each box's `git status` unchanged). His Preview (4396) lists them
+    and opens Vibe Tracks Agent on its own landing, the chart at 0 shall failing. Stable (Nov 11 release) ignores the
+    file until promoted. Undo: `vt tree remove <box>` per box.
 
 ## Suggestions for Zach
 
