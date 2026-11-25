@@ -37,8 +37,16 @@ Where it stands right now: `PROGRESS.md` (generated) and the site (`site/index.h
 uv run --directory /home/bam/vibetracks_agent vta progress
 ```
 
+The site reads `site/data/state.json`, so serve it (a `file://` open can't fetch it):
+
 ```bash
-/home/bam/.local/bin/open /home/bam/vibetracks_agent/site/index.html
+python3 -m http.server 4731 --bind 127.0.0.1 --directory /home/bam/vibetracks_agent/site
+```
+
+Rebuild its data after a new score (the blackbox_agent fold, with the acceptance run's junit):
+
+```bash
+python3 /home/bam/blackbox_agent/viewer/tools/fold_state.py --repo /home/bam/vibetracks_agent --ref HEAD --junit /home/bam/vibetracks_agent/site/data/junit.xml --out /home/bam/vibetracks_agent/site/data/state.json
 ```
 
 ## Files

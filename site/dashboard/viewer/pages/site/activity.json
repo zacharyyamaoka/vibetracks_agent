@@ -1,0 +1,30 @@
+{
+  "schema": "bb-page/1",
+  "name": "Activity",
+  "page": "activity",
+  "links": {
+    "page": "{page}.html",
+    "solution": "solution.html?id={id}"
+  },
+  "sections": {
+    "tabs": {
+      "type": "bb-nav",
+      "settings": {
+        "current": "activity"
+      }
+    },
+    "rows": {
+      "type": "bb-data-page",
+      "settings": {
+        "slice": "activity.recent",
+        "base": "activity.base",
+        "view": "Activity",
+        "height": 640
+      }
+    }
+  },
+  "order": [
+    "tabs",
+    "rows"
+  ]
+}

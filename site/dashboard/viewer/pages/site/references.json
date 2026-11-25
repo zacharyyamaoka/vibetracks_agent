@@ -1,0 +1,31 @@
+{
+  "schema": "bb-page/1",
+  "name": "References",
+  "page": "references",
+  "links": {
+    "page": "{page}.html",
+    "solution": "solution.html?id={id}"
+  },
+  "sections": {
+    "tabs": {
+      "type": "bb-nav",
+      "settings": {
+        "current": "references"
+      }
+    },
+    "rows": {
+      "type": "bb-data-page",
+      "settings": {
+        "slice": "references",
+        "base": "references.base",
+        "view": "References",
+        "height": 640,
+        "empty": "No references yet. Add a references/ folder to the box (one .md note per reference: a title, a link, what we take from it), or a REFERENCES.md list (- [title](url): why, under ## sections)."
+      }
+    }
+  },
+  "order": [
+    "tabs",
+    "rows"
+  ]
+}

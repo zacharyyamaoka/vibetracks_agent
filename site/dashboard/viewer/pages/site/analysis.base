@@ -1,0 +1,51 @@
+# Analysis: one row per file that analyses the box (CONTRACT §17): reports (HTML pages and the site's charts), Markdown
+# files someone wrote (analysis/*.md, .md beside the reports, PROGRESS.md, decision records) and study files
+# (ablations/*.md). The Reports tab's three presets (proposals-pages/reports/reports.base) over the analysis slice, plus
+# the type facet and a By type list. A Markdown row opens as the note itself (Obsidian's look); a report as its fields
+# and a link to it on GitHub.
+facets:
+  - type
+  - kind
+  - format
+open: { mode: side, splitAt: 980 }
+properties:
+  title: { displayName: "Analysis" }
+  type: { displayName: "Type" }
+  path: { displayName: "File" }
+  kind: { displayName: "Kind" }
+  format: { displayName: "Format" }
+  added: { displayName: "Added" }
+  date: { displayName: "Last changed" }
+  sha: { displayName: "Changed in" }
+  url: { displayName: "On GitHub (at the commit read)" }
+  thumb: { displayName: "Preview" }
+views:
+  - type: table
+    name: Analysis
+    order: [title, type, kind, path, date, sha, added]
+    sort:
+      - { property: date, direction: DESC }
+    display: { url: link }
+  - type: cards
+    name: Thumbnails
+    order: [title, type, kind, path, date]
+    image: thumb
+    imageFit: cover
+    imageAspectRatio: 0.62
+    cardSize: 280
+    sort:
+      - { property: date, direction: DESC }
+  - type: list
+    name: By type
+    order: [title, kind, path, date]
+    groupBy: { property: type, direction: ASC }
+    sort:
+      - { property: date, direction: DESC }
+  - type: timeline
+    name: Timeline
+    start: added
+    end: date
+    title: title
+    color: type
+    groupBy: { property: type, direction: ASC }
+    zoom: { min: PT10M, max: P30D }

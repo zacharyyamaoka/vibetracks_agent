@@ -1,0 +1,47 @@
+# Agents: one row per agent the repo records: solution proposers (meta.json) and commit lanes (git)
+# Stock: every black-box agent ships this file and swaps the data file. Grammar: Obsidian Bases + data-ui keys
+# (data-ui docs/CONTRACT.md §5). Data: proposals-pages/_build/fold.py from trajectory_tracking_agent @ 9ead945.
+data: agents.json
+facets:
+  - kind
+  - model
+  - { property: iterations, as: range }
+open: { mode: side, splitAt: 980 }
+properties:
+  agent: { displayName: "Agent" }
+  kind: { displayName: "Recorded as" }
+  model: { displayName: "Model" }
+  session: { displayName: "Session" }
+  solutions: { displayName: "Solutions", type: number, decimals: 0 }
+  iterations: { displayName: "Iterations", type: number, decimals: 0 }
+  kept: { displayName: "Kept", type: number, decimals: 0 }
+  failed: { displayName: "Failed", type: number, decimals: 0 }
+  best: { displayName: "Its best", type: number, decimals: 3 }
+  best_id: { displayName: "Its best solution" }
+  study_runs: { displayName: "Study runs", type: number, decimals: 0 }
+  commits: { displayName: "Commits", type: number, decimals: 0 }
+  start: { displayName: "First" }
+  end: { displayName: "Last" }
+  worked_on: { displayName: "Worked on" }
+  source: { displayName: "Recorded in" }
+views:
+  - type: table
+    name: Agents
+    order: [agent, kind, model, solutions, iterations, kept, best, study_runs, commits, start, end, source]
+    sort:
+      - { property: start, direction: ASC }
+  - type: timeline
+    name: Sessions
+    start: start
+    end: end
+    title: agent
+    color: kind
+    groupBy: { property: kind, direction: ASC }
+    groupOrder: [proposer, commit lane]
+    zoom: { min: PT10M, max: P30D }
+  - type: cards
+    name: Contributions
+    order: [agent, kind, iterations, kept, best, best_id, study_runs, commits, end]
+    cardSize: 270
+    sort:
+      - { property: iterations, direction: DESC }

@@ -1,0 +1,76 @@
+{
+  "schema": "bb-page/1",
+  "name": "Overview",
+  "page": "overview",
+  "links": {
+    "page": "{page}.html",
+    "solution": "solution.html?id={id}"
+  },
+  "sections": {
+    "tabs": {
+      "type": "bb-nav",
+      "settings": {
+        "current": "overview"
+      }
+    },
+    "headliner": {
+      "type": "bb-headliner"
+    },
+    "kpis": {
+      "type": "bb-kpi-strip",
+      "settings": {
+        "view": "cards",
+        "toggle": true
+      }
+    },
+    "gates": {
+      "type": "bb-gates",
+      "settings": {
+        "view": "timeline",
+        "x": "iteration",
+        "toggle": true
+      }
+    },
+    "pareto_energy": {
+      "type": "bb-frontier",
+      "settings": {
+        "cost": "energy_j",
+        "picker": false,
+        "time": "both"
+      }
+    },
+    "pareto_compute": {
+      "type": "bb-frontier",
+      "settings": {
+        "cost": "host_compute_ms_p95",
+        "picker": false,
+        "time": "both"
+      }
+    },
+    "pareto_code": {
+      "type": "bb-frontier",
+      "settings": {
+        "cost": "code_lines",
+        "picker": false,
+        "time": "both"
+      }
+    },
+    "ideas": {
+      "type": "bb-idea-preview"
+    },
+    "needs": {
+      "type": "bb-needs-you"
+    }
+  },
+  "order": [
+    "tabs",
+    "headliner",
+    "kpis",
+    "gates",
+    "pareto_energy",
+    "pareto_compute",
+    "pareto_code",
+    "ideas",
+    "needs"
+  ]
+}

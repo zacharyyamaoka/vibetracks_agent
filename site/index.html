@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vibe Tracks Agent</title>
+<meta name="description" content="Vibe Tracks as a black box: a Claude-identical sidebar over the black-box agent repos on this machine, plus Home, Review and Feedback across them. The spec, scored against every version.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1.5' y='2' width='4' height='12' rx='1' fill='none' stroke='%23c96442' stroke-width='1.4'/%3E%3Cpath d='M8 4h6.5M8 8h6.5M8 12h4.5' stroke='%23c96442' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<!-- WHY a page of its own before the dashboard (Zach, 2026-11-24: "I 100% like the separate landing page and then the
+     open the dashboard button"; blackbox_agent PICKS.md). Every number here is read from data/state.json (the
+     blackbox_agent fold of this repo at a commit, plus the acceptance run's junit); nothing is typed in. -->
+<style>
+  :root {
+    --bg: #faf9f5; --panel: #ffffff; --fg: #1f1e1d; --muted: #6b6a66; --line: #e6e3da; --accent: #c96442;
+    --pass: #2f7d4f; --pass-bg: #e6f3eb; --fail: #b3261e; --fail-bg: #fbe9e7; --none: #6b6a66; --none-bg: #efede6;
+    --should: #8a6d1d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #262624; --panel: #30302e; --fg: #f0eee6; --muted: #a6a39b; --line: #3e3d3a; --accent: #d97757;
+      --pass: #7cc59a; --pass-bg: #1f3a2b; --fail: #f2a097; --fail-bg: #4a2522; --none: #a6a39b; --none-bg: #3a3936;
+      --should: #e0c06e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #262624; --panel: #30302e; --fg: #f0eee6; --muted: #a6a39b; --line: #3e3d3a; --accent: #d97757;
+    --pass: #7cc59a; --pass-bg: #1f3a2b; --fail: #f2a097; --fail-bg: #4a2522; --none: #a6a39b; --none-bg: #3a3936;
+    --should: #e0c06e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  header.top { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; align-items: center; gap: 16px; height: 52px; }
+  .brand { font-weight: 650; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .brand small { font-weight: 450; color: var(--muted); }
+  header nav { display: flex; gap: 14px; margin-left: 8px; font-size: 14px; color: var(--muted); }
+  header nav a { text-decoration: none; }
+  header nav a:hover { color: var(--fg); }
+  .grow { flex: 1; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; font-weight: 550;
+         text-decoration: none; font-size: 14px; border: 1px solid var(--line); background: var(--panel); white-space: nowrap; }
+  .btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  section { padding: 36px 0; border-bottom: 1px solid var(--line); }
+  h1 { font-size: clamp(28px, 4.2vw, 42px); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+  h2 { font-size: 22px; margin: 0 0 6px; }
+  .lede { font-size: 17px; color: var(--muted); max-width: 720px; margin: 0; }
+  .quote { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; margin: 16px 0 0; color: var(--fg); font-style: italic; }
+  .quote cite { display: block; font-style: normal; color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start; }
+  .score { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .score .big { font-size: 46px; font-weight: 700; line-height: 1; }
+  .score .big small { font-size: 18px; color: var(--muted); font-weight: 500; }
+  .score .what { color: var(--muted); font-size: 14px; margin-top: 6px; }
+  .score .why { color: var(--muted); font-size: 13px; margin-top: 10px; border-top: 1px solid var(--line); padding-top: 10px; }
+  .bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 14px; background: var(--none-bg); }
+  .bar i { display: block; height: 100%; }
+  .areas { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 18px; }
+  .area { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .area h3 { margin: 0 0 2px; font-size: 16px; }
+  .area p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+  .item { display: grid; grid-template-columns: 44px 1fr auto; gap: 8px; align-items: baseline; padding: 6px 0;
+          border-top: 1px solid var(--line); text-decoration: none; font-size: 14px; }
+  .item:hover .t { text-decoration: underline; }
+  .item .id { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 13px; }
+  .item .t em { color: var(--should); font-style: normal; font-size: 12px; margin-left: 4px; }
+  .chip { font-size: 12px; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+  .chip.pass { color: var(--pass); background: var(--pass-bg); }
+  .chip.fail { color: var(--fail); background: var(--fail-bg); }
+  .chip.none { color: var(--none); background: var(--none-bg); }
+  .refs { display: grid; grid-template-columns: 0.55fr 1fr 1fr; gap: 16px; margin-top: 18px; align-items: start; }
+  figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .callout { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px; padding: 14px 18px; margin-top: 16px; }
+  ol.tensions { padding-left: 20px; margin: 12px 0 0; max-width: 820px; }
+  ol.tensions li { margin: 6px 0; }
+  .muted { color: var(--muted); }
+  footer { padding: 24px 0 40px; color: var(--muted); font-size: 13px; }
+  code { font-size: 0.92em; background: var(--none-bg); padding: 1px 5px; border-radius: 5px; }
+  @media (max-width: 820px) {
+    .hero, .refs { grid-template-columns: 1fr; }
+    header nav { display: none; }
+    .refs figure:first-child img { max-width: 260px; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#goal">Vibe Tracks Agent <small>local only</small></a>
+    <nav aria-label="On this page">
+      <a href="#goal">Goal</a>
+      <a href="#spec">The spec</a>
+      <a href="#reference">The reference</a>
+      <a href="#tensions">Open tensions</a>
+    </nav>
+    <span class="grow"></span>
+    <a class="btn primary" href="dashboard/#overview" data-open-dashboard>Open the dashboard <span aria-hidden="true">→</span></a>
+  </div>
+</header>
+
+<main>
+<section id="goal">
+  <div class="wrap hero">
+    <div>
+      <h1>Vibe Tracks is just a sidebar.</h1>
+      <p class="lede">Over the black-box agent repos on this machine. Click a track and you see that box's own site, live.
+        Above the tracks: Home, Review and Feedback across all of them. The sidebar is a pixel-perfect copy of the
+        Claude desktop app's, so there is nothing new to learn.</p>
+      <p class="quote">All vieb tracks now is though is just a side bar<cite>Zach, Nov 24 2026</cite></p>
+      <p class="quote">Its nice not having to relearn new UIs.<cite>Zach, Nov 24 2026</cite></p>
+    </div>
+    <div class="score" id="score" aria-live="polite">
+      <div class="big" data-score>…</div>
+      <div class="what" data-what>Reading data/state.json</div>
+      <div class="bar" data-bar aria-hidden="true"></div>
+      <div class="why" data-why></div>
+    </div>
+  </div>
+</section>
+
+<section id="spec">
+  <div class="wrap">
+    <h2>The spec</h2>
+    <p class="lede">Every item is something Zach asked for, in his words, frozen as ruler v1. The objective is how many
+      <i>shall</i> items a version of Vibe Tracks still fails, measured in a headless browser against fixture boxes. An
+      item with no check counts as failing.</p>
+    <div class="areas" data-areas></div>
+  </div>
+</section>
+
+<section id="reference">
+  <div class="wrap">
+    <h2>The reference</h2>
+    <p class="lede">Vibe Tracks' sidebar today (left), and Claude's two menus it copies: the view menu over the list and the
+      ··· menu on a row. These screenshots are the spec for S2.3 and S2.6.</p>
+    <div class="refs">
+      <figure><img src="assets/vibetracks-sidebar-2026-11-24.png" alt="Vibe Tracks' sidebar on Nov 24: Home, Review, Feedback, New track, then nested tracks with state dots and age badges" loading="lazy"><figcaption>Vibe Tracks' sidebar, Nov 24</figcaption></figure>
+      <figure><img src="assets/claude-view-menu.png" alt="Claude's view menu: Group by None, Sort by Last updated, Show, New section, Reset to defaults, View all" loading="lazy"><figcaption>Claude's view menu: Group by, Sort by, Show, New section, Reset to defaults, View all (S2.6)</figcaption></figure>
+      <figure><img src="assets/claude-row-menu.png" alt="Claude's row menu: Open in, Unpin P, Mark as unread U, Rename R, Fork F, Move down, Move to section, Archive A, Delete D" loading="lazy"><figcaption>Claude's ··· menu on a row (S2.3)</figcaption></figure>
+    </div>
+    <div class="callout">
+      <b>Changed the same evening: no <code>vibetracks.toml</code>.</b> Zach first suggested each agent define one with its
+      parent and children, then: <i>"None of the agents should have a vibetracks.toml / each agent is compeltely indpdent
+      and self contained. / Its vibe tracks that basically like defines that parent child relationship."</i> So a box
+      holds nothing for Vibe Tracks (S1.2), Vibe Tracks owns the tree (S1.3), and the tree moves by drag on a stock tree
+      component (S2.8; the pick is Headless Tree's core, which draws nothing, so Claude's rows stay).
+    </div>
+  </div>
+</section>
+
+<section id="tensions">
+  <div class="wrap">
+    <h2>Open tensions</h2>
+    <p class="lede">Defaults taken so the ruler could freeze; each is Zach's to overrule (OBJECTIVES §10).</p>
+    <ol class="tensions">
+      <li><b>Hover chevron (Oct 16) vs pixel-perfect Claude (Nov 24).</b> Claude's rows have no hover fold chevron. Default: Claude wins; S2.9 is a <i>should</i>.</li>
+      <li><b>Built-in sync and an account (Oct 25) vs local boxes (Nov 24).</b> Default: a box travels by its own git remote; the tree file is per machine.</li>
+      <li><b>"I haven't found the vibetracks thing to be that helpful"</b> (W2 retro). v1 scores the spec only; an observed use number is the ruler v2 candidate.</li>
+      <li><b>Delete</b> removes a track from Vibe Tracks only; a box's folder and repo are never deleted from the sidebar.</li>
+      <li><b>Rename</b> changes Vibe Tracks' label only; a box's title stays its README's.</li>
+      <li><b>Publish is private</b> unless <code>--public</code>: a first public push is a step nothing undoes.</li>
+    </ol>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">A black-box agent repo in the blackbox_agent format · numbers from <code>data/state.json</code> · <span data-ref></span></div></footer>
+
+<script>
+// Every number below comes from data/state.json (the fold) — never typed here. A file:// open cannot fetch it, so the
+// page says how to serve it instead of showing a made-up number.
+const AREAS = [
+  ['1', 'Tracks are independent boxes', 'A track is a black-box repo; Vibe Tracks owns the tree and never writes a box.'],
+  ['2', "The sidebar is Claude's", 'Pins, the view menu, the ··· menu, groupings, drag on a stock tree, pixel parity.'],
+  ['3', 'Roll-up pages', "Home as a stock data-ui table; Review and Feedback as a box's own pages over every box."],
+  ['4', 'New track', '`vt new` duplicates the starter box; local-only by default, GitHub as an option.'],
+  ['5', 'Meta', 'Vibe Tracks tracks itself.'],
+];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = sel => document.querySelector(sel);
+function chip(r) {
+  if (r.result === 'pass') return '<span class="chip pass">met</span>';
+  if (r.result === 'fail') return `<span class="chip fail">${r.fail ? r.fail + ' failing' : 'failing'}</span>`;
+  if (r.result === 'unverified' || (r.tests === 0)) return '<span class="chip none">no check</span>';
+  return '<span class="chip none">not run</span>';
+}
+function render(state) {
+  const spec = state.spec || {};
+  const rows = spec.requirements || [];
+  const shalls = rows.filter(r => r.verb === 'shall');
+  const met = shalls.filter(r => r.result === 'pass').length;
+  const ran = !!spec.junit_run;
+  if (ran) {
+    const failing = shalls.length - met;
+    $('[data-score]').innerHTML = `${failing}<small> of ${shalls.length} not met</small>`;
+    $('[data-what]').textContent = `shall_failing (lower is better, target 0) · ${met} met · ${spec.tests ?? '?'} checks, ${spec.tests_failed ?? '?'} failing`;
+    $('[data-bar]').innerHTML = `<i style="width:${100 * met / shalls.length}%;background:var(--pass)"></i><i style="width:${100 * failing / shalls.length}%;background:var(--fail)"></i>`;
+    $('[data-why]').textContent = `Scored on vibetracks at the acceptance run of ${spec.junit_run.at || 'an unknown time'}; an item with no check counts as not met.`;
+  } else {
+    $('[data-score]').innerHTML = `—<small> of ${shalls.length || 19}</small>`;
+    $('[data-what]').textContent = 'shall_failing: not scored yet';
+    $('[data-why]').textContent = spec.why || 'No acceptance run folded into this state yet.';
+  }
+  $('[data-areas]').innerHTML = AREAS.map(([n, title, blurb]) => {
+    const mine = rows.filter(r => String(r.section) === n);
+    return `<div class="area"><h3>${n}. ${esc(title)}</h3><p>${esc(blurb).replace(/`([^`]+)`/g, '<code>$1</code>')}</p>${mine.map(r => {
+      const t = String(r.name || r.id).replace(/^S\d+\.\d+\s+/, '');
+      return `<a class="item" href="dashboard/#spec" title="${esc(r.statement || '')}"><span class="id">${esc(r.id)}</span><span class="t">${esc(t).replace(/`([^`]+)`/g, '<code>$1</code>')}${r.verb === 'should' ? '<em>should</em>' : ''}</span>${chip(r)}</a>`;
+    }).join('')}</div>`;
+  }).join('');
+  $('[data-ref]').textContent = `${state.box || 'this box'} @ ${String(state.ref || '').slice(0, 7)}${state.ref_date ? ' · ' + state.ref_date.slice(0, 10) : ''}`;
+}
+fetch('data/state.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(render).catch(() => {
+  $('[data-score]').textContent = '—';
+  $('[data-what]').innerHTML = 'Serve the site to read its numbers: <code>python3 -m http.server --directory site</code>';
+});
+</script>
+</body>
+</html>

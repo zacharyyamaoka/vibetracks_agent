@@ -1,0 +1,31 @@
+{
+  "schema": "bb-page/1",
+  "name": "Analysis",
+  "page": "analysis",
+  "links": {
+    "page": "{page}.html",
+    "solution": "solution.html?id={id}"
+  },
+  "sections": {
+    "tabs": {
+      "type": "bb-nav",
+      "settings": {
+        "current": "analysis"
+      }
+    },
+    "rows": {
+      "type": "bb-data-page",
+      "settings": {
+        "slice": "analysis",
+        "base": "analysis.base",
+        "view": "Thumbnails",
+        "height": 640,
+        "empty": "No analysis yet. Add an HTML report under reports/, or Markdown files under analysis/ (or beside the reports); study files in ablations/ show here too."
+      }
+    }
+  },
+  "order": [
+    "tabs",
+    "rows"
+  ]
+}

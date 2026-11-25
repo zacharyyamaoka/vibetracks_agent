@@ -1,0 +1,3 @@
+/* data-ui 0.1.0 · view: graph · bundles listed in ../LICENSES.md */
+import{P as w}from"./graph-chunk-WXOADKSV.js";import{b as c}from"./graph-chunk-2NEI7QRF.js";import{a as r}from"./graph-chunk-2QXMRN76.js";var l=r((t,e,i,h)=>{t.attr("class",i);let{width:o,height:n,x,y:u}=m(t,e);w(t,n,o,h);let a=s(x,u,o,n,e);t.attr("viewBox",a),c.debug(`viewBox configured: ${a} with padding: ${e}`)},"setupViewPortForSVG"),m=r((t,e)=>{let i=t.node()?.getBBox()||{width:0,height:0,x:0,y:0};return{width:i.width+e*2,height:i.height+e*2,x:i.x,y:i.y}},"calculateDimensionsWithPadding"),s=r((t,e,i,h,o)=>`${t-o} ${e-o} ${i} ${h}`,"createViewBox");export{l as a};
+//# sourceMappingURL=graph-chunk-5QASCARZ.js.map

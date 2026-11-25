@@ -1,0 +1,23 @@
+<!doctype html>
+<!-- The box's dashboard (blackbox_agent viewer, CONTRACT §18), vendored by blackbox_agent's tools/vendor_viewer.py as
+     site/dashboard/index.html: never edit it here, re-vendor. The site bar reads ../nav.json, the tabs ../data/state.json;
+     a tab is #<tab id>, a solution #solution=<id>. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard</title>
+<meta name="description" content="The black box's dashboard: the spec, every iteration, the gates, the ablation study, the agents, the activity and the ideas, read from the box's state.json.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1.8 13.6 5v6L8 14.2 2.4 11V5z' fill='none' stroke='%232563eb' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  html, body { margin: 0; background: var(--bb-bg, #fff); color: var(--bb-fg, #18181b); }
+  body { -webkit-font-smoothing: antialiased; font-family: var(--bb-font, system-ui, sans-serif); }
+  main[data-view] { min-width: 0; min-height: 60vh; }
+</style>
+</head>
+<body data-state="../data/state.json">
+<bb-site-nav src="../nav.json" current="blackbox" href="#{page}"></bb-site-nav>
+<main data-view></main>
+<script type="module" src="viewer/site/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "schema": "bb-page/1",
+  "name": "Notes",
+  "page": "notes",
+  "links": {
+    "page": "{page}.html",
+    "solution": "solution.html?id={id}"
+  },
+  "sections": {
+    "tabs": {
+      "type": "bb-nav",
+      "settings": {
+        "current": "notes"
+      }
+    },
+    "notes": {
+      "type": "bb-notes"
+    }
+  },
+  "order": [
+    "tabs",
+    "notes"
+  ]
+}

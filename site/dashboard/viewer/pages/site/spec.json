@@ -1,0 +1,27 @@
+{
+  "schema": "bb-page/1",
+  "name": "Spec",
+  "page": "spec",
+  "links": {
+    "page": "{page}.html",
+    "solution": "solution.html?id={id}"
+  },
+  "sections": {
+    "tabs": {
+      "type": "bb-nav",
+      "settings": {
+        "current": "spec"
+      }
+    },
+    "spec": {
+      "type": "bb-spec",
+      "settings": {
+        "view": "tree"
+      }
+    }
+  },
+  "order": [
+    "tabs",
+    "spec"
+  ]
+}

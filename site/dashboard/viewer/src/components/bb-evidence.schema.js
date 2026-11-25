@@ -1,0 +1,26 @@
+// bb-evidence: the metric explainer (viewer/CONTRACT.md §14). Pure: no DOM.
+export default {
+  tag: 'bb-evidence', name: 'Evidence (metric explainer)', version: 1, wave: 2,
+  description: 'One saved run (bb-run/1) explained: what each metric scored and which samples it came from, on one shared time cursor. Two layouts over the same data: Lens (the scene large, metric cards beside it; click a card and the scene and the strip show that metric\'s evidence) and Recorder (every metric a lane on one timeline with its score and red flags where it failed; the scene small). The scene slot takes a 3-D replay of precomputed geometry, a video, several screens, or none.',
+  reads: ['playback'],
+  settings: [
+    { id: 'layout', type: 'select', label: 'Layout', default: 'lens',
+      options: [{ value: 'lens', label: 'Lens: the scene large, metric cards' }, { value: 'recorder', label: 'Recorder: metric lanes on one timeline' }] },
+    { id: 'toggle', type: 'checkbox', label: 'Show the Lens / Recorder switch', default: true },
+    { id: 'scene', type: 'select', label: 'Scene', default: 'auto',
+      options: [{ value: 'auto', label: 'Auto (the record\'s own)' }, { value: '3d', label: '3-D replay' }, { value: 'video', label: 'Video' },
+        { value: 'multi', label: 'Several screens' }, { value: 'none', label: 'None (metrics only)' }] },
+    { id: 'screens', type: 'select', label: 'Several screens: layout', default: 'row',
+      options: [{ value: 'row', label: 'Side by side' }, { value: 'grid', label: 'Grid (two columns)' }] },
+    { id: 'run', type: 'text', label: 'Run to open (solution id or record path; "" = the first listed)', default: '' },
+    { id: 'picker', type: 'checkbox', label: 'Show the run picker when the state lists several runs', default: true },
+    { id: 'metric', type: 'text', label: 'Metric to open (id; "" = the objective)', default: '' },
+    { id: 'height', type: 'range', label: 'Height', min: 320, max: 960, step: 10, unit: 'px', default: 560 },
+    { id: 'speed', type: 'range', label: 'Playback speed', min: 0.25, max: 4, step: 0.25, unit: '×', default: 1 },
+  ],
+  blocks: [],
+  limit: null,
+  presets: [{ name: 'Lens', settings: { layout: 'lens' } }, { name: 'Recorder', settings: { layout: 'recorder' } }],
+  events: ['bb-evidence-select', 'bb-evidence-layout'],
+  empty: 'No saved run: the box\'s export writes bb-run/1 records and lists them in playback.runs (CONTRACT §4, §14).',
+};

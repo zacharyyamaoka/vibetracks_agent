@@ -1,0 +1,11 @@
+{
+ "what": "marked as the viewer imports it: re-copy with node viewer/tools/vendor.mjs, never edit",
+ "package": "marked",
+ "version": "16.4.2",
+ "license": "MIT",
+ "from": "storybook/node_modules/marked (npm, pinned in storybook/package.json)",
+ "files": {
+  "marked.esm.js": "6540aa2544be84b3abdd9424fa287120e9ed7c7600512dd92c097493121a5951",
+  "LICENSE.md": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+ }
+}

@@ -1,0 +1,63 @@
+# Activity: one row per event: commits (git log), evaluations (ledger.jsonl), one line per ablation study
+# Stock: every black-box agent ships this file and swaps the data file. Grammar: Obsidian Bases + data-ui keys
+# (data-ui docs/CONTRACT.md §5). Data: proposals-pages/_build/fold.py from trajectory_tracking_agent @ 9ead945.
+data: activity.json
+facets:
+  - kind
+  - who
+  - { property: day, as: date }
+  - verdict
+open: { mode: side, splitAt: 980 }
+properties:
+  t: { displayName: "When" }
+  day: { displayName: "Day" }
+  kind: { displayName: "Kind" }
+  what: { displayName: "What" }
+  who: { displayName: "Who" }
+  ref: { displayName: "Ref" }
+  commit: { displayName: "Commit" }
+  solution: { displayName: "Solution" }
+  verdict: { displayName: "Verdict" }
+  objective: { displayName: "Score", type: number, decimals: 3 }
+  files: { displayName: "Files", type: number, decimals: 0 }
+views:
+  - type: table
+    name: Activity
+    order: [t, kind, what, who, commit]
+    sort:
+      - { property: t, direction: DESC }
+    display: { verdict: status }
+  - type: timeline
+    name: Timeline
+    start: t
+    title: what
+    color: kind
+    groupBy: { property: kind, direction: ASC }
+    groupOrder: [commit, evaluation, holdout, study run]
+    zoom: { min: PT5M, max: P30D }
+  - type: chart
+    name: Heat strip
+    order: [day, kind, what]
+    # WHY 10-minute bins, not days: this box's whole history is one day (2026-11-24, 08:38 to 11:33); a box that lives
+    # for weeks swaps the timeUnit for yearmonthdate and the same strip becomes a calendar
+    chart:
+      height: 220
+      layer:
+        - mark: { type: rect, cornerRadius: 2 }
+          encoding:
+            x: { field: t, type: ordinal, timeUnit: { unit: hoursminutes, step: 10 }, title: time of day (10-minute bins), axis: { labelAngle: 0 } }
+            y: { field: kind, type: nominal, title: null, sort: [commit, evaluation, holdout, study run] }
+            color: { aggregate: count, type: quantitative, title: events, scale: { scheme: blues } }
+            tooltip: [{ field: t, timeUnit: { unit: hoursminutes, step: 10 }, title: from }, { field: kind }, { aggregate: count, title: events }]
+        - mark: { type: text, fontSize: 11 }
+          encoding:
+            x: { field: t, type: ordinal, timeUnit: { unit: hoursminutes, step: 10 } }
+            y: { field: kind, type: nominal, sort: [commit, evaluation, holdout, study run] }
+            text: { aggregate: count, type: quantitative }
+            color: { condition: { test: "datum.__count > 18", value: "#ffffff" }, value: "#1b1e23" }
+  - type: table
+    name: By commit
+    order: [t, kind, what, who]
+    groupBy: { property: commit, direction: DESC }
+    sort:
+      - { property: t, direction: DESC }

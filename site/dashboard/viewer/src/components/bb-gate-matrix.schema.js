@@ -1,0 +1,27 @@
+// bb-gate-matrix: the gate history, the box's gates × time (viewer/CONTRACT.md §5.2, §16.6). Pure: no DOM.
+export default {
+  tag: 'bb-gate-matrix', name: 'Gate history', version: 1, wave: 2,
+  description: "The box's gates (rows, OBJECTIVES.md's gate table) over time (columns: each iteration, commit or day). A cell is pass or the failed task count for the solution the column shows; where a commit or a day holds several solutions the column shows the leading one and says so (\"leading p6s of 9\"). Hover names the solution, its verdict, objective and failed gates; click a column opens it.",
+  reads: ['iterations', 'ablations', 'gates'],
+  settings: [
+    { id: 'x', type: 'select', label: 'Columns (x)', default: 'iteration',
+      info: 'iteration: one column per solution; commit: per commit that introduced solutions; date: per day evaluated. A commit or day holding several solutions shows the leading one: search solutions before ablation runs, admissible first, then the best objective.',
+      options: [{ value: 'iteration', label: 'Iteration' }, { value: 'commit', label: 'Commit' }, { value: 'date', label: 'Date' }] },
+    { id: 'only_failing', type: 'checkbox', label: 'Only columns where a gate failed', default: false,
+      info: 'keeps a column when any of its solutions failed a gate (a failure behind a passing leader counts)' },
+    { id: 'limit', type: 'range', label: 'Newest columns shown', min: 5, max: 200, step: 1, default: 60, info: 'older columns are hidden and counted' },
+    { id: 'ablations', type: 'checkbox', label: 'Show the ablation runs', default: false, info: 'study variants, not search steps; they never lead a column over a search solution' },
+    { id: 'controls', type: 'checkbox', label: 'Reader controls (x chips, toggles)', default: true },
+    { id: 'draw', type: 'select', label: 'Drawn as', default: 'grid',
+      info: "grid: the compact grid (counts in the cells, the leading-of-N header, column click opens the solution). tracker: data-ui's stock gate matrix (tracker matrix mode) over the same columns; its cells carry a glyph (a pass whose column holds another solution's failure is amber \"partial\"), the count is in the hover.",
+      options: [{ value: 'grid', label: 'Grid (counts in cells)' }, { value: 'tracker', label: 'data-ui tracker (stock)' }] },
+    { id: 'title', type: 'text', label: 'Title', default: 'Gate history' },
+    { id: 'click', type: 'select', label: 'Clicking a cell', default: 'open',
+      info: 'open: a click opens the column\'s solution (bb-open). select: a click selects the cell (a header selects its column) and fires bb-gate-select {x, key, index, gate, lead, members}; bb-gates\' timeline view answers it with why the cell is red. Grid only: data-ui\'s tracker always opens its own side peek.',
+      options: [{ value: 'open', label: 'Open its solution' }, { value: 'select', label: 'Select it (bb-gate-select)' }] },
+  ],
+  events: ['bb-gate-select', 'bb-gate-view'],
+  blocks: [],
+  presets: [{ name: 'Gate history' }, { name: 'Gate history by commit', settings: { x: 'commit' } }, { name: 'Failures only', settings: { only_failing: true } }],
+  empty: 'No solution scored yet.',
+};

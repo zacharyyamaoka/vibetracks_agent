@@ -1,0 +1,24 @@
+{
+  "schema": "bb-page/1",
+  "name": "A box's own tab",
+  "page": "tab",
+  "links": {
+    "page": "{page}.html",
+    "solution": "solution.html?id={id}"
+  },
+  "sections": {
+    "tabs": {
+      "type": "bb-nav"
+    },
+    "body": {
+      "type": "bb-markdown",
+      "settings": {
+        "markdown": "This box has no tab by that name. A box adds a tab by adding one file: `site/tabs/<order>-<slug>.md`, `.json`, `.base` or `.html` (CONTRACT \u00a717)."
+      }
+    }
+  },
+  "order": [
+    "tabs",
+    "body"
+  ]
+}

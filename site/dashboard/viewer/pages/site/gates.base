@@ -1,0 +1,15 @@
+# Overview · gates: one row per ruler gate, judged on the best admissible solution (the viewer's gates slice)
+# Stock: every black-box agent ships this file and swaps the data file. Grammar: Obsidian Bases + data-ui keys
+# (data-ui docs/CONTRACT.md §5). Data: proposals-pages/_build/fold.py from trajectory_tracking_agent @ 9ead945.
+data: gates.json
+open: { mode: side, splitAt: 760 }
+properties:
+  id: { displayName: Gate }
+  passed: { displayName: Passes }
+  worst: { displayName: Worst task, digits: 3 }
+  margin: { displayName: Margin, digits: 3 }
+views:
+  - type: table
+    name: Gates
+    order: [id, passed, worst, unit, op, threshold, margin, failed_tasks, iterations_passing]
+    columnSize: { id: 170, passed: 80, worst: 100, unit: 70, op: 50, threshold: 90, margin: 90 }

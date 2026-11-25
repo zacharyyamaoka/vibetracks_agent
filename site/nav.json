@@ -1,0 +1,20 @@
+{
+ "schema": "bb-site-nav/1",
+ "what": "The site bar on every page of this box's site (the blackbox_agent viewer's <bb-site-nav>, CONTRACT §18; vendored in site/dashboard/ by blackbox_agent's tools/vendor_viewer.py). The box is local only, so no repo link yet. Every href is relative to this file.",
+ "site": {
+  "name": "Vibe Tracks Agent",
+  "landing": "index.html",
+  "home": "blackbox"
+ },
+ "groups": [
+  {"id": "box", "label": "Black box", "kind": "box"}
+ ],
+ "dashboards": [
+  {
+   "id": "blackbox", "label": "Black box", "group": "box", "icon": "box", "href": "dashboard/", "tabs": "viewer",
+   "about": "The agent's search: the spec, every iteration, the gates, the agents, the activity and the ideas."
+  }
+ ],
+ "order": ["blackbox"],
+ "overflow": {"rule": "priority-plus", "label": "More", "keep": "current", "fold": "short labels first, then the highest priority number, right to left; the open tab never folds"}
+}
