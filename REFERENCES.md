@@ -8,7 +8,7 @@ item) and the web; npm versions and dates from the registry that day.
 - [Claude Code desktop](https://code.claude.com/docs/en/desktop): the reference app for the whole sidebar (S2.*). Its groups, pins and menus are what Vibe Tracks copies; never a second grouping model. From "Vibe Tracks — Off-the-Shelf Stand-ins to Use Now (2026-10-11)", where it was the top pick at 71/100.
 - **Claude Desktop sidebar CSS, read out 2026-10-09** (claude-hub `reports/claude-code-200x-sidebar-2026-10-09.html`): measured row height, type and fills; the source for S2.2's reference values.
 - **Zach's screenshots of Claude's two menus** (vault, Daily Note Nov 24 "# Vibe tracks"): the view menu (Group by, Sort by, Show, New section, Reset to defaults, View all) and the row menu (Open in, Unpin, Mark as unread, Rename, Fork, Move down, Move to section, Archive, Delete). The literal spec for S2.3 and S2.6.
-- **Vibe Tracks' own sidebar** (vibetracks `vibetracks/home/static/sidebar.js`): already Claude's row height, type, hover and selected fills, with the state dots (amber waits, grey blinking works, blue new, hollow ring idle). Reuse it; don't restart.
+- **Vibe Tracks' own sidebar** (`sidebar.js` in the vibetracks package's `home/static` folder): already Claude's row height, type, hover and selected fills, with the state dots (amber waits, grey blinking works, blue new, hollow ring idle). Reuse it; don't restart.
 - **Notion's sidebar** (Daily Note Oct 16, screenshots): the fold chevron shows on hover, so open and fold are separate targets. Clashes with pixel-perfect Claude (OBJECTIVES §6.1).
 
 ## Tree and drag
