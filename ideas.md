@@ -60,6 +60,12 @@ loading come first because every other item reads them.
   - Rung: new track
   - Needs: a starter box to copy. Since blackbox_agent 0.1.x, `blackbox new <dir>` writes one (OBJECTIVES, AGENTS,
     an empty ledger, nav.json, the Pages workflow; committed on main): call it rather than copy `template/`.
+- [ ] **Pause / Resume** in the ··· and right-click menus, before Archive; a paused row shows a pause glyph and a
+  muted title; `vt pause|resume <track>`; an append-only `status` list in the tree file, stamped `by` (person, or
+  agent when an agent's session ran it). Zach's words: [`feedback/2026-11-25-pause-a-track.md`](feedback/2026-11-25-pause-a-track.md).
+  Expect (ruler v2): S2.10 → pass, S2.3 stays green. Spec: [PEP 0002](docs/peps/0002-ruler-v2-pause-resume.md).
+  - Rung: sidebar
+  - Needs: the tree file (boxes-as-tracks) and ruler v2 frozen
 - [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`
