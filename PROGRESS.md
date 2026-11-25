@@ -1,6 +1,6 @@
 # Progress
 
-Ruler v3 ([`OBJECTIVES.md`](OBJECTIVES.md) §8, §11). Generated 2026-11-25T20:00:38Z by `vta progress` from [`ledger.jsonl`](ledger.jsonl); never edit by hand.
+Ruler v3 ([`OBJECTIVES.md`](OBJECTIVES.md) §8, §11). Generated 2026-11-25T20:32:04Z by `vta progress` from [`ledger.jsonl`](ledger.jsonl); never edit by hand.
 
 ## Where it stands
 
@@ -14,6 +14,7 @@ Ruler v3 only. Admissible versions by shall failing, then `open_ms` (rounded to 
 | rank | id | shall failing | open ms | should failing | checks failing | admissible | holdout shall | change | model |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | [`main-940b507-v3`](solutions/main-940b507-v3/) | 2 | 816 | 1 | 9 | yes | — | vibetracks main @ 940b507 (= bb-0112-2's tree plus a docs commit) re-scored on … | claude-opus-5-5 |
+| 2 | [`speed-1`](solutions/speed-1/) | 23 | — | 3 | 135 | no (deterministic) | — | server prebuild + lean /tree.json + no Nagle (vt/speed-prebuild) and kept frame… | claude-opus-5-5 |
 
 ## Earlier rulers
 
@@ -86,7 +87,6 @@ The spec items [`main-940b507-v3`](solutions/main-940b507-v3/) does not meet (3)
 
 | t | id | split | ruler | shall | open ms | should | checks | admissible | wall s |
 |---|---|---|---|---|---|---|---|---|---|
-| 2026-11-25T14:10:21Z | [`dash-first-1`](solutions/dash-first-1/) | dev | v2 | 20 | — | 4 | 119 | no | 367 |
 | 2026-11-25T14:35:58Z | [`dash-first-1`](solutions/dash-first-1/) | dev | v2 | 20 | — | 4 | 119 | no | 409 |
 | 2026-11-25T14:45:14Z | [`dash-first-1`](solutions/dash-first-1/) | dev | v2 | 0 | — | 1 | 0 | yes | 534 |
 | 2026-11-25T15:17:22Z | [`bb-0112-1`](solutions/bb-0112-1/) | dev | v2 | 20 | — | 4 | 119 | no | 411 |
@@ -96,3 +96,4 @@ The spec items [`main-940b507-v3`](solutions/main-940b507-v3/) does not meet (3)
 | 2026-11-25T16:01:14Z | [`bb-0112-2`](solutions/bb-0112-2/) | dev | v2 | 0 | — | 1 | 0 | yes | 351 |
 | 2026-11-25T19:39:48Z | [`main-940b507-v3`](solutions/main-940b507-v3/) | dev | v3 | 23 | — | 3 | 135 | no | 614 |
 | 2026-11-25T19:59:53Z | [`main-940b507-v3`](solutions/main-940b507-v3/) | dev | v3 | 2 | 816 | 1 | 9 | yes | 1,025 |
+| 2026-11-25T20:32:04Z | [`speed-1`](solutions/speed-1/) | dev | v3 | 23 | — | 3 | 135 | no | 792 |

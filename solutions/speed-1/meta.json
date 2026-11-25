@@ -1,0 +1,15 @@
+{
+  "id": "speed-1",
+  "parent": "main-940b507-v3",
+  "change": "server prebuild + lean /tree.json + no Nagle (vt/speed-prebuild) and kept frames + load on press + no blank pane (vt/speed-frames), merged on main",
+  "vibetracks_sha": "e7cd3b9a19ad3844a2338f759e95b306bc742536",
+  "vibetracks_ref": "e7cd3b9",
+  "vibetracks_committed": "2026-11-25T20:10:50Z",
+  "proposed_by": {
+    "agent": "Claude Code (dispatcher)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T20:18:51Z",
+  "tags": []
+}
