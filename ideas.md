@@ -125,6 +125,10 @@ loading come first because every other item reads them.
   separate ones); S1.4 clicks a row that sits under the account footer at its 420 px window.
   - Rung: meta
   - Needs: Zach
+  More, found 2026-11-25 by lane D: `ruler/suite/run.mjs --list` calls `process.exit(0)` right after writing its JSON to a
+  pipe, so Node can cut the output and `vta evaluate` dies with "Unterminated string" before any run (twice);
+  S1.5 treats files as volatile only in a 2.5 s window, so any periodic writer can trip it (Vibe Tracks' idle churn is
+  fixed, vibetracks 24e2ae5, but the window stays fragile).
 - [ ] **The use number** ([PEP 0001](docs/peps/0001-ruler-v2-use-number.md), accepted): `days_opened` and
   `boxes_opened_per_day` as a live stage, reported beside `shall_failing`, never a gate. A `vta tick` appends one
   `live` row a day from vibetracks' reader file and a per-person box-open counter (a person's click, never an agent's).
@@ -147,6 +151,11 @@ loading come first because every other item reads them.
   live chats bound to the box (they bind again since vibetracks bd459dc), summed over the subtree as today. Seen
   2026-11-25 over his eight real boxes.
   - Rung: roll-ups
+  - Needs: nothing
+- [ ] **Close the box-frame isolation hole.** A box's page can navigate its own frame to the main page's loopback name,
+  which `/box/` also serves, and from there read the page's token (PEP 0024's isolation). Existing, not new; found by lane
+  D 2026-11-25. Low urgency while every listed box is Zach's own (PEP 0028 §3: listing a box already trusts its code).
+  - Rung: boxes
   - Needs: nothing
 - [x] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta

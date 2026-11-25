@@ -1,6 +1,6 @@
 # Progress
 
-Ruler v2 ([`OBJECTIVES.md`](OBJECTIVES.md) §8, §11). Generated 2026-11-25T11:09:32Z by `vta progress` from [`ledger.jsonl`](ledger.jsonl); never edit by hand.
+Ruler v2 ([`OBJECTIVES.md`](OBJECTIVES.md) §8, §11). Generated 2026-11-25T16:01:14Z by `vta progress` from [`ledger.jsonl`](ledger.jsonl); never edit by hand.
 
 ## Where it stands
 
@@ -13,20 +13,20 @@ Ruler v2 only. Admissible versions by shall failing, then should failing, then c
 | rank | id | shall failing | should failing | checks failing | admissible | holdout shall | change | model |
 |---|---|---|---|---|---|---|---|---|
 | 1 | [`bb-0110-1`](solutions/bb-0110-1/) | 0 | 1 | 0 | yes | — | re-vendor blackbox_agent 0.1.10 (fold: no divide by a zero objective; landing t… | claude-sonnet-5-5 |
-| 2 | [`stock-tree-2`](solutions/stock-tree-2/) | 0 | 1 | 0 | yes | — | stock-tree-1 rebased on 2d3e724 (box-sites, S1.4) and its PEP renumbered 0030: … | claude-opus-5-5 |
-| 3 | [`stock-tree-1`](solutions/stock-tree-1/) | 0 | 2 | 2 | yes | — | Headless Tree under the sidebar's tree and drag (PEP 0028): @headless-tree/core… | claude-opus-5-5 |
-| 4 | [`box-sites-1`](solutions/box-sites-1/) | 1 | 1 | 1 | yes | — | A box opens on its own site (vibetracks PEP 0028 §2-§4): a package box is built… | claude-opus-5-5 |
-| 5 | [`box-sites-2`](solutions/box-sites-2/) | 1 | 1 | 1 | yes | — | box-sites-1 rebased on vibetracks main dec7b06 (lane M's serve memory, PEP 0017… | claude-opus-5-5 |
-| 6 | [`live-1`](solutions/live-1/) | 1 | 1 | 1 | yes | — | The sidebar keeps a row reachable at a short window (vibetracks PEP 0028 §6): o… | claude-opus-5-5 |
-| 7 | [`states-1`](solutions/states-1/) | 1 | 1 | 1 | yes | — | One state vocabulary (vibetracks PEP 0028 §5): status.json words in one table (… | claude-opus-5-5 |
-| 8 | [`view-2`](solutions/view-2/) | 1 | 2 | 3 | yes | — | view-1 rebased on 6a73de5: Claude's view menu over the boxes (PEP 0027 §4), Gro… | claude-opus-5-5 |
-| 9 | [`menus-2`](solutions/menus-2/) | 3 | 2 | 13 | yes | — | menus-1 rebased on vibetracks main 6a73de5 (roll-ups, PEP 0025): Claude's ··· m… | claude-opus-5-5 |
-| 10 | [`rollups-2`](solutions/rollups-2/) | 5 | 2 | 32 | yes | — | rollups-1 rebased on vibetracks main ecf4dd6 (vt new, PEP 0026): the roll-up pa… | claude-opus-5-5 |
-| 11 | [`view-1`](solutions/view-1/) | 6 | 2 | 16 | yes | — | Claude's view menu over the boxes (PEP 0027 §4): Group by › None / Parent / Sta… | claude-opus-5-5 |
-| 12 | [`menus-1`](solutions/menus-1/) | 8 | 2 | 26 | yes | — | Claude's ··· menu over the boxes and Pause / Resume (PEP 0027 §2-§3): Open in ›… | claude-opus-5-5 |
-| 13 | [`rollups-1`](solutions/rollups-1/) | 9 | 2 | 44 | yes | — | Roll-up pages over the boxes (PEP 0025): Home a data-ui <data-views> nested by … | claude-opus-5-5 |
-| 14 | [`new-track-1`](solutions/new-track-1/) | 10 | 2 | 45 | yes | — | New track (PEP 0026): vt new "<title>" [--parent] [--dir] [--from] [--publish [… | claude-opus-5-5 |
-| 15 | [`boxes-as-tracks-1-v2`](solutions/boxes-as-tracks-1-v2/) | 14 | 2 | 57 | yes | — | re-score on ruler v2 | claude-opus-5-5 |
+| 2 | [`bb-0112-2`](solutions/bb-0112-2/) | 0 | 1 | 0 | yes | — | blackbox-agent 0.1.12 bundled (the site bar reads ⌂ <box>), and an idle ingest … | claude-opus-5-5 |
+| 3 | [`dash-first-1`](solutions/dash-first-1/) | 0 | 1 | 0 | yes | — | a track opens on its box's dashboard | claude-opus-5-5 |
+| 4 | [`stock-tree-2`](solutions/stock-tree-2/) | 0 | 1 | 0 | yes | — | stock-tree-1 rebased on 2d3e724 (box-sites, S1.4) and its PEP renumbered 0030: … | claude-opus-5-5 |
+| 5 | [`stock-tree-1`](solutions/stock-tree-1/) | 0 | 2 | 2 | yes | — | Headless Tree under the sidebar's tree and drag (PEP 0028): @headless-tree/core… | claude-opus-5-5 |
+| 6 | [`box-sites-1`](solutions/box-sites-1/) | 1 | 1 | 1 | yes | — | A box opens on its own site (vibetracks PEP 0028 §2-§4): a package box is built… | claude-opus-5-5 |
+| 7 | [`box-sites-2`](solutions/box-sites-2/) | 1 | 1 | 1 | yes | — | box-sites-1 rebased on vibetracks main dec7b06 (lane M's serve memory, PEP 0017… | claude-opus-5-5 |
+| 8 | [`live-1`](solutions/live-1/) | 1 | 1 | 1 | yes | — | The sidebar keeps a row reachable at a short window (vibetracks PEP 0028 §6): o… | claude-opus-5-5 |
+| 9 | [`states-1`](solutions/states-1/) | 1 | 1 | 1 | yes | — | One state vocabulary (vibetracks PEP 0028 §5): status.json words in one table (… | claude-opus-5-5 |
+| 10 | [`view-2`](solutions/view-2/) | 1 | 2 | 3 | yes | — | view-1 rebased on 6a73de5: Claude's view menu over the boxes (PEP 0027 §4), Gro… | claude-opus-5-5 |
+| 11 | [`menus-2`](solutions/menus-2/) | 3 | 2 | 13 | yes | — | menus-1 rebased on vibetracks main 6a73de5 (roll-ups, PEP 0025): Claude's ··· m… | claude-opus-5-5 |
+| 12 | [`rollups-2`](solutions/rollups-2/) | 5 | 2 | 32 | yes | — | rollups-1 rebased on vibetracks main ecf4dd6 (vt new, PEP 0026): the roll-up pa… | claude-opus-5-5 |
+| 13 | [`view-1`](solutions/view-1/) | 6 | 2 | 16 | yes | — | Claude's view menu over the boxes (PEP 0027 §4): Group by › None / Parent / Sta… | claude-opus-5-5 |
+| 14 | [`menus-1`](solutions/menus-1/) | 8 | 2 | 26 | yes | — | Claude's ··· menu over the boxes and Pause / Resume (PEP 0027 §2-§3): Open in ›… | claude-opus-5-5 |
+| 15 | [`rollups-1`](solutions/rollups-1/) | 9 | 2 | 44 | yes | — | Roll-up pages over the boxes (PEP 0025): Home a data-ui <data-views> nested by … | claude-opus-5-5 |
 
 ## Earlier rulers
 
@@ -50,13 +50,13 @@ The spec items [`bb-0110-1`](solutions/bb-0110-1/) does not meet (1); each is Za
 
 | t | id | split | ruler | shall | should | checks | admissible | wall s |
 |---|---|---|---|---|---|---|---|---|
-| 2026-11-25T09:31:46Z | [`menus-2`](solutions/menus-2/) | dev | v2 | 3 | 2 | 13 | yes | 387 |
-| 2026-11-25T09:41:02Z | [`view-2`](solutions/view-2/) | dev | v2 | 1 | 2 | 3 | yes | 409 |
-| 2026-11-25T10:04:32Z | [`live-1`](solutions/live-1/) | dev | v2 | 20 | 4 | 119 | no | 331 |
-| 2026-11-25T10:10:16Z | [`states-1`](solutions/states-1/) | dev | v2 | 1 | 1 | 1 | yes | 344 |
-| 2026-11-25T10:15:33Z | [`box-sites-1`](solutions/box-sites-1/) | dev | v2 | 1 | 1 | 1 | yes | 316 |
-| 2026-11-25T10:31:19Z | [`box-sites-2`](solutions/box-sites-2/) | dev | v2 | 1 | 1 | 1 | yes | 326 |
-| 2026-11-25T10:35:59Z | [`stock-tree-1`](solutions/stock-tree-1/) | dev | v2 | 0 | 2 | 2 | yes | 325 |
-| 2026-11-25T10:36:29Z | [`live-1`](solutions/live-1/) | dev | v2 | 1 | 1 | 1 | yes | 309 |
 | 2026-11-25T10:45:38Z | [`stock-tree-2`](solutions/stock-tree-2/) | dev | v2 | 0 | 1 | 0 | yes | 334 |
 | 2026-11-25T11:09:32Z | [`bb-0110-1`](solutions/bb-0110-1/) | dev | v2 | 0 | 1 | 0 | yes | 318 |
+| 2026-11-25T14:10:21Z | [`dash-first-1`](solutions/dash-first-1/) | dev | v2 | 20 | 4 | 119 | no | 367 |
+| 2026-11-25T14:35:58Z | [`dash-first-1`](solutions/dash-first-1/) | dev | v2 | 20 | 4 | 119 | no | 409 |
+| 2026-11-25T14:45:14Z | [`dash-first-1`](solutions/dash-first-1/) | dev | v2 | 0 | 1 | 0 | yes | 534 |
+| 2026-11-25T15:17:22Z | [`bb-0112-1`](solutions/bb-0112-1/) | dev | v2 | 20 | 4 | 119 | no | 411 |
+| 2026-11-25T15:22:10Z | [`bb-0112-1`](solutions/bb-0112-1/) | dev | v2 | 20 | 4 | 119 | no | 236 |
+| 2026-11-25T15:31:40Z | [`bb-0112-1`](solutions/bb-0112-1/) | dev | v2 | 0 | 2 | 1 | no | 539 |
+| 2026-11-25T15:40:21Z | [`bb-0112-1`](solutions/bb-0112-1/) | dev | v2 | 0 | 2 | 1 | no | 491 |
+| 2026-11-25T16:01:14Z | [`bb-0112-2`](solutions/bb-0112-2/) | dev | v2 | 0 | 1 | 0 | yes | 351 |

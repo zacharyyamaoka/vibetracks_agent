@@ -1,0 +1,15 @@
+{
+  "id": "bb-0112-2",
+  "parent": "dash-first-1",
+  "change": "blackbox-agent 0.1.12 bundled (the site bar reads \u2302 <box>), and an idle ingest pass leaves HOME byte for byte (S1.5's flake)",
+  "vibetracks_sha": "24e2ae53dd582c0cc84086f1c3d6498690396eed",
+  "vibetracks_ref": "24e2ae53dd582c0cc84086f1c3d6498690396eed",
+  "vibetracks_committed": "2026-11-25T15:55:10Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane D subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T15:55:21Z",
+  "tags": []
+}
