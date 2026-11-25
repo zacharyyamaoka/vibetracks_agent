@@ -102,8 +102,8 @@ def test_latest_keeps_the_newest_row_per_solution_and_split():
 
 
 def test_the_code_and_the_frozen_ruler_name_one_version():
-    """The scorer, the manifest and checks.json all say v3 (PEP 0003), so a scorecard's `ruler` is the ruler it ran."""
-    assert ledger.RULER == "v3"
+    """The scorer, the manifest and checks.json all say v4 (PEP 0004), so a scorecard's `ruler` is the ruler it ran."""
+    assert ledger.RULER == "v4"
     assert ruler.manifest(REPO)["ruler"] == ledger.RULER
     assert json.loads((REPO / "ruler" / "checks.json").read_text())["ruler"] == ledger.RULER
 

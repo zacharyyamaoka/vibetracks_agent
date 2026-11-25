@@ -1,4 +1,4 @@
-# Objectives & Gates (ruler v3, frozen 2026-11-25)
+# Objectives & Gates (ruler v4, frozen 2026-11-25)
 
 The outside of the black box: what Vibe Tracks is for, how a version of it is scored, and where every number comes
 from. Nothing here says how Vibe Tracks does it. Changing anything in this file, `specs/` or `ruler/` makes a **new ruler
@@ -35,7 +35,7 @@ it is checked); a spec id `S<n>.<m>` is item m of §n. **§6-§8 say how a versi
 | [S2.6](specs/S2.6-the-view-menu.md) | shall | The view menu: Group by, Sort by, Show, New section, Reset to defaults, View all |
 | [S2.7](specs/S2.7-groupings.md) | shall | Groupings: flat by recent, and the parent tree |
 | [S2.8](specs/S2.8-drag-to-reorder-on-a-stock-tree.md) | shall | Drag to reorder and to move under another track, on a stock tree component |
-| [S2.9](specs/S2.9-row-anatomy.md) | shall | Fold and unfold like Notion: on hover the status dot turns into the fold chevron ("Fold N sub-tracks (← →)"); click, ← →, kept across a reload, the roll-up kept |
+| [S2.9](specs/S2.9-row-anatomy.md) | shall | Fold and unfold: a parent's chevron always left of its title (Obsidian), the status dot at the row's right end (Claude); "Fold N sub-tracks (← →)"; click, ← →, kept across a reload, the roll-up kept |
 | [S2.10](specs/S2.10-pause-and-resume.md) | shall | Pause a track; a paused track looks paused and stays paused until resumed |
 | [S2.11](specs/S2.11-search.md) | shall | Search: a Search row with Ctrl+K and a palette on Ctrl+K, Ctrl+O, Ctrl+P that finds text in the tracks' files (track, file, line), the open track first; Enter opens the hit, Escape closes |
 
@@ -149,11 +149,15 @@ version fixes or breaks without reading its code.
 
 ## 10. Open tensions (defaults taken; Zach's to overrule)
 
-Each default is in force for ruler v3 (as it was for v1 and v2); overruling one is a new ruler version.
+Each default is in force for ruler v4 (as it was for v1-v3); overruling one is a new ruler version.
 
-1. **Hover chevron (Oct 16) vs pixel-perfect Claude (Nov 24).** *Resolved by Zach, 2026-11-25* ([`feedback/2026-11-25-fold-tracks-like-notion.md`](feedback/2026-11-25-fold-tracks-like-notion.md)):
-   *"when you hover over the dot it should turn into a chvron"*, Notion's pattern. Since ruler v3, S2.9 is a *shall*:
-   a parent's hover chevron in the dot's slot is required, and S2.2's pixel parity holds everywhere else.
+1. **Hover chevron (Oct 16) vs pixel-perfect Claude (Nov 24).** *Resolved by Zach, 2026-11-25, twice.* Ruler v3
+   ([`feedback/2026-11-25-fold-tracks-like-notion.md`](feedback/2026-11-25-fold-tracks-like-notion.md)): *"when you hover over the dot it should turn into a chvron"*, a
+   *shall*. Ruler v4 ([`feedback/2026-11-25-chevron-left-status-right.md`](feedback/2026-11-25-chevron-left-status-right.md)) overrules the hover: *"Its not clear from the
+   outside what has things where you can fold … one option here is to swithc to like obisdan we show the vheron on
+   the left side … and then on the right now we put the status icon"*. A parent's chevron shows left of its title at
+   rest and the status dot sits at the row's right end, where Claude's own sidebar draws it, so S2.2's pixel parity
+   and S2.9 no longer pull apart.
 2. **Built-in sync and an account (Oct 25) vs local boxes (Nov 24).** Default: a box travels by its own git remote;
    Vibe Tracks' tree file is per machine in v1, and nothing here scores sync.
 3. **"I haven't found the vibetracks thing to be that helpful" (W2 retro, by Nov 21).** v1 scores the spec only.
@@ -194,3 +198,13 @@ Each default is in force for ruler v3 (as it was for v1 and v2); overruling one 
   and expand things. just like you can collapse and expand folders"*, and the same day ([`feedback/2026-11-25-search-bar.md`](feedback/2026-11-25-search-bar.md)): *"pleae
   support a search bar"*. Every solution is re-scored on v3; v1 and v2
   rows stay in the ledger, labelled, never ranked against v3.
+- **v4**, frozen 2026-11-25: [PEP 0004](docs/peps/0004-ruler-v4-chevron-left-status-right.md). What changed: **S2.9**'s row anatomy only (folding, its labels,
+  keys, reload and roll-up unchanged): a parent's fold chevron shows left of its title **at rest**, not only on hover
+  (Obsidian's file explorer), a leaf shows none, and the status dot sits at the **row's right end** (Claude's
+  sidebar), not in the leading slot. `ruler/`: the sidebar group's first two S2.9 checks and the fold group's first
+  check are rewritten for it and the fold group finds the chevron at rest, re-pinned in `ruler/manifest.json`; every
+  other check, the fixture, the KPI `open_ms` and the frozen refs are as in v3, so the spec stays 23 *shall*, 3
+  *should*, 135 checks. Why: Zach, Daily Note - Nov 25 2026 ([`feedback/2026-11-25-chevron-left-status-right.md`](feedback/2026-11-25-chevron-left-status-right.md)): *"Its not clear from
+  the outside what has things where you can fold … we show the vheron on the left side … and then on the right now we
+  put the status icon"*. Every solution is re-scored on v4; v1-v3 rows stay in the ledger, labelled, never ranked
+  against v4.

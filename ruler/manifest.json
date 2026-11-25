@@ -1,6 +1,6 @@
 {
  "schema": "vibetracks-agent/ruler-manifest-1",
- "ruler": "v3",
+ "ruler": "v4",
  "frozen": "2026-11-25",
  "blackbox_agent": {
   "repo": "~/blackbox_agent",
@@ -39,7 +39,7 @@
  "time_limit_s": 1200,
  "checks": 135,
  "files": {
-  "checks.json": "9581f8badac3d6b5c07b82e760cd068fcf992ab01416aedd0982f1ccb3d2fecb",
+  "checks.json": "d206f069245a1e591e3e8380f881ac77fb809cfdc3f88249d2beb4178b30c3b3",
   "fixture.py": "281d3f63fb2e67d737fed9866b9e5bd2094442e94ac1d4348821b76fa1781021",
   "reference/box-components.json": "89526e5d35d5ac056c8a2b908db24b16c4830083722c439e371c8f173b13a8a9",
   "reference/claude-sidebar.json": "de6a2136872c488164b90571b1a6f5ee861adf07fc199171b71f5d36c1a6f8c4",
@@ -48,7 +48,7 @@
   "suite/groups/cli.mjs": "81f14c2ea18a7291c0080215da8622cb5e0f53984ee87a5f5998c91a845e75a0",
   "suite/groups/common.mjs": "bca1ba8c28bbaae26bbf91f09d3e3cf54e2716a01fcf99d817953d3e39c8ce61",
   "suite/groups/drag.mjs": "589c6df939e870720aa0f2ccd94ad6681d85c0c28c2ed5829724e74c8ec052bd",
-  "suite/groups/fold.mjs": "78d31e4ed20afd1c04527c77cee9c63854cd6244dd93d550d8bec76fcda34e6d",
+  "suite/groups/fold.mjs": "75640803a9a1c13e0bc3c4e1dd14f040bbf93a3b5c4990fa2fdd6c9347902dcc",
   "suite/groups/index.mjs": "276d64388ad9e5f28ffd7086f175b3e627dac4ea27cff49c97b3659e5eb5fde4",
   "suite/groups/menu.mjs": "84bc3b3f8a548092479a29bc9d9624baf707b887a69973749db9448a02474358",
   "suite/groups/newtrack.mjs": "8a2c792a5d8de8d86ebf4486201e32129ca80153c1e99cf410c1e95950604f7f",
@@ -58,7 +58,7 @@
   "suite/groups/review.mjs": "e5dd96beaf2c02a81d89c75ab4a83618ba5ef38f18408e68f2f000f3aba073a4",
   "suite/groups/rollup.mjs": "b4fd86897bf3a72ae80e50a7539127bfcbe1fb97587e9aa301d65d1b8ef1d763",
   "suite/groups/search.mjs": "1e3775338140050b30859e2b4eba7f97280fed5401449d36c378cbdd51684bfe",
-  "suite/groups/sidebar.mjs": "d0bb5130871886256db81676b85e64b392869c365b4b9e6cc709d43d847e24e4",
+  "suite/groups/sidebar.mjs": "4c690a926c6910a4ea2d80ed9c220dad7ea1fffce5f8f316f96db2fdb25c3d9b",
   "suite/groups/speed.mjs": "c0c51816f9196913e489f4b3a2af11273a394d782fd7828fd21131a2d482ccf4",
   "suite/groups/verbs.mjs": "3d2e4936869a46aa7231b0b65370c7bb45529a75b203e0c4424c4c7c8f11f2dc",
   "suite/groups/view.mjs": "10e20872e7fca17a7ed12ccc07b956f83a75533308fe3631e7b8103988a4580d",
@@ -67,7 +67,7 @@
   "suite/timer.mjs": "c95e2c525b284d07cfb8ce86b60d6c23ff8c621170c540a7b9d1296eda83035c"
  },
  "spec_files": {
-  "OBJECTIVES.md": "1ae8c429e84274d36b3ca0cd9691283819c95eb0fb7b58046c846a34ac669d9b",
+  "OBJECTIVES.md": "b684b281b431f217fae6bdea0295d00c299157d723e80535a9fc304d8bc30eda",
   "specs/S1.1-a-track-is-a-box.md": "00ef21565256159878061f700f93ae99cc32a85c0f54c4762d402e7901e5ef89",
   "specs/S1.2-a-box-holds-nothing-for-vibetracks.md": "fb13be1c7c73a35d838b1cac3bd18bbeab3970ae6f99b44949e3d0fa95e7e53e",
   "specs/S1.3-vibetracks-owns-the-tree.md": "0f3402ef05cdc1fe9a1a59851c69744262af206bd1cbb5633f8abb56740bdc3e",
@@ -84,7 +84,7 @@
   "specs/S2.6-the-view-menu.md": "5da3ec575266a28e213c750e2a0df9e3d33f36d1082d714a39718280aa06d3ac",
   "specs/S2.7-groupings.md": "39359b91fc6d2ad231cac9c8f2d7765d1fe95b5287a47f8793bf7291a0e5d4d3",
   "specs/S2.8-drag-to-reorder-on-a-stock-tree.md": "a0fdb69333cb1bf261c7d9b2e6793d7d77a1feac4eb9b40627011fe0240be178",
-  "specs/S2.9-row-anatomy.md": "c4beb73a7de427503e7df541f4f596eae7b46df43b741ea7a6e1e7beefc1ef8a",
+  "specs/S2.9-row-anatomy.md": "41b70de49d672ca1539008d656a7c66d7c6ffb64d3a26b64c2059583a915ffdf",
   "specs/S3.1-home-is-a-stock-data-ui-table.md": "10d64f81ef6aeb2cc520b698721d6c19c3c7bc3f54b4a9cda5f7fc013d993140",
   "specs/S3.2-review-across-tracks.md": "67ece090b0b706af3a723698f0fb0c463efd1452492dd30743432ccd11aeef8c",
   "specs/S3.3-feedback-across-tracks.md": "ef7034355084bce525d4c930707e9cb4ebaca94ef0abf573820d7d6250be7ea5",

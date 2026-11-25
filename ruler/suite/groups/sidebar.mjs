@@ -14,7 +14,8 @@ const TOPS = ['Home', 'Review', 'Feedback', 'New track']
 
 const S21 = ['S2.1 Home, Review, Feedback, New track in this order above the first track row', 'S2.1 Feedback shows its open count',
   'S2.1 each top row opens its page']
-const S29 = ['S2.9 the status dot is in the leading slot', "S2.9 a parent's fold chevron is hidden until hover",
+// ruler v4 (PEP 0004): the chevron at rest left of a parent's title (Obsidian), the status dot at the row's right end (Claude)
+const S29 = ["S2.9 the status dot is at the row's right end, nothing left of a leaf's title", "S2.9 a parent's fold chevron shows left of its title at rest",
   'S2.9 a title click opens the track', 'S2.9 a chevron click folds without opening']
 
 const rgb = (c) => (c ? `rgb(${c.r},${c.g},${c.b})` : 'none')
@@ -56,7 +57,7 @@ async function measure(ctx, theme) {
   // pitch
   out.row_pitch = ra && rb ? { value: Math.round((rb.row.y - ra.row.y) * 10) / 10, note: `${shown[pair].title} → ${b.title}` } : { value: null, note: 'no two adjacent rows at one depth' }
   // the status dot of a plain row (neither hovered nor selected), anywhere in the row: Claude 3.6556.1 draws it at the
-  // row's right end, S2.9 asks for the leading slot; this check is its size only
+  // row's right end, and since ruler v4 S2.9 asks for the same place (PEP 0004); this check is its size only
   if (ra) {
     const box = { l: ra.row.x, r: ra.row.x + ra.row.w, t: ra.row.y, b: ra.row.y + ra.row.h }
     const dot = await page.evaluate((bx) => window.__vta.dotIn(bx, null), box)
@@ -214,15 +215,22 @@ export default group('sidebar', [...S21, ...STYLE_CHECKS.map((s) => s.name), ...
   const parent = one(F, 'rollup_parent')
   const kids = F.boxes.filter((b) => b.parent === parent.slug).map((b) => b.title)
   await t(S29[0], async () => {
+    await page.mouse.move(1300, 880)
+    await sleep(300)
     const r = await row(page, leaf.title)
     need(r, `no row for ${leaf.title}`)
     const box = { l: r.row.x, r: r.row.x + r.row.w, t: r.row.y, b: r.row.y + r.row.h }
-    const dot = await page.evaluate(([bx, before]) => window.__vta.dotIn(bx, before), [box, r.text.x])
-    need(dot, 'no round status dot left of the title')
-    need(dot.x - r.row.x <= 40, `the dot sits ${Math.round(dot.x - r.row.x)} px into the row, not in the leading slot`)
+    const dot = await page.evaluate((bx) => window.__vta.dotIn(bx, null), box)
+    need(dot, `no round status dot in ${leaf.title}'s row`)
+    const gap = box.r - (dot.x + dot.w)
+    need(dot.x > r.text.x && gap <= 40, `the dot's right edge is ${Math.round(gap)} px from the row's right end (x ${Math.round(dot.x)}, the title at ${Math.round(r.text.x)}), not at the row's right end`)
+    const left = await page.evaluate(([bx, l]) => window.__vta.controlsIn(bx, l), [box, r.text.x])
+    need(!left.length, `a leaf shows ${left.length} control(s) left of its title, so it reads as foldable`)
+    return `dot ${Math.round(dot.w)} px, ${Math.round(gap)} px from the row's right end`
   })
   let chevron = null
   await t(S29[1], async () => {
+    // at rest: the pointer away from the sidebar, nothing hovered or focused there
     await page.mouse.move(1300, 880)
     await sleep(300)
     const r = await row(page, parent.title)
@@ -230,13 +238,10 @@ export default group('sidebar', [...S21, ...STYLE_CHECKS.map((s) => s.name), ...
     const box = { l: r.row.x, r: r.row.x + r.row.w, t: r.row.y, b: r.row.y + r.row.h }
     const dot = await page.evaluate(([bx, before]) => window.__vta.dotIn(bx, before), [box, r.text.x])
     const notDot = (c) => !dot || Math.abs(c.x - dot.x) > 1 || Math.abs(c.w - dot.w) > 1
-    const before = (await page.evaluate(([bx, left]) => window.__vta.controlsIn(bx, left), [box, r.text.x])).filter(notDot)
-    await page.mouse.move(r.text.x + 6, r.row.y + r.row.h / 2, { steps: 2 })
-    await sleep(350)
-    const after = (await page.evaluate(([bx, left]) => window.__vta.controlsIn(bx, left), [box, r.text.x])).filter(notDot)
-    if (after.length) chevron = after[after.length - 1]
-    need(!before.length, `a control shows left of the title before hover (${before.length})`)
-    need(after.length, 'no fold control shows left of the title on hover')
+    const atRest = (await page.evaluate(([bx, left]) => window.__vta.controlsIn(bx, left), [box, r.text.x])).filter(notDot)
+    if (atRest.length) chevron = atRest[atRest.length - 1]
+    need(atRest.length, `at rest no fold control shows left of ${parent.title}'s title: which rows fold cannot be read from the outside`)
+    return `${atRest.length} control(s) left of the title at rest`
   })
   await t(S29[2], async () => {
     const box = byRole(F, 'top_leaf')[1] || leaf

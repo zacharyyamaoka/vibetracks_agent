@@ -1,6 +1,7 @@
-// S2.9 (a shall since ruler v3, docs/peps/0003): fold and unfold a track's sub-tracks the way Notion's sidebar folds a
-// page's sub-pages. Each track is itself the folder: on hover its status dot turns into the fold chevron in the same
-// leading slot, labelled "Fold N sub-tracks (← →)" ("Unfold N sub-tracks" when folded); a chevron click folds every
+// S2.9 (a shall since ruler v3, docs/peps/0003; its row anatomy since ruler v4, docs/peps/0004): fold and unfold a
+// track's sub-tracks the way Notion's sidebar folds a page's sub-pages. Each track is itself the folder: its fold
+// chevron shows left of its title at rest (Obsidian's file explorer) and its status dot sits at the row's right end
+// (Claude's sidebar); the chevron is labelled "Fold N sub-tracks (← →)" ("Unfold N sub-tracks" when folded); a chevron click folds every
 // level below it and a second unfolds; the title still opens the track; ← and → fold and unfold a focused row; a fold
 // survives a reload; a folded parent still shows its roll-up (S3.4). Measured on screen: boxes, computed styles,
 // elementFromPoint, real pointer and keys.
@@ -12,7 +13,7 @@ import { group, need, sleep, waitFor, row, rows, order, url, urlNames, settle, l
 import { addStageBoxes, clickTitle } from './common.mjs'
 
 const S29 = [
-  'S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot',
+  "S2.9 a parent shows its fold chevron left of its title at rest, and its status dot at the row's right end",
   'S2.9 the chevron reads "Fold N sub-tracks (← →)", and "Unfold N sub-tracks" when folded, N its sub-tracks',
   'S2.9 a chevron click folds every level below and the rows below move up; a second click unfolds',
   'S2.9 a title click on a parent opens it and leaves it unfolded',
@@ -64,21 +65,24 @@ export default group('fold', S29, async (ctx, t) => {
   const shownBelow = async () => (await rows(page, belowTitles)).map((r) => r.title)
   const want = (folded) => `${folded ? 'Unfold' : 'Fold'} ${kids.length} sub-track${kids.length === 1 ? '' : 's'}`
 
-  // the parent's dot, and the chevron that takes its place on hover
+  // the parent's fold chevron: found at rest, left of its title (ruler v4: no hover needed to see it), then hit at that
+  // place the way a person's pointer would, after resting on the row
   let slot = null
   const findChevron = async () => {
     const r = await row(page, parent.title)
     if (!r) return null
     if (!slot) {
       await away(page)
-      const dot = await page.evaluate(([bx, before]) => window.__vta.dotIn(bx, before), [boxOf(await row(page, parent.title)), r.text.x])
-      if (!dot) return null
-      slot = { x: dot.x + dot.w / 2, y: dot.y + dot.h / 2, dot, dx: dot.x - r.row.x }
+      const rest = await row(page, parent.title)
+      const list = await page.evaluate(([bx, left]) => window.__vta.controlsIn(bx, left), [boxOf(rest), rest.text.x])
+      if (!list.length) return null
+      const c = list[list.length - 1]
+      slot = { x: c.x + c.w / 2, y: c.y + c.h / 2, w: c.w, dx: c.x + c.w / 2 - rest.row.x }
     }
     const now = await row(page, parent.title)
     await page.mouse.move(now.text.x + Math.min(40, now.text.w / 2), now.row.y + now.row.h / 2, { steps: 2 })
     await sleep(350)
-    const at = { x: now.row.x + slot.dx + slot.dot.w / 2, y: now.row.y + now.row.h / 2 }
+    const at = { x: now.row.x + slot.dx, y: now.row.y + now.row.h / 2 }
     const c = await controlAt(page, at.x, at.y)
     return c.found ? { ...c, at } : null
   }
@@ -95,17 +99,21 @@ export default group('fold', S29, async (ctx, t) => {
     await away(page)
     const r = await row(page, parent.title)
     need(r, `no row for ${parent.title}`)
-    const dot = await page.evaluate(([bx, before]) => window.__vta.dotIn(bx, before), [boxOf(r), r.text.x])
-    need(dot, `${parent.title} shows no round status dot left of its title before hover`)
-    need(dot.x - r.row.x <= 40, `its dot sits ${Math.round(dot.x - r.row.x)} px into the row, not in the leading slot`)
+    const box = boxOf(r)
+    const rest = await page.evaluate(([bx, left]) => window.__vta.controlsIn(bx, left), [box, r.text.x])
+    need(rest.length, `at rest nothing button-like shows left of ${parent.title}'s title: which rows fold cannot be read from the outside`)
+    const dot = await page.evaluate((bx) => window.__vta.dotIn(bx, null), box)
+    need(dot, `${parent.title} shows no round status dot in its row`)
+    const gap = box.r - (dot.x + dot.w)
+    need(dot.x > r.text.x && gap <= 40, `its dot's right edge is ${Math.round(gap)} px from the row's right end (x ${Math.round(dot.x)}, the title at ${Math.round(r.text.x)}), not at the row's right end`)
     const c = await findChevron()
-    need(c, `on hover nothing button-like is at the dot's place (${Math.round(slot.x)}, ${Math.round(slot.y)}): the dot does not turn into a chevron`)
-    need(c.visible, 'the control at the dot\'s place is not visible on hover')
+    need(c, `nothing button-like is at the chevron's place (${Math.round(slot ? slot.x : 0)}, ${Math.round(slot ? slot.y : 0)})`)
+    need(c.visible, 'the chevron is not visible with the pointer on the row')
     const cx = c.rect.x + c.rect.w / 2, cy = c.rect.y + c.rect.h / 2
-    need(Math.abs(cx - slot.x) <= 6 && Math.abs(cy - slot.y) <= 6, `the chevron's centre (${Math.round(cx)}, ${Math.round(cy)}) is not the dot's (${Math.round(slot.x)}, ${Math.round(slot.y)})`)
+    need(cx < r.text.x, `the control hit at the chevron's place (centre x ${Math.round(cx)}) is not left of the title (x ${Math.round(r.text.x)})`)
     await away(page)
-    need(!(await chevVisible(page)), 'the chevron is still visible after the pointer leaves the row')
-    return `dot ${Math.round(dot.w)} px at x ${Math.round(slot.x)}; chevron ${Math.round(c.rect.w)}×${Math.round(c.rect.h)} at x ${Math.round(cx)}`
+    need(await chevVisible(page), 'the chevron hides once the pointer leaves the row: it must show at rest')
+    return `chevron ${Math.round(c.rect.w)}×${Math.round(c.rect.h)} at x ${Math.round(cx)} (title at ${Math.round(r.text.x)}); dot ${Math.round(dot.w)} px, ${Math.round(gap)} px from the row's right end`
   })
 
   await t(S29[1], async () => {

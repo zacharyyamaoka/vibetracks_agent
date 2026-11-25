@@ -9,7 +9,7 @@
 
 A row carries the ruler it was scored on (`ruler`). WHY rank only within one ruler (OBJECTIVES §11): a new ruler
 changes what is counted (v2 adds S2.10, so the shall total goes 19 -> 20; v3 adds S1.6 and makes S2.9 a shall,
-22 shall and 3 should), so a v1 number and a v2 number are not the same quantity; a row is kept, labelled, and never
+22 shall and 3 should; v4 rewrites S2.9's checks for the chevron at rest, PEP 0004), so a v1 number and a v2 number are not the same quantity; a row is kept, labelled, and never
 compared against another ruler's (`rank(rows, ruler="v1")` reads v1's).
 
 The tie-break slots are ordered (`tiebreak`, `tiebreak2`, `tiebreak3`: the blackbox_agent fold ranks equal objectives
@@ -28,7 +28,7 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
-RULER = "v3"  # the ruler this code scores: OBJECTIVES §11, ruler/manifest.json `ruler`
+RULER = "v4"  # the ruler this code scores: OBJECTIVES §11, ruler/manifest.json `ruler`
 SPLITS = ("dev", "holdout")
 ROW_KEYS = (
     "t", "solution", "parent", "split", "ruler", "objective", "tiebreak", "tiebreak2", "admissible", "gate_pass_rate",

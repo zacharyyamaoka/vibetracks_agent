@@ -214,9 +214,10 @@ def test_every_row_of_pep_0002s_check_table_has_an_s2_10_check():
     assert any(n.startswith("S2.3 Z ") for n in names)
 
 
-# PEP 0003's fold behaviours (Zach, 2026-11-25), each with a fold-group S2.9 check, and S1.6's two bounds
+# PEP 0003's fold behaviours (Zach, 2026-11-25), each with a fold-group S2.9 check, and S1.6's two bounds; PEP 0004
+# (ruler v4) replaced the first: the chevron at rest left of the title, the status dot at the row's right end
 PEP_0003_FOLD = {
-    "the dot turns into the chevron in the same slot": "turns its status dot into the fold chevron, in the same slot",
+    "the chevron left of the title at rest, the dot at the right end (PEP 0004)": "fold chevron left of its title at rest, and its status dot at the row's right end",
     "Fold N sub-tracks (← →) / Unfold N sub-tracks": '"Fold N sub-tracks (← →)", and "Unfold N sub-tracks"',
     "a chevron click folds every level and the rows below move up; a second unfolds": "folds every level below and the rows below move up; a second click unfolds",
     "a title click opens without folding": "title click on a parent opens it and leaves it unfolded",

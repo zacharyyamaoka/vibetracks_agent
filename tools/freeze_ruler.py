@@ -5,7 +5,7 @@
     uv run --directory ~/vibetracks_agent python tools/freeze_ruler.py --blackbox-ref b25a20c --frozen <date> [--force]
 
 Run once per ruler version; the version it writes is the scorer's (`vibetracks_agent.ledger.RULER`), so the manifest,
-checks.json and every scorecard name one ruler. v1: 2026-11-24; v2 (PEP 0002): 2026-11-25, `--force`; v3 (PEP 0003): 2026-11-25, `--force`. It refuses to overwrite an existing manifest without --force: changing the ruler is a new
+checks.json and every scorecard name one ruler. v1: 2026-11-24; v2 (PEP 0002): 2026-11-25, `--force`; v3 (PEP 0003): 2026-11-25, `--force`; v4 (PEP 0004): 2026-11-25, `--force`. It refuses to overwrite an existing manifest without --force: changing the ruler is a new
 version (a section in OBJECTIVES.md), and every solution is re-scored on it.
 """
 

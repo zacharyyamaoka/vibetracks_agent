@@ -1,6 +1,6 @@
 {
  "schema": "vibetracks-agent/checks-1",
- "ruler": "v3",
+ "ruler": "v4",
  "what": "Every check the acceptance suite runs (node ruler/suite/run.mjs --list), frozen with it: a check missing from a run's junit counts as failing, and an item none of these match has no check (OBJECTIVES \u00a78).",
  "checks": [
   {
@@ -129,14 +129,14 @@
    "name": "S2.2 dark: \u00b7\u00b7\u00b7 button hover fill rgb(78,78,78)"
   },
   {
-   "id": "ruler/suite/sidebar.py::S2.9 the status dot is in the leading slot",
+   "id": "ruler/suite/sidebar.py::S2.9 the status dot is at the row's right end, nothing left of a leaf's title",
    "group": "sidebar",
-   "name": "S2.9 the status dot is in the leading slot"
+   "name": "S2.9 the status dot is at the row's right end, nothing left of a leaf's title"
   },
   {
-   "id": "ruler/suite/sidebar.py::S2.9 a parent's fold chevron is hidden until hover",
+   "id": "ruler/suite/sidebar.py::S2.9 a parent's fold chevron shows left of its title at rest",
    "group": "sidebar",
-   "name": "S2.9 a parent's fold chevron is hidden until hover"
+   "name": "S2.9 a parent's fold chevron shows left of its title at rest"
   },
   {
    "id": "ruler/suite/sidebar.py::S2.9 a title click opens the track",
@@ -599,9 +599,9 @@
    "name": "S2.10 pausing and resuming leave every box untouched"
   },
   {
-   "id": "ruler/suite/fold.py::S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot",
+   "id": "ruler/suite/fold.py::S2.9 a parent shows its fold chevron left of its title at rest, and its status dot at the row's right end",
    "group": "fold",
-   "name": "S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot"
+   "name": "S2.9 a parent shows its fold chevron left of its title at rest, and its status dot at the row's right end"
   },
   {
    "id": "ruler/suite/fold.py::S2.9 the chevron reads \"Fold N sub-tracks (\u2190 \u2192)\", and \"Unfold N sub-tracks\" when folded, N its sub-tracks",
