@@ -6,6 +6,18 @@ loading come first because every other item reads them.
 
 ## I'll try
 
+- [ ] **A track's first open is the dashboard viewer's own cost: bundle it.** Measured 2026-11-25 on a copy of Zach's
+  real tree (`vta speed`, two versions alternated): a first open is ~750 ms with 98 requests and 2.7 MB, the blackbox_agent
+  dashboard's ~90 ES modules fetched and parsed again in every box's frame (each frame is its own realm, and each box
+  serves them under its own URL, so nothing is shared). One bundled, minified viewer module (esbuild) in the package's
+  `blackbox build` output would cut that to a few requests. It is blackbox_agent's code: propose it to the Blackbox Agent
+  Agent; Vibe Tracks serves what the box builds, byte for byte (PEP 0028). Expect: S1.6 (open_ms) on real boxes; on the dev
+  fixture (one-file sites) little. Risk: none to the spec here.
+  - Rung: speed
+  - Needs: the blackbox_agent change
+- [ ] **Re-score main on ruler v3 in a session with the sandbox.** speed-1 (e7cd3b9) run 1: open_ms 383, S1.6 met; speed-2
+  (7293e77) run 1: 787 under heavy load, plus S2.3 red (fixed on main 5d78e15: menus open no submenu under a still pointer)
+  and run 2 killed by the memory guard. The next clean `vta evaluate` decides S1.6.
 - [x] **Boxes as tracks, the tree in Vibe Tracks' own file.** A per-machine tree file outside every box (id, folder,
   parent, order, pinned, section, archived, label); `vt serve` lists each box from it and serves the box's own [`site/`](site/)
   in the main pane (README when it has none). Expect: S1.1, S1.2, S1.3 → pass; S2.1 stays green.
