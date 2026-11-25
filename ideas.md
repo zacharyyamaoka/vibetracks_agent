@@ -36,7 +36,7 @@ loading come first because every other item reads them.
   - Needs: the tree file
   - **Done: [`stock-tree-2`](solutions/stock-tree-2/)**, S2.8 met: **0 of 20 shall, 0 of 119 checks failing** (ruler v2),
     no regressions; landed on [vibetracks main @ 5787f03](https://github.com/zacharyyamaoka/vibetracks/commit/5787f03)
-    ([PEP 0030](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0030-the-sidebar-tree-on-headless-tree.md)):
+    ([PEP 0030](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0030-the-tree-on-headless-tree.md)):
     `@headless-tree/core` 1.8.1 vendored with sha256s, vanilla (no fallback needed).
 - [x] **Claude's ··· menu**: Open in ›, Pin/Unpin P, Mark as unread U, Rename R, Fork F, Move up/down, Move to section
   ›, Archive A, Delete D (red, removes from Vibe Tracks only), then New sub-track… behind a separator; right-click
