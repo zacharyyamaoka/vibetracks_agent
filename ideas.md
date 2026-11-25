@@ -13,6 +13,11 @@ loading come first because every other item reads them.
   `blackbox build` output would cut that to a few requests. It is blackbox_agent's code: propose it to the Blackbox Agent
   Agent; Vibe Tracks serves what the box builds, byte for byte (PEP 0028). Expect: S1.6 (open_ms) on real boxes; on the dev
   fixture (one-file sites) little. Risk: none to the spec here.
+  - **Measured 2026-11-25 (CDP, 0.1.12 dashboards of three real boxes):** the module waterfall dominates, not bytes or
+    parsing: even warm (all 304s, 27 KB) the first-to-last module window is 395-665 ms, script 72-435 ms. A service
+    worker (blackbox-agent 0.1.18) made a reloaded switch slower (median 763 → 1142 ms, three alternating rounds), so
+    `vt/bb-0118` stays unmerged and 0.1.19 turns it off. The cheaper lever to try first: `<link rel="modulepreload">`
+    for every viewer module in the built dashboard (keeps the import-map override contract), then a bundle.
   - Rung: speed
   - Needs: the blackbox_agent change
   - **Measured again 2026-11-25 ~15:55 on his live Preview** (main 9475a84, `vta speed --rounds 3`, 54 opens of 18 tracks,
