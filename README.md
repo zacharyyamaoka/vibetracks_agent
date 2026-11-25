@@ -1,7 +1,6 @@
 # Vibe Tracks Agent
 
-**Local only** (no GitHub remote yet, by choice: S4.3's local-only track) · a black-box agent repo in the
-[blackbox_agent](https://github.com/zacharyyamaoka/blackbox_agent) format
+**[▶ Live landing page](https://zacharyyamaoka.github.io/vibetracks_agent/)**: not published yet. The box is local only (S4.3's local-only track), so view it with `blackbox serve` below · a black-box agent repo built by the [blackbox_agent](https://github.com/zacharyyamaoka/blackbox_agent) package
 
 Vibe Tracks as a black box. Vibe Tracks (`~/vibetracks`) is, since Zach's Nov 24 redesign, **just a sidebar** over the
 black-box agent repos on his machine: click a track and you see that box's own site, live; above the tracks sit three
@@ -37,16 +36,10 @@ Where it stands right now: `PROGRESS.md` (generated) and the site (`site/index.h
 uv run --directory /home/bam/vibetracks_agent vta progress
 ```
 
-The site reads `site/data/state.json`, so serve it (a `file://` open can't fetch it):
+The site (landing page and dashboard) is built by the blackbox_agent package from this repo's git history:
 
 ```bash
-python3 -m http.server 4731 --bind 127.0.0.1 --directory /home/bam/vibetracks_agent/site
-```
-
-Rebuild its data after a new score (the blackbox_agent fold, with the acceptance run's junit):
-
-```bash
-python3 /home/bam/blackbox_agent/viewer/tools/fold_state.py --repo /home/bam/vibetracks_agent --ref HEAD --junit /home/bam/vibetracks_agent/site/data/junit.xml --out /home/bam/vibetracks_agent/site/data/state.json
+uvx --from git+https://github.com/zacharyyamaoka/blackbox_agent@v0 blackbox serve --box /home/bam/vibetracks_agent
 ```
 
 ## Files
@@ -64,7 +57,7 @@ python3 /home/bam/blackbox_agent/viewer/tools/fold_state.py --repo /home/bam/vib
 | `ruler/` | The frozen acceptance suite, its fixture generator and the measured Claude reference, with sha256s |
 | `status.json` | `ai-team-status/1` |
 | `REFERENCES.md` | Prior art and the repos this builds on |
-| `site/` | The landing page and the black-box dashboard (blackbox_agent viewer, vendored) |
+| `site/` | What the page shows: `nav.json`, the dev junit, the reference screenshots; the package builds the rest |
 | `docs/CONTRACT.md` | Schemas, CLI, write sets, deviations |
 
 ## Builds on
