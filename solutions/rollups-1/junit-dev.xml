@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="vibetracks_agent ruler v2" tests="119" failures="44" errors="0" seed="1">
+  <testsuite name="ruler.suite.sidebar" tests="29" failures="0" errors="0" skipped="0" time="8.282">
+    <testcase classname="ruler.suite.sidebar" name="S2.1 Home, Review, Feedback, New track in this order above the first track row" time="0.331"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.1 Feedback shows its open count" time="0.018"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.1 each top row opens its page" time="3.815"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: row height 32 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: row pitch 34 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: title font 14 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: title font family Anthropic Sans" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: row corner radius 8 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: title starts 36 px into the row&apos;s pill" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: ··· button 24 px at the row&apos;s right end" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: status dot 6 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: section header 13 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: row height 32 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: row pitch 34 px" time="0.001"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: title font 14 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: title font family Anthropic Sans" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: row corner radius 8 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: title starts 36 px into the row&apos;s pill" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: ··· button 24 px at the row&apos;s right end" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: status dot 6 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: section header 13 px" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: sidebar background rgb(31,31,31)" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: hovered row fill rgb(48,48,48)" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: selected row fill rgb(64,64,64)" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: ··· button hover fill rgb(78,78,78)" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 the status dot is in the leading slot" time="0.043"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a parent&apos;s fold chevron is hidden until hover" time="0.744"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a title click opens the track" time="1.368"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a chevron click folds without opening" time="1.962"/>
+  </testsuite>
+  <testsuite name="ruler.suite.open" tests="5" failures="2" errors="0" skipped="0" time="14.037">
+    <testcase classname="ruler.suite.open" name="S1.1 each of three boxes opens its own site in the main pane" time="2.136"/>
+    <testcase classname="ruler.suite.open" name="S1.1 the address bar names the track" time="0.000"/>
+    <testcase classname="ruler.suite.open" name="S1.1 a box with no site shows its README&apos;s first heading" time="0.714"/>
+    <testcase classname="ruler.suite.open" name="S1.4 a box&apos;s site changed on disk shows on its page within 5 s" time="11.187">
+      <failure message="Brambling Lidar Agent&apos;s site is not shown to begin with (S1.1), so there is no page to watch">Brambling Lidar Agent&apos;s site is not shown to begin with (S1.1), so there is no page to watch</failure>
+    </testcase>
+    <testcase classname="ruler.suite.open" name="S1.4 no reload: history length and the sidebar scroll position are kept" time="0.000">
+      <failure message="the box&apos;s page was not open (S1.4&apos;s first check)">the box&apos;s page was not open (S1.4&apos;s first check)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="ruler.suite.menu" tests="12" failures="5" errors="0" skipped="0" time="19.761">
+    <testcase classname="ruler.suite.menu" name="S2.4 a right-click on a track opens a menu at the pointer" time="0.684"/>
+    <testcase classname="ruler.suite.menu" name="S2.4 the right-click menu&apos;s items equal the ··· menu&apos;s" time="0.000"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 a middle row&apos;s menu items are Claude&apos;s, in Claude&apos;s order" time="0.000">
+      <failure message="items: Pin, Rename, Move up, Move down, Move to section, Archive, Delete; Claude&apos;s: Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move up, Move down, Move to section, Pause / Resume, Archive, Delete">items: Pin, Rename, Move up, Move down, Move to section, Archive, Delete; Claude&apos;s: Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move up, Move down, Move to section, Pause / Resume, Archive, Delete</failure>
+    </testcase>
+    <testcase classname="ruler.suite.menu" name="S2.3 Move up is absent on the first row" time="1.262">
+      <failure message="first row: Pin, Rename, Move down, Move to section, Archive, Delete; want Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move down, Move to section, Pause / Resume, Archive, Delete">first row: Pin, Rename, Move down, Move to section, Archive, Delete; want Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move down, Move to section, Pause / Resume, Archive, Delete</failure>
+    </testcase>
+    <testcase classname="ruler.suite.menu" name="S2.3 P pins the track" time="2.239"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 U marks it unread or read" time="0.432">
+      <failure message="no Mark as unread / read item: Pin, Rename, Move down, Move to section, Archive, Delete">no Mark as unread / read item: Pin, Rename, Move down, Move to section, Archive, Delete</failure>
+    </testcase>
+    <testcase classname="ruler.suite.menu" name="S2.3 R starts a rename" time="1.358"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 F forks the box" time="11.379">
+      <failure message="after F no new row naming Dunlin Bin Agent and no dialog appeared within 10 s">after F no new row naming Dunlin Bin Agent and no dialog appeared within 10 s</failure>
+    </testcase>
+    <testcase classname="ruler.suite.menu" name="S2.3 A archives the track" time="0.952"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 D deletes the track" time="1.066"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 Delete leaves the box&apos;s folder on disk" time="0.024"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 Z pauses the track, and Z on a paused track resumes it" time="0.365">
+      <failure message="no Pause item on the active track Linnet Reach Agent: Pin, Rename, Move up, Move down, Move to section, Archive, Delete">no Pause item on the active track Linnet Reach Agent: Pin, Rename, Move up, Move down, Move to section, Archive, Delete</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="ruler.suite.pin" tests="4" failures="0" errors="0" skipped="0" time="7.467">
+    <testcase classname="ruler.suite.pin" name="S2.5 two pinned tracks sit under Pinned, in pin order, above the rest" time="1.921"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 folding Pinned hides them" time="0.674"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 pins survive a vt serve restart" time="2.604"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 unpin returns each to its old parent and place" time="2.268"/>
+  </testsuite>
+  <testsuite name="ruler.suite.view" tests="12" failures="10" errors="0" skipped="0" time="11.891">
+    <testcase classname="ruler.suite.view" name="S2.6 the view menu&apos;s entries in order" time="0.000">
+      <failure message="entries: New section, Show archived; want Group by, Sort by, Show, New section, Reset to defaults, View all">entries: New section, Show archived; want Group by, Sort by, Show, New section, Reset to defaults, View all</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.6 Group by offers None, Parent, State" time="0.840">
+      <failure message="no Group by entry">no Group by entry</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.6 Sort by offers Manual, Last updated, Created, Name" time="0.913">
+      <failure message="no Sort by entry">no Sort by entry</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.6 Show offers archived and done" time="0.746">
+      <failure message="no Show entry">no Show entry</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.6 each submenu shows its current pick on the right" time="0.747">
+      <failure message="Group by shows &quot;&quot;, Sort by shows &quot;&quot;; the defaults are Parent and Manual">Group by shows &quot;&quot;, Sort by shows &quot;&quot;; the defaults are Parent and Manual</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.7 flat by last updated: newest first, every row at one indent" time="0.688">
+      <failure message="could not pick Group by › None">could not pick Group by › None</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.7 State grouping puts each track under its state" time="0.706">
+      <failure message="could not pick Group by › State">could not pick Group by › State</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.6 the choice survives a restart" time="0.750">
+      <failure message="could not pick Group by › None">could not pick Group by › None</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.6 Reset to defaults restores Parent and Manual" time="0.629">
+      <failure message="no Reset to defaults entry">no Reset to defaults entry</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.7 Parent grouping shows the tree from Vibe Tracks&apos; file" time="3.431"/>
+    <testcase classname="ruler.suite.view" name="S2.7 switching groupings keeps the selection" time="1.721">
+      <failure message="could not pick Group by › None">could not pick Group by › None</failure>
+    </testcase>
+    <testcase classname="ruler.suite.view" name="S2.6 New section asks for a name and adds an empty section" time="0.720"/>
+  </testsuite>
+  <testsuite name="ruler.suite.drag" tests="11" failures="1" errors="0" skipped="0" time="16.109">
+    <testcase classname="ruler.suite.drag" name="S2.8 dragging a row between two rows reorders it" time="3.848"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 a drop indicator shows mid-drag" time="0.001"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 dropping onto a row makes it that row&apos;s child" time="2.667"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 the file that changed lives outside every box" time="1.116"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 dragging out to the left makes it top-level" time="2.554"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 a drop into its own child is refused" time="2.473"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the moves survive a vt serve restart" time="0.000"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 the tree set by a drag survives a restart" time="0.000"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 a hand edit of that file moves the row within 5 s, with no reload" time="1.215"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the keyboard path does one reorder" time="2.173"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the page loads a stock tree package" time="0.062">
+      <failure message="none of @headless-tree/core, @atlaskit/pragmatic-drag-and-drop, @atlaskit/pragmatic-drag-and-drop-hitbox, react-arborist, react-complex-tree, wunderbaum, @atlaskit/tree, jstree, jquery.fancytree, @minoru/react-dnd-treeview among the 71 scripts the page loaded">none of @headless-tree/core, @atlaskit/pragmatic-drag-and-drop, @atlaskit/pragmatic-drag-and-drop-hitbox, react-arborist, react-complex-tree, wunderbaum, @atlaskit/tree, jstree, jquery.fancytree, @minoru/react-dnd-treeview among the 71 scripts the page loaded</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="ruler.suite.verbs" tests="4" failures="0" errors="0" skipped="0" time="6.857">
+    <testcase classname="ruler.suite.verbs" name="S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete" time="0.000"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 after them each box&apos;s git status is clean and its HEAD unchanged" time="0.295"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 no file under any box is named like vibetracks or vibe-tracks" time="0.018"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 a vibetracks.toml dropped into a box changes nothing on the page" time="6.544"/>
+  </testsuite>
+  <testsuite name="ruler.suite.rollup" tests="7" failures="0" errors="0" skipped="0" time="4.115">
+    <testcase classname="ruler.suite.rollup" name="S3.4 the parent&apos;s sidebar row shows a pip for its blocked child" time="0.197"/>
+    <testcase classname="ruler.suite.rollup" name="S3.4 the parent shows 3 agents working in its subtree" time="0.084"/>
+    <testcase classname="ruler.suite.rollup" name="S3.4 a child&apos;s status.json changed on disk updates the parent within 5 s" time="0.171"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 Home holds a data-views element" time="0.015"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 its presets are Active, Done, All tracks in that order" time="0.065"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 folding a parent hides exactly its descendants" time="2.550"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 the Done preset shows only done boxes" time="1.033"/>
+  </testsuite>
+  <testsuite name="ruler.suite.review" tests="6" failures="0" errors="0" skipped="0" time="7.006">
+    <testcase classname="ruler.suite.review" name="S3.2 both waits are on Review, each labelled with its track" time="0.862"/>
+    <testcase classname="ruler.suite.review" name="S3.2 the waits sit in the element a box&apos;s own site uses" time="0.042"/>
+    <testcase classname="ruler.suite.review" name="S3.2 clicking a wait opens its box&apos;s page" time="0.320"/>
+    <testcase classname="ruler.suite.review" name="S3.3 every feedback note is listed with its track" time="1.289"/>
+    <testcase classname="ruler.suite.review" name="S3.3 the side panel opens the note" time="0.580"/>
+    <testcase classname="ruler.suite.review" name="S3.3 adding feedback writes one new file in the chosen box&apos;s feedback/ and nothing else" time="3.913"/>
+  </testsuite>
+  <testsuite name="ruler.suite.newtrack" tests="4" failures="3" errors="0" skipped="0" time="3.024">
+    <testcase classname="ruler.suite.newtrack" name="S4.2 the command follows the name, the parent and Publish" time="2.139">
+      <failure message="no Publish to GitHub switch">no Publish to GitHub switch</failure>
+    </testcase>
+    <testcase classname="ruler.suite.newtrack" name="S4.2 Copy puts the command on the clipboard" time="0.437"/>
+    <testcase classname="ruler.suite.newtrack" name="S4.2 Create makes the box and shows it under its parent within 5 s" time="0.042">
+      <failure message="no Create button in the dialog">no Create button in the dialog</failure>
+    </testcase>
+    <testcase classname="ruler.suite.newtrack" name="S4.4 vt new from a shell shows the row under its parent within 5 s" time="0.406">
+      <failure message="vt new exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
+              [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
+              [--body BODY] [--json]
+              space id
+vt new: error: the following arguments are required: id, --title
+</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="ruler.suite.cli" tests="11" failures="9" errors="0" skipped="0" time="6.959">
+    <testcase classname="ruler.suite.cli" name="S4.1 vt new exits 0 offline and makes a new box folder" time="0.384">
+      <failure message="vt new &quot;Whimbrel Camera Agent&quot; --parent heron_belt_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new &quot;Whimbrel Camera Agent&quot; --parent heron_belt_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
+              [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
+              [--body BODY] [--json]
+              space id
+vt new: error: the following arguments are required: id, --title
+</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.1 the folder is a git repo with one commit" time="0.000">
+      <failure message="no box was made (the first S4.1 check)">no box was made (the first S4.1 check)</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.1 its README&apos;s first heading is the title" time="0.000">
+      <failure message="no box was made">no box was made</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.1 its files include the starter box&apos;s" time="0.000">
+      <failure message="no box was made">no box was made</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.1 the track is in the tree under the parent" time="0.000">
+      <failure message="no box was made">no box was made</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.1 --from copies the source box&apos;s files without its history" time="0.221">
+      <failure message="vt new &quot;Ouzel Sort Agent&quot; --from plover_wrist_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new &quot;Ouzel Sort Agent&quot; --from plover_wrist_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
+              [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
+              [--body BODY] [--json]
+              space id
+vt new: error: the following arguments are required: --title
+</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.3 without --publish gh is never called" time="0.249">
+      <failure message="vt new without --publish did not make a box (exit 2): usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new without --publish did not make a box (exit 2): usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
+              [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
+              [--body BODY] [--json]
+              space id
+vt new: error: the following arguments are required: id, --title
+</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.3 signed out, --publish stops, names gh auth login and makes nothing" time="0.302">
+      <failure message="the message does not name gh auth login: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">the message does not name gh auth login: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
+              [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
+              [--body BODY] [--json]
+              space id
+vt new: error: the following arguments are required: id, --title
+</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S4.3 signed in, --publish creates a private repo from the folder and pushes once" time="0.276">
+      <failure message="exit 2 while gh is signed in: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">exit 2 while gh is signed in: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
+              [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
+              [--body BODY] [--json]
+              space id
+vt new: error: the following arguments are required: id, --title
+</failure>
+    </testcase>
+    <testcase classname="ruler.suite.cli" name="S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged" time="4.057"/>
+    <testcase classname="ruler.suite.cli" name="S1.5 vt add lists an existing box under its parent in the sidebar" time="1.470"/>
+  </testsuite>
+  <testsuite name="ruler.suite.pause" tests="14" failures="14" errors="0" skipped="0" time="1.926">
+    <testcase classname="ruler.suite.pause" name="S2.10 an active track&apos;s ··· and right-click menus show Pause" time="0.977">
+      <failure message="Plover Wrist Agent (active): ··· menu: Pin, Rename, Move up, Move down, Move to section, Archive, Delete (want Pause, not Resume); right-click menu: Pin, Rename, Move up, Move down, Move to section, Archive, Delete (want Pause, not Resume)">Plover Wrist Agent (active): ··· menu: Pin, Rename, Move up, Move down, Move to section, Archive, Delete (want Pause, not Resume); right-click menu: Pin, Rename, Move up, Move down, Move to section, Archive, Delete (want Pause, not Resume)</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 Pause in the ··· menu writes a person record to the tree file, with no agent and no why" time="0.618">
+      <failure message="no Pause item in Plover Wrist Agent&apos;s ··· menu">no Pause item in Plover Wrist Agent&apos;s ··· menu</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 a paused track&apos;s ··· and right-click menus show Resume" time="0.000">
+      <failure message="Pause did not run (the check before)">Pause did not run (the check before)</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 a paused row shows a pause glyph in its status-dot slot" time="0.000">
+      <failure message="Pause did not run">Pause did not run</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 a paused row&apos;s title is muted" time="0.000">
+      <failure message="Pause did not run">Pause did not run</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 the pause survives a reload" time="0.000">
+      <failure message="Pause did not run">Pause did not run</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 the pause survives a vt serve restart" time="0.000">
+      <failure message="Pause did not run">Pause did not run</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 Resume returns the row to its state colour and the menu to Pause" time="0.000">
+      <failure message="Pause did not run">Pause did not run</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt pause writes a person record via cli with no why" time="0.144">
+      <failure message="vt pause petrel_planner_agent exited 1: vt: no command &apos;pause&apos;. `vt --help` lists them.">vt pause petrel_planner_agent exited 1: vt: no command &apos;pause&apos;. `vt --help` lists them.
+</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt pause shows on the page within 5 s, with no reload" time="0.000">
+      <failure message="vt pause did not run (the check before)">vt pause did not run (the check before)</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s" time="0.000">
+      <failure message="vt pause did not run">vt pause did not run</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim" time="0.185">
+      <failure message="CLAUDE_CODE_SESSION_ID=… vt pause shrike_suction_agent --why … exited 1: vt: no command &apos;pause&apos;. `vt --help` lists them.">CLAUDE_CODE_SESSION_ID=… vt pause shrike_suction_agent --why … exited 1: vt: no command &apos;pause&apos;. `vt --help` lists them.
+</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 the status list is append-only and a track never paused reads active" time="0.002">
+      <failure message="plover_wrist_agent: 0 of its 2 verbs left a list to compare; petrel_planner_agent: 0 of its 2 verbs left a list to compare; shrike_suction_agent: 0 of its 1 verbs left a list to compare">plover_wrist_agent: 0 of its 2 verbs left a list to compare; petrel_planner_agent: 0 of its 2 verbs left a list to compare; shrike_suction_agent: 0 of its 1 verbs left a list to compare</failure>
+    </testcase>
+    <testcase classname="ruler.suite.pause" name="S2.10 pausing and resuming leave every box untouched" time="0.000">
+      <failure message="no pause took effect (no paused record from the page or vt pause), so untouched boxes prove nothing">no pause took effect (no paused record from the page or vt pause), so untouched boxes prove nothing</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

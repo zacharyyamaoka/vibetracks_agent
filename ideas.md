@@ -62,12 +62,16 @@ loading come first because every other item reads them.
   Expect: S3.2, S3.3 → pass.
   - Rung: roll-ups
   - Needs: the tree file
-- [ ] **`vt new "<title>" [--parent] [--dir] [--from] [--publish [--public]]`** copying blackbox_agent's starter box,
+- [x] **`vt new "<title>" [--parent] [--dir] [--from] [--publish [--public]]`** copying blackbox_agent's starter box,
   git init + first commit, private GitHub only with `--publish` after `gh auth status`; the New track dialog writes
   the command and gets a Create button running it. Expect: S4.1-S4.4 → pass.
   - Rung: new track
   - Needs: a starter box to copy. Since blackbox_agent 0.1.x, `blackbox new <dir>` writes one (OBJECTIVES, AGENTS,
     an empty ledger, nav.json, the Pages workflow; committed on main): call it rather than copy `template/`.
+  - **Done: [`new-track-1`](solutions/new-track-1/)**, S4.1-S4.4 met, shall 14 → 10 (ruler v2), checks 57 → 45, no
+    regressions; landed on [vibetracks main @ ecf4dd6](https://github.com/zacharyyamaoka/vibetracks/commit/ecf4dd6)
+    ([PEP 0026](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0026-new-track-makes-a-box.md): a pinned
+    copy of `blackbox new`, `--publish` private unless `--public`, after `gh auth status`).
 - [ ] **Pause / Resume** in the ··· and right-click menus, before Archive; a paused row shows a pause glyph and a
   muted title; `vt pause|resume <track>`; an append-only `status` list in the tree file, stamped `by` (person, or
   agent when an agent's session ran it). Zach's words: [`feedback/2026-11-25-pause-a-track.md`](feedback/2026-11-25-pause-a-track.md).

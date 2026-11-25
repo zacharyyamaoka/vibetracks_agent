@@ -5,18 +5,18 @@
   "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true (ruler v2, OBJECTIVES.md)",
   "kpi": {
     "name": "shall items failing, of 20 (ruler v2, dev)",
-    "value": 14.0,
+    "value": 9.0,
     "unit": "items",
     "direction": "down",
     "target": 0,
-    "level": "14 of 20 shall failing",
-    "level_name": "ruler v2, dev, best boxes-as-tracks-1-v2",
-    "next_gate": "a version with fewer than 14 shall items failing",
+    "level": "9 of 20 shall failing",
+    "level_name": "ruler v2, dev, best rollups-1",
+    "next_gate": "a version with fewer than 9 shall items failing",
     "on_track": null
   },
   "counter_kpi": {
     "name": "checks failing (the third tie-break), same version",
-    "value": 57.0,
+    "value": 44.0,
     "unit": "checks",
     "owner": "Vibe Tracks Agent"
   },
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795596273.630167
+  "updated_t": 1795597088.963108
 }

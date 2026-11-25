@@ -1,0 +1,15 @@
+{
+  "id": "rollups-1",
+  "parent": "boxes-as-tracks-1",
+  "change": "Roll-up pages over the boxes (PEP 0025): Home a data-ui <data-views> nested by parent with Active / Done / All tracks; Review the viewer's <bb-needs-you> over every box's waits; Feedback the box's own Feedback views plus Track over every box's notes, Add feedback writes one note (vt box-feedback); tree.json roll-up (agents across the subtree, a pip for a blocked or broken descendant) and the Feedback count",
+  "vibetracks_sha": "d93de210ed679b3b769d379503780494867e2117",
+  "vibetracks_ref": "d93de21",
+  "vibetracks_committed": "2026-11-25T08:42:09Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane E subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T08:42:20Z",
+  "tags": []
+}
