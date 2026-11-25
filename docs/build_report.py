@@ -171,7 +171,7 @@ ul.why{{margin:4px 0 8px;padding-left:18px;font-size:13px;color:var(--muted)}}ul
 ul.dec li{{margin:6px 0}}
 </style></head><body><div class="wrap">
 <h1>Vibe Tracks Agent</h1>
-<p class="muted">Vibe Tracks as a black box, from Zach's Nov 24 design · <code>/home/bam/vibetracks_agent</code> @ <code>{esc(head)}</code>, local only · built by Claude Code (Opus 5.5)</p>
+<p class="muted">Vibe Tracks as a black box, from Zach's Nov 24 design · <code>/home/bam/vibetracks_agent</code> @ <code>{esc(head)}</code>, private on GitHub · built by Claude Code (Opus 5.5)</p>
 <div class="verdict"><b>The box exists and scores Vibe Tracks:</b> your Nov 24 design is 23 spec items (19 shall, 4 should) with your words,
 frozen as ruler v1, checked in a headless browser against fixture box repos. Baseline, vibetracks main @ <code>d0cb827</code>:
 <b>{esc(shall_failing)} of 19 shall items not met</b>, {esc(should_failing)} of 4 should. That's expected: the redesign isn't built yet; this is the starting line.</div>
@@ -196,12 +196,12 @@ frozen as ruler v1, checked in a headless browser against fixture box repos. Bas
 <li>On the blackbox_agent package (v0): <code>blackbox check</code> says the box is in the format; the stock landing and dashboard rendered and looked at, light and dark.</li><li>Fixed on the way: the published junit was not valid XML and named the fixture's home as a home path (scorer, red first); blackbox_agent's junit reader counted only the first test suite (<code>4abcc9a</code>, pushed). No score moved.</li></ul>
 <h3>Decided for you (each one line to undo)</h3><ul class="dec">
 <li><b>Its own repo</b>, not <code>agent/</code> in vibetracks, since every track is now a box repo. Undo: move the files into vibetracks.</li><li><b>The stock landing, no override</b>, per tonight's package ruling; the design overview lives in NOTES.md (the Notes tab). Undo: put a page at <code>site/overrides/index.html</code>.</li>
-<li><b>Local only</b> (your S4.3 local-only track). Undo: <code>gh repo create vibetracks_agent --private --source /home/bam/vibetracks_agent --push</code>.</li>
+<li><b>Published private</b> (zacharyyamaoka/vibetracks_agent), so the landing's GitHub button lands; Pages waits until it's public, your call. Undo: <code>gh repo delete zacharyyamaoka/vibetracks_agent</code>.</li>
 <li><b>Fail closed:</b> no check = not met. <b>Claude beats the Oct 16 hover chevron</b> (S2.9 a should). <b>Delete</b> never deletes a box folder; <b>Rename</b> is Vibe Tracks' label; <b>publish is private</b>. Undo: edit OBJECTIVES §10 (a ruler v2).</li>
 <li><b>Stock tree = Headless Tree core</b>, Pragmatic drag and drop as fallback. Undo: edit S2.8's reference list.</li></ul>
 <h3>Left (next, not blocked)</h3><ul class="dec"><li>The I'll-try queue in <code>ideas.md</code>, boxes-as-tracks first: nothing of the redesign is built in vibetracks yet.</li>
 <li>A full starter box in blackbox_agent <code>template/</code> for <code>vt new</code> to copy.</li></ul>
-<h3>Needs you</h3><ul class="dec"><li>Nothing blocking. Four rulings with defaults in force: hover chevron, sync, a use number for ruler v2, publish this box.</li></ul>
+<h3>Needs you</h3><ul class="dec"><li>Nothing blocking. One success-criteria call, ready to accept: the use number for ruler v2 (<code>docs/peps/0001-ruler-v2-use-number.md</code>, proposed).</li></ul>
 <h3>Deliberately not done</h3><ul class="dec"><li>No change to vibetracks itself: the box scores it; building the redesign is the agent loop's job.</li>
 <li>No audit (ask for one with /llm-judge).</li></ul>
 </div></body></html>"""
