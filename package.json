@@ -1,0 +1,8 @@
+{
+  "name": "vibetracks-agent-ruler",
+  "private": true,
+  "description": "The acceptance suite's one dependency (ruler/suite): Playwright, pinned. Install with npm ci.",
+  "dependencies": {
+    "playwright": "1.64.1"
+  }
+}

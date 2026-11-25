@@ -1,0 +1,30 @@
+{
+ "schema": "vibetracks-agent/stock-trees-1",
+ "ruler": "v1",
+ "what": "S2.8: the stock tree / drag-and-drop packages a version may build its sidebar tree on. The page passes when any script it loads (the page or a frame, same origin or not) names a package here by URL, or carries at least `min_markers` of that package's content markers. Markers are string literals of the published package that survive minification, read from the npm tarball at the version named (2026-11-24); `markers: []` means only its URL is recognised.",
+ "packages": [
+  {"npm": "@headless-tree/core", "version": "1.8.1", "license": "MIT", "pick": "first (spec note S2.8, the Nov 24 prior-art sweep)",
+   "url_patterns": ["@headless-tree", "headless-tree"],
+   "markers": ["keyboard-drag-and-drop", "sync-data-loader", "async-data-loader", "hotkeys-core", "prop-memoization"], "min_markers": 2},
+  {"npm": "@atlaskit/pragmatic-drag-and-drop", "version": "4.0.0", "license": "Apache-2.0", "pick": "fallback (spec note S2.8)",
+   "url_patterns": ["pragmatic-drag-and-drop"],
+   "markers": ["pdnd:android-fallback", "data-drop-target-for-", "onGenerateDragPreview", "onDropTargetChange"], "min_markers": 2},
+  {"npm": "@atlaskit/pragmatic-drag-and-drop-hitbox", "version": "3.0.0", "license": "Apache-2.0", "pick": "the tree-item hitbox that goes with the fallback",
+   "url_patterns": ["pragmatic-drag-and-drop-hitbox"],
+   "markers": ["tree-item-instruction", "instruction-blocked", "reorder-above", "reorder-below", "make-child"], "min_markers": 2},
+  {"npm": "react-arborist", "version": "4.0.1", "license": "MIT", "pick": "named and set aside in the sweep (needs React)",
+   "url_patterns": ["react-arborist"],
+   "markers": ["DND_DESTINATION", "DND_CURSOR", "VISIBILITY_TOGGLE"], "min_markers": 2},
+  {"npm": "react-complex-tree", "version": "2.6.4", "license": "MIT", "pick": "another stock tree with drag and keyboard",
+   "url_patterns": ["react-complex-tree"],
+   "markers": ["rct-tree-item-arrow-path", "rct-tree-root-renaming"], "min_markers": 2},
+  {"npm": "wunderbaum", "version": "0.15.0", "license": "MIT", "pick": "named and set aside in the sweep (draws its own rows)",
+   "url_patterns": ["wunderbaum"],
+   "markers": ["wb-expander", "wunderbaum-node"], "min_markers": 2},
+  {"npm": "@atlaskit/tree", "version": "9.0.1", "license": "Apache-2.0", "pick": "named and set aside in the sweep (deprecated, needs React)",
+   "url_patterns": ["@atlaskit/tree", "atlaskit-tree"], "markers": [], "min_markers": 0},
+  {"npm": "jstree", "version": "3.3.17", "license": "MIT", "pick": "a stock jQuery tree", "url_patterns": ["jstree"], "markers": [], "min_markers": 0},
+  {"npm": "jquery.fancytree", "version": "2.38.x", "license": "MIT", "pick": "a stock jQuery tree", "url_patterns": ["fancytree"], "markers": [], "min_markers": 0},
+  {"npm": "@minoru/react-dnd-treeview", "version": "3.5.4", "license": "MIT", "pick": "a stock React drag-and-drop tree", "url_patterns": ["react-dnd-treeview"], "markers": [], "min_markers": 0}
+ ]
+}

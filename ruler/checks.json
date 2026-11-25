@@ -1,0 +1,527 @@
+{
+ "schema": "vibetracks-agent/checks-1",
+ "ruler": "v1",
+ "what": "Every check the acceptance suite runs (node ruler/suite/run.mjs --list), frozen with it: a check missing from a run's junit counts as failing, and an item none of these match has no check (OBJECTIVES \u00a78).",
+ "checks": [
+  {
+   "id": "ruler/suite/sidebar.py::S2.1 Home, Review, Feedback, New track in this order above the first track row",
+   "group": "sidebar",
+   "name": "S2.1 Home, Review, Feedback, New track in this order above the first track row"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.1 Feedback shows its open count",
+   "group": "sidebar",
+   "name": "S2.1 Feedback shows its open count"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.1 each top row opens its page",
+   "group": "sidebar",
+   "name": "S2.1 each top row opens its page"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: row height 32 px",
+   "group": "sidebar",
+   "name": "S2.2 light: row height 32 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: row pitch 34 px",
+   "group": "sidebar",
+   "name": "S2.2 light: row pitch 34 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: title font 14 px",
+   "group": "sidebar",
+   "name": "S2.2 light: title font 14 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: title font family Anthropic Sans",
+   "group": "sidebar",
+   "name": "S2.2 light: title font family Anthropic Sans"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: row corner radius 8 px",
+   "group": "sidebar",
+   "name": "S2.2 light: row corner radius 8 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: title starts 36 px into the row's pill",
+   "group": "sidebar",
+   "name": "S2.2 light: title starts 36 px into the row's pill"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+   "group": "sidebar",
+   "name": "S2.2 light: \u00b7\u00b7\u00b7 button 24 px at the row's right end"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: status dot 6 px",
+   "group": "sidebar",
+   "name": "S2.2 light: status dot 6 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 light: section header 13 px",
+   "group": "sidebar",
+   "name": "S2.2 light: section header 13 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: row height 32 px",
+   "group": "sidebar",
+   "name": "S2.2 dark: row height 32 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: row pitch 34 px",
+   "group": "sidebar",
+   "name": "S2.2 dark: row pitch 34 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: title font 14 px",
+   "group": "sidebar",
+   "name": "S2.2 dark: title font 14 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: title font family Anthropic Sans",
+   "group": "sidebar",
+   "name": "S2.2 dark: title font family Anthropic Sans"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: row corner radius 8 px",
+   "group": "sidebar",
+   "name": "S2.2 dark: row corner radius 8 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: title starts 36 px into the row's pill",
+   "group": "sidebar",
+   "name": "S2.2 dark: title starts 36 px into the row's pill"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+   "group": "sidebar",
+   "name": "S2.2 dark: \u00b7\u00b7\u00b7 button 24 px at the row's right end"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: status dot 6 px",
+   "group": "sidebar",
+   "name": "S2.2 dark: status dot 6 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: section header 13 px",
+   "group": "sidebar",
+   "name": "S2.2 dark: section header 13 px"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: sidebar background rgb(31,31,31)",
+   "group": "sidebar",
+   "name": "S2.2 dark: sidebar background rgb(31,31,31)"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: hovered row fill rgb(48,48,48)",
+   "group": "sidebar",
+   "name": "S2.2 dark: hovered row fill rgb(48,48,48)"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: selected row fill rgb(64,64,64)",
+   "group": "sidebar",
+   "name": "S2.2 dark: selected row fill rgb(64,64,64)"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.2 dark: \u00b7\u00b7\u00b7 button hover fill rgb(78,78,78)",
+   "group": "sidebar",
+   "name": "S2.2 dark: \u00b7\u00b7\u00b7 button hover fill rgb(78,78,78)"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.9 the status dot is in the leading slot",
+   "group": "sidebar",
+   "name": "S2.9 the status dot is in the leading slot"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.9 a parent's fold chevron is hidden until hover",
+   "group": "sidebar",
+   "name": "S2.9 a parent's fold chevron is hidden until hover"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.9 a title click opens the track",
+   "group": "sidebar",
+   "name": "S2.9 a title click opens the track"
+  },
+  {
+   "id": "ruler/suite/sidebar.py::S2.9 a chevron click folds without opening",
+   "group": "sidebar",
+   "name": "S2.9 a chevron click folds without opening"
+  },
+  {
+   "id": "ruler/suite/open.py::S1.1 each of three boxes opens its own site in the main pane",
+   "group": "open",
+   "name": "S1.1 each of three boxes opens its own site in the main pane"
+  },
+  {
+   "id": "ruler/suite/open.py::S1.1 the address bar names the track",
+   "group": "open",
+   "name": "S1.1 the address bar names the track"
+  },
+  {
+   "id": "ruler/suite/open.py::S1.1 a box with no site shows its README's first heading",
+   "group": "open",
+   "name": "S1.1 a box with no site shows its README's first heading"
+  },
+  {
+   "id": "ruler/suite/open.py::S1.4 a box's site changed on disk shows on its page within 5 s",
+   "group": "open",
+   "name": "S1.4 a box's site changed on disk shows on its page within 5 s"
+  },
+  {
+   "id": "ruler/suite/open.py::S1.4 no reload: history length and the sidebar scroll position are kept",
+   "group": "open",
+   "name": "S1.4 no reload: history length and the sidebar scroll position are kept"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.4 a right-click on a track opens a menu at the pointer",
+   "group": "menu",
+   "name": "S2.4 a right-click on a track opens a menu at the pointer"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.4 the right-click menu's items equal the \u00b7\u00b7\u00b7 menu's",
+   "group": "menu",
+   "name": "S2.4 the right-click menu's items equal the \u00b7\u00b7\u00b7 menu's"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 a middle row's menu items are Claude's, in Claude's order",
+   "group": "menu",
+   "name": "S2.3 a middle row's menu items are Claude's, in Claude's order"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 Move up is absent on the first row",
+   "group": "menu",
+   "name": "S2.3 Move up is absent on the first row"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 P pins the track",
+   "group": "menu",
+   "name": "S2.3 P pins the track"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 U marks it unread or read",
+   "group": "menu",
+   "name": "S2.3 U marks it unread or read"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 R starts a rename",
+   "group": "menu",
+   "name": "S2.3 R starts a rename"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 F forks the box",
+   "group": "menu",
+   "name": "S2.3 F forks the box"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 A archives the track",
+   "group": "menu",
+   "name": "S2.3 A archives the track"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 D deletes the track",
+   "group": "menu",
+   "name": "S2.3 D deletes the track"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 Delete leaves the box's folder on disk",
+   "group": "menu",
+   "name": "S2.3 Delete leaves the box's folder on disk"
+  },
+  {
+   "id": "ruler/suite/pin.py::S2.5 two pinned tracks sit under Pinned, in pin order, above the rest",
+   "group": "pin",
+   "name": "S2.5 two pinned tracks sit under Pinned, in pin order, above the rest"
+  },
+  {
+   "id": "ruler/suite/pin.py::S2.5 folding Pinned hides them",
+   "group": "pin",
+   "name": "S2.5 folding Pinned hides them"
+  },
+  {
+   "id": "ruler/suite/pin.py::S2.5 pins survive a vt serve restart",
+   "group": "pin",
+   "name": "S2.5 pins survive a vt serve restart"
+  },
+  {
+   "id": "ruler/suite/pin.py::S2.5 unpin returns each to its old parent and place",
+   "group": "pin",
+   "name": "S2.5 unpin returns each to its old parent and place"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 the view menu's entries in order",
+   "group": "view",
+   "name": "S2.6 the view menu's entries in order"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 Group by offers None, Parent, State",
+   "group": "view",
+   "name": "S2.6 Group by offers None, Parent, State"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 Sort by offers Manual, Last updated, Created, Name",
+   "group": "view",
+   "name": "S2.6 Sort by offers Manual, Last updated, Created, Name"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 Show offers archived and done",
+   "group": "view",
+   "name": "S2.6 Show offers archived and done"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 each submenu shows its current pick on the right",
+   "group": "view",
+   "name": "S2.6 each submenu shows its current pick on the right"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 the choice survives a restart",
+   "group": "view",
+   "name": "S2.6 the choice survives a restart"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 Reset to defaults restores Parent and Manual",
+   "group": "view",
+   "name": "S2.6 Reset to defaults restores Parent and Manual"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.6 New section asks for a name and adds an empty section",
+   "group": "view",
+   "name": "S2.6 New section asks for a name and adds an empty section"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.7 flat by last updated: newest first, every row at one indent",
+   "group": "view",
+   "name": "S2.7 flat by last updated: newest first, every row at one indent"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.7 Parent grouping shows the tree from Vibe Tracks' file",
+   "group": "view",
+   "name": "S2.7 Parent grouping shows the tree from Vibe Tracks' file"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.7 State grouping puts each track under its state",
+   "group": "view",
+   "name": "S2.7 State grouping puts each track under its state"
+  },
+  {
+   "id": "ruler/suite/view.py::S2.7 switching groupings keeps the selection",
+   "group": "view",
+   "name": "S2.7 switching groupings keeps the selection"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 dragging a row between two rows reorders it",
+   "group": "drag",
+   "name": "S2.8 dragging a row between two rows reorders it"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 a drop indicator shows mid-drag",
+   "group": "drag",
+   "name": "S2.8 a drop indicator shows mid-drag"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 dropping onto a row makes it that row's child",
+   "group": "drag",
+   "name": "S2.8 dropping onto a row makes it that row's child"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 dragging out to the left makes it top-level",
+   "group": "drag",
+   "name": "S2.8 dragging out to the left makes it top-level"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 a drop into its own child is refused",
+   "group": "drag",
+   "name": "S2.8 a drop into its own child is refused"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 the moves survive a vt serve restart",
+   "group": "drag",
+   "name": "S2.8 the moves survive a vt serve restart"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 the keyboard path does one reorder",
+   "group": "drag",
+   "name": "S2.8 the keyboard path does one reorder"
+  },
+  {
+   "id": "ruler/suite/drag.py::S2.8 the page loads a stock tree package",
+   "group": "drag",
+   "name": "S2.8 the page loads a stock tree package"
+  },
+  {
+   "id": "ruler/suite/drag.py::S1.3 the tree set by a drag survives a restart",
+   "group": "drag",
+   "name": "S1.3 the tree set by a drag survives a restart"
+  },
+  {
+   "id": "ruler/suite/drag.py::S1.3 the file that changed lives outside every box",
+   "group": "drag",
+   "name": "S1.3 the file that changed lives outside every box"
+  },
+  {
+   "id": "ruler/suite/drag.py::S1.3 a hand edit of that file moves the row within 5 s, with no reload",
+   "group": "drag",
+   "name": "S1.3 a hand edit of that file moves the row within 5 s, with no reload"
+  },
+  {
+   "id": "ruler/suite/verbs.py::S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete",
+   "group": "verbs",
+   "name": "S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete"
+  },
+  {
+   "id": "ruler/suite/verbs.py::S1.2 after them each box's git status is clean and its HEAD unchanged",
+   "group": "verbs",
+   "name": "S1.2 after them each box's git status is clean and its HEAD unchanged"
+  },
+  {
+   "id": "ruler/suite/verbs.py::S1.2 no file under any box is named like vibetracks or vibe-tracks",
+   "group": "verbs",
+   "name": "S1.2 no file under any box is named like vibetracks or vibe-tracks"
+  },
+  {
+   "id": "ruler/suite/verbs.py::S1.2 a vibetracks.toml dropped into a box changes nothing on the page",
+   "group": "verbs",
+   "name": "S1.2 a vibetracks.toml dropped into a box changes nothing on the page"
+  },
+  {
+   "id": "ruler/suite/rollup.py::S3.1 Home holds a data-views element",
+   "group": "rollup",
+   "name": "S3.1 Home holds a data-views element"
+  },
+  {
+   "id": "ruler/suite/rollup.py::S3.1 its presets are Active, Done, All tracks in that order",
+   "group": "rollup",
+   "name": "S3.1 its presets are Active, Done, All tracks in that order"
+  },
+  {
+   "id": "ruler/suite/rollup.py::S3.1 folding a parent hides exactly its descendants",
+   "group": "rollup",
+   "name": "S3.1 folding a parent hides exactly its descendants"
+  },
+  {
+   "id": "ruler/suite/rollup.py::S3.1 the Done preset shows only done boxes",
+   "group": "rollup",
+   "name": "S3.1 the Done preset shows only done boxes"
+  },
+  {
+   "id": "ruler/suite/rollup.py::S3.4 the parent's sidebar row shows a pip for its blocked child",
+   "group": "rollup",
+   "name": "S3.4 the parent's sidebar row shows a pip for its blocked child"
+  },
+  {
+   "id": "ruler/suite/rollup.py::S3.4 the parent shows 3 agents working in its subtree",
+   "group": "rollup",
+   "name": "S3.4 the parent shows 3 agents working in its subtree"
+  },
+  {
+   "id": "ruler/suite/rollup.py::S3.4 a child's status.json changed on disk updates the parent within 5 s",
+   "group": "rollup",
+   "name": "S3.4 a child's status.json changed on disk updates the parent within 5 s"
+  },
+  {
+   "id": "ruler/suite/review.py::S3.2 both waits are on Review, each labelled with its track",
+   "group": "review",
+   "name": "S3.2 both waits are on Review, each labelled with its track"
+  },
+  {
+   "id": "ruler/suite/review.py::S3.2 the waits sit in the element a box's own site uses",
+   "group": "review",
+   "name": "S3.2 the waits sit in the element a box's own site uses"
+  },
+  {
+   "id": "ruler/suite/review.py::S3.2 clicking a wait opens its box's page",
+   "group": "review",
+   "name": "S3.2 clicking a wait opens its box's page"
+  },
+  {
+   "id": "ruler/suite/review.py::S3.3 every feedback note is listed with its track",
+   "group": "review",
+   "name": "S3.3 every feedback note is listed with its track"
+  },
+  {
+   "id": "ruler/suite/review.py::S3.3 the side panel opens the note",
+   "group": "review",
+   "name": "S3.3 the side panel opens the note"
+  },
+  {
+   "id": "ruler/suite/review.py::S3.3 adding feedback writes one new file in the chosen box's feedback/ and nothing else",
+   "group": "review",
+   "name": "S3.3 adding feedback writes one new file in the chosen box's feedback/ and nothing else"
+  },
+  {
+   "id": "ruler/suite/newtrack.py::S4.2 the command follows the name, the parent and Publish",
+   "group": "newtrack",
+   "name": "S4.2 the command follows the name, the parent and Publish"
+  },
+  {
+   "id": "ruler/suite/newtrack.py::S4.2 Copy puts the command on the clipboard",
+   "group": "newtrack",
+   "name": "S4.2 Copy puts the command on the clipboard"
+  },
+  {
+   "id": "ruler/suite/newtrack.py::S4.2 Create makes the box and shows it under its parent within 5 s",
+   "group": "newtrack",
+   "name": "S4.2 Create makes the box and shows it under its parent within 5 s"
+  },
+  {
+   "id": "ruler/suite/newtrack.py::S4.4 vt new from a shell shows the row under its parent within 5 s",
+   "group": "newtrack",
+   "name": "S4.4 vt new from a shell shows the row under its parent within 5 s"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.1 vt new exits 0 offline and makes a new box folder",
+   "group": "cli",
+   "name": "S4.1 vt new exits 0 offline and makes a new box folder"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.1 the folder is a git repo with one commit",
+   "group": "cli",
+   "name": "S4.1 the folder is a git repo with one commit"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.1 its README's first heading is the title",
+   "group": "cli",
+   "name": "S4.1 its README's first heading is the title"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.1 its files include the starter box's",
+   "group": "cli",
+   "name": "S4.1 its files include the starter box's"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.1 the track is in the tree under the parent",
+   "group": "cli",
+   "name": "S4.1 the track is in the tree under the parent"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.1 --from copies the source box's files without its history",
+   "group": "cli",
+   "name": "S4.1 --from copies the source box's files without its history"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.3 without --publish gh is never called",
+   "group": "cli",
+   "name": "S4.3 without --publish gh is never called"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.3 signed out, --publish stops, names gh auth login and makes nothing",
+   "group": "cli",
+   "name": "S4.3 signed out, --publish stops, names gh auth login and makes nothing"
+  },
+  {
+   "id": "ruler/suite/cli.py::S4.3 signed in, --publish creates a private repo from the folder and pushes once",
+   "group": "cli",
+   "name": "S4.3 signed in, --publish creates a private repo from the folder and pushes once"
+  },
+  {
+   "id": "ruler/suite/cli.py::S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged",
+   "group": "cli",
+   "name": "S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged"
+  },
+  {
+   "id": "ruler/suite/cli.py::S1.5 vt add lists an existing box under its parent in the sidebar",
+   "group": "cli",
+   "name": "S1.5 vt add lists an existing box under its parent in the sidebar"
+  }
+ ]
+}

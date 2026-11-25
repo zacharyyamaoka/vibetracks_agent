@@ -1,0 +1,9 @@
+{
+ "schema": "vibetracks-agent/box-components-1",
+ "ruler": "v1",
+ "what": "S3.2: the element a box's own site uses for what waits on Zach, at the frozen blackbox_agent ref. Review passes its 'same component' check when the waits it lists sit inside this element.",
+ "needs_you": {
+  "tag": "bb-needs-you",
+  "source": "blackbox_agent viewer/src/components/bb-needs-you.js at the ref in ruler/manifest.json ('<bb-needs-you>: the open asks only Zach can answer'); viewer/CONTRACT.md §3.2: the `needs` slice is read by bb-needs-you"
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "schema": "vibetracks-agent/claude-sidebar-reference-1",
+ "ruler": "v1",
+ "what": "S2.2's reference values: the Claude desktop app's sidebar as measured, each value with where it was measured. The suite checks each value against the version's computed styles and boxes (ruler/suite/groups/sidebar.mjs); a property with no measured value is listed under `unmeasured` and is not checked.",
+ "sources": {
+  "controls_yaml": {
+   "what": "claude-hub's ruler for its copy of Claude's Code-tab sidebar: Claude Desktop's own stylesheet tokens (decoded read-only from the Desktop's cache, cited file@offset) and measurements on Zach's screenshots. The 200x Sidebar report names it as its ruler.",
+   "path": "~/claude-hub/docs/sidebar-controls.yaml",
+   "claude_hub_sha": "8adddc6faa19796d196a6ab500930cfe5e50120d",
+   "blob": "4bc3dbe60824795653470fd10e1f71d3d86e53dd",
+   "named_by": {"path": "~/claude-hub/reports/claude-code-200x-sidebar-2026-10-09.html", "sha256": "0f5038cc3114451bb0c56c60c48aff0cdfa1f98cf14e1b6f724541619f184d42"}
+  },
+  "b2_report": {
+   "what": "Vibe Tracks' B2 report (2026-10-09), the evidence VT-009 names: Claude's sidebar CSS read from this machine's Desktop cache (Claude Desktop 2.9939.4), with the font family and weight. Read-only, not in git.",
+   "path": "~/vibetracks/reports/media/vibetracks-home-b2-2026-10-09/index.html",
+   "sha256": "395bdc88f7671a8803f8a7954e756f51ee03a5423665991a36432e15d2557b00",
+   "named_by": {"repo": "~/vibetracks", "sha": "d0cb82732adcdd4852f26767a00daf6772b715cb", "path": "features/VT-009 - Sidebar in Claude Code's visual language.md", "blob": "e85afb0305dc0998752d3d613abe2eea7d8f5a59"}
+  },
+  "screens_2026_11_24": {
+   "what": "Zach's two screenshots of Claude's sidebar menus (Daily Note - Nov 24 2026, # Vibe tracks), dark. Scale 1.44 image px per CSS px: the row pitch is 49 image px = 34 CSS px (the yaml's comfortable-density pitch) and the hovered pill 45-46 image px = 32 CSS px. Colours are the pixel values at the named points.",
+   "files": {
+    "~/zach_brain/Sources/Images/Pasted image 20261124201012.png": "b489cb8f7baaeffcd6f5a9916ca5fbd6632b2c71b67402a264a09e87b2e552ea",
+    "~/zach_brain/Sources/Images/Pasted image 20261124201036.png": "8fa9366893ad9751e1c684a06b9f8ed9084e901c5f39c14af7ac540eb97c580d"
+   }
+  }
+ },
+ "checks": [
+  {"id": "row_height", "name": "row height 32 px", "themes": ["light", "dark"], "measure": "hovered row's painted pill height", "value": 32, "tol": 1, "unit": "px",
+   "measured": "controls_yaml real.tokens_3_6556.row_h 32 (bundle:shared-styles-6FpYGL_6.css@255446, .dframe-sidebar[data-density=comfortable] row-h 32; the selected pill measured 44 px at 1.37); screens_2026_11_24: the hovered pill 45 px at 1.44 = 31.3"},
+  {"id": "row_pitch", "name": "row pitch 34 px", "themes": ["light", "dark"], "measure": "top-to-top distance of two adjacent rows at one depth", "value": 34, "tol": 1, "unit": "px",
+   "measured": "controls_yaml real.tokens_3_6556.row_pitch 34 (row-h 32 + row-stack-gap 2; measured 46.58 image px at 1.37); screens_2026_11_24: 49 px at 1.44 = 34.0"},
+  {"id": "title_font_size", "name": "title font 14 px", "themes": ["light", "dark"], "measure": "computed font-size of a row title", "value": 14, "tol": 0.25, "unit": "px",
+   "measured": "controls_yaml real.tokens_3_6556.row_font 14 (bundle:shared-styles-6FpYGL_6.css@255446 row-font 14)"},
+  {"id": "title_font_family", "name": "title font family Anthropic Sans", "themes": ["light", "dark"], "measure": "first family of the computed font-family of a row title, lower case, quotes and spaces/hyphens dropped", "value": "anthropicsans", "unit": "family",
+   "measured": "b2_report 'Measured against Claude': row font '13 px anthropic-sans 400' from Claude's own stylesheet (Desktop 2.9939.4; the family, not the size, carries to 3.6556.1)"},
+  {"id": "row_radius", "name": "row corner radius 8 px", "themes": ["light", "dark"], "measure": "border-radius of the hovered row's painted pill", "value": 8, "tol": 1, "unit": "px",
+   "measured": "controls_yaml real.tokens_3_6556.radius_pill 8 (bundle:shared-styles-6FpYGL_6.css@255446 radius-pill 8)"},
+  {"id": "title_inset", "name": "title starts 36 px into the row's pill", "themes": ["light", "dark"], "measure": "title text left - hovered pill left (a row with a leading slot: the status dot sits where Claude puts its icon, S2.9)", "value": 36, "tol": 2, "unit": "px",
+   "measured": "controls_yaml real.tokens_3_6556: leading_slot 28 + row_gap 8 from the row edge, row_px 2 outside the pill ('New starts 50 px into the pill (2 + 28 + 8 = 38 CSS)'); screens_2026_11_24 (201036): pill left x 33, title x 85, 52 px at 1.44 = 36.1"},
+  {"id": "more_button", "name": "··· button 24 px at the row's right end", "themes": ["light", "dark"], "measure": "on hover: the row's menu button is 24 px wide and tall, its right edge within 8 px of the pill's, centred on the row within 2 px", "value": 24, "tol": 2, "unit": "px",
+   "measured": "controls_yaml real.tokens_3_6556.row_ctl 24 and dot_from_right; screens_2026_11_24 (201036): the hovered ··· box 34 px at 1.44 = 23.6, 4 image px from the pill's right edge"},
+  {"id": "dot_size", "name": "status dot 6 px", "themes": ["light", "dark"], "measure": "the row's round status dot, width and height", "value": 6, "tol": 0.5, "unit": "px",
+   "measured": "controls_yaml real.dots.size 6 (bundle:shared-styles-B1jXfLTX.css@43769 .status-dot 6px; dots_3_6556: running unchanged)"},
+  {"id": "header_font_size", "name": "section header 13 px", "themes": ["light", "dark"], "measure": "computed font-size of a section header's text (Pinned, else the tracks list header)", "value": 13, "tol": 0.25, "unit": "px",
+   "measured": "controls_yaml real.tokens_3_6556.group_font 13 (bundle:shared-styles-6FpYGL_6.css@255446 group-font 13)"},
+  {"id": "sidebar_bg", "name": "sidebar background rgb(31,31,31)", "themes": ["dark"], "measure": "effective background of the sidebar away from any row", "value": [31, 31, 31], "tol": 6, "unit": "rgb",
+   "measured": "controls_yaml real.tokens_3_6556.sidebar_bg rgb(31,31,31) (measured); screens_2026_11_24 (201036) x 30 y 232: rgb(31,31,31)"},
+  {"id": "hover_fill", "name": "hovered row fill rgb(48,48,48)", "themes": ["dark"], "measure": "effective background inside the hovered row's pill, off its text", "value": [48, 48, 48], "tol": 6, "unit": "rgb",
+   "measured": "controls_yaml real.tokens_3_6556.hover_bg rgb(48,48,48) (--cds-fill-ghost-hover, white 7.5 %, bundle:c6a992d55-Dp-Cg9N1.css); screens_2026_11_24: the hovered Recents header rgb(48,48,48) (201012 x 300 y 131), a hovered row rgb(46,46,46) (201036 x 520 y 150)"},
+  {"id": "selected_fill", "name": "selected row fill rgb(64,64,64)", "themes": ["dark"], "measure": "effective background inside the selected row's pill, pointer away", "value": [64, 64, 64], "tol": 6, "unit": "rgb",
+   "measured": "controls_yaml real.tokens_3_6556.selected_bg rgb(64,64,64) (measured; white 15 %, --cds-fill-ghost-selected); screens_2026_11_24 (201012 x 400 y 56): rgb(64,64,64)"},
+  {"id": "more_hover_fill", "name": "··· button hover fill rgb(78,78,78)", "themes": ["dark"], "measure": "effective background inside the hovered ··· button, off its dots", "value": [78, 78, 78], "tol": 8, "unit": "rgb",
+   "measured": "screens_2026_11_24: the hovered ··· box rgb(78,78,78) (201036 x 578 y 128) and the hovered filter button rgb(78,78,78) (201012 x 585 y 131)"}
+ ],
+ "unmeasured": [
+  {"property": "light theme colours (sidebar background, hover fill, selected fill, ··· hover fill, title and header ink)", "why": "every capture of Claude's sidebar on this machine is dark (the B2 report says so: 'No light capture of Claude exists'); the light tokens it lists are Desktop 2.9939.4's, from before the 3.6556.1 redraw changed the title ink to text-primary"},
+  {"property": "title and header text colour (dark)", "why": "controls_yaml names tokens (text-primary for titles) and a glyph peak (233), not a computed colour value"},
+  {"property": "title and header font weight", "why": "no measured value for 3.6556.1 or later (2.9939.4's 400 predates the redraw)"},
+  {"property": "section header height, padding and caret", "why": "controls_yaml gives group-pt 16 and the caret glyph size, not a header box to compare a computed style with"},
+  {"property": "status dot colours per state", "why": "Claude's dots mean session states (running, unread, needs input); which Vibe Tracks state maps to which is not measured anywhere"},
+  {"property": "menu geometry (item height, width, background)", "why": "controls_yaml's menu values are Desktop 2.9939.4's; the Nov 24 screenshots show a larger menu, not measured as CSS"},
+  {"property": "side-by-side capture against Zach's screenshots", "why": "diagnostic only (spec note S2.2): the run saves sidebar-dark.png and sidebar-light.png; it is not scored"}
+ ]
+}

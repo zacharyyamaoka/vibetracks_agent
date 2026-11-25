@@ -1,0 +1,94 @@
+{
+ "schema": "vibetracks-agent/ruler-manifest-1",
+ "ruler": "v1",
+ "frozen": "2026-11-24",
+ "blackbox_agent": {
+  "repo": "~/blackbox_agent",
+  "ref": "b25a20cf14791e9eb7293a0f8d8e43ffb8f3a79f",
+  "read": [
+   "README.md",
+   "template/",
+   "tools/apply_template.py",
+   "viewer/src/components/bb-needs-you.js (ruler/reference/box-components.json)"
+  ]
+ },
+ "vibetracks": {
+  "repo": "~/vibetracks",
+  "baseline": "d0cb82732adcdd4852f26767a00daf6772b715cb",
+  "read": "git archive / rev-parse / show only"
+ },
+ "claude_hub": {
+  "repo": "~/claude-hub",
+  "sha": "8adddc6faa19796d196a6ab500930cfe5e50120d",
+  "sidebar_controls_blob": "4bc3dbe60824795653470fd10e1f71d3d86e53dd"
+ },
+ "playwright": {
+  "npm": "playwright",
+  "version": "1.64.1",
+  "chromium_headless_shell_revision": "1248",
+  "browser_version": "156.0.8078.4"
+ },
+ "splits": {
+  "dev": {
+   "seed": 1
+  },
+  "holdout": {
+   "seed": 2
+  }
+ },
+ "time_limit_s": 1200,
+ "checks": 104,
+ "files": {
+  "checks.json": "999f9a09cd5ad28fcc03df4a4d40c9685ecebb84aa892eb85d3b718e6e068ec5",
+  "fixture.py": "bcf5e5238ba21b6ffd229b2c652fc21e8349b92c68e546b95fb32facbaca92d0",
+  "reference/box-components.json": "89526e5d35d5ac056c8a2b908db24b16c4830083722c439e371c8f173b13a8a9",
+  "reference/claude-sidebar.json": "de6a2136872c488164b90571b1a6f5ee861adf07fc199171b71f5d36c1a6f8c4",
+  "reference/stock-trees.json": "c373e30e4660293985b65a5c057655668215e2f3cf809d6baa195741899893a2",
+  "stage.py": "a37ced8fbbdc44aab755424f222b33fb046059c2bffe34a715d6e5d461442d76",
+  "suite/groups/cli.mjs": "81f14c2ea18a7291c0080215da8622cb5e0f53984ee87a5f5998c91a845e75a0",
+  "suite/groups/common.mjs": "890f412780e349af583539f2c3d58a37294f0832cce9d4ede9c0cef23736478a",
+  "suite/groups/drag.mjs": "589c6df939e870720aa0f2ccd94ad6681d85c0c28c2ed5829724e74c8ec052bd",
+  "suite/groups/index.mjs": "5dfcc52b534dca7ffd41e3a68325e6c1f3fba77b17c8f01633dd7243fe7cd735",
+  "suite/groups/menu.mjs": "78f6631f66ff14ed7095ee8ab3a71104cf508bda81a2f39770f55b8703ec3db1",
+  "suite/groups/newtrack.mjs": "8a2c792a5d8de8d86ebf4486201e32129ca80153c1e99cf410c1e95950604f7f",
+  "suite/groups/open.mjs": "a1ba68f7535f6bb57f8783b3aafe8a81b7a6dc960ef5f926dacc81e28e341b7d",
+  "suite/groups/pin.mjs": "6c2988e1fc010a2812566bf94ea45fa45dbb037b6855418a187a72be42eb6383",
+  "suite/groups/review.mjs": "e5dd96beaf2c02a81d89c75ab4a83618ba5ef38f18408e68f2f000f3aba073a4",
+  "suite/groups/rollup.mjs": "b4fd86897bf3a72ae80e50a7539127bfcbe1fb97587e9aa301d65d1b8ef1d763",
+  "suite/groups/sidebar.mjs": "d0bb5130871886256db81676b85e64b392869c365b4b9e6cc709d43d847e24e4",
+  "suite/groups/verbs.mjs": "3d2e4936869a46aa7231b0b65370c7bb45529a75b203e0c4424c4c7c8f11f2dc",
+  "suite/groups/view.mjs": "10e20872e7fca17a7ed12ccc07b956f83a75533308fe3631e7b8103988a4580d",
+  "suite/lib.mjs": "cee55eb55697a5a0875452f9f918e3d3146c4eaef2c9f60f59f1bbefde514adc",
+  "suite/run.mjs": "e6b710536aadec64dd50d2280d963408bbbb95a45a6b78ca2f30cff2740efa8b"
+ },
+ "spec_files": {
+  "OBJECTIVES.md": "2b7a1d294b03cc0a38a4d8a8b7d9700a27cdd797e1ad5c3b942813bb7c2ae585",
+  "specs/S1.1-a-track-is-a-box.md": "00ef21565256159878061f700f93ae99cc32a85c0f54c4762d402e7901e5ef89",
+  "specs/S1.2-a-box-holds-nothing-for-vibetracks.md": "fb13be1c7c73a35d838b1cac3bd18bbeab3970ae6f99b44949e3d0fa95e7e53e",
+  "specs/S1.3-vibetracks-owns-the-tree.md": "0f3402ef05cdc1fe9a1a59851c69744262af206bd1cbb5633f8abb56740bdc3e",
+  "specs/S1.4-live-local-data.md": "a477f546624bafc1ce7ddeac2827cfb9de1f1738c9fdde12b5fbb17db9df70f2",
+  "specs/S1.5-add-an-existing-box.md": "8540c2bdc011673a6c8d4935dcf7e0e19da49076a170e6db2843ff9e7c9f482b",
+  "specs/S2.1-top-rows.md": "db0ea5033d49cb9892b6b82bab6278cef5a836a8b8daec399bf1b9ab3a417031",
+  "specs/S2.2-pixel-parity-with-claude.md": "dad2928edc63717d63baa2b9f9361674b1ca757bec4e1a77a673d39408c7b837",
+  "specs/S2.3-row-menu-has-claudes-items.md": "30dcb56bd3ab87d117f916edc49a09e9fca278d64354f1fb629bc3962b656a9d",
+  "specs/S2.4-right-click-is-the-row-menu.md": "3b3b610f5c0e4ea00c280462a4421662270cb0e5759e9d1136e61c5ed8b42c4e",
+  "specs/S2.5-pin-and-the-pinned-section.md": "d8bb6a584fc746a693ca7dde7baec44409922e4011d145b502848356c0bddd6d",
+  "specs/S2.6-the-view-menu.md": "5da3ec575266a28e213c750e2a0df9e3d33f36d1082d714a39718280aa06d3ac",
+  "specs/S2.7-groupings.md": "39359b91fc6d2ad231cac9c8f2d7765d1fe95b5287a47f8793bf7291a0e5d4d3",
+  "specs/S2.8-drag-to-reorder-on-a-stock-tree.md": "a0fdb69333cb1bf261c7d9b2e6793d7d77a1feac4eb9b40627011fe0240be178",
+  "specs/S2.9-row-anatomy.md": "ecb9771dab3aca83c2f4d435ec89bcd50158f0e07f78f3bf11754f929f66c85a",
+  "specs/S3.1-home-is-a-stock-data-ui-table.md": "10d64f81ef6aeb2cc520b698721d6c19c3c7bc3f54b4a9cda5f7fc013d993140",
+  "specs/S3.2-review-across-tracks.md": "67ece090b0b706af3a723698f0fb0c463efd1452492dd30743432ccd11aeef8c",
+  "specs/S3.3-feedback-across-tracks.md": "ef7034355084bce525d4c930707e9cb4ebaca94ef0abf573820d7d6250be7ea5",
+  "specs/S3.4-roll-ups-from-children.md": "a46b396be6e139852b40d86ff7c40dc743ef2b400a6016cc58e1de3e354745de",
+  "specs/S4.1-vt-new-duplicates-the-template.md": "532deeeeac5f4128a8d6583fdba71a4c6def393df49d1ef2f3e7577e6a3a3123",
+  "specs/S4.2-new-track-dialog-writes-the-command.md": "f1e67c59a78b62a4b4e39df70903f04f99480bdcf0ee64b3e7c0414877858b8c",
+  "specs/S4.3-local-first-publish-optional.md": "99562b73f9a6cbbbe2b88ca7fd057dd9c57a598733f7599ad95e6acf1ebf262a",
+  "specs/S4.4-new-box-lands-in-the-tree.md": "a667742e70a0803fa854d5f120f2951d28935eb21807b34b454a9e6579d3f45c",
+  "specs/S5.1-vibetracks-tracks-itself.md": "1796d6dfd3eccb22d7d3a9f5e4ecc0d217c21e77f98315f6a93c018f323adca9"
+ },
+ "pins": {
+  "package.json": "e01dbb26e7a6fa19f882b9336f06aa82ea5faf4410fc1c793a1e1e86cd987fac",
+  "package-lock.json": "90166f2cd29a9af1bfaf6d131b3880f92c9e8d96712ab57125fff575d704bb7b"
+ }
+}

@@ -1,0 +1,176 @@
+"""The score (OBJECTIVES §8), red first: every input missing must not pass, and an item with no check is failing.
+
+Written before src/vibetracks_agent/scoring.py existed (it failed on import, then on each rule as the code grew).
+"""
+
+from __future__ import annotations
+
+import math
+from pathlib import Path
+
+import pytest
+
+from vibetracks_agent import scoring, specs
+from vibetracks_agent.specs import SpecItem
+
+REPO = Path(__file__).resolve().parents[1]
+
+ITEMS = [
+    SpecItem(id="S1.1", kind="shall", tests=("*::S1.1 *",), title="a", path="specs/S1.1.md"),
+    SpecItem(id="S2.3", kind="shall", tests=("*::S2.3 *",), title="b", path="specs/S2.3.md"),
+    SpecItem(id="S2.9", kind="should", tests=("*::S2.9 *",), title="c", path="specs/S2.9.md"),
+    SpecItem(id="S5.1", kind="should", tests=(), title="d", path="specs/S5.1.md"),
+]
+EXPECTED = [
+    "ruler/suite/open.py::S1.1 each box opens its own site",
+    "ruler/suite/open.py::S1.1 the address bar names the track",
+    "ruler/suite/menu.py::S2.3 menu items in Claude's order",
+    "ruler/suite/anatomy.py::S2.9 the status dot is in the leading slot",
+]
+
+
+def junit(states: dict[str, str]) -> str:
+    """A junit XML with one testcase per expected id; `states` maps an id to pass/fail/error/skipped (default pass)."""
+    cases = []
+    for cid in EXPECTED:
+        path, name = cid.split("::", 1)
+        classname = path[: -len(".py")].replace("/", ".")
+        state = states.get(cid, "pass")
+        body = {"pass": "", "fail": '<failure message="no">x</failure>', "error": '<error message="boom">x</error>',
+                "skipped": "<skipped/>"}[state]
+        cases.append(f'<testcase classname="{classname}" name="{name}" time="0.1">{body}</testcase>')
+    return f'<?xml version="1.0"?><testsuites><testsuite name="s">{"".join(cases)}</testsuite></testsuites>'
+
+
+def run(text: str | None, **kw) -> scoring.RunResult:
+    return scoring.RunResult(junit=text, finished=kw.get("finished", True), timed_out=kw.get("timed_out", False),
+                             wall_s=kw.get("wall_s", 60.0))
+
+
+def score(*runs: scoring.RunResult, items=ITEMS, expected=EXPECTED) -> dict:
+    return scoring.score(items, expected, list(runs))
+
+
+# ── every input missing must not pass ──────────────────────────────────────────────────────────────────────────
+
+
+@pytest.mark.parametrize("text", [None, "", "   ", "<not xml", "<testsuites/>", "<?xml version='1.0'?><testsuites></testsuites>"])
+def test_an_empty_or_missing_junit_never_meets_an_item_or_passes_a_gate(text):
+    card = score(run(text), run(text))
+    assert card["shall_failing"] == 2 and card["should_failing"] == 2
+    assert card["checks_failing"] == len(EXPECTED)
+    assert card["gates"] == {"completed": False, "deterministic": False}
+    assert card["admissible"] is False and card["gate_pass_rate"] == 0.0
+    assert set(card["task_objectives"].values()) == {1}
+
+
+def test_no_runs_at_all_fails_everything():
+    card = score()
+    assert card["shall_failing"] == 2 and card["should_failing"] == 2 and card["checks_failing"] == len(EXPECTED)
+    assert card["admissible"] is False
+
+
+def test_an_item_with_no_check_counts_as_failing():
+    card = score(run(junit({})), run(junit({})))
+    assert card["task_objectives"]["S5.1"] == 1
+    s51 = next(t for t in card["tasks"] if t["id"] == "S5.1")
+    assert s51["met"] is False and s51["checks"] == [] and "no check" in s51["why"]
+    assert card["should_failing"] == 1 and card["shall_failing"] == 0
+
+
+def test_an_item_whose_pattern_matches_no_expected_check_is_failing():
+    items = [SpecItem(id="S9.9", kind="shall", tests=("*::S9.9 *",), title="x", path="x")]
+    card = score(run(junit({})), run(junit({})), items=items)
+    assert card["shall_failing"] == 1 and card["task_objectives"] == {"S9.9": 1}
+
+
+def test_all_checks_passing_meets_every_item_with_a_check_and_passes_both_gates():
+    card = score(run(junit({})), run(junit({})))
+    assert card["shall_failing"] == 0 and card["should_failing"] == 1 and card["checks_failing"] == 0
+    assert card["gates"] == {"completed": True, "deterministic": True} and card["admissible"] is True
+    assert card["task_objectives"] == {"S1.1": 0, "S2.3": 0, "S2.9": 0, "S5.1": 1}
+
+
+def test_one_failing_check_fails_its_item_only():
+    bad = {EXPECTED[1]: "fail"}
+    card = score(run(junit(bad)), run(junit(bad)))
+    assert card["task_objectives"]["S1.1"] == 1 and card["task_objectives"]["S2.3"] == 0
+    assert card["shall_failing"] == 1 and card["checks_failing"] == 1
+    assert card["admissible"] is True  # a failing check is a result
+
+
+@pytest.mark.parametrize("state", ["skipped", "error"])
+def test_a_skipped_or_crashed_check_fails_its_item_and_the_completed_gate(state):
+    bad = {EXPECTED[2]: state}
+    card = score(run(junit(bad)), run(junit(bad)))
+    assert card["task_objectives"]["S2.3"] == 1
+    assert card["gates"]["completed"] is False and card["admissible"] is False
+
+
+def test_a_check_missing_from_the_junit_fails_its_item_and_the_completed_gate():
+    text = junit({}).replace(f'name="{EXPECTED[0].split("::")[1]}"', 'name="something else"')
+    card = score(run(text), run(text))
+    assert card["task_objectives"]["S1.1"] == 1 and card["checks_failing"] == 1
+    assert card["gates"]["completed"] is False
+
+
+def test_a_run_that_did_not_finish_fails_everything_even_with_a_green_junit():
+    for broken in (run(junit({}), finished=False), run(junit({}), timed_out=True), run(junit({}), wall_s=1201.0)):
+        card = score(broken, run(junit({})))
+        assert card["shall_failing"] == 2 and card["gates"]["completed"] is False and card["admissible"] is False
+
+
+@pytest.mark.parametrize("wall", [None, math.nan, math.inf])
+def test_a_run_with_no_wall_time_has_not_completed(wall):
+    card = score(run(junit({}), wall_s=wall), run(junit({})))
+    assert card["gates"]["completed"] is False
+
+
+def test_deterministic_needs_two_runs_that_agree_check_by_check():
+    one = score(run(junit({})))
+    assert one["gates"]["deterministic"] is False and one["admissible"] is False
+    flip = score(run(junit({})), run(junit({EXPECTED[3]: "fail"})))
+    assert flip["gates"]["deterministic"] is False
+    # an item is met only when it is met in every run (fail closed): the flipped check's item fails
+    assert flip["task_objectives"]["S2.9"] == 1 and flip["checks_failing"] == 1
+    missing_second = score(run(junit({})), run(None))
+    assert missing_second["gates"]["deterministic"] is False
+
+
+def test_pattern_needs_the_space_after_the_id():
+    assert scoring.matches("ruler/suite/menu.py::S2.3 menu items", ("*::S2.3 *",))
+    assert not scoring.matches("ruler/suite/menu.py::S2.30 other", ("*::S2.3 *",))
+    assert not scoring.matches("ruler/suite/menu.py::S2.3x other", ("*::S2.3 *",))
+    assert not scoring.matches("ruler/suite/menu.py::S2.3 menu items", ())
+
+
+def test_case_ids_follow_the_viewer_reading():
+    cases = scoring.parse_junit(junit({}))
+    assert set(cases) == set(EXPECTED)
+    assert scoring.case_id("ruler.suite.menu", "S2.3 x") == "ruler/suite/menu.py::S2.3 x"
+
+
+def test_gates_are_admissible_only_when_both_are_true():
+    assert scoring.admissible({"completed": True, "deterministic": True}) is True
+    for gates in ({"completed": True, "deterministic": None}, {"completed": True}, {}, None,
+                  {"completed": 1, "deterministic": True}, {"completed": True, "deterministic": math.nan}):
+        assert scoring.admissible(gates) is False
+
+
+# ── the real spec notes ──────────────────────────────────────────────────────────────────────────────────────
+
+
+def test_the_frozen_spec_has_19_shall_and_4_should_and_s5_1_has_no_check():
+    items = specs.load_items(REPO / "specs")
+    assert len([i for i in items if i.kind == "shall"]) == 19
+    assert len([i for i in items if i.kind == "should"]) == 4
+    by_id = {i.id: i for i in items}
+    assert by_id["S5.1"].tests == ()
+    assert by_id["S2.3"].tests == ("*::S2.3 *",)
+
+
+def test_every_spec_item_but_s5_1_has_at_least_one_ruler_check():
+    items = specs.load_items(REPO / "specs")
+    expected = scoring.expected_checks(REPO / "ruler" / "checks.json")
+    unchecked = [i.id for i in items if not [c for c in expected if scoring.matches(c, i.tests)]]
+    assert unchecked == ["S5.1"]
