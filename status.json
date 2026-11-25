@@ -10,25 +10,25 @@
     "direction": "down",
     "target": 0,
     "level": "0 of 20 shall failing",
-    "level_name": "ruler v2, dev, best stock-tree-1",
+    "level_name": "ruler v2, dev, best stock-tree-2",
     "next_gate": "a version with fewer than 0 shall items failing",
     "on_track": null
   },
   "counter_kpi": {
     "name": "checks failing (the third tie-break), same version",
-    "value": 2.0,
+    "value": 0.0,
     "unit": "checks",
     "owner": "Vibe Tracks Agent"
   },
   "status": "idle",
   "blocked_on": null,
   "todo": {
-    "open": 7,
-    "done_7d": 11,
+    "open": 4,
+    "done_7d": 14,
     "top": [
-      "Live box pages.",
       "Swap the sidebar's tree model for Headless Tree's core",
-      "A real box opens on its own page, not its README."
+      "Ruler v3 candidates",
+      "The use number"
     ]
   },
   "links": {
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795602959.8122694
+  "updated_t": 1795603538.0096464
 }

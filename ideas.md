@@ -28,12 +28,16 @@ loading come first because every other item reads them.
     34 px rows the row S1.4 clicks sits under the account footer in its 420 px window, so the click misses. Next:
     scroll the selected row into view, or less chrome above the tree.
   - **Done: [`live-1`](solutions/live-1/)**, S1.4 met (the list keeps its scroll on redraw; the selected row scrolls back into view).
-- [ ] **Swap the sidebar's tree model for Headless Tree's core** (vanilla, rows still drawn by `sidebar.js`): drag to
+- [x] **Swap the sidebar's tree model for Headless Tree's core** (vanilla, rows still drawn by `sidebar.js`): drag to
   reorder, onto a row to reparent, out to the left to un-nest; keyboard moves; refuse a drop into its own subtree.
   Spike the vanilla path for 30 minutes first (its docs are React-first); Pragmatic drag and drop is the fallback.
   Expect: S2.8 → pass. Risk: S2.2 and S2.9 if the rows' markup changes.
   - Rung: sidebar
   - Needs: the tree file
+  - **Done: [`stock-tree-2`](solutions/stock-tree-2/)**, S2.8 met: **0 of 20 shall, 0 of 119 checks failing** (ruler v2),
+    no regressions; landed on [vibetracks main @ 5787f03](https://github.com/zacharyyamaoka/vibetracks/commit/5787f03)
+    ([PEP 0030](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0030-the-sidebar-tree-on-headless-tree.md)):
+    `@headless-tree/core` 1.8.1 vendored with sha256s, vanilla (no fallback needed).
 - [x] **Claude's ··· menu**: Open in ›, Pin/Unpin P, Mark as unread U, Rename R, Fork F, Move up/down, Move to section
   ›, Archive A, Delete D (red, removes from Vibe Tracks only), then New sub-track… behind a separator; right-click
   stays the same menu. Expect: S2.3 → pass, S2.4 stays green.
