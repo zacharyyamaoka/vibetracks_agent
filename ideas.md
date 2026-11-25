@@ -34,10 +34,13 @@ loading come first because every other item reads them.
   Show ›, New section, Reset to defaults, View all), defaults Parent + Manual. Expect: S2.5, S2.6, S2.7 → pass.
   - Rung: sidebar
   - Needs: the tree file
-- [ ] **Measure Claude's sidebar once more and close the style gaps** the run lists under `sidebar_style_props_off`.
+- [x] **Measure Claude's sidebar once more and close the style gaps** the run lists under `sidebar_style_props_off`.
   Expect: S2.2 → pass; `sidebar_style_props_off` → 0.
   - Rung: sidebar
   - Needs: nothing
+  - **Done: [`sidebar-style-1`](solutions/sidebar-style-1/)**, S2.2 met, props off 14 → 0 of 22, shall 18 → 17, checks
+    85 → 71, no regressions; landed on [vibetracks main @ edbfc4e](https://github.com/zacharyyamaoka/vibetracks/commit/edbfc4e)
+    (rows 32/34 px, 14 px titles, radius 8, dark fills 31/48/64, a 13 px "Tracks" list header).
 - [ ] **Home as one data-ui `<data-views>`** over one row per box, nested by the tree, presets Active / Done / All
   tracks. Expect: S3.1 → pass.
   - Rung: roll-ups
@@ -55,7 +58,8 @@ loading come first because every other item reads them.
   git init + first commit, private GitHub only with `--publish` after `gh auth status`; the New track dialog writes
   the command and gets a Create button running it. Expect: S4.1-S4.4 → pass.
   - Rung: new track
-  - Needs: a full starter box in blackbox_agent `template/` (today it holds only the README header, nav.json and the Pages test)
+  - Needs: a starter box to copy. Since blackbox_agent 0.1.x, `blackbox new <dir>` writes one (OBJECTIVES, AGENTS,
+    an empty ledger, nav.json, the Pages workflow; committed on main): call it rather than copy `template/`.
 - [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`

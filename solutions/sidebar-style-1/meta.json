@@ -1,0 +1,15 @@
+{
+  "id": "sidebar-style-1",
+  "parent": "main-d0cb827",
+  "change": "Sidebar style tokens to Claude 3.6556.1 (row 32/pitch 34, 14 px, radius 8, 24 px \u00b7\u00b7\u00b7 button, dark side/hover/selected fills) plus a 13 px 'Tracks' list header",
+  "vibetracks_sha": "210279c98db6ff874d8b6e6e69eaca143f4d2183",
+  "vibetracks_ref": "210279c",
+  "vibetracks_committed": "2026-11-25T07:11:11Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane B subagent)",
+    "model": "claude-sonnet-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T07:12:29Z",
+  "tags": []
+}
