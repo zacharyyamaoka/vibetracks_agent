@@ -1,0 +1,18 @@
+{
+  "id": "main-d0cb827",
+  "parent": null,
+  "change": "vibetracks main as it stood on 2026-11-24 (the baseline: before the Nov 24 design)",
+  "vibetracks_sha": "d0cb82732adcdd4852f26767a00daf6772b715cb",
+  "vibetracks_ref": "d0cb827",
+  "vibetracks_committed": "2026-11-13T18:45:05Z",
+  "proposed_by": {
+    "agent": "Claude Code (vibetracks_agent ruler lane)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T05:13:22Z",
+  "tags": [
+    "main",
+    "baseline"
+  ]
+}

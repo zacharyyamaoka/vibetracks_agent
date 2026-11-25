@@ -1,0 +1,41 @@
+{
+  "schema": "ai-team-status/1",
+  "member": "Vibe Tracks Agent",
+  "team": "AI Team",
+  "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his Nov 24 spec true (ruler v1, OBJECTIVES.md)",
+  "kpi": {
+    "name": "shall items failing, of 19 (ruler v1, dev)",
+    "value": 18.0,
+    "unit": "items",
+    "direction": "down",
+    "target": 0,
+    "level": "18 of 19 shall failing",
+    "level_name": "ruler v1, dev, best main-d0cb827",
+    "next_gate": "a version with fewer than 18 shall items failing",
+    "on_track": null
+  },
+  "counter_kpi": {
+    "name": "checks failing (the third tie-break), same version",
+    "value": 85.0,
+    "unit": "checks",
+    "owner": "Vibe Tracks Agent"
+  },
+  "status": "idle",
+  "blocked_on": null,
+  "todo": {
+    "open": 12,
+    "done_7d": 0,
+    "top": [
+      "Boxes as tracks, the tree in Vibe Tracks' own file.",
+      "`vt add <folder | github url> [--parent]` and the page's Add box.",
+      "Live box pages."
+    ]
+  },
+  "links": {
+    "repo": null,
+    "report": "PROGRESS.md",
+    "wandb": null,
+    "vault": "PROJECT - Vibe Tracks"
+  },
+  "updated_t": 1795584016.4285781
+}

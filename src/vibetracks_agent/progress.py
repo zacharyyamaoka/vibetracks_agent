@@ -74,7 +74,8 @@ def gather(root: Path | None = None) -> dict[str, Any]:
             if value != 0:
                 item = items.get(sid)
                 task = tasks.get(sid) or {}
-                orders.append({"id": sid, "kind": item.kind if item else None, "title": item.title if item else sid,
+                title = re.sub(rf"^{re.escape(sid)}\s+", "", item.title) if item else sid
+                orders.append({"id": sid, "kind": item.kind if item else None, "title": title,
                                "failed": len(task.get("failed_checks") or []), "checks": len(task.get("checks") or []),
                                "why": task.get("why")})
     return {"as_of": max((str(r.get("t") or "") for r in rows), default=None) or None, "rows": len(rows),
