@@ -41,7 +41,9 @@ def uri(p: Path, mime: str | None = None, jpeg: bool = False) -> str:
 
 def rows() -> list[dict]:
     out = [json.loads(l) for l in (BOX / "ledger.jsonl").read_text().splitlines() if l.strip()]
-    return [r for r in out if r.get("split") == "dev"]
+    # WHY v1 only: this is the night-2 report, scored and worded on ruler v1 ("of 19"); a v2 row is another quantity
+    # (20 shall) and is never compared with a v1 one (OBJECTIVES §11)
+    return [r for r in out if r.get("split") == "dev" and r.get("ruler") == "v1"]
 
 
 def card(sid: str) -> dict:
