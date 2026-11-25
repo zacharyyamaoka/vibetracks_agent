@@ -34,7 +34,8 @@ is free; a check reads the letter, so another free letter is a one-line change b
 | A paused row is visibly paused: a pause glyph in the status-dot slot and a muted title (Claude has no paused row; this is the closest honest look, and the sidebar measurement records it) | computed style + glyph present on screen, never DOM presence alone |
 | It survives a reload and a `vt serve` restart | re-measured after both |
 | **Who paused it is recorded**: from the page, a person record; from `vt pause <track>` run inside an agent's session, an agent record (vt stamps it, the caller can't) | the record's `by` in the tree file |
-| Parity: `vt pause <track>` / `vt resume <track>` (named by the box folder's basename, like `vt add --parent`) do the same as the menu | CLI then page agree within one tick |
+| Parity: `vt pause <track> [--why "<text>"]` / `vt resume <track> [--why "<text>"]` (named by the box folder's basename, like `vt add --parent`) do the same as the menu | CLI then page agree within one tick |
+| `--why` is stored verbatim on that record as `why`; without it the record has no `why` key | the record in the tree file |
 | Resume returns the row to its state colour and the menu to **Pause** | menu label + style |
 
 ## The record (what the Agent Activity Agent reads)
@@ -44,12 +45,16 @@ active. One record:
 
 ```json
 {"at": "2026-11-25T08:10:00Z", "status": "paused", "by": {"person": "zach@…", "via": "page"}}
-{"at": "2026-11-25T09:00:00Z", "status": "active", "by": {"person": "zach@…", "agent": "claude-code", "model": "claude-opus-5-5", "sid": "…", "via": "cli"}}
+{"at": "2026-11-25T09:00:00Z", "status": "paused", "by": {"person": "zach@…", "agent": "claude-code", "model": "claude-opus-5-5", "sid": "…", "via": "cli"}, "why": "answer <answer-record-id>"}
 ```
 
 `by` is vibetracks' existing stamp ([`vibetracks/core/records.py`](https://github.com/zacharyyamaoka/vibetracks/blob/main/vibetracks/core/records.py) `stamp()`): `person` always; `agent`, `model`,
 `sid` and `account` only when an agent's session ran the verb; `via` is `page` or `cli`. **A person's pause = the
-latest record is `paused` and its `by` has no `agent`.** The tree file's path and its other keys are the
+latest record is `paused` and its `by` has no `agent`.** `why` is optional free text, written only from
+`--why`. WHY it exists (the Agent Activity Agent, 2026-11-25): when Zach answers a "Still important?" ask with *Pause
+it*, that agent runs `vt pause <track> --why "answer <answer-record-id>"`; its ruler (its OBJECTIVES §6a) counts an
+agent-run pause as his only when `why` cites a person-signed answer whose option is pause. Vibe Tracks only stores
+it; it never reads `why` to decide anything. The tree file's path and its other keys are the
 boxes-as-tracks PEP's to name ([vibetracks `docs/peps/`](https://github.com/zacharyyamaoka/vibetracks/tree/main/docs/peps)); this PEP fixes only the `status` list's shape.
 
 ## What it costs
