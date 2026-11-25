@@ -130,13 +130,13 @@ def main() -> None:
                        f"{('<ul class=why>' + why + '</ul>') if why else '<p class=muted>Every check passed.' if st == 'pass' else '<p class=muted>No check in ruler v1 (counts as failing).</p>'}</details>")
         spec_html.append(f"<div class='area'><h3>{n}. {esc(title)}</h3>{''.join(lis)}</div>")
 
-    stills = [("01-landing.jpg", "The landing page: the design in one line, the headline number, Zach's words"),
-              ("02-landing-spec.jpg", "The spec by area, each item's baseline result"),
-              ("05-spec-tab.jpg", "The dashboard's Spec tab: the 23 items by section"),
-              ("06-spec-note.jpg", "A spec item opens as its note (S2.3, the ··· menu)"),
+    stills = [("01-landing.jpg", "The stock landing (the blackbox_agent package): the goal and the headline, 18 shall items not met"),
+              ("04-dashboard-overview.jpg", "The dashboard's Overview: the baseline, both gates, the queue and what's for Zach"),
+              ("05-spec-tab.jpg", "The Spec tab: 23 items by section, each with its checks' pass rate"),
+              ("06-spec-note.jpg", "A spec item opens as its note (S2.3, the ··· menu), his words first"),
               ("07-feedback-tab.jpg", "Feedback: 13 notes, his words exact, each naming the items it became"),
               ("08-references-tab.jpg", "References: the prior-art sweep"),
-              ("09-ideas-tab.jpg", "The idea queue, critical path first"),
+              ("11-notes-tab.jpg", "Notes: the design in one screen and Claude's two reference menus"),
               ("10-landing-dark.jpg", "Dark mode")]
     fig = "".join(f"<figure><img src='{data_uri(media / f, 'image/jpeg' if f.endswith('.jpg') else 'image/png')}' alt='{esc(c)}' loading='lazy'><figcaption>{esc(c)}</figcaption></figure>"
                   for f, c in stills if (media / f).exists())
@@ -184,7 +184,7 @@ frozen as ruler v1, checked in a headless browser against fixture box repos. Bas
 <p class="muted">Gates: {gate_html or '—'}</p>
 <h2>The box's site, walked</h2>
 {hero}
-<p class="muted">Landing page → Open the dashboard → Spec tab → a spec note → Feedback → References → Ideas. Recorded from the real site (served locally) after the baseline fold.</p>
+<p class="muted">Landing → Open the dashboard → Spec tab → a spec note → Feedback → References → Notes → Ideas. Recorded from the site the blackbox_agent package builds from this repo's git (served locally).</p>
 <h2>The spec, with the baseline result per item</h2>
 <p class="muted">Click an item for the failing checks and their messages. An item with no check counts as not met (fail closed).</p>
 <div class="areas">{''.join(spec_html)}</div>
@@ -193,9 +193,9 @@ frozen as ruler v1, checked in a headless browser against fixture box repos. Bas
 <h3>Done and proved</h3><ul class="dec">
 <li>Box repo with the standard file set: OBJECTIVES (ruler v1), 23 spec notes, 13 feedback notes, REFERENCES ({nref} items), AGENTS, ideas, site.</li>
 <li>Baseline scored by the ruler (two dev runs + holdout); numbers above come from <code>ledger.jsonl</code> and the solution's junit.</li>
-<li>The blackbox_agent fold reads every slice; landing and dashboard rendered and looked at, light and dark.</li></ul>
+<li>On the blackbox_agent package (v0): <code>blackbox check</code> says the box is in the format; the stock landing and dashboard rendered and looked at, light and dark.</li><li>Fixed on the way: the published junit was not valid XML and named the fixture's home as a home path (scorer, red first); blackbox_agent's junit reader counted only the first test suite (<code>4abcc9a</code>, pushed). No score moved.</li></ul>
 <h3>Decided for you (each one line to undo)</h3><ul class="dec">
-<li><b>Its own repo</b>, not <code>agent/</code> in vibetracks, since every track is now a box repo. Undo: move the files into vibetracks.</li>
+<li><b>Its own repo</b>, not <code>agent/</code> in vibetracks, since every track is now a box repo. Undo: move the files into vibetracks.</li><li><b>The stock landing, no override</b>, per tonight's package ruling; the design overview lives in NOTES.md (the Notes tab). Undo: put a page at <code>site/overrides/index.html</code>.</li>
 <li><b>Local only</b> (your S4.3 local-only track). Undo: <code>gh repo create vibetracks_agent --private --source /home/bam/vibetracks_agent --push</code>.</li>
 <li><b>Fail closed:</b> no check = not met. <b>Claude beats the Oct 16 hover chevron</b> (S2.9 a should). <b>Delete</b> never deletes a box folder; <b>Rename</b> is Vibe Tracks' label; <b>publish is private</b>. Undo: edit OBJECTIVES §10 (a ruler v2).</li>
 <li><b>Stock tree = Headless Tree core</b>, Pragmatic drag and drop as fallback. Undo: edit S2.8's reference list.</li></ul>
