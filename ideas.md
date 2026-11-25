@@ -81,6 +81,28 @@ loading come first because every other item reads them.
     `records.agent_session()` and `via "cli"`; `paused` in the tree view; the ··· item (Z) before Archive in
     boxes.js; a pause glyph in the row's lead and a lower-opacity title in sidebar.js. How each is measured:
     [`docs/CONTRACT.md`](docs/CONTRACT.md) §7, items 24-32.
+- [ ] **A real box opens on its own page, not its README.** Zach's boxes build their site with the blackbox package
+  (no `site/index.html` in the repo), so today a real box shows its README; the ruler's fixture boxes ship a prebuilt
+  `site/index.html` (the pre-package layout), which is why S1.1 passes anyway. Build it with
+  `blackbox build --box <dir> --out <vt cache>/<id>` (reads git only, never writes the box) and serve that; rebuild on
+  a new commit. Ruler v3: fixture boxes in the package format. Seen 2026-11-25 on six real boxes
+  ([the report's hero](https://github.com/zacharyyamaoka/vibetracks_agent/blob/main/docs/build_progress_report.py)).
+  - Rung: boxes
+  - Needs: nothing
+- [ ] **One state vocabulary.** robot_viz_agent's status.json says "watching", agent_activity_agent's "running"; Vibe
+  Tracks shows both as Unknown. Map ai-team-status/1's words (or agree one list with the blackbox format).
+  - Rung: roll-ups
+  - Needs: nothing
+- [ ] **Ruler v3 candidates** (Zach's call, like any ruler change): S2.2 measures row pitch across the section header,
+  so a Pinned header above the other tracks fails it (boxes-as-tracks-1 merged the headers to pass; Claude has
+  separate ones); S1.4 clicks a row that sits under the account footer at its 420 px window.
+  - Rung: meta
+  - Needs: Zach
+- [ ] **The use number** ([PEP 0001](docs/peps/0001-ruler-v2-use-number.md), accepted): `days_opened` and
+  `boxes_opened_per_day` as a live stage, reported beside `shall_failing`, never a gate. A `vta tick` appends one
+  `live` row a day from vibetracks' reader file and a per-person box-open counter (a person's click, never an agent's).
+  - Rung: meta
+  - Needs: ruler v2 frozen
 - [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`
@@ -91,7 +113,7 @@ loading come first because every other item reads them.
   pixel-perfect Claude. Default: Claude wins, S2.9 stays a *should*. OBJECTIVES §10.1.
 - [ ] **Sync and accounts.** Oct 25 asked for built-in sync and an online account; local boxes travel by their own git
   remotes. Default: the tree file is per machine in v1. OBJECTIVES §10.2.
-- [ ] **A use number for ruler v2.** Your W2 retro found Vibe Tracks "not that helpful". Scoring only the spec could
+- [x] **A use number for ruler v2.** Accepted 2026-11-25 (PEP 0001); queued under I'll try. Your W2 retro found Vibe Tracks "not that helpful". Scoring only the spec could
   ship a version that passes and still goes unused; candidate: days you opened it, or boxes opened from it per day,
   read from `vt serve`'s own log. OBJECTIVES §10.3. **Drafted:** [`docs/peps/0001-ruler-v2-use-number.md`](docs/peps/0001-ruler-v2-use-number.md); accept it by
   changing its status line.

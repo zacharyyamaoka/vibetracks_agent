@@ -1,7 +1,9 @@
 # PEP 0001: Ruler v2 adds a use number
 
-- **Status:** proposed, waiting on Zach. It changes his success criteria, so it is his call. If he says nothing,
-  ruler v1 stands.
+- **Status:** accepted 2026-11-25 by the dispatcher under Zach's standing default for reversible changes (Nov 4:
+  "I would prefer it just goes with its default particularly on these things that are easy to reverse"). It adds a
+  reported number only: never a gate, never used to choose a version, the headline stays `shall_failing`. It lands as
+  a live stage after ruler v2 (PEP 0002) freezes. Undo: set this line back to "proposed" (nothing has been built on it).
 - **Date:** 2026-11-24
 - **Builds on:** OBJECTIVES.md §10.3
 
