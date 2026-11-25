@@ -15,6 +15,26 @@ loading come first because every other item reads them.
   fixture (one-file sites) little. Risk: none to the spec here.
   - Rung: speed
   - Needs: the blackbox_agent change
+  - **Measured again 2026-11-25 ~15:55 on his live Preview** (main 9475a84, `vta speed --rounds 3`, 54 opens of 18 tracks,
+    load 55-61 on 24 cores): open_ms **1388 ms**, first round 1590, later rounds 1232, p95 3509, max 3968; 98 requests and
+    2.7 MB per open, no writes. The dashboard's graph from `viewer/site/dashboard.js`: **89 modules, 5 imports deep,
+    1.6 MB unminified**; vt serve answers all 89 to a plain sequential client in 0.26 s, so the time is the browser's
+    module waterfall, parse and compile, not the server. blackbox-agent 0.1.18's site cache (CONTRACT §18.5, lane
+    `vt/bb-0118`) takes the revalidations off a warm reopen, not the first open's compile.
+- [ ] **Keep a frame for every track in his tree, not 8.** Same run: a track opened again took 1232 ms (median), not
+  PEP 0028 §8.1's 143 ms, because `vta speed` cycles all 18 visible rows and `KEEP = 8` (`static/boxes.js`) had already
+  evicted each one: he has 18 rows unfolded, so any walk through his tree misses the kept frames. 18 × 14 MB ≈ 250 MB of
+  renderer memory. Expect: S1.6 later opens on real boxes → ~150 ms. Risk: renderer memory; measure it as §8.1 did.
+  Filed by Claude Code (Opus 5.5) from Zach's note "it takes a long time to open any of the track I am not sure why"
+  (Daily Note - Nov 25 2026, "Issues with vibe tracks").
+  - Rung: speed
+  - Needs: nothing
+- [ ] **Report his own number beside the fixture's.** The KPI `open_ms` is the ruler's fixture: 816 ms (main-940b507-v3)
+  and 383 ms (speed-1, inadmissible), while his Preview measured 1388 ms the same afternoon, about 2-4x more, because his
+  boxes' dashboards carry real data. A `vta speed` over his Preview as a diagnostic in `status.json` and PROGRESS (never
+  selected on) would let the number he reads match what he feels. A ruler change: propose it in `docs/peps/`.
+  - Rung: speed
+  - Needs: his yes on the PEP
 - [ ] **Re-score main on ruler v3 in a session with the sandbox.** speed-1 (e7cd3b9) run 1: open_ms 383, S1.6 met; speed-2
   (7293e77) run 1: 787 under heavy load, plus S2.3 red (fixed on main 5d78e15: menus open no submenu under a still pointer)
   and run 2 killed by the memory guard. The next clean `vta evaluate` decides S1.6.
