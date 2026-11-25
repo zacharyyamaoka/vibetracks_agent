@@ -23,7 +23,7 @@
   "status": "idle",
   "blocked_on": null,
   "todo": {
-    "open": 10,
+    "open": 14,
     "done_7d": 3,
     "top": [
       "Live box pages.",
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795596094.1239161
+  "updated_t": 1795596273.630167
 }
