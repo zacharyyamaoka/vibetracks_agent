@@ -74,6 +74,10 @@ def junit_cases(path: Path) -> dict[str, list[tuple[str, str, str]]]:
     return out
 
 
+def code_spans(s: str) -> str:
+    return re.sub(r"`([^`]+)`", lambda m: f"<code>{m.group(1)}</code>", s)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--media", required=True)
@@ -121,26 +125,26 @@ def main() -> None:
             st, label = item_status(s["id"])
             cases = junit.get(s["id"], [])
             why = "".join(f"<li class='{c[1]}'><b>{esc(c[0])}</b>{(' — ' + esc(c[2][:260])) if c[2] else ''}</li>" for c in cases if c[1] != "pass")
-            lis.append(f"<details class='it'><summary><span class='id'>{esc(s['id'])}</span><span class='t'>{esc(s['title'])}"
+            lis.append(f"<details class='it'><summary><span class='id'>{esc(s['id'])}</span><span class='t'>{code_spans(esc(s['title']))}"
                        f"{' <em>should</em>' if s['kind'] == 'should' else ''}</span><span class='chip {st}'>{esc(label)}</span></summary>"
                        f"{('<ul class=why>' + why + '</ul>') if why else '<p class=muted>Every check passed.' if st == 'pass' else '<p class=muted>No check in ruler v1 (counts as failing).</p>'}</details>")
         spec_html.append(f"<div class='area'><h3>{n}. {esc(title)}</h3>{''.join(lis)}</div>")
 
-    stills = [("01-landing.png", "The landing page: the design in one line, the headline number, Zach's words"),
-              ("02-landing-spec.png", "The spec by area, each item's baseline result"),
-              ("05-spec-tab.png", "The dashboard's Spec tab: the 23 items by section"),
-              ("06-spec-note.png", "A spec item opens as its note (S2.3, the ··· menu)"),
-              ("07-feedback-tab.png", "Feedback: 13 notes, his words exact, each naming the items it became"),
-              ("08-references-tab.png", "References: the prior-art sweep"),
-              ("09-ideas-tab.png", "The idea queue, critical path first"),
-              ("10-landing-dark.png", "Dark mode")]
+    stills = [("01-landing.jpg", "The landing page: the design in one line, the headline number, Zach's words"),
+              ("02-landing-spec.jpg", "The spec by area, each item's baseline result"),
+              ("05-spec-tab.jpg", "The dashboard's Spec tab: the 23 items by section"),
+              ("06-spec-note.jpg", "A spec item opens as its note (S2.3, the ··· menu)"),
+              ("07-feedback-tab.jpg", "Feedback: 13 notes, his words exact, each naming the items it became"),
+              ("08-references-tab.jpg", "References: the prior-art sweep"),
+              ("09-ideas-tab.jpg", "The idea queue, critical path first"),
+              ("10-landing-dark.jpg", "Dark mode")]
     fig = "".join(f"<figure><img src='{data_uri(media / f, 'image/jpeg' if f.endswith('.jpg') else 'image/png')}' alt='{esc(c)}' loading='lazy'><figcaption>{esc(c)}</figcaption></figure>"
                   for f, c in stills if (media / f).exists())
     vid = next((p for p in [media / "hero.mp4", media / "hero.webm"] if p.exists()), None)
     gif = media / "hero.gif"
     hero = ""
     if vid:
-        hero = (f"<video controls muted loop autoplay playsinline poster='{data_uri(media / '01-landing.png', 'image/png') if (media / '01-landing.png').exists() else ''}'>"
+        hero = (f"<video controls muted loop autoplay playsinline poster='{data_uri(media / '01-landing.jpg', 'image/jpeg') if (media / '01-landing.jpg').exists() else ''}'>"
                 f"<source src='{data_uri(vid, 'video/mp4' if vid.suffix == '.mp4' else 'video/webm')}' type='{'video/mp4' if vid.suffix == '.mp4' else 'video/webm'}'>"
                 + (f"<img src='{data_uri(gif, 'image/gif')}' alt='The walk through the box site'>" if gif.exists() else "") + "</video>")
 
