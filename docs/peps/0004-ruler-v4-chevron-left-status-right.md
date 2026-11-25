@@ -59,5 +59,5 @@ at the row's right end, the 36 px title inset) are unchanged and still pass with
 ## Re-scoring
 
 Every solution is re-scored on v4 by the loop's next run (not done in the session that froze this). Until a v4 row
-exists, `vta progress` would show no `open_ms` for v4; `status.json` keeps its last v3 headline until then. v1-v3 rows
+exists, `vta progress` would show no `open_ms` for v4; [`status.json`](../../status.json) keeps its last v3 headline until then. v1-v3 rows
 stay in the ledger, labelled, never ranked against v4.

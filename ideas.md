@@ -36,8 +36,8 @@ loading come first because every other item reads them.
   - Needs: nothing
 - [ ] **Report his own number beside the fixture's.** The KPI `open_ms` is the ruler's fixture: 816 ms (main-940b507-v3)
   and 383 ms (speed-1, inadmissible), while his Preview measured 1388 ms the same afternoon, about 2-4x more, because his
-  boxes' dashboards carry real data. A `vta speed` over his Preview as a diagnostic in `status.json` and PROGRESS (never
-  selected on) would let the number he reads match what he feels. A ruler change: propose it in `docs/peps/`.
+  boxes' dashboards carry real data. A `vta speed` over his Preview as a diagnostic in [`status.json`](status.json) and [PROGRESS](PROGRESS.md) (never
+  selected on) would let the number he reads match what he feels. A ruler change: propose it in [`docs/peps/`](docs/peps/).
   - Rung: speed
   - Needs: his yes on the PEP
 - [ ] **Re-score main on ruler v3 in a session with the sandbox.** speed-1 (e7cd3b9) run 1: open_ms 383, S1.6 met; speed-2
