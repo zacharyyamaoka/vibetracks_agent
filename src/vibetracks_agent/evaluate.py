@@ -156,9 +156,10 @@ def run_stage(tree: Path, run_dir: Path, seed: int, *, timeout_s: float, isolate
 
 
 def public_junit(text: str, run_dir: Path) -> str:
-    """The junit as published (site/ may be public): no run dir, no home path."""
-    text = text.replace(str(run_dir), "<run>")
-    text = text.replace(str(paths.work_dir()), "<work>")
+    """The junit as published (site/ may be public): no run dir, no home path. The placeholders are XML-escaped
+    because they land inside attribute values and text (a bare `<run>` made the file unparseable)."""
+    text = text.replace(str(run_dir), "&lt;run&gt;")
+    text = text.replace(str(paths.work_dir()), "&lt;work&gt;")
     return text.replace(str(Path.home()), "~")
 
 

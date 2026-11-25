@@ -94,7 +94,12 @@ def test_the_published_junit_names_no_run_dir_and_no_home():
     run_dir = Path.home() / ".cache" / "vibetracks_agent" / "x" / "runs" / "dev-1"
     text = f'<failure message="{run_dir}/home/a and {Path.home()}/b">{run_dir}</failure>'
     out = evaluate.public_junit(text, run_dir)
-    assert str(Path.home()) not in out and "<run>/home/a" in out and "~/b" in out
+    assert str(Path.home()) not in out and "&lt;run&gt;/home/a" in out and "~/b" in out
+    # WHY: the placeholder lands inside XML; a bare "<run>" made every published junit unparseable (the blackbox_agent
+    # fold refused site/data/junit.xml at line 327, 2026-11-24).
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(f"<testcase>{out}</testcase>")
+    assert root.find("failure").attrib["message"].startswith("<run>/home/a")
 
 
 def test_a_port_is_never_one_of_zachs():

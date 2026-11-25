@@ -324,7 +324,7 @@ vt new: error: the following arguments are required: id, --title
 </failure>
     </testcase>
     <testcase classname="ruler.suite.cli" name="S1.5 vt add lists an existing box under its parent in the sidebar" time="0.106">
-      <failure message="vt add <run>/home/kittiwake_thermal_agent --parent skua_planner_agent exited 1: vt: no command &apos;add&apos;. `vt --help` lists them.">vt add <run>/home/kittiwake_thermal_agent --parent skua_planner_agent exited 1: vt: no command &apos;add&apos;. `vt --help` lists them.
+      <failure message="vt add &lt;run&gt;/home/kittiwake_thermal_agent --parent skua_planner_agent exited 1: vt: no command &apos;add&apos;. `vt --help` lists them.">vt add &lt;run&gt;/home/kittiwake_thermal_agent --parent skua_planner_agent exited 1: vt: no command &apos;add&apos;. `vt --help` lists them.
 </failure>
     </testcase>
   </testsuite>
