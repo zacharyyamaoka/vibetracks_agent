@@ -135,7 +135,8 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
         d = speed["diagnostics"]
         runs = " and ".join(fmt(x, 0, " ms") for x in d.get("open_ms_runs") or []) or DASH
         kinds = ", ".join(f"{k} {fmt(v, 0, ' ms')}" for k, v in (d.get("open_p50_by_kind") or {}).items()) or DASH
-        mb = lambda b: DASH if finite(b) is None else f"{finite(b) / 1e6:,.2f} MB"  # noqa: E731
+        mb = lambda b: (DASH if finite(b) is None else f"{finite(b) / 1e6:,.2f} MB" if finite(b) >= 1e5  # noqa: E731
+                        else f"{finite(b) / 1e3:,.1f} kB")
         lines.append(f"- **Opening a track: `open_ms` {fmt(speed['open_ms'], 0, ' ms')}** (target {OPEN_TARGET_MS} ms; S1.6 "
                      "wants it within 400 ms and nineteen opens in twenty within 1000 ms): the median of the package "
                      f"boxes' opens over both dev runs (each run: {runs}; spread {fmt(d.get('open_ms_spread'), 0, ' ms')}). "

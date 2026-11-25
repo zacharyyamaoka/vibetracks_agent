@@ -1,0 +1,4387 @@
+{
+ "solution": "main-940b507-v3",
+ "split": "dev",
+ "ruler": "v3",
+ "objective": 2,
+ "objective_name": "shall_failing",
+ "tiebreak": 820.0,
+ "tiebreak_name": "open_ms (rounded to 10 ms)",
+ "tiebreak2": 1,
+ "tiebreak2_name": "should_failing",
+ "tiebreak3": 9,
+ "tiebreak3_name": "checks_failing",
+ "open_ms": 815.5,
+ "open_ms_unit": "ms",
+ "open_ms_target": 100,
+ "shall_failing": 2,
+ "shall_total": 23,
+ "should_failing": 1,
+ "should_total": 3,
+ "checks_failing": 9,
+ "checks_total": 135,
+ "admissible": true,
+ "gate_pass_rate": 1.0,
+ "gates": {
+  "completed": true,
+  "deterministic": true
+ },
+ "failed_gates": {
+  "completed": 0,
+  "deterministic": 0
+ },
+ "diagnostics": {
+  "shall_passing": 21,
+  "sidebar_style_props_off": 0,
+  "sidebar_style_props_measured": 22,
+  "page_ready_ms": 1301,
+  "vt_gate_failed": null,
+  "wall_time_s": 1024.8641965370625,
+  "checks_total": 135,
+  "registration": "vt add",
+  "stock_tree": [
+   "@headless-tree/core (url http://127.0.0.1:4811/vendor/headless-tree@417a775c4809/index.mjs)"
+  ],
+  "open_ms_runs": [
+   874.6,
+   649.8
+  ],
+  "open_ms_spread": 224.8,
+  "open_cold_p50": 3141.4,
+  "open_warm_p50": 671.8,
+  "open_p50_by_kind": {
+   "files": 209.4,
+   "package": 815.5,
+   "readme": 292.1
+  },
+  "open_p95": 2435.1,
+  "open_p95_runs": [
+   2315.1,
+   3243.2
+  ],
+  "open_max": 4863.2,
+  "opens": 176,
+  "opens_failed": 0,
+  "requests_per_open": 95.0,
+  "bytes_first_open": 1657197.0,
+  "bytes_later_open": 2853.0,
+  "builds_waited": 10.0,
+  "page_crashes": 0
+ },
+ "tasks": [
+  {
+   "id": "S1.1",
+   "kind": "shall",
+   "title": "S1.1 A track is a black-box agent repo on this machine, and opening it shows that box's own site",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/open.py::S1.1 each of three boxes opens its own site in the main pane",
+     "name": "S1.1 each of three boxes opens its own site in the main pane",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/open.py::S1.1 the address bar names the track",
+     "name": "S1.1 the address bar names the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/open.py::S1.1 a box with no site shows its README's first heading",
+     "name": "S1.1 a box with no site shows its README's first heading",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.2",
+   "kind": "shall",
+   "title": "S1.2 A box holds nothing for Vibe Tracks, and tree changes never write a box",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/verbs.py::S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete",
+     "name": "S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/verbs.py::S1.2 after them each box's git status is clean and its HEAD unchanged",
+     "name": "S1.2 after them each box's git status is clean and its HEAD unchanged",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/verbs.py::S1.2 no file under any box is named like vibetracks or vibe-tracks",
+     "name": "S1.2 no file under any box is named like vibetracks or vibe-tracks",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/verbs.py::S1.2 a vibetracks.toml dropped into a box changes nothing on the page",
+     "name": "S1.2 a vibetracks.toml dropped into a box changes nothing on the page",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.3",
+   "kind": "shall",
+   "title": "S1.3 Vibe Tracks owns the tree: parent, child, order, pins and sections",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/drag.py::S1.3 the tree set by a drag survives a restart",
+     "name": "S1.3 the tree set by a drag survives a restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S1.3 the file that changed lives outside every box",
+     "name": "S1.3 the file that changed lives outside every box",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S1.3 a hand edit of that file moves the row within 5 s, with no reload",
+     "name": "S1.3 a hand edit of that file moves the row within 5 s, with no reload",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.4",
+   "kind": "should",
+   "title": "S1.4 A box's data changing on disk shows on its page live",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/open.py::S1.4 a box's site changed on disk shows on its page within 5 s",
+     "name": "S1.4 a box's site changed on disk shows on its page within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/open.py::S1.4 no reload: history length and the sidebar scroll position are kept",
+     "name": "S1.4 no reload: history length and the sidebar scroll position are kept",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.5",
+   "kind": "should",
+   "title": "S1.5 Add a box that already exists: a folder, or a GitHub repo to clone",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/cli.py::S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged",
+     "name": "S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S1.5 vt add lists an existing box under its parent in the sidebar",
+     "name": "S1.5 vt add lists an existing box under its parent in the sidebar",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.6",
+   "kind": "shall",
+   "title": "S1.6 Opening a track shows its page fast",
+   "met": false,
+   "why": "2 of 2 checks not passed",
+   "checks": [
+    {
+     "id": "ruler/suite/speed.py::S1.6 the median open of a package box shows its page within 400 ms",
+     "name": "S1.6 the median open of a package box shows its page within 400 ms",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "88 opens: package boxes' median 874.6 ms (first opens 2490.8, later 836.2); every kind's median: files 224.3, package 874.6, readme 266.1; p95 2315.1, slowest 3965.1; 0 not shown within 10 s"
+    },
+    {
+     "id": "ruler/suite/speed.py::S1.6 nineteen opens in twenty, of any box, show their page within 1000 ms",
+     "name": "S1.6 nineteen opens in twenty, of any box, show their page within 1000 ms",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "88 opens: package boxes' median 874.6 ms (first opens 2490.8, later 836.2); every kind's median: files 224.3, package 874.6, readme 266.1; p95 2315.1, slowest 3965.1; 0 not shown within 10 s; over 1000 ms: 11, e.g. garganey_calibration_agent (cold) 3965.1 ms, bittern_reach_agent (cold) 2621.4 ms, av"
+    }
+   ],
+   "failed_checks": [
+    "S1.6 the median open of a package box shows its page within 400 ms",
+    "S1.6 nineteen opens in twenty, of any box, show their page within 1000 ms"
+   ]
+  },
+  {
+   "id": "S2.1",
+   "kind": "shall",
+   "title": "S2.1 Top rows: Home, Review, Feedback, New track, then Search",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/sidebar.py::S2.1 Home, Review, Feedback, New track in this order above the first track row",
+     "name": "S2.1 Home, Review, Feedback, New track in this order above the first track row",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.1 Feedback shows its open count",
+     "name": "S2.1 Feedback shows its open count",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.1 each top row opens its page",
+     "name": "S2.1 each top row opens its page",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.2",
+   "kind": "shall",
+   "title": "S2.2 Pixel parity with the Claude desktop app's sidebar",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: row height 32 px",
+     "name": "S2.2 light: row height 32 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: row pitch 34 px",
+     "name": "S2.2 light: row pitch 34 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: title font 14 px",
+     "name": "S2.2 light: title font 14 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: title font family Anthropic Sans",
+     "name": "S2.2 light: title font family Anthropic Sans",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: row corner radius 8 px",
+     "name": "S2.2 light: row corner radius 8 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: title starts 36 px into the row's pill",
+     "name": "S2.2 light: title starts 36 px into the row's pill",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "name": "S2.2 light: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: status dot 6 px",
+     "name": "S2.2 light: status dot 6 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: section header 13 px",
+     "name": "S2.2 light: section header 13 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: row height 32 px",
+     "name": "S2.2 dark: row height 32 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: row pitch 34 px",
+     "name": "S2.2 dark: row pitch 34 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: title font 14 px",
+     "name": "S2.2 dark: title font 14 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: title font family Anthropic Sans",
+     "name": "S2.2 dark: title font family Anthropic Sans",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: row corner radius 8 px",
+     "name": "S2.2 dark: row corner radius 8 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: title starts 36 px into the row's pill",
+     "name": "S2.2 dark: title starts 36 px into the row's pill",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "name": "S2.2 dark: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: status dot 6 px",
+     "name": "S2.2 dark: status dot 6 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: section header 13 px",
+     "name": "S2.2 dark: section header 13 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: sidebar background rgb(31,31,31)",
+     "name": "S2.2 dark: sidebar background rgb(31,31,31)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: hovered row fill rgb(48,48,48)",
+     "name": "S2.2 dark: hovered row fill rgb(48,48,48)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: selected row fill rgb(64,64,64)",
+     "name": "S2.2 dark: selected row fill rgb(64,64,64)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: \u00b7\u00b7\u00b7 button hover fill rgb(78,78,78)",
+     "name": "S2.2 dark: \u00b7\u00b7\u00b7 button hover fill rgb(78,78,78)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.3",
+   "kind": "shall",
+   "title": "S2.3 The \u00b7\u00b7\u00b7 menu on a track has Claude's items, in Claude's order, with its shortcut letters",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/menu.py::S2.3 a middle row's menu items are Claude's, in Claude's order",
+     "name": "S2.3 a middle row's menu items are Claude's, in Claude's order",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 Move up is absent on the first row",
+     "name": "S2.3 Move up is absent on the first row",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 P pins the track",
+     "name": "S2.3 P pins the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 U marks it unread or read",
+     "name": "S2.3 U marks it unread or read",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 R starts a rename",
+     "name": "S2.3 R starts a rename",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 F forks the box",
+     "name": "S2.3 F forks the box",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 A archives the track",
+     "name": "S2.3 A archives the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 D deletes the track",
+     "name": "S2.3 D deletes the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 Delete leaves the box's folder on disk",
+     "name": "S2.3 Delete leaves the box's folder on disk",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 Z pauses the track, and Z on a paused track resumes it",
+     "name": "S2.3 Z pauses the track, and Z on a paused track resumes it",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.4",
+   "kind": "shall",
+   "title": "S2.4 Right-click on a track opens the same menu as its \u00b7\u00b7\u00b7",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/menu.py::S2.4 a right-click on a track opens a menu at the pointer",
+     "name": "S2.4 a right-click on a track opens a menu at the pointer",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.4 the right-click menu's items equal the \u00b7\u00b7\u00b7 menu's",
+     "name": "S2.4 the right-click menu's items equal the \u00b7\u00b7\u00b7 menu's",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.5",
+   "kind": "shall",
+   "title": "S2.5 Pin a track; pinned tracks sit in a Pinned section at the top",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/pin.py::S2.5 two pinned tracks sit under Pinned, in pin order, above the rest",
+     "name": "S2.5 two pinned tracks sit under Pinned, in pin order, above the rest",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pin.py::S2.5 folding Pinned hides them",
+     "name": "S2.5 folding Pinned hides them",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pin.py::S2.5 pins survive a vt serve restart",
+     "name": "S2.5 pins survive a vt serve restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pin.py::S2.5 unpin returns each to its old parent and place",
+     "name": "S2.5 unpin returns each to its old parent and place",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.6",
+   "kind": "shall",
+   "title": "S2.6 The view menu: Group by, Sort by, Show, New section, Reset to defaults, View all",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/view.py::S2.6 the view menu's entries in order",
+     "name": "S2.6 the view menu's entries in order",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Group by offers None, Parent, State",
+     "name": "S2.6 Group by offers None, Parent, State",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Sort by offers Manual, Last updated, Created, Name",
+     "name": "S2.6 Sort by offers Manual, Last updated, Created, Name",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Show offers archived and done",
+     "name": "S2.6 Show offers archived and done",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 each submenu shows its current pick on the right",
+     "name": "S2.6 each submenu shows its current pick on the right",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 the choice survives a restart",
+     "name": "S2.6 the choice survives a restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Reset to defaults restores Parent and Manual",
+     "name": "S2.6 Reset to defaults restores Parent and Manual",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 New section asks for a name and adds an empty section",
+     "name": "S2.6 New section asks for a name and adds an empty section",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.7",
+   "kind": "shall",
+   "title": "S2.7 Groupings: flat by recent, and the parent tree",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/view.py::S2.7 flat by last updated: newest first, every row at one indent",
+     "name": "S2.7 flat by last updated: newest first, every row at one indent",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.7 Parent grouping shows the tree from Vibe Tracks' file",
+     "name": "S2.7 Parent grouping shows the tree from Vibe Tracks' file",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.7 State grouping puts each track under its state",
+     "name": "S2.7 State grouping puts each track under its state",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.7 switching groupings keeps the selection",
+     "name": "S2.7 switching groupings keeps the selection",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.8",
+   "kind": "shall",
+   "title": "S2.8 Drag to reorder and to move under another track, on a stock tree component",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/drag.py::S2.8 dragging a row between two rows reorders it",
+     "name": "S2.8 dragging a row between two rows reorders it",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 a drop indicator shows mid-drag",
+     "name": "S2.8 a drop indicator shows mid-drag",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 dropping onto a row makes it that row's child",
+     "name": "S2.8 dropping onto a row makes it that row's child",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 dragging out to the left makes it top-level",
+     "name": "S2.8 dragging out to the left makes it top-level",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 a drop into its own child is refused",
+     "name": "S2.8 a drop into its own child is refused",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 the moves survive a vt serve restart",
+     "name": "S2.8 the moves survive a vt serve restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 the keyboard path does one reorder",
+     "name": "S2.8 the keyboard path does one reorder",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 the page loads a stock tree package",
+     "name": "S2.8 the page loads a stock tree package",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.9",
+   "kind": "shall",
+   "title": "S2.9 Fold and unfold like Notion: the status dot turns into the fold chevron on hover",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 the status dot is in the leading slot",
+     "name": "S2.9 the status dot is in the leading slot",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 a parent's fold chevron is hidden until hover",
+     "name": "S2.9 a parent's fold chevron is hidden until hover",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 a title click opens the track",
+     "name": "S2.9 a title click opens the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 a chevron click folds without opening",
+     "name": "S2.9 a chevron click folds without opening",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/fold.py::S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot",
+     "name": "S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/fold.py::S2.9 the chevron reads \"Fold N sub-tracks (\u2190 \u2192)\", and \"Unfold N sub-tracks\" when folded, N its sub-tracks",
+     "name": "S2.9 the chevron reads \"Fold N sub-tracks (\u2190 \u2192)\", and \"Unfold N sub-tracks\" when folded, N its sub-tracks",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/fold.py::S2.9 a chevron click folds every level below and the rows below move up; a second click unfolds",
+     "name": "S2.9 a chevron click folds every level below and the rows below move up; a second click unfolds",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/fold.py::S2.9 a title click on a parent opens it and leaves it unfolded",
+     "name": "S2.9 a title click on a parent opens it and leaves it unfolded",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/fold.py::S2.9 \u2190 folds a focused row and \u2192 unfolds it",
+     "name": "S2.9 \u2190 folds a focused row and \u2192 unfolds it",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/fold.py::S2.9 a fold survives a reload",
+     "name": "S2.9 a fold survives a reload",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/fold.py::S2.9 a folded parent still shows its roll-up: a pip for its blocked sub-track and its 3 agents",
+     "name": "S2.9 a folded parent still shows its roll-up: a pip for its blocked sub-track and its 3 agents",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.10",
+   "kind": "shall",
+   "title": "S2.10 Pause a track; a paused track looks paused and stays paused until resumed",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/pause.py::S2.10 an active track's \u00b7\u00b7\u00b7 and right-click menus show Pause",
+     "name": "S2.10 an active track's \u00b7\u00b7\u00b7 and right-click menus show Pause",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 Pause in the \u00b7\u00b7\u00b7 menu writes a person record to the tree file, with no agent and no why",
+     "name": "S2.10 Pause in the \u00b7\u00b7\u00b7 menu writes a person record to the tree file, with no agent and no why",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 a paused track's \u00b7\u00b7\u00b7 and right-click menus show Resume",
+     "name": "S2.10 a paused track's \u00b7\u00b7\u00b7 and right-click menus show Resume",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 a paused row shows a pause glyph in its status-dot slot",
+     "name": "S2.10 a paused row shows a pause glyph in its status-dot slot",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 a paused row's title is muted",
+     "name": "S2.10 a paused row's title is muted",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 the pause survives a reload",
+     "name": "S2.10 the pause survives a reload",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 the pause survives a vt serve restart",
+     "name": "S2.10 the pause survives a vt serve restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 Resume returns the row to its state colour and the menu to Pause",
+     "name": "S2.10 Resume returns the row to its state colour and the menu to Pause",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt pause writes a person record via cli with no why",
+     "name": "S2.10 vt pause writes a person record via cli with no why",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt pause shows on the page within 5 s, with no reload",
+     "name": "S2.10 vt pause shows on the page within 5 s, with no reload",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s",
+     "name": "S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim",
+     "name": "S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 the status list is append-only and a track never paused reads active",
+     "name": "S2.10 the status list is append-only and a track never paused reads active",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 pausing and resuming leave every box untouched",
+     "name": "S2.10 pausing and resuming leave every box untouched",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.11",
+   "kind": "shall",
+   "title": "S2.11 Search: a palette on Ctrl+K, Ctrl+O and Ctrl+P that finds text in the tracks' files, the open track first",
+   "met": false,
+   "why": "7 of 7 checks not passed",
+   "checks": [
+    {
+     "id": "ruler/suite/search.py::S2.11 Ctrl+K opens the search palette with its input focused",
+     "name": "S2.11 Ctrl+K opens the search palette with its input focused",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Ctrl+K: no text input appears focused (in the page, outside any box frame) within 1.5 s"
+    },
+    {
+     "id": "ruler/suite/search.py::S2.11 Ctrl+O and Ctrl+P open the search palette too",
+     "name": "S2.11 Ctrl+O and Ctrl+P open the search palette too",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Ctrl+O and Ctrl+P: no focused search input appears within 1.5 s"
+    },
+    {
+     "id": "ruler/suite/search.py::S2.11 Escape closes the search palette",
+     "name": "S2.11 Escape closes the search palette",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Ctrl+K opens no palette to close (the first S2.11 check)"
+    },
+    {
+     "id": "ruler/suite/search.py::S2.11 the sidebar shows Search with Ctrl+K at its right end, below New track and above the tracks; a click opens the palette",
+     "name": "S2.11 the sidebar shows Search with Ctrl+K at its right end, below New track and above the tracks; a click opens the palette",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "no sidebar row reads \"Search\""
+    },
+    {
+     "id": "ruler/suite/search.py::S2.11 a phrase from one box's files lists that hit with its track, file and line",
+     "name": "S2.11 a phrase from one box's files lists that hit with its track, file and line",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Ctrl+K opens no palette"
+    },
+    {
+     "id": "ruler/suite/search.py::S2.11 with a track open, its hits come first",
+     "name": "S2.11 with a track open, its hits come first",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Ctrl+K opens no palette"
+    },
+    {
+     "id": "ruler/suite/search.py::S2.11 Enter on a hit opens its track on the page that shows it",
+     "name": "S2.11 Enter on a hit opens its track on the page that shows it",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Ctrl+K opens no palette"
+    }
+   ],
+   "failed_checks": [
+    "S2.11 Ctrl+K opens the search palette with its input focused",
+    "S2.11 Ctrl+O and Ctrl+P open the search palette too",
+    "S2.11 Escape closes the search palette",
+    "S2.11 the sidebar shows Search with Ctrl+K at its right end, below New track and above the tracks; a click opens the palette",
+    "S2.11 a phrase from one box's files lists that hit with its track, file and line",
+    "S2.11 with a track open, its hits come first",
+    "S2.11 Enter on a hit opens its track on the page that shows it"
+   ]
+  },
+  {
+   "id": "S3.1",
+   "kind": "shall",
+   "title": "S3.1 Home is a stock data-ui table of tracks, folding by parent, with Active / Done / All tracks presets",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/rollup.py::S3.1 Home holds a data-views element",
+     "name": "S3.1 Home holds a data-views element",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.1 its presets are Active, Done, All tracks in that order",
+     "name": "S3.1 its presets are Active, Done, All tracks in that order",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.1 folding a parent hides exactly its descendants",
+     "name": "S3.1 folding a parent hides exactly its descendants",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.1 the Done preset shows only done boxes",
+     "name": "S3.1 the Done preset shows only done boxes",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S3.2",
+   "kind": "shall",
+   "title": "S3.2 Review is a box's own review page, over every track's waits",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/review.py::S3.2 both waits are on Review, each labelled with its track",
+     "name": "S3.2 both waits are on Review, each labelled with its track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.2 the waits sit in the element a box's own site uses",
+     "name": "S3.2 the waits sit in the element a box's own site uses",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.2 clicking a wait opens its box's page",
+     "name": "S3.2 clicking a wait opens its box's page",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S3.3",
+   "kind": "shall",
+   "title": "S3.3 Feedback is a box's own feedback page, over every track's feedback notes",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/review.py::S3.3 every feedback note is listed with its track",
+     "name": "S3.3 every feedback note is listed with its track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.3 the side panel opens the note",
+     "name": "S3.3 the side panel opens the note",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.3 adding feedback writes one new file in the chosen box's feedback/ and nothing else",
+     "name": "S3.3 adding feedback writes one new file in the chosen box's feedback/ and nothing else",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S3.4",
+   "kind": "shall",
+   "title": "S3.4 A parent rolls up its children: state and number of agents",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/rollup.py::S3.4 the parent's sidebar row shows a pip for its blocked child",
+     "name": "S3.4 the parent's sidebar row shows a pip for its blocked child",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.4 the parent shows 3 agents working in its subtree",
+     "name": "S3.4 the parent shows 3 agents working in its subtree",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.4 a child's status.json changed on disk updates the parent within 5 s",
+     "name": "S3.4 a child's status.json changed on disk updates the parent within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.1",
+   "kind": "shall",
+   "title": "S4.1 `vt new` makes a new box by duplicating the black-box template",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/cli.py::S4.1 vt new exits 0 offline and makes a new box folder",
+     "name": "S4.1 vt new exits 0 offline and makes a new box folder",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 the folder is a git repo with one commit",
+     "name": "S4.1 the folder is a git repo with one commit",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 its README's first heading is the title",
+     "name": "S4.1 its README's first heading is the title",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 its files include the starter box's",
+     "name": "S4.1 its files include the starter box's",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 the track is in the tree under the parent",
+     "name": "S4.1 the track is in the tree under the parent",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 --from copies the source box's files without its history",
+     "name": "S4.1 --from copies the source box's files without its history",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.2",
+   "kind": "shall",
+   "title": "S4.2 The New track dialog writes the command to copy, and can run it",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/newtrack.py::S4.2 the command follows the name, the parent and Publish",
+     "name": "S4.2 the command follows the name, the parent and Publish",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/newtrack.py::S4.2 Copy puts the command on the clipboard",
+     "name": "S4.2 Copy puts the command on the clipboard",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/newtrack.py::S4.2 Create makes the box and shows it under its parent within 5 s",
+     "name": "S4.2 Create makes the box and shows it under its parent within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.3",
+   "kind": "shall",
+   "title": "S4.3 Local-only by default; publishing to GitHub is an option that needs `gh` signed in",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/cli.py::S4.3 without --publish gh is never called",
+     "name": "S4.3 without --publish gh is never called",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.3 signed out, --publish stops, names gh auth login and makes nothing",
+     "name": "S4.3 signed out, --publish stops, names gh auth login and makes nothing",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.3 signed in, --publish creates a private repo from the folder and pushes once",
+     "name": "S4.3 signed in, --publish creates a private repo from the folder and pushes once",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.4",
+   "kind": "shall",
+   "title": "S4.4 A new box shows in the sidebar under its parent at once",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/newtrack.py::S4.4 vt new from a shell shows the row under its parent within 5 s",
+     "name": "S4.4 vt new from a shell shows the row under its parent within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S5.1",
+   "kind": "should",
+   "title": "S5.1 Vibe Tracks tracks itself: this box is a track in Zach's Vibe Tracks",
+   "met": false,
+   "why": "no check: the spec note lists no test",
+   "checks": [],
+   "failed_checks": []
+  }
+ ],
+ "task_objectives": {
+  "S1.1": 0,
+  "S1.2": 0,
+  "S1.3": 0,
+  "S1.4": 0,
+  "S1.5": 0,
+  "S1.6": 1,
+  "S2.1": 0,
+  "S2.2": 0,
+  "S2.3": 0,
+  "S2.4": 0,
+  "S2.5": 0,
+  "S2.6": 0,
+  "S2.7": 0,
+  "S2.8": 0,
+  "S2.9": 0,
+  "S2.10": 0,
+  "S2.11": 1,
+  "S3.1": 0,
+  "S3.2": 0,
+  "S3.3": 0,
+  "S3.4": 0,
+  "S4.1": 0,
+  "S4.2": 0,
+  "S4.3": 0,
+  "S4.4": 0,
+  "S5.1": 1
+ },
+ "vibetracks_sha": "940b50717e610f5bd4cb7b0d4c370e188ab0f9be",
+ "vibetracks_committed": "2026-11-25T16:13:52Z",
+ "seed": 1,
+ "evaluated": "2026-11-25T19:59:53Z",
+ "wall_time_s": 1024.8641965370625,
+ "runs": [
+  {
+   "n": 1,
+   "exit": 0,
+   "timed_out": false,
+   "wall_s": 532.7,
+   "junit": true,
+   "network": "loopback-only namespace",
+   "reaped_pids": [],
+   "groups": {
+    "sidebar": {
+     "s": 26.4,
+     "error": null,
+     "page_errors": 0
+    },
+    "open": {
+     "s": 16.3,
+     "error": null,
+     "page_errors": 0
+    },
+    "menu": {
+     "s": 22.8,
+     "error": null,
+     "page_errors": 0
+    },
+    "pin": {
+     "s": 17.5,
+     "error": null,
+     "page_errors": 0
+    },
+    "view": {
+     "s": 35,
+     "error": null,
+     "page_errors": 0
+    },
+    "drag": {
+     "s": 30.4,
+     "error": null,
+     "page_errors": 0
+    },
+    "verbs_ran": {
+     "drag": true,
+     "pin": true,
+     "rename": true,
+     "archive": true,
+     "section": true,
+     "delete": true
+    },
+    "verbs": {
+     "s": 25.1,
+     "error": null,
+     "page_errors": 0
+    },
+    "rollup": {
+     "s": 11.3,
+     "error": null,
+     "page_errors": 0
+    },
+    "review": {
+     "s": 11.1,
+     "error": null,
+     "page_errors": 0
+    },
+    "newtrack": {
+     "s": 12.3,
+     "error": null,
+     "page_errors": 0
+    },
+    "cli": {
+     "s": 24.5,
+     "error": null,
+     "page_errors": 0
+    },
+    "pause": {
+     "s": 34.7,
+     "error": null,
+     "page_errors": 0
+    },
+    "fold": {
+     "s": 30.7,
+     "error": null,
+     "page_errors": 0
+    },
+    "search": {
+     "s": 19,
+     "error": null,
+     "page_errors": 0
+    },
+    "speed": {
+     "s": 204,
+     "error": null,
+     "page_errors": 0
+    }
+   },
+   "speed": {
+    "definition": {
+     "median_ms": 400,
+     "slowest_ms": 1000,
+     "settle_ms": 10000,
+     "gap_ms": 1000,
+     "warm_rounds": 3,
+     "after_commit_ms": 2000,
+     "dwell_ms": 150,
+     "press_ms": 80,
+     "timeout_ms": 10000,
+     "viewport": {
+      "width": 1400,
+      "height": 900
+     }
+    },
+    "added": [
+     "add shrike_lidar_agent: exit 0",
+     "add brambling_bin_agent --parent shrike_lidar_agent: exit 0",
+     "add dunlin_vision_agent --parent brambling_bin_agent: exit 0",
+     "add garganey_calibration_agent --parent shrike_lidar_agent: exit 0",
+     "add avocet_pick_agent: exit 0",
+     "add bittern_reach_agent: exit 0",
+     "add sanderling_grasp_agent: exit 0"
+    ],
+    "commits": [
+     {
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "code": 0,
+      "sha": "1f6031497bb8e3105b92f4d7ea9d3fd9698e6b4f"
+     },
+     {
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "code": 0,
+      "sha": "fff858a01835df4a778e87f4aaebb06fa6521ce6"
+     }
+    ],
+    "opens": [
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 524,
+      "requests": 4,
+      "bytes": 3234,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 212.1,
+      "requests": 3,
+      "bytes": 3061,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 210.9,
+      "requests": 3,
+      "bytes": 3070,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 2621.4,
+      "requests": 97,
+      "bytes": 1657197,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 2602,
+      "requests": 98,
+      "bytes": 1657348,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 188.8,
+      "requests": 3,
+      "bytes": 3071,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 190.3,
+      "requests": 3,
+      "bytes": 3079,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 307.2,
+      "requests": 3,
+      "bytes": 3076,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 290.9,
+      "requests": 3,
+      "bytes": 3064,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 3965.1,
+      "requests": 98,
+      "bytes": 1657474,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 2379.5,
+      "requests": 97,
+      "bytes": 1657197,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 179.7,
+      "requests": 3,
+      "bytes": 3067,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 256,
+      "requests": 3,
+      "bytes": 3064,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 2376.8,
+      "requests": 98,
+      "bytes": 1657362,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 228,
+      "requests": 3,
+      "bytes": 3064,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 378.7,
+      "requests": 5,
+      "bytes": 83260,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 2200.6,
+      "requests": 97,
+      "bytes": 1657197,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 211.3,
+      "requests": 4,
+      "bytes": 3246,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 226.5,
+      "requests": 3,
+      "bytes": 3055,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 232.1,
+      "requests": 3,
+      "bytes": 3061,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 223.1,
+      "requests": 3,
+      "bytes": 3070,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 205.3,
+      "requests": 3,
+      "bytes": 3067,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 167.3,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 526.3,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 1049.6,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 725.1,
+      "requests": 94,
+      "bytes": 12140,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 222.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 1169.4,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 662.6,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 856.8,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 474.8,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 401.4,
+      "requests": 3,
+      "bytes": 3089,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 242.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 245.4,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 264.2,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 458.9,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 224,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 438,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 1589.4,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 432.5,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 394.9,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 272.6,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 305.8,
+      "requests": 5,
+      "bytes": 4972,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 375.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 442.4,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 1412.2,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 874.7,
+      "requests": 97,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 276.2,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 205.5,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 203.2,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 574.8,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 179,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 273.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 336.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 247.3,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 224.5,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 207.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 175.9,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 1487.5,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 160,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 207.8,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 226.3,
+      "requests": 6,
+      "bytes": 5151,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 874.3,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 624.6,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 213.3,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 239.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 151.8,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 184.8,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 195.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 282,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 747.6,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 172.9,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 815.5,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 435.9,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 192.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 488.4,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 191.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 150.8,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 378.6,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 874.5,
+      "requests": 96,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 722.6,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 192.9,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 143.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 620.1,
+      "requests": 97,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 161,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 184.9,
+      "requests": 6,
+      "bytes": 5151,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 304.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 178.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     }
+    ],
+    "skipped": null,
+    "page_ready": true,
+    "crashes": 0,
+    "background": [
+     "/tree.json",
+     "/processes"
+    ],
+    "open_ms": 874.6,
+    "n_opens": 88,
+    "failed": 0,
+    "by_kind": {
+     "files": 224.3,
+     "package": 874.6,
+     "readme": 266.1
+    },
+    "cold_p50": 2490.8,
+    "warm_p50": 836.2,
+    "p95": 2315.1,
+    "max": 3965.1,
+    "requests_per_open_p50": 95,
+    "bytes_cold_p50": 1657272.5,
+    "bytes_warm_p50": 2853,
+    "builds_waited": 5,
+    "boxes": {
+     "heron_belt_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 339,
+      "p95": 516.6,
+      "max": 524,
+      "cold": 524,
+      "cold_requests": 4,
+      "cold_bytes": 3234,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "linnet_reach_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 313,
+      "p95": 429.1,
+      "max": 438,
+      "cold": 212.1,
+      "cold_requests": 3,
+      "cold_bytes": 3061,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "garganey_vision_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 260.9,
+      "p95": 409.9,
+      "max": 432.5,
+      "cold": 210.9,
+      "cold_requests": 3,
+      "cold_bytes": 3070,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "bittern_reach_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 874.6,
+      "p95": 2359.4,
+      "max": 2621.4,
+      "cold": 2621.4,
+      "cold_requests": 97,
+      "cold_bytes": 1657197,
+      "warm_requests_p50": 96,
+      "warm_bytes_p50": 3032
+     },
+     "avocet_pick_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 1500.8,
+      "p95": 2450.1,
+      "max": 2602,
+      "cold": 2602,
+      "cold_requests": 98,
+      "cold_bytes": 1657348,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "sanderling_grasp_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 183.9,
+      "p95": 234.4,
+      "max": 242.4,
+      "cold": 188.8,
+      "cold_requests": 3,
+      "cold_bytes": 3071,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "avocet_calibration_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 199.2,
+      "p95": 366.5,
+      "max": 394.9,
+      "cold": 190.3,
+      "cold_requests": 3,
+      "cold_bytes": 3079,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "redshank_conveyor_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 265,
+      "p95": 416.6,
+      "max": 435.9,
+      "cold": 307.2,
+      "cold_requests": 3,
+      "cold_bytes": 3076,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "kestrel_fleet_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 249.4,
+      "p95": 606.8,
+      "max": 662.6,
+      "cold": 290.9,
+      "cold_requests": 3,
+      "cold_bytes": 3064,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "garganey_calibration_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 836.2,
+      "p95": 3498.9,
+      "max": 3965.1,
+      "cold": 3965.1,
+      "cold_requests": 98,
+      "cold_bytes": 1657474,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "dunlin_vision_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 1021.9,
+      "p95": 2198,
+      "max": 2379.5,
+      "cold": 2379.5,
+      "cold_requests": 97,
+      "cold_bytes": 1657197,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "petrel_planner_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 193.7,
+      "p95": 239.7,
+      "max": 245.4,
+      "cold": 179.7,
+      "cold_requests": 3,
+      "cold_bytes": 3067,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "siskin_motion_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 234.7,
+      "p95": 379.6,
+      "max": 401.4,
+      "cold": 256,
+      "cold_requests": 3,
+      "cold_bytes": 3064,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 3032
+     },
+     "shrike_lidar_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 898.6,
+      "p95": 2177.7,
+      "max": 2376.8,
+      "cold": 2376.8,
+      "cold_requests": 98,
+      "cold_bytes": 1657362,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "godwit_torque_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 246.1,
+      "p95": 272,
+      "max": 273.4,
+      "cold": 228,
+      "cold_requests": 3,
+      "cold_bytes": 3064,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "bittern_pick_agent": {
+      "kind": "readme",
+      "opens": 4,
+      "failed": 0,
+      "p50": 266.1,
+      "p95": 367.8,
+      "max": 378.7,
+      "cold": 378.7,
+      "cold_requests": 5,
+      "cold_bytes": 83260,
+      "warm_requests_p50": 6,
+      "warm_bytes_p50": 5151
+     },
+     "brambling_bin_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 1006.9,
+      "p95": 2093.6,
+      "max": 2200.6,
+      "cold": 2200.6,
+      "cold_requests": 97,
+      "cold_bytes": 1657197,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "curlew_gripper_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 242,
+      "p95": 327.1,
+      "max": 336.7,
+      "cold": 211.3,
+      "cold_requests": 4,
+      "cold_bytes": 3246,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "dunlin_bin_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 181.5,
+      "p95": 221.9,
+      "max": 226.5,
+      "cold": 226.5,
+      "cold_requests": 3,
+      "cold_bytes": 3055,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "plover_wrist_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 337.3,
+      "p95": 456.4,
+      "max": 458.9,
+      "cold": 232.1,
+      "cold_requests": 3,
+      "cold_bytes": 3061,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "brambling_lidar_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 250.1,
+      "p95": 300.2,
+      "max": 304.4,
+      "cold": 223.1,
+      "cold_requests": 3,
+      "cold_bytes": 3070,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "shrike_suction_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 214.9,
+      "p95": 352.8,
+      "max": 375.4,
+      "cold": 205.3,
+      "cold_requests": 3,
+      "cold_bytes": 3067,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     }
+    }
+   }
+  },
+  {
+   "n": 2,
+   "exit": 0,
+   "timed_out": false,
+   "wall_s": 492.1,
+   "junit": true,
+   "network": "loopback-only namespace",
+   "reaped_pids": [],
+   "groups": {
+    "sidebar": {
+     "s": 23.8,
+     "error": null,
+     "page_errors": 0
+    },
+    "open": {
+     "s": 10.3,
+     "error": null,
+     "page_errors": 0
+    },
+    "menu": {
+     "s": 19.5,
+     "error": null,
+     "page_errors": 0
+    },
+    "pin": {
+     "s": 17.1,
+     "error": null,
+     "page_errors": 0
+    },
+    "view": {
+     "s": 34.4,
+     "error": null,
+     "page_errors": 0
+    },
+    "drag": {
+     "s": 38.8,
+     "error": null,
+     "page_errors": 0
+    },
+    "verbs_ran": {
+     "drag": true,
+     "pin": true,
+     "rename": true,
+     "archive": true,
+     "section": true,
+     "delete": true
+    },
+    "verbs": {
+     "s": 25.7,
+     "error": null,
+     "page_errors": 0
+    },
+    "rollup": {
+     "s": 13.6,
+     "error": null,
+     "page_errors": 0
+    },
+    "review": {
+     "s": 15.2,
+     "error": null,
+     "page_errors": 0
+    },
+    "newtrack": {
+     "s": 13.8,
+     "error": null,
+     "page_errors": 0
+    },
+    "cli": {
+     "s": 12.9,
+     "error": null,
+     "page_errors": 0
+    },
+    "pause": {
+     "s": 20.5,
+     "error": null,
+     "page_errors": 0
+    },
+    "fold": {
+     "s": 20.1,
+     "error": null,
+     "page_errors": 0
+    },
+    "search": {
+     "s": 17.8,
+     "error": null,
+     "page_errors": 0
+    },
+    "speed": {
+     "s": 200.5,
+     "error": null,
+     "page_errors": 0
+    }
+   },
+   "speed": {
+    "definition": {
+     "median_ms": 400,
+     "slowest_ms": 1000,
+     "settle_ms": 10000,
+     "gap_ms": 1000,
+     "warm_rounds": 3,
+     "after_commit_ms": 2000,
+     "dwell_ms": 150,
+     "press_ms": 80,
+     "timeout_ms": 10000,
+     "viewport": {
+      "width": 1400,
+      "height": 900
+     }
+    },
+    "added": [
+     "add shrike_lidar_agent: exit 0",
+     "add brambling_bin_agent --parent shrike_lidar_agent: exit 0",
+     "add dunlin_vision_agent --parent brambling_bin_agent: exit 0",
+     "add garganey_calibration_agent --parent shrike_lidar_agent: exit 0",
+     "add avocet_pick_agent: exit 0",
+     "add bittern_reach_agent: exit 0",
+     "add sanderling_grasp_agent: exit 0"
+    ],
+    "commits": [
+     {
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "code": 0,
+      "sha": "1f6031497bb8e3105b92f4d7ea9d3fd9698e6b4f"
+     },
+     {
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "code": 0,
+      "sha": "fff858a01835df4a778e87f4aaebb06fa6521ce6"
+     }
+    ],
+    "opens": [
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 391,
+      "requests": 4,
+      "bytes": 3234,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 339.3,
+      "requests": 3,
+      "bytes": 3061,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 288.1,
+      "requests": 3,
+      "bytes": 3070,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 4458.1,
+      "requests": 97,
+      "bytes": 1657197,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 4702.6,
+      "requests": 98,
+      "bytes": 1657348,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 402.6,
+      "requests": 3,
+      "bytes": 3071,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 233.6,
+      "requests": 3,
+      "bytes": 3079,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 292.1,
+      "requests": 3,
+      "bytes": 3076,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 350.9,
+      "requests": 4,
+      "bytes": 3243,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 3810.2,
+      "requests": 97,
+      "bytes": 1657295,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 3480.9,
+      "requests": 97,
+      "bytes": 1657197,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 237.2,
+      "requests": 4,
+      "bytes": 3246,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 447.2,
+      "requests": 3,
+      "bytes": 3064,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 4863.2,
+      "requests": 97,
+      "bytes": 1657183,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 411,
+      "requests": 4,
+      "bytes": 3243,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 469.1,
+      "requests": 5,
+      "bytes": 83260,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 2801.9,
+      "requests": 97,
+      "bytes": 1657197,
+      "builds": 1
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 222.5,
+      "requests": 3,
+      "bytes": 3067,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 243.9,
+      "requests": 4,
+      "bytes": 3234,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 184.8,
+      "requests": 3,
+      "bytes": 3061,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 211.3,
+      "requests": 3,
+      "bytes": 3070,
+      "builds": 0
+     },
+     {
+      "round": 1,
+      "phase": "cold",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 192.5,
+      "requests": 3,
+      "bytes": 3067,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 178.2,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 610.3,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 736.5,
+      "requests": 96,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 641.6,
+      "requests": 96,
+      "bytes": 12140,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 322.5,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 828.6,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 176.1,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 641.4,
+      "requests": 96,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 201.3,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 190.2,
+      "requests": 3,
+      "bytes": 3089,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 290.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 225.2,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 232.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 187.9,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 194.6,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 194,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 658,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 306.8,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 215.9,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 188.2,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 422.7,
+      "requests": 5,
+      "bytes": 4972,
+      "builds": 0
+     },
+     {
+      "round": 2,
+      "phase": "warm",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 357.1,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 369.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 685.5,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 524.3,
+      "requests": 97,
+      "bytes": 4268,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 389.2,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 154.1,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 185.6,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 815.6,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 153,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 124.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 162.4,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 129.1,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 143.2,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 161.9,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 141.6,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 477.4,
+      "requests": 97,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 178.3,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 137.6,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 203.2,
+      "requests": 5,
+      "bytes": 4972,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 443.4,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 380.5,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 145.2,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 3,
+      "phase": "warm",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 159.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "curlew_gripper_agent",
+      "kind": "files",
+      "ms": 145.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "siskin_motion_agent",
+      "kind": "files",
+      "ms": 161.9,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "dunlin_bin_agent",
+      "kind": "files",
+      "ms": 156.3,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "garganey_vision_agent",
+      "kind": "files",
+      "ms": 154.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "shrike_lidar_agent",
+      "kind": "package",
+      "ms": 510.1,
+      "requests": 97,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "petrel_planner_agent",
+      "kind": "files",
+      "ms": 158,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "garganey_calibration_agent",
+      "kind": "package",
+      "ms": 838.3,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "redshank_conveyor_agent",
+      "kind": "files",
+      "ms": 224.9,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "plover_wrist_agent",
+      "kind": "files",
+      "ms": 161.1,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "brambling_bin_agent",
+      "kind": "package",
+      "ms": 433,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "kestrel_fleet_agent",
+      "kind": "files",
+      "ms": 168.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "sanderling_grasp_agent",
+      "kind": "files",
+      "ms": 158.4,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "linnet_reach_agent",
+      "kind": "files",
+      "ms": 176.5,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "bittern_reach_agent",
+      "kind": "package",
+      "ms": 517.2,
+      "requests": 95,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "dunlin_vision_agent",
+      "kind": "package",
+      "ms": 425.5,
+      "requests": 98,
+      "bytes": 3032,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "avocet_calibration_agent",
+      "kind": "files",
+      "ms": 146.8,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "heron_belt_agent",
+      "kind": "files",
+      "ms": 179,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "avocet_pick_agent",
+      "kind": "package",
+      "ms": 558.9,
+      "requests": 97,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "godwit_torque_agent",
+      "kind": "files",
+      "ms": 157.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "bittern_pick_agent",
+      "kind": "readme",
+      "ms": 278.3,
+      "requests": 5,
+      "bytes": 4972,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "brambling_lidar_agent",
+      "kind": "files",
+      "ms": 166.7,
+      "requests": 3,
+      "bytes": 2853,
+      "builds": 0
+     },
+     {
+      "round": 4,
+      "phase": "warm",
+      "box": "shrike_suction_agent",
+      "kind": "files",
+      "ms": 162.5,
+      "requests": 4,
+      "bytes": 3032,
+      "builds": 0
+     }
+    ],
+    "skipped": null,
+    "page_ready": true,
+    "crashes": 0,
+    "background": [
+     "/tree.json",
+     "/processes"
+    ],
+    "open_ms": 649.8,
+    "n_opens": 88,
+    "failed": 0,
+    "by_kind": {
+     "files": 186.8,
+     "package": 649.8,
+     "readme": 350.5
+    },
+    "cold_p50": 4134.2,
+    "warm_p50": 584.6,
+    "p95": 3243.2,
+    "max": 4863.2,
+    "requests_per_open_p50": 96,
+    "bytes_cold_p50": 1657197,
+    "bytes_warm_p50": 2853,
+    "builds_waited": 5,
+    "boxes": {
+     "heron_belt_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 193.5,
+      "p95": 362.5,
+      "max": 391,
+      "cold": 391,
+      "cold_requests": 4,
+      "cold_bytes": 3234,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "linnet_reach_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 185.3,
+      "p95": 317.5,
+      "max": 339.3,
+      "cold": 339.3,
+      "cold_requests": 3,
+      "cold_bytes": 3061,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "garganey_vision_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 223.8,
+      "p95": 304,
+      "max": 306.8,
+      "cold": 288.1,
+      "cold_requests": 3,
+      "cold_bytes": 3070,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "bittern_reach_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 583,
+      "p95": 3885.6,
+      "max": 4458.1,
+      "cold": 4458.1,
+      "cold_requests": 97,
+      "cold_bytes": 1657197,
+      "warm_requests_p50": 96,
+      "warm_bytes_p50": 4268
+     },
+     "avocet_pick_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 671.8,
+      "p95": 4100,
+      "max": 4702.6,
+      "cold": 4702.6,
+      "cold_requests": 98,
+      "cold_bytes": 1657348,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "sanderling_grasp_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 224.6,
+      "p95": 385.8,
+      "max": 402.6,
+      "cold": 402.6,
+      "cold_requests": 3,
+      "cold_bytes": 3071,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "avocet_calibration_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 185,
+      "p95": 230.9,
+      "max": 233.6,
+      "cold": 233.6,
+      "cold_requests": 3,
+      "cold_bytes": 3079,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "redshank_conveyor_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 258.5,
+      "p95": 317.9,
+      "max": 322.5,
+      "cold": 292.1,
+      "cold_requests": 3,
+      "cold_bytes": 3076,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "kestrel_fleet_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 172.3,
+      "p95": 324.7,
+      "max": 350.9,
+      "cold": 350.9,
+      "cold_requests": 4,
+      "cold_bytes": 3243,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "garganey_calibration_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 739.8,
+      "p95": 3364.4,
+      "max": 3810.2,
+      "cold": 3810.2,
+      "cold_requests": 97,
+      "cold_bytes": 1657295,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "dunlin_vision_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 636,
+      "p95": 3083.1,
+      "max": 3480.9,
+      "cold": 3480.9,
+      "cold_requests": 97,
+      "cold_bytes": 1657197,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "petrel_planner_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 193.6,
+      "p95": 235.4,
+      "max": 237.2,
+      "cold": 237.2,
+      "cold_requests": 4,
+      "cold_bytes": 3246,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "siskin_motion_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 176.1,
+      "p95": 408.6,
+      "max": 447.2,
+      "cold": 447.2,
+      "cold_requests": 3,
+      "cold_bytes": 3064,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 3032
+     },
+     "shrike_lidar_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 776.1,
+      "p95": 4256.1,
+      "max": 4863.2,
+      "cold": 4863.2,
+      "cold_requests": 97,
+      "cold_bytes": 1657183,
+      "warm_requests_p50": 96,
+      "warm_bytes_p50": 2853
+     },
+     "godwit_torque_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 195.1,
+      "p95": 384.2,
+      "max": 411,
+      "cold": 411,
+      "cold_requests": 4,
+      "cold_bytes": 3243,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "bittern_pick_agent": {
+      "kind": "readme",
+      "opens": 4,
+      "failed": 0,
+      "p50": 350.5,
+      "p95": 462.1,
+      "max": 469.1,
+      "cold": 469.1,
+      "cold_requests": 5,
+      "cold_bytes": 83260,
+      "warm_requests_p50": 5,
+      "warm_bytes_p50": 4972
+     },
+     "brambling_bin_agent": {
+      "kind": "package",
+      "opens": 4,
+      "failed": 0,
+      "p50": 543.8,
+      "p95": 2473.2,
+      "max": 2801.9,
+      "cold": 2801.9,
+      "cold_requests": 97,
+      "cold_bytes": 1657197,
+      "warm_requests_p50": 95,
+      "warm_bytes_p50": 2853
+     },
+     "curlew_gripper_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 175.3,
+      "p95": 217.4,
+      "max": 222.5,
+      "cold": 222.5,
+      "cold_requests": 3,
+      "cold_bytes": 3067,
+      "warm_requests_p50": 4,
+      "warm_bytes_p50": 3032
+     },
+     "dunlin_bin_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 178.3,
+      "p95": 234.1,
+      "max": 243.9,
+      "cold": 243.9,
+      "cold_requests": 4,
+      "cold_bytes": 3234,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "plover_wrist_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 186.4,
+      "p95": 342.4,
+      "max": 369.7,
+      "cold": 184.8,
+      "cold_requests": 3,
+      "cold_bytes": 3061,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "brambling_lidar_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 203,
+      "p95": 362.5,
+      "max": 389.2,
+      "cold": 211.3,
+      "cold_requests": 3,
+      "cold_bytes": 3070,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     },
+     "shrike_suction_agent": {
+      "kind": "files",
+      "opens": 4,
+      "failed": 0,
+      "p50": 177.5,
+      "p95": 332.4,
+      "max": 357.1,
+      "cold": 192.5,
+      "cold_requests": 3,
+      "cold_bytes": 3067,
+      "warm_requests_p50": 3,
+      "warm_bytes_p50": 2853
+     }
+    }
+   }
+  }
+ ],
+ "code": {
+  "ruler": "v3",
+  "blackbox_agent_ref": "b25a20cf14791e9eb7293a0f8d8e43ffb8f3a79f",
+  "playwright": "1.64.1",
+  "repo_commit": "b861f2b223a2"
+ }
+}

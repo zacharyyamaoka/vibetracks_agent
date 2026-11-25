@@ -2,33 +2,33 @@
   "schema": "ai-team-status/1",
   "member": "Vibe Tracks Agent",
   "team": "AI Team",
-  "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true (ruler v2, OBJECTIVES.md)",
+  "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true, and every track's page on screen fast (ruler v3, OBJECTIVES.md)",
   "kpi": {
-    "name": "shall items failing, of 20 (ruler v2, dev)",
-    "value": 0.0,
-    "unit": "items",
+    "name": "open_ms: ms from a click on a track to its page on screen, package boxes' median (ruler v3, dev)",
+    "value": 815.5,
+    "unit": "ms",
     "direction": "down",
-    "target": 0,
-    "level": "0 of 20 shall failing",
-    "level_name": "ruler v2, dev, best bb-0110-1",
-    "next_gate": "a version with fewer than 0 shall items failing",
+    "target": 100,
+    "level": "816 ms (S1.6: within 400, and 19 opens in 20 within 1000)",
+    "level_name": "ruler v3, dev, best main-940b507-v3",
+    "next_gate": "open_ms at most 400 ms, nineteen opens in twenty within 1000 ms (S1.6)",
     "on_track": null
   },
   "counter_kpi": {
-    "name": "checks failing (the third tie-break), same version",
-    "value": 0.0,
-    "unit": "checks",
+    "name": "shall items failing, of 23: must be 0 (the ranked objective, same version)",
+    "value": 2.0,
+    "unit": "items",
     "owner": "Vibe Tracks Agent"
   },
   "status": "idle",
   "blocked_on": null,
   "todo": {
-    "open": 3,
+    "open": 5,
     "done_7d": 16,
     "top": [
+      "Package boxes open in under 400 ms (S1.6, `open_ms`, ruler v3).",
       "Ruler v3 candidates",
-      "The use number",
-      "The Agents column counts the chats on a box."
+      "The use number"
     ]
   },
   "links": {
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795604972.085256
+  "updated_t": 1795636793.050773
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="vibetracks_agent ruler v2" tests="119" failures="0" errors="0" seed="1">
-  <testsuite name="ruler.suite.sidebar" tests="29" failures="0" errors="0" skipped="0" time="7.391">
-    <testcase classname="ruler.suite.sidebar" name="S2.1 Home, Review, Feedback, New track in this order above the first track row" time="0.312"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.1 Feedback shows its open count" time="0.027"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.1 each top row opens its page" time="2.997"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.2 light: row height 32 px" time="0.000"/>
+<testsuites name="vibetracks_agent ruler v3" tests="135" failures="9" errors="0" seed="1">
+  <testsuite name="ruler.suite.sidebar" tests="29" failures="0" errors="0" skipped="0" time="8.634">
+    <testcase classname="ruler.suite.sidebar" name="S2.1 Home, Review, Feedback, New track in this order above the first track row" time="0.571"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.1 Feedback shows its open count" time="0.046"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.1 each top row opens its page" time="3.269"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 light: row height 32 px" time="0.001"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 light: row pitch 34 px" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 light: title font 14 px" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 light: title font family Anthropic Sans" time="0.000"/>
@@ -22,125 +22,165 @@
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: ··· button 24 px at the row&apos;s right end" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: status dot 6 px" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: section header 13 px" time="0.000"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: sidebar background rgb(31,31,31)" time="0.000"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.2 dark: sidebar background rgb(31,31,31)" time="0.001"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: hovered row fill rgb(48,48,48)" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: selected row fill rgb(64,64,64)" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: ··· button hover fill rgb(78,78,78)" time="0.000"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 the status dot is in the leading slot" time="0.034"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 a parent&apos;s fold chevron is hidden until hover" time="0.729"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 a title click opens the track" time="1.373"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 a chevron click folds without opening" time="1.919"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 the status dot is in the leading slot" time="0.071"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a parent&apos;s fold chevron is hidden until hover" time="0.771"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a title click opens the track" time="1.647"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a chevron click folds without opening" time="2.257"/>
   </testsuite>
-  <testsuite name="ruler.suite.open" tests="5" failures="0" errors="0" skipped="0" time="4.630">
-    <testcase classname="ruler.suite.open" name="S1.1 each of three boxes opens its own site in the main pane" time="2.144"/>
-    <testcase classname="ruler.suite.open" name="S1.1 the address bar names the track" time="0.001"/>
-    <testcase classname="ruler.suite.open" name="S1.1 a box with no site shows its README&apos;s first heading" time="0.716"/>
-    <testcase classname="ruler.suite.open" name="S1.4 a box&apos;s site changed on disk shows on its page within 5 s" time="1.768"/>
-    <testcase classname="ruler.suite.open" name="S1.4 no reload: history length and the sidebar scroll position are kept" time="0.001"/>
+  <testsuite name="ruler.suite.open" tests="5" failures="0" errors="0" skipped="0" time="7.691">
+    <testcase classname="ruler.suite.open" name="S1.1 each of three boxes opens its own site in the main pane" time="3.770"/>
+    <testcase classname="ruler.suite.open" name="S1.1 the address bar names the track" time="0.000"/>
+    <testcase classname="ruler.suite.open" name="S1.1 a box with no site shows its README&apos;s first heading" time="1.105"/>
+    <testcase classname="ruler.suite.open" name="S1.4 a box&apos;s site changed on disk shows on its page within 5 s" time="2.813"/>
+    <testcase classname="ruler.suite.open" name="S1.4 no reload: history length and the sidebar scroll position are kept" time="0.003"/>
   </testsuite>
-  <testsuite name="ruler.suite.menu" tests="12" failures="0" errors="0" skipped="0" time="11.175">
-    <testcase classname="ruler.suite.menu" name="S2.4 a right-click on a track opens a menu at the pointer" time="0.600"/>
+  <testsuite name="ruler.suite.menu" tests="12" failures="0" errors="0" skipped="0" time="13.567">
+    <testcase classname="ruler.suite.menu" name="S2.4 a right-click on a track opens a menu at the pointer" time="0.726"/>
     <testcase classname="ruler.suite.menu" name="S2.4 the right-click menu&apos;s items equal the ··· menu&apos;s" time="0.000"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 a middle row&apos;s menu items are Claude&apos;s, in Claude&apos;s order" time="0.001"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 Move up is absent on the first row" time="0.577"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 P pins the track" time="1.189"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 U marks it unread or read" time="1.525"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 R starts a rename" time="1.110"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 F forks the box" time="1.151"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 A archives the track" time="0.894"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 D deletes the track" time="1.039"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 Delete leaves the box&apos;s folder on disk" time="0.013"/>
-    <testcase classname="ruler.suite.menu" name="S2.3 Z pauses the track, and Z on a paused track resumes it" time="3.076"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 a middle row&apos;s menu items are Claude&apos;s, in Claude&apos;s order" time="0.005"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 Move up is absent on the first row" time="0.677"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 P pins the track" time="1.507"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 U marks it unread or read" time="1.935"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 R starts a rename" time="1.235"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 F forks the box" time="1.638"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 A archives the track" time="0.975"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 D deletes the track" time="1.236"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 Delete leaves the box&apos;s folder on disk" time="0.050"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 Z pauses the track, and Z on a paused track resumes it" time="3.583"/>
   </testsuite>
-  <testsuite name="ruler.suite.pin" tests="4" failures="0" errors="0" skipped="0" time="7.964">
-    <testcase classname="ruler.suite.pin" name="S2.5 two pinned tracks sit under Pinned, in pin order, above the rest" time="2.113"/>
-    <testcase classname="ruler.suite.pin" name="S2.5 folding Pinned hides them" time="0.722"/>
-    <testcase classname="ruler.suite.pin" name="S2.5 pins survive a vt serve restart" time="3.159"/>
-    <testcase classname="ruler.suite.pin" name="S2.5 unpin returns each to its old parent and place" time="1.970"/>
+  <testsuite name="ruler.suite.pin" tests="4" failures="0" errors="0" skipped="0" time="10.932">
+    <testcase classname="ruler.suite.pin" name="S2.5 two pinned tracks sit under Pinned, in pin order, above the rest" time="2.931"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 folding Pinned hides them" time="1.207"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 pins survive a vt serve restart" time="4.298"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 unpin returns each to its old parent and place" time="2.496"/>
   </testsuite>
-  <testsuite name="ruler.suite.view" tests="12" failures="0" errors="0" skipped="0" time="24.021">
+  <testsuite name="ruler.suite.view" tests="12" failures="0" errors="0" skipped="0" time="28.085">
     <testcase classname="ruler.suite.view" name="S2.6 the view menu&apos;s entries in order" time="0.000"/>
-    <testcase classname="ruler.suite.view" name="S2.6 Group by offers None, Parent, State" time="0.884"/>
-    <testcase classname="ruler.suite.view" name="S2.6 Sort by offers Manual, Last updated, Created, Name" time="0.952"/>
-    <testcase classname="ruler.suite.view" name="S2.6 Show offers archived and done" time="0.885"/>
-    <testcase classname="ruler.suite.view" name="S2.6 each submenu shows its current pick on the right" time="0.956"/>
-    <testcase classname="ruler.suite.view" name="S2.7 flat by last updated: newest first, every row at one indent" time="3.628"/>
-    <testcase classname="ruler.suite.view" name="S2.7 State grouping puts each track under its state" time="2.415"/>
-    <testcase classname="ruler.suite.view" name="S2.6 the choice survives a restart" time="6.064"/>
-    <testcase classname="ruler.suite.view" name="S2.6 Reset to defaults restores Parent and Manual" time="1.938"/>
-    <testcase classname="ruler.suite.view" name="S2.7 Parent grouping shows the tree from Vibe Tracks&apos; file" time="1.355"/>
-    <testcase classname="ruler.suite.view" name="S2.7 switching groupings keeps the selection" time="4.176"/>
-    <testcase classname="ruler.suite.view" name="S2.6 New section asks for a name and adds an empty section" time="0.768"/>
+    <testcase classname="ruler.suite.view" name="S2.6 Group by offers None, Parent, State" time="1.020"/>
+    <testcase classname="ruler.suite.view" name="S2.6 Sort by offers Manual, Last updated, Created, Name" time="1.040"/>
+    <testcase classname="ruler.suite.view" name="S2.6 Show offers archived and done" time="1.030"/>
+    <testcase classname="ruler.suite.view" name="S2.6 each submenu shows its current pick on the right" time="1.078"/>
+    <testcase classname="ruler.suite.view" name="S2.7 flat by last updated: newest first, every row at one indent" time="3.615"/>
+    <testcase classname="ruler.suite.view" name="S2.7 State grouping puts each track under its state" time="2.221"/>
+    <testcase classname="ruler.suite.view" name="S2.6 the choice survives a restart" time="7.984"/>
+    <testcase classname="ruler.suite.view" name="S2.6 Reset to defaults restores Parent and Manual" time="2.467"/>
+    <testcase classname="ruler.suite.view" name="S2.7 Parent grouping shows the tree from Vibe Tracks&apos; file" time="1.901"/>
+    <testcase classname="ruler.suite.view" name="S2.7 switching groupings keeps the selection" time="4.769"/>
+    <testcase classname="ruler.suite.view" name="S2.6 New section asks for a name and adds an empty section" time="0.960"/>
   </testsuite>
-  <testsuite name="ruler.suite.drag" tests="11" failures="0" errors="0" skipped="0" time="12.415">
-    <testcase classname="ruler.suite.drag" name="S2.8 dragging a row between two rows reorders it" time="2.297"/>
+  <testsuite name="ruler.suite.drag" tests="11" failures="0" errors="0" skipped="0" time="15.316">
+    <testcase classname="ruler.suite.drag" name="S2.8 dragging a row between two rows reorders it" time="2.642"/>
     <testcase classname="ruler.suite.drag" name="S2.8 a drop indicator shows mid-drag" time="0.000"/>
-    <testcase classname="ruler.suite.drag" name="S2.8 dropping onto a row makes it that row&apos;s child" time="2.156"/>
-    <testcase classname="ruler.suite.drag" name="S1.3 the file that changed lives outside every box" time="0.029"/>
-    <testcase classname="ruler.suite.drag" name="S2.8 dragging out to the left makes it top-level" time="2.087"/>
-    <testcase classname="ruler.suite.drag" name="S2.8 a drop into its own child is refused" time="2.087"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 dropping onto a row makes it that row&apos;s child" time="3.130"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 the file that changed lives outside every box" time="0.752"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 dragging out to the left makes it top-level" time="2.644"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 a drop into its own child is refused" time="2.413"/>
     <testcase classname="ruler.suite.drag" name="S2.8 the moves survive a vt serve restart" time="0.000"/>
     <testcase classname="ruler.suite.drag" name="S1.3 the tree set by a drag survives a restart" time="0.000"/>
-    <testcase classname="ruler.suite.drag" name="S1.3 a hand edit of that file moves the row within 5 s, with no reload" time="1.556"/>
-    <testcase classname="ruler.suite.drag" name="S2.8 the keyboard path does one reorder" time="2.155"/>
-    <testcase classname="ruler.suite.drag" name="S2.8 the page loads a stock tree package" time="0.048"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 a hand edit of that file moves the row within 5 s, with no reload" time="1.189"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the keyboard path does one reorder" time="2.487"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the page loads a stock tree package" time="0.059"/>
   </testsuite>
-  <testsuite name="ruler.suite.verbs" tests="4" failures="0" errors="0" skipped="0" time="6.639">
-    <testcase classname="ruler.suite.verbs" name="S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete" time="0.000"/>
-    <testcase classname="ruler.suite.verbs" name="S1.2 after them each box&apos;s git status is clean and its HEAD unchanged" time="0.159"/>
-    <testcase classname="ruler.suite.verbs" name="S1.2 no file under any box is named like vibetracks or vibe-tracks" time="0.016"/>
-    <testcase classname="ruler.suite.verbs" name="S1.2 a vibetracks.toml dropped into a box changes nothing on the page" time="6.464"/>
+  <testsuite name="ruler.suite.verbs" tests="4" failures="0" errors="0" skipped="0" time="7.868">
+    <testcase classname="ruler.suite.verbs" name="S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete" time="0.001"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 after them each box&apos;s git status is clean and its HEAD unchanged" time="0.775"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 no file under any box is named like vibetracks or vibe-tracks" time="0.181"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 a vibetracks.toml dropped into a box changes nothing on the page" time="6.911"/>
   </testsuite>
-  <testsuite name="ruler.suite.rollup" tests="7" failures="0" errors="0" skipped="0" time="3.642">
-    <testcase classname="ruler.suite.rollup" name="S3.4 the parent&apos;s sidebar row shows a pip for its blocked child" time="0.099"/>
-    <testcase classname="ruler.suite.rollup" name="S3.4 the parent shows 3 agents working in its subtree" time="0.052"/>
-    <testcase classname="ruler.suite.rollup" name="S3.4 a child&apos;s status.json changed on disk updates the parent within 5 s" time="0.324"/>
-    <testcase classname="ruler.suite.rollup" name="S3.1 Home holds a data-views element" time="0.008"/>
-    <testcase classname="ruler.suite.rollup" name="S3.1 its presets are Active, Done, All tracks in that order" time="0.032"/>
-    <testcase classname="ruler.suite.rollup" name="S3.1 folding a parent hides exactly its descendants" time="2.175"/>
-    <testcase classname="ruler.suite.rollup" name="S3.1 the Done preset shows only done boxes" time="0.952"/>
+  <testsuite name="ruler.suite.rollup" tests="7" failures="0" errors="0" skipped="0" time="5.779">
+    <testcase classname="ruler.suite.rollup" name="S3.4 the parent&apos;s sidebar row shows a pip for its blocked child" time="0.464"/>
+    <testcase classname="ruler.suite.rollup" name="S3.4 the parent shows 3 agents working in its subtree" time="0.110"/>
+    <testcase classname="ruler.suite.rollup" name="S3.4 a child&apos;s status.json changed on disk updates the parent within 5 s" time="0.765"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 Home holds a data-views element" time="0.014"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 its presets are Active, Done, All tracks in that order" time="0.191"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 folding a parent hides exactly its descendants" time="2.770"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 the Done preset shows only done boxes" time="1.465"/>
   </testsuite>
-  <testsuite name="ruler.suite.review" tests="6" failures="0" errors="0" skipped="0" time="5.421">
-    <testcase classname="ruler.suite.review" name="S3.2 both waits are on Review, each labelled with its track" time="0.712"/>
-    <testcase classname="ruler.suite.review" name="S3.2 the waits sit in the element a box&apos;s own site uses" time="0.009"/>
-    <testcase classname="ruler.suite.review" name="S3.2 clicking a wait opens its box&apos;s page" time="0.249"/>
-    <testcase classname="ruler.suite.review" name="S3.3 every feedback note is listed with its track" time="0.793"/>
-    <testcase classname="ruler.suite.review" name="S3.3 the side panel opens the note" time="0.378"/>
-    <testcase classname="ruler.suite.review" name="S3.3 adding feedback writes one new file in the chosen box&apos;s feedback/ and nothing else" time="3.280"/>
+  <testsuite name="ruler.suite.review" tests="6" failures="0" errors="0" skipped="0" time="6.180">
+    <testcase classname="ruler.suite.review" name="S3.2 both waits are on Review, each labelled with its track" time="0.934"/>
+    <testcase classname="ruler.suite.review" name="S3.2 the waits sit in the element a box&apos;s own site uses" time="0.028"/>
+    <testcase classname="ruler.suite.review" name="S3.2 clicking a wait opens its box&apos;s page" time="0.044"/>
+    <testcase classname="ruler.suite.review" name="S3.3 every feedback note is listed with its track" time="0.964"/>
+    <testcase classname="ruler.suite.review" name="S3.3 the side panel opens the note" time="0.465"/>
+    <testcase classname="ruler.suite.review" name="S3.3 adding feedback writes one new file in the chosen box&apos;s feedback/ and nothing else" time="3.745"/>
   </testsuite>
-  <testsuite name="ruler.suite.newtrack" tests="4" failures="0" errors="0" skipped="0" time="5.048">
-    <testcase classname="ruler.suite.newtrack" name="S4.2 the command follows the name, the parent and Publish" time="1.814"/>
-    <testcase classname="ruler.suite.newtrack" name="S4.2 Copy puts the command on the clipboard" time="0.422"/>
-    <testcase classname="ruler.suite.newtrack" name="S4.2 Create makes the box and shows it under its parent within 5 s" time="1.252"/>
-    <testcase classname="ruler.suite.newtrack" name="S4.4 vt new from a shell shows the row under its parent within 5 s" time="1.560"/>
+  <testsuite name="ruler.suite.newtrack" tests="4" failures="0" errors="0" skipped="0" time="6.595">
+    <testcase classname="ruler.suite.newtrack" name="S4.2 the command follows the name, the parent and Publish" time="2.218"/>
+    <testcase classname="ruler.suite.newtrack" name="S4.2 Copy puts the command on the clipboard" time="0.448"/>
+    <testcase classname="ruler.suite.newtrack" name="S4.2 Create makes the box and shows it under its parent within 5 s" time="1.811"/>
+    <testcase classname="ruler.suite.newtrack" name="S4.4 vt new from a shell shows the row under its parent within 5 s" time="2.118"/>
   </testsuite>
-  <testsuite name="ruler.suite.cli" tests="11" failures="0" errors="0" skipped="0" time="7.456">
-    <testcase classname="ruler.suite.cli" name="S4.1 vt new exits 0 offline and makes a new box folder" time="0.334"/>
-    <testcase classname="ruler.suite.cli" name="S4.1 the folder is a git repo with one commit" time="0.011"/>
+  <testsuite name="ruler.suite.cli" tests="11" failures="0" errors="0" skipped="0" time="13.644">
+    <testcase classname="ruler.suite.cli" name="S4.1 vt new exits 0 offline and makes a new box folder" time="0.942"/>
+    <testcase classname="ruler.suite.cli" name="S4.1 the folder is a git repo with one commit" time="0.009"/>
     <testcase classname="ruler.suite.cli" name="S4.1 its README&apos;s first heading is the title" time="0.001"/>
-    <testcase classname="ruler.suite.cli" name="S4.1 its files include the starter box&apos;s" time="0.000"/>
-    <testcase classname="ruler.suite.cli" name="S4.1 the track is in the tree under the parent" time="1.377"/>
-    <testcase classname="ruler.suite.cli" name="S4.1 --from copies the source box&apos;s files without its history" time="0.215"/>
-    <testcase classname="ruler.suite.cli" name="S4.3 without --publish gh is never called" time="0.283"/>
-    <testcase classname="ruler.suite.cli" name="S4.3 signed out, --publish stops, names gh auth login and makes nothing" time="0.191"/>
-    <testcase classname="ruler.suite.cli" name="S4.3 signed in, --publish creates a private repo from the folder and pushes once" time="0.370"/>
-    <testcase classname="ruler.suite.cli" name="S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged" time="3.858"/>
-    <testcase classname="ruler.suite.cli" name="S1.5 vt add lists an existing box under its parent in the sidebar" time="0.816"/>
+    <testcase classname="ruler.suite.cli" name="S4.1 its files include the starter box&apos;s" time="0.002"/>
+    <testcase classname="ruler.suite.cli" name="S4.1 the track is in the tree under the parent" time="2.480"/>
+    <testcase classname="ruler.suite.cli" name="S4.1 --from copies the source box&apos;s files without its history" time="0.660"/>
+    <testcase classname="ruler.suite.cli" name="S4.3 without --publish gh is never called" time="1.018"/>
+    <testcase classname="ruler.suite.cli" name="S4.3 signed out, --publish stops, names gh auth login and makes nothing" time="0.420"/>
+    <testcase classname="ruler.suite.cli" name="S4.3 signed in, --publish creates a private repo from the folder and pushes once" time="1.055"/>
+    <testcase classname="ruler.suite.cli" name="S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged" time="5.160"/>
+    <testcase classname="ruler.suite.cli" name="S1.5 vt add lists an existing box under its parent in the sidebar" time="1.897"/>
   </testsuite>
-  <testsuite name="ruler.suite.pause" tests="14" failures="0" errors="0" skipped="0" time="13.457">
-    <testcase classname="ruler.suite.pause" name="S2.10 an active track&apos;s ··· and right-click menus show Pause" time="0.731"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 Pause in the ··· menu writes a person record to the tree file, with no agent and no why" time="0.690"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 a paused track&apos;s ··· and right-click menus show Resume" time="0.758"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 a paused row shows a pause glyph in its status-dot slot" time="0.412"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 a paused row&apos;s title is muted" time="0.406"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 the pause survives a reload" time="1.907"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 the pause survives a vt serve restart" time="2.729"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 Resume returns the row to its state colour and the menu to Pause" time="1.659"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 vt pause writes a person record via cli with no why" time="0.238"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 vt pause shows on the page within 5 s, with no reload" time="1.632"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s" time="1.796"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim" time="0.294"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 the status list is append-only and a track never paused reads active" time="0.002"/>
-    <testcase classname="ruler.suite.pause" name="S2.10 pausing and resuming leave every box untouched" time="0.203"/>
+  <testsuite name="ruler.suite.pause" tests="14" failures="0" errors="0" skipped="0" time="26.167">
+    <testcase classname="ruler.suite.pause" name="S2.10 an active track&apos;s ··· and right-click menus show Pause" time="1.076"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 Pause in the ··· menu writes a person record to the tree file, with no agent and no why" time="1.032"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 a paused track&apos;s ··· and right-click menus show Resume" time="1.770"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 a paused row shows a pause glyph in its status-dot slot" time="0.460"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 a paused row&apos;s title is muted" time="0.483"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 the pause survives a reload" time="3.344"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 the pause survives a vt serve restart" time="9.760"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 Resume returns the row to its state colour and the menu to Pause" time="2.453"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt pause writes a person record via cli with no why" time="0.474"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt pause shows on the page within 5 s, with no reload" time="2.007"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s" time="2.085"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim" time="0.498"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 the status list is append-only and a track never paused reads active" time="0.027"/>
+    <testcase classname="ruler.suite.pause" name="S2.10 pausing and resuming leave every box untouched" time="0.698"/>
+  </testsuite>
+  <testsuite name="ruler.suite.fold" tests="7" failures="0" errors="0" skipped="0" time="16.799">
+    <testcase classname="ruler.suite.fold" name="S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot" time="2.042"/>
+    <testcase classname="ruler.suite.fold" name="S2.9 the chevron reads &quot;Fold N sub-tracks (← →)&quot;, and &quot;Unfold N sub-tracks&quot; when folded, N its sub-tracks" time="1.196"/>
+    <testcase classname="ruler.suite.fold" name="S2.9 a chevron click folds every level below and the rows below move up; a second click unfolds" time="6.048"/>
+    <testcase classname="ruler.suite.fold" name="S2.9 a title click on a parent opens it and leaves it unfolded" time="1.173"/>
+    <testcase classname="ruler.suite.fold" name="S2.9 ← folds a focused row and → unfolds it" time="2.223"/>
+    <testcase classname="ruler.suite.fold" name="S2.9 a fold survives a reload" time="3.382"/>
+    <testcase classname="ruler.suite.fold" name="S2.9 a folded parent still shows its roll-up: a pip for its blocked sub-track and its 3 agents" time="0.735"/>
+  </testsuite>
+  <testsuite name="ruler.suite.search" tests="7" failures="7" errors="0" skipped="0" time="13.134">
+    <testcase classname="ruler.suite.search" name="S2.11 Ctrl+K opens the search palette with its input focused" time="1.732">
+      <failure message="Ctrl+K: no text input appears focused (in the page, outside any box frame) within 1.5 s">Ctrl+K: no text input appears focused (in the page, outside any box frame) within 1.5 s</failure>
+    </testcase>
+    <testcase classname="ruler.suite.search" name="S2.11 Ctrl+O and Ctrl+P open the search palette too" time="3.518">
+      <failure message="Ctrl+O and Ctrl+P: no focused search input appears within 1.5 s">Ctrl+O and Ctrl+P: no focused search input appears within 1.5 s</failure>
+    </testcase>
+    <testcase classname="ruler.suite.search" name="S2.11 Escape closes the search palette" time="1.744">
+      <failure message="Ctrl+K opens no palette to close (the first S2.11 check)">Ctrl+K opens no palette to close (the first S2.11 check)</failure>
+    </testcase>
+    <testcase classname="ruler.suite.search" name="S2.11 the sidebar shows Search with Ctrl+K at its right end, below New track and above the tracks; a click opens the palette" time="0.034">
+      <failure message="no sidebar row reads &quot;Search&quot;">no sidebar row reads &quot;Search&quot;</failure>
+    </testcase>
+    <testcase classname="ruler.suite.search" name="S2.11 a phrase from one box&apos;s files lists that hit with its track, file and line" time="1.717">
+      <failure message="Ctrl+K opens no palette">Ctrl+K opens no palette</failure>
+    </testcase>
+    <testcase classname="ruler.suite.search" name="S2.11 with a track open, its hits come first" time="2.678">
+      <failure message="Ctrl+K opens no palette">Ctrl+K opens no palette</failure>
+    </testcase>
+    <testcase classname="ruler.suite.search" name="S2.11 Enter on a hit opens its track on the page that shows it" time="1.711">
+      <failure message="Ctrl+K opens no palette">Ctrl+K opens no palette</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="ruler.suite.speed" tests="2" failures="2" errors="0" skipped="0" time="0.001">
+    <testcase classname="ruler.suite.speed" name="S1.6 the median open of a package box shows its page within 400 ms" time="0.001">
+      <failure message="88 opens: package boxes&apos; median 874.6 ms (first opens 2490.8, later 836.2); every kind&apos;s median: files 224.3, package 874.6, readme 266.1; p95 2315.1, slowest 3965.1; 0 not shown within 10 s">88 opens: package boxes&apos; median 874.6 ms (first opens 2490.8, later 836.2); every kind&apos;s median: files 224.3, package 874.6, readme 266.1; p95 2315.1, slowest 3965.1; 0 not shown within 10 s</failure>
+    </testcase>
+    <testcase classname="ruler.suite.speed" name="S1.6 nineteen opens in twenty, of any box, show their page within 1000 ms" time="0.000">
+      <failure message="88 opens: package boxes&apos; median 874.6 ms (first opens 2490.8, later 836.2); every kind&apos;s median: files 224.3, package 874.6, readme 266.1; p95 2315.1, slowest 3965.1; 0 not shown within 10 s; over 1000 ms: 11, e.g. garganey_calibration_agent (cold) 3965.1 ms, bittern_reach_agent (cold) 2621.4 ms, avocet_pick_agent (cold) 2602 ms, dunlin_vision_agent (cold) 2379.5 ms, shrike_lidar_agent (cold) 2376.8 ms">88 opens: package boxes&apos; median 874.6 ms (first opens 2490.8, later 836.2); every kind&apos;s median: files 224.3, package 874.6, readme 266.1; p95 2315.1, slowest 3965.1; 0 not shown within 10 s; over 1000 ms: 11, e.g. garganey_calibration_agent (cold) 3965.1 ms, bittern_reach_agent (cold) 2621.4 ms, avocet_pick_agent (cold) 2602 ms, dunlin_vision_agent (cold) 2379.5 ms, shrike_lidar_agent (cold) 2376.8 ms</failure>
+    </testcase>
   </testsuite>
 </testsuites>

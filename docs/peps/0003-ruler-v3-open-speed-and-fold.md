@@ -98,18 +98,44 @@ order); its own checks stay the four rows, so a missing Search row counts once (
 - **The deterministic half:** the click sequence, the box order, the commits (fixed author and dates: the same shas
   every run) and the per-open counts (requests, bytes, builds) do not depend on load.
 - **The repeatable half:** `open_ms` is a median of 48 opens (6 package boxes × 4 rounds × 2 runs), stamped in the
-  page. Measured on 940b507 on this machine at load 40+ on 24 threads: (see "Measured" below).
+  page; three runs on 940b507 at load 50-70 stayed within 117 ms of each other ("Measured" below).
 - **The checks' margin:** S1.6's second check is a p95, not the single slowest open: of about a hundred opens on a
   shared machine, the slowest is one stall (a renderer paused under memory pressure, a busy core) and would flip run to
   run, and the deterministic gate would then make an improving version inadmissible. The p95 still fails a kind that
   is slow every time (package boxes are a quarter of the opens; their first opens alone are more than one in twenty).
 - **A renderer killed under memory pressure** (Chrome raises its renderers' OOM score on purpose) is reloaded and the
   open retried once; every crash is counted in the report; a second crash fails the open.
-- **CPU pinning:** measured, see below.
+- **CPU pinning:** measured, and left out: it widened the spread ("Measured").
 
-## Measured
+## Measured (vibetracks 940b507, this machine at load 50-70 on 24 threads, the speed group alone)
 
-Filled in at the freeze; see the bottom of this file.
+| Run | `open_ms` (package) | first opens | later opens | files | p95 | slowest | requests / package open | bytes, first open | builds waited |
+|---|---|---|---|---|---|---|---|---|---|
+| unpinned 1 | 782 | 3294 | 716 | 222 | 2974 | 6197 | 95 | 1.657 MB | 5 |
+| unpinned 2 | 764 | 3239 | 602 | 204 | 2466 | 3987 | 96 | 1.657 MB | 5 |
+| unpinned 3 | 881 | 3900 | 682 | 212 | 2930 | 5414 | 96 | 1.657 MB | 5 |
+| pinned 1 (CPUs 0-5,12-17: one CCD) | 708 | 3249 | 514 | 195 | 2370 | 4675 | 96 | 1.657 MB | 5 |
+| pinned 2 | 1012 | 3934 | 871 | 253 | 3570 | 4363 | 95 | 1.657 MB | 5 |
+
+- **The scored baseline** ([`main-940b507-v3`](../../solutions/main-940b507-v3/), two full dev runs at the same load): `open_ms` **816 ms**, its two runs
+  875 and 650 ms (spread 225 ms), first opens 3141 ms, later 672 ms, files boxes 209 ms, p95 2435 ms, slowest 4863 ms;
+  95 requests per package open, 1.66 MB the first time and 2.9 kB after (95 `304`s); 5 builds waited on per run.
+  Admissible: 2 of 23 shall failing (S1.6 and S2.11), 1 of 3 should (S5.1), 9 of 135 checks; S2.9's eleven pass.
+- **Repeatable:** unpinned, `open_ms` stayed within 117 ms (764-881) at about 800 in the study and 225 ms in the
+  scored pair; the counts did not move at all
+  (95-96 requests, 1.657 MB, 5 builds). Both S1.6 checks failed in every run, far from their bounds: deterministic.
+- **CPU pinning does not help here:** the two pinned runs spread 305 ms. With the machine's load above its core count,
+  pinning only narrows the cores the run may use; the stage is not pinned.
+- **A renderer killed under memory pressure** was real: the claude-code-bash pool held 6-7 GiB that afternoon (the
+  pool's ceiling follows free RAM) and the kernel killed Chrome mid-run twice before the speed group learned to reload
+  and retry. The evaluator was then run in its own memory scope (`systemd-run --user --scope -p MemoryMax=5G`), an
+  environment choice, not part of the ruler.
+- **It sees a faster version:** the `vt/speed-frames` lane's committed tip (0263c75: frames kept, loading on press)
+  timed 708 ms with files boxes at 142 ms (940b507: about 210) and reopened package boxes at 126-151 ms.
+- **The fold checks can fail:** a copy of 940b507 whose chevron reads "Hide/Show 2 sub-tracks" and whose ← does not
+  fold failed exactly those two S2.9 checks and passed the other nine. 940b507 itself passes all eleven.
+- **The search checks fail on 940b507** (no search yet; lane `vt/search` is building it), each saying what it looked
+  for.
 
 ## What it costs
 
