@@ -1,0 +1,15 @@
+{
+  "id": "bb-0110-1",
+  "parent": "stock-tree-2",
+  "change": "re-vendor blackbox_agent 0.1.10 (fold: no divide by a zero objective; landing tiebreak)",
+  "vibetracks_sha": "d034a15371c812f38345ceca055243797817138f",
+  "vibetracks_ref": "d034a15371c812f38345ceca055243797817138f",
+  "vibetracks_committed": "2026-11-25T11:04:07Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane V subagent)",
+    "model": "claude-sonnet-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T11:04:13Z",
+  "tags": []
+}

@@ -10,7 +10,7 @@
     "direction": "down",
     "target": 0,
     "level": "0 of 20 shall failing",
-    "level_name": "ruler v2, dev, best stock-tree-2",
+    "level_name": "ruler v2, dev, best bb-0110-1",
     "next_gate": "a version with fewer than 0 shall items failing",
     "on_track": null
   },
@@ -23,12 +23,12 @@
   "status": "idle",
   "blocked_on": null,
   "todo": {
-    "open": 4,
-    "done_7d": 14,
+    "open": 3,
+    "done_7d": 16,
     "top": [
-      "Swap the sidebar's tree model for Headless Tree's core",
       "Ruler v3 candidates",
-      "The use number"
+      "The use number",
+      "The Agents column counts the chats on a box."
     ]
   },
   "links": {
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795603538.0096464
+  "updated_t": 1795604972.085256
 }
