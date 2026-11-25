@@ -13,8 +13,8 @@ loading come first because every other item reads them.
   - Needs: nothing
   - **Done: [`boxes-as-tracks-1`](solutions/boxes-as-tracks-1/)** with the next item: S1.1, S1.2, S1.3, S1.5 and S2.5
     met, shall 17 → 13, should 3 → 2, checks 71 → 42, no regressions; landed on
-    [vibetracks main @ 8ba03b2](https://github.com/zacharyyamaoka/vibetracks/commit/8ba03b2)
-    ([PEP 0024](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0024-boxes-are-the-tracks.md): `<vt home>/tree.json`, `vt-tree/1`).
+    [vibetracks main @ 8ba03b2](https://github.com/zacharyyamaoka/vibetracks-dev/commit/8ba03b2)
+    ([PEP 0024](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/docs/peps/0024-boxes-are-the-tracks.md): `<vt home>/tree.json`, `vt-tree/1`).
 - [x] **`vt add <folder | github url> [--parent]` and the page's Add box.** Clone a URL first; refuse a folder that is
   not a box and say what is missing. Expect: S1.5 → pass.
   - Rung: boxes
@@ -35,8 +35,8 @@ loading come first because every other item reads them.
   - Rung: sidebar
   - Needs: the tree file
   - **Done: [`stock-tree-2`](solutions/stock-tree-2/)**, S2.8 met: **0 of 20 shall, 0 of 119 checks failing** (ruler v2),
-    no regressions; landed on [vibetracks main @ 5787f03](https://github.com/zacharyyamaoka/vibetracks/commit/5787f03)
-    ([PEP 0030](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0030-the-tree-on-headless-tree.md)):
+    no regressions; landed on [vibetracks main @ 5787f03](https://github.com/zacharyyamaoka/vibetracks-dev/commit/5787f03)
+    ([PEP 0030](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/docs/peps/0030-the-tree-on-headless-tree.md)):
     `@headless-tree/core` 1.8.1 vendored with sha256s, vanilla (no fallback needed).
 - [x] **Claude's ··· menu**: Open in ›, Pin/Unpin P, Mark as unread U, Rename R, Fork F, Move up/down, Move to section
   ›, Archive A, Delete D (red, removes from Vibe Tracks only), then New sub-track… behind a separator; right-click
@@ -49,14 +49,14 @@ loading come first because every other item reads them.
   - Rung: sidebar
   - Needs: the tree file
   - **Done: [`view-2`](solutions/view-2/)**, S2.6 and S2.7 met: shall 3 → 1 on ruler v2, checks 13 → 3, no
-    regressions; landed with menus-2 on [vibetracks main @ 12743ec](https://github.com/zacharyyamaoka/vibetracks/commit/12743ec)
-    ([PEP 0027](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0027-claudes-menus-over-the-boxes.md)).
+    regressions; landed with menus-2 on [vibetracks main @ 12743ec](https://github.com/zacharyyamaoka/vibetracks-dev/commit/12743ec)
+    ([PEP 0027](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/docs/peps/0027-claudes-menus-over-the-boxes.md)).
 - [x] **Measure Claude's sidebar once more and close the style gaps** the run lists under `sidebar_style_props_off`.
   Expect: S2.2 → pass; `sidebar_style_props_off` → 0.
   - Rung: sidebar
   - Needs: nothing
   - **Done: [`sidebar-style-1`](solutions/sidebar-style-1/)**, S2.2 met, props off 14 → 0 of 22, shall 18 → 17, checks
-    85 → 71, no regressions; landed on [vibetracks main @ edbfc4e](https://github.com/zacharyyamaoka/vibetracks/commit/edbfc4e)
+    85 → 71, no regressions; landed on [vibetracks main @ edbfc4e](https://github.com/zacharyyamaoka/vibetracks-dev/commit/edbfc4e)
     (rows 32/34 px, 14 px titles, radius 8, dark fills 31/48/64, a 13 px "Tracks" list header).
 - [x] **Home as one data-ui `<data-views>`** over one row per box, nested by the tree, presets Active / Done / All
   tracks. Expect: S3.1 → pass.
@@ -64,8 +64,8 @@ loading come first because every other item reads them.
   - Needs: the tree file
   - **Done: [`rollups-2`](solutions/rollups-2/)**, with the two items below it: S3.1-S3.4 and S2.1 met, shall 10 → 5
     (ruler v2), checks 45 → 32, no regressions; landed on
-    [vibetracks main @ 6a73de5](https://github.com/zacharyyamaoka/vibetracks/commit/6a73de5)
-    ([PEP 0025](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0025-roll-up-pages-over-the-boxes.md)).
+    [vibetracks main @ 6a73de5](https://github.com/zacharyyamaoka/vibetracks-dev/commit/6a73de5)
+    ([PEP 0025](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/docs/peps/0025-roll-up-pages-over-the-boxes.md)).
 - [x] **Roll-ups from [`status.json`](status.json)**: a parent's own dot plus a pip when a descendant is worse, and agents summed
   over its subtree, on the sidebar and Home. Expect: S3.4 → pass.
   - Rung: roll-ups
@@ -84,8 +84,8 @@ loading come first because every other item reads them.
   - Needs: a starter box to copy. Since blackbox_agent 0.1.x, `blackbox new <dir>` writes one (OBJECTIVES, AGENTS,
     an empty ledger, nav.json, the Pages workflow; committed on main): call it rather than copy `template/`.
   - **Done: [`new-track-1`](solutions/new-track-1/)**, S4.1-S4.4 met, shall 14 → 10 (ruler v2), checks 57 → 45, no
-    regressions; landed on [vibetracks main @ ecf4dd6](https://github.com/zacharyyamaoka/vibetracks/commit/ecf4dd6)
-    ([PEP 0026](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0026-new-track-makes-a-box.md): a pinned
+    regressions; landed on [vibetracks main @ ecf4dd6](https://github.com/zacharyyamaoka/vibetracks-dev/commit/ecf4dd6)
+    ([PEP 0026](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/docs/peps/0026-new-track-makes-a-box.md): a pinned
     copy of `blackbox new`, `--publish` private unless `--public`, after `gh auth status`).
 - [x] **Pause / Resume** in the ··· and right-click menus, before Archive; a paused row shows a pause glyph and a
   muted title; `vt pause|resume <track>`; an append-only `status` list in the tree file, stamped `by` (person, or
@@ -110,8 +110,8 @@ loading come first because every other item reads them.
   - Rung: boxes
   - Needs: nothing
   - **Done: [`box-sites-2`](solutions/box-sites-2/)** (not a v2 item: proved on Zach's seven real boxes), landed on
-    [vibetracks main @ 2d3e724](https://github.com/zacharyyamaoka/vibetracks/commit/2d3e724)
-    ([PEP 0028](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0028-a-box-opens-on-its-own-site.md)):
+    [vibetracks main @ 2d3e724](https://github.com/zacharyyamaoka/vibetracks-dev/commit/2d3e724)
+    ([PEP 0028](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/docs/peps/0028-a-box-opens-on-its-own-site.md)):
     a box whose workflow builds with blackbox_agent is built by the vendored release into `<vt home>/cache/box-sites`
     (one build per box, ≤ 16 boxes and 512 MiB). claude_party_agent's build fails in blackbox_agent (a zero objective);
     it shows its README with the reason. Ruler v3: one fixture box in the package format.
@@ -138,7 +138,7 @@ loading come first because every other item reads them.
   and working, whatever its entrypoint. Bears on S3.4's agent counts for real use (the fixture has no chats).
   - Rung: roll-ups
   - Needs: nothing
-  - **Done** (not a ruler item): [vibetracks main @ bd459dc](https://github.com/zacharyyamaoka/vibetracks/commit/bd459dc).
+  - **Done** (not a ruler item): [vibetracks main @ bd459dc](https://github.com/zacharyyamaoka/vibetracks-dev/commit/bd459dc).
     Cause: Claude Code now sets `CLAUDE_CODE_CHILD_SESSION` in every shell, so `vt brief` took every chat for a subagent
     and never bound it; a subagent is now decided on evidence (PEP 0011 §2.4, amended). `vt claim` still doesn't bind
     (decided: binding on claim would move a chat onto any track it only audits).

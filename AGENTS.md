@@ -12,7 +12,7 @@ inside the gates. You do it by proposing versions of Vibe Tracks (vibetracks com
 3. `uv run --directory ~/vibetracks_agent vta verify`. A failure stops everything.
 4. Read [`PROGRESS.md`](PROGRESS.md) (regenerate with `vta progress` if the ledger is newer), then [`ideas.md`](ideas.md) and [`feedback/`](feedback/).
 5. Pick one idea, or add one with the spec items it should turn green.
-6. Build it in vibetracks on a branch or worktree (that repo's [`CLAUDE.md`](https://github.com/zacharyyamaoka/vibetracks/blob/main/CLAUDE.md), its PEPs and its gate apply there; never
+6. Build it in vibetracks on a branch or worktree (that repo's [`CLAUDE.md`](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/CLAUDE.md), its PEPs and its gate apply there; never
    touch its Stable/Preview ports 4394-4397), then here:
    `vta new <id> --ref <branch or sha> --parent <id> --change "…" --agent "<agent>" --model "<model id>"`.
 7. `vta evaluate <id>` (dev). It writes the scorecard, appends [`ledger.jsonl`](ledger.jsonl) and refreshes the generated files.

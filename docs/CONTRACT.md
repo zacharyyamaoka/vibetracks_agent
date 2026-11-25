@@ -259,7 +259,7 @@ leaves a measurement open, the closest honest one, frozen in v2:
     checks which one shows). `Z` runs on a track no other letter touched (else U's): with the menu open, `Z`, then the
     menu reads Resume; `Z` again, then it reads Pause.
 25. **S2.10, the tree file and the record:** the file is `$VT_HOME/tree.json`, else `~/.vibetracks/tree.json` under the
-    run's HOME ([vibetracks PEP 0024](https://github.com/zacharyyamaoka/vibetracks/tree/main/docs/peps) §2); the entry
+    run's HOME ([vibetracks PEP 0024](https://github.com/zacharyyamaoka/vibetracks-dev/tree/main/docs/peps) §2); the entry
     is the one whose `id` is the box folder's basename or whose `path` is the box's folder; no `status` key reads as an
     empty list. A record passes with `status`, an `at` that parses as a time within an hour of the run, `by.person` =
     the machine's person (the fixture person), `by.via` = `page` from the page and `cli` from `vt`; a person's record

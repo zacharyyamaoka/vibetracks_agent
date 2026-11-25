@@ -48,14 +48,14 @@ active. One record:
 {"at": "2026-11-25T09:00:00Z", "status": "paused", "by": {"person": "zach@…", "agent": "claude-code", "model": "claude-opus-5-5", "sid": "…", "via": "cli"}, "why": "answer <answer-record-id>"}
 ```
 
-`by` is vibetracks' existing stamp ([`vibetracks/core/records.py`](https://github.com/zacharyyamaoka/vibetracks/blob/main/vibetracks/core/records.py) `stamp()`): `person` always; `agent`, `model`,
+`by` is vibetracks' existing stamp ([`vibetracks/core/records.py`](https://github.com/zacharyyamaoka/vibetracks-dev/blob/main/vibetracks/core/records.py) `stamp()`): `person` always; `agent`, `model`,
 `sid` and `account` only when an agent's session ran the verb; `via` is `page` or `cli`. **A person's pause = the
 latest record is `paused` and its `by` has no `agent`.** `why` is optional free text, written only from
 `--why`. WHY it exists (the Agent Activity Agent, 2026-11-25): when Zach answers a "Still important?" ask with *Pause
 it*, that agent runs `vt pause <track> --why "answer <answer-record-id>"`; its ruler (its OBJECTIVES §6a) counts an
 agent-run pause as his only when `why` cites a person-signed answer whose option is pause. Vibe Tracks only stores
 it; it never reads `why` to decide anything. The tree file's path and its other keys are the
-boxes-as-tracks PEP's to name ([vibetracks `docs/peps/`](https://github.com/zacharyyamaoka/vibetracks/tree/main/docs/peps)); this PEP fixes only the `status` list's shape.
+boxes-as-tracks PEP's to name ([vibetracks `docs/peps/`](https://github.com/zacharyyamaoka/vibetracks-dev/tree/main/docs/peps)); this PEP fixes only the `status` list's shape.
 
 ## What it costs
 

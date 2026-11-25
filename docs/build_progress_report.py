@@ -20,7 +20,7 @@ from pathlib import Path
 
 BOX = Path(__file__).resolve().parents[1]
 GH = "https://github.com/zacharyyamaoka"
-PEPS = f"{GH}/vibetracks/blob/main/docs/peps"
+PEPS = f"{GH}/vibetracks-dev/blob/main/docs/peps"
 # solution -> (vibetracks main merge, PEP file or None, what it brought). WHY typed: the merge sha lives in vibetracks.
 LANDED = {
     "sidebar-style-1": ("edbfc4e", None, "the sidebar's style = Claude's, 0 of 22 properties off"),
@@ -98,7 +98,7 @@ def board(ruler: str, total: int) -> str:
         up, down = flips(r)
         sid = r["solution"]
         land = LANDED.get(sid)
-        landed = f'<a href="{GH}/vibetracks/commit/{land[0]}">{land[0]}</a>' if land else ("baseline" if sid.startswith("main-") else "·")
+        landed = f'<a href="{GH}/vibetracks-dev/commit/{land[0]}">{land[0]}</a>' if land else ("baseline" if sid.startswith("main-") else "·")
         out.append(f"<tr><td><a href=\"{GH}/vibetracks_agent/tree/main/solutions/{esc(sid)}\"><code>{esc(sid)}</code></a></td>"
                    f"<td class=n>{r['objective']} / {total}</td><td class=n>{r['tiebreak']}</td><td class=n>{r['tiebreak2']}</td>"
                    f"<td>{'yes' if r['admissible'] else 'no'}</td><td>{', '.join(up) or '·'}</td><td>{', '.join(down) or 'none'}</td><td>{landed}</td></tr>")
@@ -126,9 +126,9 @@ def main() -> None:
         return (f'<div class=pair><figure><img src="{uri(m / a_, jpeg=True)}" alt="{esc(ca)}"><figcaption>{esc(ca)}</figcaption></figure>'
                 f'<figure><img src="{uri(m / b_, jpeg=True)}" alt="{esc(cb)}"><figcaption>{esc(cb)}</figcaption></figure></div>')
 
-    landed_rows = "".join(f'<tr><td><a href="{GH}/vibetracks/commit/{sha}"><code>{sha}</code></a></td><td>{pep_link(pep)}</td>'
+    landed_rows = "".join(f'<tr><td><a href="{GH}/vibetracks-dev/commit/{sha}"><code>{sha}</code></a></td><td>{pep_link(pep)}</td>'
                           f'<td>{esc(what)}</td><td><code>{esc(sid)}</code></td></tr>' for sid, (sha, pep, what) in LANDED.items())
-    landed_rows += "".join(f'<tr><td><a href="{GH}/vibetracks/commit/{sha}"><code>{sha}</code></a></td><td>{pep_link(pep)}</td>'
+    landed_rows += "".join(f'<tr><td><a href="{GH}/vibetracks-dev/commit/{sha}"><code>{sha}</code></a></td><td>{pep_link(pep)}</td>'
                            f'<td>{esc(what)}</td><td>not a ruler item</td></tr>' for sha, pep, what in OTHER)
 
     page = f"""<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
@@ -145,7 +145,7 @@ table{{border-collapse:collapse;width:100%;font-size:14px}}td,th{{border-bottom:
 .tbl{{overflow-x:auto}}ul li{{margin:5px 0}}.k{{font-weight:600}}details{{margin-top:10px}}summary{{cursor:pointer;color:var(--mut)}}
 </style></head><body><div class=wrap>
 <h1>Vibe Tracks Agent · night 2</h1>
-<p class=muted><a href="{GH}/vibetracks_agent">vibetracks_agent</a> @ <code>{esc(head)}</code> (public) · Vibe Tracks main @ <a href="{GH}/vibetracks/commit/5787f03"><code>5787f03</code></a> and later · built by Claude Code (Opus 5.5) and its lanes</p>
+<p class=muted><a href="{GH}/vibetracks_agent">vibetracks_agent</a> @ <code>{esc(head)}</code> (public) · Vibe Tracks main @ <a href="{GH}/vibetracks-dev/commit/5787f03"><code>5787f03</code></a> and later · built by Claude Code (Opus 5.5) and its lanes</p>
 <div class=verdict><b>Every required item of your Nov 24 spec now passes: {best['objective']} of 20 shall failing, {best['tiebreak2']} of 119 checks (ruler v2), down from 18 of 19 at the start of the night.</b>
 Fourteen changes landed on Vibe Tracks' main, each verified check by check with no regression. Your eight boxes are in your Preview's sidebar, each opening on its own site. vibetracks_agent is public with every file linked, and <code>blackbox check</code> catches unlinked files and home paths in every box. Stable still runs the Nov 11 release until you promote it.</div>
 
