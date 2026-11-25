@@ -35,6 +35,9 @@ OTHER = [  # landed on vibetracks main tonight, not measured by the ruler
     ("bd459dc", "0011-file-contracts", "headless claude -p chats bind to their track again (every chat was taken for a subagent)"),
     ("5283ade", "0017-live-push", "vt serve memory about halved: Preview 2 GB → 0.8 GB"),
     ("dec7b06", "0029-set-why", "vt set --why: a pause on a legacy note track can carry Zach's answer"),
+    ("5ae9861", None, "Windows CI green for the first time (vibetracks and the dev mirror): one cross-platform lock, safe_open, liveness"),
+    ("3b31500", None, "the hourly feedback miner names its real error (it was an expired account login; the unit now runs as personal)"),
+    ("3b12a80", "0014-overview-landing-kpi-layout", "the track dashboard stays still while read (0 px, CLS 0 over 60 s); a stale proposal reads superseded"),
     ("563563b", "0028-a-box-opens-on-its-own-site", "blackbox_agent 0.1.10 bundled: claude_party_agent builds; a box's landing names the tie-break winner (scored bb-0110-1: no change)"),
 ]
 STILLS = [
@@ -144,7 +147,7 @@ table{{border-collapse:collapse;width:100%;font-size:14px}}td,th{{border-bottom:
 <h1>Vibe Tracks Agent · night 2</h1>
 <p class=muted><a href="{GH}/vibetracks_agent">vibetracks_agent</a> @ <code>{esc(head)}</code> (public) · Vibe Tracks main @ <a href="{GH}/vibetracks/commit/5787f03"><code>5787f03</code></a> and later · built by Claude Code (Opus 5.5) and its lanes</p>
 <div class=verdict><b>Every required item of your Nov 24 spec now passes: {best['objective']} of 20 shall failing, {best['tiebreak2']} of 119 checks (ruler v2), down from 18 of 19 at the start of the night.</b>
-Eleven changes landed on Vibe Tracks' main, each verified check by check with no regression. Your eight boxes are in your Preview's sidebar, each opening on its own site. vibetracks_agent is public with every file linked, and <code>blackbox check</code> catches unlinked files and home paths in every box. Stable still runs the Nov 11 release until you promote it.</div>
+Fourteen changes landed on Vibe Tracks' main, each verified check by check with no regression. Your eight boxes are in your Preview's sidebar, each opening on its own site. vibetracks_agent is public with every file linked, and <code>blackbox check</code> catches unlinked files and home paths in every box. Stable still runs the Nov 11 release until you promote it.</div>
 
 <h2>Your Preview, over your real boxes</h2>
 <video controls autoplay muted loop playsinline><source src="{uri(m / 'hero.mp4', 'video/mp4')}" type="video/mp4"><img src="{uri(m / 'hero.gif', 'image/gif')}" alt="hero GIF"></video>
