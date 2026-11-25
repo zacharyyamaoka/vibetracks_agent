@@ -198,7 +198,10 @@ function render(state) {
     $('[data-score]').innerHTML = `${failing}<small> of ${shalls.length} not met</small>`;
     $('[data-what]').textContent = `shall_failing (lower is better, target 0) · ${met} met · ${spec.tests ?? '?'} checks, ${spec.tests_failed ?? '?'} failing`;
     $('[data-bar]').innerHTML = `<i style="width:${100 * met / shalls.length}%;background:var(--pass)"></i><i style="width:${100 * failing / shalls.length}%;background:var(--fail)"></i>`;
-    $('[data-why]').textContent = `Scored on vibetracks at the acceptance run of ${spec.junit_run.at || 'an unknown time'}; an item with no check counts as not met.`;
+    const last = (state.iterations || []).slice(-1)[0];
+    $('[data-why]').textContent = last
+      ? `Latest scored version: ${last.id} (${String(last.evaluated || '').slice(0, 10)}), holdout ${last.holdout ?? '—'}, gates ${last.admissible ? 'pass' : 'fail'}. An item with no check counts as not met.`
+      : 'An item with no check counts as not met.';
   } else {
     $('[data-score]').innerHTML = `—<small> of ${shalls.length || 19}</small>`;
     $('[data-what]').textContent = 'shall_failing: not scored yet';
