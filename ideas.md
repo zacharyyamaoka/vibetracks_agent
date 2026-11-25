@@ -33,15 +33,19 @@ loading come first because every other item reads them.
   Expect: S2.8 → pass. Risk: S2.2 and S2.9 if the rows' markup changes.
   - Rung: sidebar
   - Needs: the tree file
-- [ ] **Claude's ··· menu**: Open in ›, Pin/Unpin P, Mark as unread U, Rename R, Fork F, Move up/down, Move to section
+- [x] **Claude's ··· menu**: Open in ›, Pin/Unpin P, Mark as unread U, Rename R, Fork F, Move up/down, Move to section
   ›, Archive A, Delete D (red, removes from Vibe Tracks only), then New sub-track… behind a separator; right-click
   stays the same menu. Expect: S2.3 → pass, S2.4 stays green.
   - Rung: sidebar
   - Needs: the tree file
-- [ ] **Pinned section and the view menu** (Group by None/Parent/State, Sort by Manual/Last updated/Created/Name,
+  - **Done: [`menus-2`](solutions/menus-2/)** (S2.3 met; Fork uses `vt new --from`).
+- [x] **Pinned section and the view menu** (Group by None/Parent/State, Sort by Manual/Last updated/Created/Name,
   Show ›, New section, Reset to defaults, View all), defaults Parent + Manual. Expect: S2.5, S2.6, S2.7 → pass.
   - Rung: sidebar
   - Needs: the tree file
+  - **Done: [`view-2`](solutions/view-2/)**, S2.6 and S2.7 met: shall 3 → 1 on ruler v2, checks 13 → 3, no
+    regressions; landed with menus-2 on [vibetracks main @ 12743ec](https://github.com/zacharyyamaoka/vibetracks/commit/12743ec)
+    ([PEP 0027](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0027-claudes-menus-over-the-boxes.md)).
 - [x] **Measure Claude's sidebar once more and close the style gaps** the run lists under `sidebar_style_props_off`.
   Expect: S2.2 → pass; `sidebar_style_props_off` → 0.
   - Rung: sidebar
@@ -78,7 +82,7 @@ loading come first because every other item reads them.
     regressions; landed on [vibetracks main @ ecf4dd6](https://github.com/zacharyyamaoka/vibetracks/commit/ecf4dd6)
     ([PEP 0026](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0026-new-track-makes-a-box.md): a pinned
     copy of `blackbox new`, `--publish` private unless `--public`, after `gh auth status`).
-- [ ] **Pause / Resume** in the ··· and right-click menus, before Archive; a paused row shows a pause glyph and a
+- [x] **Pause / Resume** in the ··· and right-click menus, before Archive; a paused row shows a pause glyph and a
   muted title; `vt pause|resume <track>`; an append-only `status` list in the tree file, stamped `by` (person, or
   agent when an agent's session ran it). Zach's words: [`feedback/2026-11-25-pause-a-track.md`](feedback/2026-11-25-pause-a-track.md).
   Expect (ruler v2): S2.10 → pass, and S2.3's `Z` check; S2.3 itself stays red until its v1 misses (Open in, Mark as
@@ -91,6 +95,7 @@ loading come first because every other item reads them.
     `records.agent_session()` and `via "cli"`; `paused` in the tree view; the ··· item (Z) before Archive in
     boxes.js; a pause glyph in the row's lead and a lower-opacity title in sidebar.js. How each is measured:
     [`docs/CONTRACT.md`](docs/CONTRACT.md) §7, items 24-32.
+  - **Done: [`menus-2`](solutions/menus-2/)**, S2.10 met (records exactly PEP 0002's shape; a page request carrying its own `by` is refused).
 - [ ] **A real box opens on its own page, not its README.** Zach's boxes build their site with the blackbox package
   (no `site/index.html` in the repo), so today a real box shows its README; the ruler's fixture boxes ship a prebuilt
   `site/index.html` (the pre-package layout), which is why S1.1 passes anyway. Build it with
@@ -113,6 +118,14 @@ loading come first because every other item reads them.
   `live` row a day from vibetracks' reader file and a per-person box-open counter (a person's click, never an agent's).
   - Rung: meta
   - Needs: ruler v2 frozen
+- [ ] **Headless `claude -p` chats count as working.** The claude-code adapter never sees a headless chat as live,
+  though `state.json.inputs[].adapters[].sees_all` is true. Seen 2026-11-25 by the Agent Activity Agent: a `claude -p`
+  chat (cwd ~/bam_ws) ran `vt brief pick-place-r1` and `vt claim pick-place-r1 …` from 08:08Z, its transcript under
+  `~/.claude-personal/projects/` kept moving, and the track still read `sessions: {live: 0, working: 0}`, Stale. Expected:
+  a chat whose transcript moved in the last few minutes and that `vt brief`/`vt claim` bound to a track counts as live
+  and working, whatever its entrypoint. Bears on S3.4's agent counts for real use (the fixture has no chats).
+  - Rung: roll-ups
+  - Needs: nothing
 - [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`

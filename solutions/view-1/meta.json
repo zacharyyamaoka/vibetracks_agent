@@ -1,0 +1,15 @@
+{
+  "id": "view-1",
+  "parent": "menus-1",
+  "change": "Claude's view menu over the boxes (PEP 0027 \u00a74): Group by \u203a None / Parent / State, Sort by \u203a Manual / Last updated / Created / Name, Show \u203a Archived / Done, New section, Reset to defaults, View all, each pick on the right; flat by recent, the parent tree, state groups; Pinned on top in every grouping; picks kept per viewer",
+  "vibetracks_sha": "aaab34cf7790ab5f9f7435d7dd143c9769b626a7",
+  "vibetracks_ref": "aaab34cf7790ab5f9f7435d7dd143c9769b626a7",
+  "vibetracks_committed": "2026-11-25T09:14:00Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane C subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:15:33Z",
+  "tags": []
+}

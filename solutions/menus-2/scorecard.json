@@ -1,0 +1,1683 @@
+{
+ "solution": "menus-2",
+ "split": "dev",
+ "ruler": "v2",
+ "objective": 3,
+ "objective_name": "shall_failing",
+ "tiebreak": 2,
+ "tiebreak_name": "should_failing",
+ "tiebreak2": 13,
+ "tiebreak2_name": "checks_failing",
+ "shall_failing": 3,
+ "shall_total": 20,
+ "should_failing": 2,
+ "should_total": 4,
+ "checks_failing": 13,
+ "checks_total": 119,
+ "admissible": true,
+ "gate_pass_rate": 1.0,
+ "gates": {
+  "completed": true,
+  "deterministic": true
+ },
+ "failed_gates": {
+  "completed": 0,
+  "deterministic": 0
+ },
+ "diagnostics": {
+  "shall_passing": 17,
+  "sidebar_style_props_off": 0,
+  "sidebar_style_props_measured": 22,
+  "page_ready_ms": 648,
+  "vt_gate_failed": null,
+  "wall_time_s": 386.6812024610117,
+  "checks_total": 119,
+  "registration": "vt add",
+  "stock_tree": []
+ },
+ "tasks": [
+  {
+   "id": "S1.1",
+   "kind": "shall",
+   "title": "S1.1 A track is a black-box agent repo on this machine, and opening it shows that box's own site",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/open.py::S1.1 each of three boxes opens its own site in the main pane",
+     "name": "S1.1 each of three boxes opens its own site in the main pane",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/open.py::S1.1 the address bar names the track",
+     "name": "S1.1 the address bar names the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/open.py::S1.1 a box with no site shows its README's first heading",
+     "name": "S1.1 a box with no site shows its README's first heading",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.2",
+   "kind": "shall",
+   "title": "S1.2 A box holds nothing for Vibe Tracks, and tree changes never write a box",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/verbs.py::S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete",
+     "name": "S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/verbs.py::S1.2 after them each box's git status is clean and its HEAD unchanged",
+     "name": "S1.2 after them each box's git status is clean and its HEAD unchanged",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/verbs.py::S1.2 no file under any box is named like vibetracks or vibe-tracks",
+     "name": "S1.2 no file under any box is named like vibetracks or vibe-tracks",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/verbs.py::S1.2 a vibetracks.toml dropped into a box changes nothing on the page",
+     "name": "S1.2 a vibetracks.toml dropped into a box changes nothing on the page",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.3",
+   "kind": "shall",
+   "title": "S1.3 Vibe Tracks owns the tree: parent, child, order, pins and sections",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/drag.py::S1.3 the tree set by a drag survives a restart",
+     "name": "S1.3 the tree set by a drag survives a restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S1.3 the file that changed lives outside every box",
+     "name": "S1.3 the file that changed lives outside every box",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S1.3 a hand edit of that file moves the row within 5 s, with no reload",
+     "name": "S1.3 a hand edit of that file moves the row within 5 s, with no reload",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S1.4",
+   "kind": "should",
+   "title": "S1.4 A box's data changing on disk shows on its page live",
+   "met": false,
+   "why": "2 of 2 checks not passed",
+   "checks": [
+    {
+     "id": "ruler/suite/open.py::S1.4 a box's site changed on disk shows on its page within 5 s",
+     "name": "S1.4 a box's site changed on disk shows on its page within 5 s",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Brambling Lidar Agent's site is not shown to begin with (S1.1), so there is no page to watch"
+    },
+    {
+     "id": "ruler/suite/open.py::S1.4 no reload: history length and the sidebar scroll position are kept",
+     "name": "S1.4 no reload: history length and the sidebar scroll position are kept",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "the box's page was not open (S1.4's first check)"
+    }
+   ],
+   "failed_checks": [
+    "S1.4 a box's site changed on disk shows on its page within 5 s",
+    "S1.4 no reload: history length and the sidebar scroll position are kept"
+   ]
+  },
+  {
+   "id": "S1.5",
+   "kind": "should",
+   "title": "S1.5 Add a box that already exists: a folder, or a GitHub repo to clone",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/cli.py::S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged",
+     "name": "S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S1.5 vt add lists an existing box under its parent in the sidebar",
+     "name": "S1.5 vt add lists an existing box under its parent in the sidebar",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.1",
+   "kind": "shall",
+   "title": "S2.1 Top rows: Home, Review, Feedback, New track",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/sidebar.py::S2.1 Home, Review, Feedback, New track in this order above the first track row",
+     "name": "S2.1 Home, Review, Feedback, New track in this order above the first track row",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.1 Feedback shows its open count",
+     "name": "S2.1 Feedback shows its open count",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.1 each top row opens its page",
+     "name": "S2.1 each top row opens its page",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.2",
+   "kind": "shall",
+   "title": "S2.2 Pixel parity with the Claude desktop app's sidebar",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: row height 32 px",
+     "name": "S2.2 light: row height 32 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: row pitch 34 px",
+     "name": "S2.2 light: row pitch 34 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: title font 14 px",
+     "name": "S2.2 light: title font 14 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: title font family Anthropic Sans",
+     "name": "S2.2 light: title font family Anthropic Sans",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: row corner radius 8 px",
+     "name": "S2.2 light: row corner radius 8 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: title starts 36 px into the row's pill",
+     "name": "S2.2 light: title starts 36 px into the row's pill",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "name": "S2.2 light: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: status dot 6 px",
+     "name": "S2.2 light: status dot 6 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 light: section header 13 px",
+     "name": "S2.2 light: section header 13 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: row height 32 px",
+     "name": "S2.2 dark: row height 32 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: row pitch 34 px",
+     "name": "S2.2 dark: row pitch 34 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: title font 14 px",
+     "name": "S2.2 dark: title font 14 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: title font family Anthropic Sans",
+     "name": "S2.2 dark: title font family Anthropic Sans",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: row corner radius 8 px",
+     "name": "S2.2 dark: row corner radius 8 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: title starts 36 px into the row's pill",
+     "name": "S2.2 dark: title starts 36 px into the row's pill",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "name": "S2.2 dark: \u00b7\u00b7\u00b7 button 24 px at the row's right end",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: status dot 6 px",
+     "name": "S2.2 dark: status dot 6 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: section header 13 px",
+     "name": "S2.2 dark: section header 13 px",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: sidebar background rgb(31,31,31)",
+     "name": "S2.2 dark: sidebar background rgb(31,31,31)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: hovered row fill rgb(48,48,48)",
+     "name": "S2.2 dark: hovered row fill rgb(48,48,48)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: selected row fill rgb(64,64,64)",
+     "name": "S2.2 dark: selected row fill rgb(64,64,64)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.2 dark: \u00b7\u00b7\u00b7 button hover fill rgb(78,78,78)",
+     "name": "S2.2 dark: \u00b7\u00b7\u00b7 button hover fill rgb(78,78,78)",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.3",
+   "kind": "shall",
+   "title": "S2.3 The \u00b7\u00b7\u00b7 menu on a track has Claude's items, in Claude's order, with its shortcut letters",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/menu.py::S2.3 a middle row's menu items are Claude's, in Claude's order",
+     "name": "S2.3 a middle row's menu items are Claude's, in Claude's order",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 Move up is absent on the first row",
+     "name": "S2.3 Move up is absent on the first row",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 P pins the track",
+     "name": "S2.3 P pins the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 U marks it unread or read",
+     "name": "S2.3 U marks it unread or read",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 R starts a rename",
+     "name": "S2.3 R starts a rename",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 F forks the box",
+     "name": "S2.3 F forks the box",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 A archives the track",
+     "name": "S2.3 A archives the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 D deletes the track",
+     "name": "S2.3 D deletes the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 Delete leaves the box's folder on disk",
+     "name": "S2.3 Delete leaves the box's folder on disk",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.3 Z pauses the track, and Z on a paused track resumes it",
+     "name": "S2.3 Z pauses the track, and Z on a paused track resumes it",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.4",
+   "kind": "shall",
+   "title": "S2.4 Right-click on a track opens the same menu as its \u00b7\u00b7\u00b7",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/menu.py::S2.4 a right-click on a track opens a menu at the pointer",
+     "name": "S2.4 a right-click on a track opens a menu at the pointer",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/menu.py::S2.4 the right-click menu's items equal the \u00b7\u00b7\u00b7 menu's",
+     "name": "S2.4 the right-click menu's items equal the \u00b7\u00b7\u00b7 menu's",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.5",
+   "kind": "shall",
+   "title": "S2.5 Pin a track; pinned tracks sit in a Pinned section at the top",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/pin.py::S2.5 two pinned tracks sit under Pinned, in pin order, above the rest",
+     "name": "S2.5 two pinned tracks sit under Pinned, in pin order, above the rest",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pin.py::S2.5 folding Pinned hides them",
+     "name": "S2.5 folding Pinned hides them",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pin.py::S2.5 pins survive a vt serve restart",
+     "name": "S2.5 pins survive a vt serve restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pin.py::S2.5 unpin returns each to its old parent and place",
+     "name": "S2.5 unpin returns each to its old parent and place",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.6",
+   "kind": "shall",
+   "title": "S2.6 The view menu: Group by, Sort by, Show, New section, Reset to defaults, View all",
+   "met": false,
+   "why": "7 of 8 checks not passed",
+   "checks": [
+    {
+     "id": "ruler/suite/view.py::S2.6 the view menu's entries in order",
+     "name": "S2.6 the view menu's entries in order",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "entries: New section, Show archived; want Group by, Sort by, Show, New section, Reset to defaults, View all"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Group by offers None, Parent, State",
+     "name": "S2.6 Group by offers None, Parent, State",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "no Group by entry"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Sort by offers Manual, Last updated, Created, Name",
+     "name": "S2.6 Sort by offers Manual, Last updated, Created, Name",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "no Sort by entry"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Show offers archived and done",
+     "name": "S2.6 Show offers archived and done",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "no Show entry"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 each submenu shows its current pick on the right",
+     "name": "S2.6 each submenu shows its current pick on the right",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "Group by shows \"\", Sort by shows \"\"; the defaults are Parent and Manual"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 the choice survives a restart",
+     "name": "S2.6 the choice survives a restart",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "could not pick Group by \u203a None"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 Reset to defaults restores Parent and Manual",
+     "name": "S2.6 Reset to defaults restores Parent and Manual",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "no Reset to defaults entry"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.6 New section asks for a name and adds an empty section",
+     "name": "S2.6 New section asks for a name and adds an empty section",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": [
+    "S2.6 the view menu's entries in order",
+    "S2.6 Group by offers None, Parent, State",
+    "S2.6 Sort by offers Manual, Last updated, Created, Name",
+    "S2.6 Show offers archived and done",
+    "S2.6 each submenu shows its current pick on the right",
+    "S2.6 the choice survives a restart",
+    "S2.6 Reset to defaults restores Parent and Manual"
+   ]
+  },
+  {
+   "id": "S2.7",
+   "kind": "shall",
+   "title": "S2.7 Groupings: flat by recent, and the parent tree",
+   "met": false,
+   "why": "3 of 4 checks not passed",
+   "checks": [
+    {
+     "id": "ruler/suite/view.py::S2.7 flat by last updated: newest first, every row at one indent",
+     "name": "S2.7 flat by last updated: newest first, every row at one indent",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "could not pick Group by \u203a None"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.7 Parent grouping shows the tree from Vibe Tracks' file",
+     "name": "S2.7 Parent grouping shows the tree from Vibe Tracks' file",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/view.py::S2.7 State grouping puts each track under its state",
+     "name": "S2.7 State grouping puts each track under its state",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "could not pick Group by \u203a State"
+    },
+    {
+     "id": "ruler/suite/view.py::S2.7 switching groupings keeps the selection",
+     "name": "S2.7 switching groupings keeps the selection",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "could not pick Group by \u203a None"
+    }
+   ],
+   "failed_checks": [
+    "S2.7 flat by last updated: newest first, every row at one indent",
+    "S2.7 State grouping puts each track under its state",
+    "S2.7 switching groupings keeps the selection"
+   ]
+  },
+  {
+   "id": "S2.8",
+   "kind": "shall",
+   "title": "S2.8 Drag to reorder and to move under another track, on a stock tree component",
+   "met": false,
+   "why": "1 of 8 checks not passed",
+   "checks": [
+    {
+     "id": "ruler/suite/drag.py::S2.8 dragging a row between two rows reorders it",
+     "name": "S2.8 dragging a row between two rows reorders it",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 a drop indicator shows mid-drag",
+     "name": "S2.8 a drop indicator shows mid-drag",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 dropping onto a row makes it that row's child",
+     "name": "S2.8 dropping onto a row makes it that row's child",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 dragging out to the left makes it top-level",
+     "name": "S2.8 dragging out to the left makes it top-level",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 a drop into its own child is refused",
+     "name": "S2.8 a drop into its own child is refused",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 the moves survive a vt serve restart",
+     "name": "S2.8 the moves survive a vt serve restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 the keyboard path does one reorder",
+     "name": "S2.8 the keyboard path does one reorder",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/drag.py::S2.8 the page loads a stock tree package",
+     "name": "S2.8 the page loads a stock tree package",
+     "states": [
+      "fail",
+      "fail"
+     ],
+     "passed": false,
+     "message": "none of @headless-tree/core, @atlaskit/pragmatic-drag-and-drop, @atlaskit/pragmatic-drag-and-drop-hitbox, react-arborist, react-complex-tree, wunderbaum, @atlaskit/tree, jstree, jquery.fancytree, @minoru/react-dnd-treeview among the 71 scripts the page loaded"
+    }
+   ],
+   "failed_checks": [
+    "S2.8 the page loads a stock tree package"
+   ]
+  },
+  {
+   "id": "S2.9",
+   "kind": "should",
+   "title": "S2.9 Row anatomy: status dot in the leading slot, age and count badges, fold chevron on hover",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 the status dot is in the leading slot",
+     "name": "S2.9 the status dot is in the leading slot",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 a parent's fold chevron is hidden until hover",
+     "name": "S2.9 a parent's fold chevron is hidden until hover",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 a title click opens the track",
+     "name": "S2.9 a title click opens the track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/sidebar.py::S2.9 a chevron click folds without opening",
+     "name": "S2.9 a chevron click folds without opening",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S2.10",
+   "kind": "shall",
+   "title": "S2.10 Pause a track; a paused track looks paused and stays paused until resumed",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/pause.py::S2.10 an active track's \u00b7\u00b7\u00b7 and right-click menus show Pause",
+     "name": "S2.10 an active track's \u00b7\u00b7\u00b7 and right-click menus show Pause",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 Pause in the \u00b7\u00b7\u00b7 menu writes a person record to the tree file, with no agent and no why",
+     "name": "S2.10 Pause in the \u00b7\u00b7\u00b7 menu writes a person record to the tree file, with no agent and no why",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 a paused track's \u00b7\u00b7\u00b7 and right-click menus show Resume",
+     "name": "S2.10 a paused track's \u00b7\u00b7\u00b7 and right-click menus show Resume",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 a paused row shows a pause glyph in its status-dot slot",
+     "name": "S2.10 a paused row shows a pause glyph in its status-dot slot",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 a paused row's title is muted",
+     "name": "S2.10 a paused row's title is muted",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 the pause survives a reload",
+     "name": "S2.10 the pause survives a reload",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 the pause survives a vt serve restart",
+     "name": "S2.10 the pause survives a vt serve restart",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 Resume returns the row to its state colour and the menu to Pause",
+     "name": "S2.10 Resume returns the row to its state colour and the menu to Pause",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt pause writes a person record via cli with no why",
+     "name": "S2.10 vt pause writes a person record via cli with no why",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt pause shows on the page within 5 s, with no reload",
+     "name": "S2.10 vt pause shows on the page within 5 s, with no reload",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s",
+     "name": "S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim",
+     "name": "S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 the status list is append-only and a track never paused reads active",
+     "name": "S2.10 the status list is append-only and a track never paused reads active",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/pause.py::S2.10 pausing and resuming leave every box untouched",
+     "name": "S2.10 pausing and resuming leave every box untouched",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S3.1",
+   "kind": "shall",
+   "title": "S3.1 Home is a stock data-ui table of tracks, folding by parent, with Active / Done / All tracks presets",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/rollup.py::S3.1 Home holds a data-views element",
+     "name": "S3.1 Home holds a data-views element",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.1 its presets are Active, Done, All tracks in that order",
+     "name": "S3.1 its presets are Active, Done, All tracks in that order",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.1 folding a parent hides exactly its descendants",
+     "name": "S3.1 folding a parent hides exactly its descendants",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.1 the Done preset shows only done boxes",
+     "name": "S3.1 the Done preset shows only done boxes",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S3.2",
+   "kind": "shall",
+   "title": "S3.2 Review is a box's own review page, over every track's waits",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/review.py::S3.2 both waits are on Review, each labelled with its track",
+     "name": "S3.2 both waits are on Review, each labelled with its track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.2 the waits sit in the element a box's own site uses",
+     "name": "S3.2 the waits sit in the element a box's own site uses",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.2 clicking a wait opens its box's page",
+     "name": "S3.2 clicking a wait opens its box's page",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S3.3",
+   "kind": "shall",
+   "title": "S3.3 Feedback is a box's own feedback page, over every track's feedback notes",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/review.py::S3.3 every feedback note is listed with its track",
+     "name": "S3.3 every feedback note is listed with its track",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.3 the side panel opens the note",
+     "name": "S3.3 the side panel opens the note",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/review.py::S3.3 adding feedback writes one new file in the chosen box's feedback/ and nothing else",
+     "name": "S3.3 adding feedback writes one new file in the chosen box's feedback/ and nothing else",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S3.4",
+   "kind": "shall",
+   "title": "S3.4 A parent rolls up its children: state and number of agents",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/rollup.py::S3.4 the parent's sidebar row shows a pip for its blocked child",
+     "name": "S3.4 the parent's sidebar row shows a pip for its blocked child",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.4 the parent shows 3 agents working in its subtree",
+     "name": "S3.4 the parent shows 3 agents working in its subtree",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/rollup.py::S3.4 a child's status.json changed on disk updates the parent within 5 s",
+     "name": "S3.4 a child's status.json changed on disk updates the parent within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.1",
+   "kind": "shall",
+   "title": "S4.1 `vt new` makes a new box by duplicating the black-box template",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/cli.py::S4.1 vt new exits 0 offline and makes a new box folder",
+     "name": "S4.1 vt new exits 0 offline and makes a new box folder",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 the folder is a git repo with one commit",
+     "name": "S4.1 the folder is a git repo with one commit",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 its README's first heading is the title",
+     "name": "S4.1 its README's first heading is the title",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 its files include the starter box's",
+     "name": "S4.1 its files include the starter box's",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 the track is in the tree under the parent",
+     "name": "S4.1 the track is in the tree under the parent",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.1 --from copies the source box's files without its history",
+     "name": "S4.1 --from copies the source box's files without its history",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.2",
+   "kind": "shall",
+   "title": "S4.2 The New track dialog writes the command to copy, and can run it",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/newtrack.py::S4.2 the command follows the name, the parent and Publish",
+     "name": "S4.2 the command follows the name, the parent and Publish",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/newtrack.py::S4.2 Copy puts the command on the clipboard",
+     "name": "S4.2 Copy puts the command on the clipboard",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/newtrack.py::S4.2 Create makes the box and shows it under its parent within 5 s",
+     "name": "S4.2 Create makes the box and shows it under its parent within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.3",
+   "kind": "shall",
+   "title": "S4.3 Local-only by default; publishing to GitHub is an option that needs `gh` signed in",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/cli.py::S4.3 without --publish gh is never called",
+     "name": "S4.3 without --publish gh is never called",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.3 signed out, --publish stops, names gh auth login and makes nothing",
+     "name": "S4.3 signed out, --publish stops, names gh auth login and makes nothing",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    },
+    {
+     "id": "ruler/suite/cli.py::S4.3 signed in, --publish creates a private repo from the folder and pushes once",
+     "name": "S4.3 signed in, --publish creates a private repo from the folder and pushes once",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S4.4",
+   "kind": "shall",
+   "title": "S4.4 A new box shows in the sidebar under its parent at once",
+   "met": true,
+   "why": null,
+   "checks": [
+    {
+     "id": "ruler/suite/newtrack.py::S4.4 vt new from a shell shows the row under its parent within 5 s",
+     "name": "S4.4 vt new from a shell shows the row under its parent within 5 s",
+     "states": [
+      "pass",
+      "pass"
+     ],
+     "passed": true,
+     "message": null
+    }
+   ],
+   "failed_checks": []
+  },
+  {
+   "id": "S5.1",
+   "kind": "should",
+   "title": "S5.1 Vibe Tracks tracks itself: this box is a track in Zach's Vibe Tracks",
+   "met": false,
+   "why": "no check: the spec note lists no test",
+   "checks": [],
+   "failed_checks": []
+  }
+ ],
+ "task_objectives": {
+  "S1.1": 0,
+  "S1.2": 0,
+  "S1.3": 0,
+  "S1.4": 1,
+  "S1.5": 0,
+  "S2.1": 0,
+  "S2.2": 0,
+  "S2.3": 0,
+  "S2.4": 0,
+  "S2.5": 0,
+  "S2.6": 1,
+  "S2.7": 1,
+  "S2.8": 1,
+  "S2.9": 0,
+  "S2.10": 0,
+  "S3.1": 0,
+  "S3.2": 0,
+  "S3.3": 0,
+  "S3.4": 0,
+  "S4.1": 0,
+  "S4.2": 0,
+  "S4.3": 0,
+  "S4.4": 0,
+  "S5.1": 1
+ },
+ "vibetracks_sha": "76e400c69c8b94d715b104844aa4725753116a8a",
+ "vibetracks_committed": "2026-11-25T09:20:48Z",
+ "seed": 1,
+ "evaluated": "2026-11-25T09:31:46Z",
+ "wall_time_s": 386.6812024610117,
+ "runs": [
+  {
+   "n": 1,
+   "exit": 0,
+   "timed_out": false,
+   "wall_s": 191.8,
+   "junit": true,
+   "network": "loopback-only namespace",
+   "reaped_pids": [],
+   "groups": {
+    "sidebar": {
+     "s": 20.3,
+     "error": null,
+     "page_errors": 0
+    },
+    "open": {
+     "s": 17,
+     "error": null,
+     "page_errors": 0
+    },
+    "menu": {
+     "s": 14,
+     "error": null,
+     "page_errors": 0
+    },
+    "pin": {
+     "s": 12.4,
+     "error": null,
+     "page_errors": 0
+    },
+    "view": {
+     "s": 15,
+     "error": null,
+     "page_errors": 0
+    },
+    "drag": {
+     "s": 23.6,
+     "error": null,
+     "page_errors": 0
+    },
+    "verbs_ran": {
+     "drag": true,
+     "pin": true,
+     "rename": true,
+     "archive": true,
+     "section": true,
+     "delete": true
+    },
+    "verbs": {
+     "s": 21.5,
+     "error": null,
+     "page_errors": 0
+    },
+    "rollup": {
+     "s": 7.5,
+     "error": null,
+     "page_errors": 0
+    },
+    "review": {
+     "s": 9.1,
+     "error": null,
+     "page_errors": 0
+    },
+    "newtrack": {
+     "s": 11.5,
+     "error": null,
+     "page_errors": 0
+    },
+    "cli": {
+     "s": 13.8,
+     "error": null,
+     "page_errors": 0
+    },
+    "pause": {
+     "s": 20,
+     "error": null,
+     "page_errors": 0
+    }
+   }
+  },
+  {
+   "n": 2,
+   "exit": 0,
+   "timed_out": false,
+   "wall_s": 193.9,
+   "junit": true,
+   "network": "loopback-only namespace",
+   "reaped_pids": [],
+   "groups": {
+    "sidebar": {
+     "s": 20.2,
+     "error": null,
+     "page_errors": 0
+    },
+    "open": {
+     "s": 18.1,
+     "error": null,
+     "page_errors": 0
+    },
+    "menu": {
+     "s": 16.3,
+     "error": null,
+     "page_errors": 0
+    },
+    "pin": {
+     "s": 10.4,
+     "error": null,
+     "page_errors": 0
+    },
+    "view": {
+     "s": 16.2,
+     "error": null,
+     "page_errors": 0
+    },
+    "drag": {
+     "s": 26.4,
+     "error": null,
+     "page_errors": 0
+    },
+    "verbs_ran": {
+     "drag": true,
+     "pin": true,
+     "rename": true,
+     "archive": true,
+     "section": true,
+     "delete": true
+    },
+    "verbs": {
+     "s": 20.8,
+     "error": null,
+     "page_errors": 0
+    },
+    "rollup": {
+     "s": 9.4,
+     "error": null,
+     "page_errors": 0
+    },
+    "review": {
+     "s": 9,
+     "error": null,
+     "page_errors": 0
+    },
+    "newtrack": {
+     "s": 10.1,
+     "error": null,
+     "page_errors": 0
+    },
+    "cli": {
+     "s": 12,
+     "error": null,
+     "page_errors": 0
+    },
+    "pause": {
+     "s": 17.9,
+     "error": null,
+     "page_errors": 0
+    }
+   }
+  }
+ ],
+ "code": {
+  "ruler": "v2",
+  "blackbox_agent_ref": "b25a20cf14791e9eb7293a0f8d8e43ffb8f3a79f",
+  "playwright": "1.64.1",
+  "repo_commit": "8c82aa916d21"
+ }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "view-2",
+  "parent": "menus-2",
+  "change": "view-1 rebased on 6a73de5: Claude's view menu over the boxes (PEP 0027 \u00a74), Group by / Sort by / Show, flat by recent, the parent tree, state groups; Show \u203a Done hides done rows in the sidebar only",
+  "vibetracks_sha": "8d6163927823533f4bed749db880f1a3feb6e728",
+  "vibetracks_ref": "8d6163927823533f4bed749db880f1a3feb6e728",
+  "vibetracks_committed": "2026-11-25T09:21:11Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane C subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:22:02Z",
+  "tags": []
+}

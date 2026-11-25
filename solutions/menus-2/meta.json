@@ -1,0 +1,15 @@
+{
+  "id": "menus-2",
+  "parent": "rollups-2",
+  "change": "menus-1 rebased on vibetracks main 6a73de5 (roll-ups, PEP 0025): Claude's \u00b7\u00b7\u00b7 menu over the boxes and Pause / Resume (PEP 0027 \u00a72-\u00a73)",
+  "vibetracks_sha": "76e400c69c8b94d715b104844aa4725753116a8a",
+  "vibetracks_ref": "76e400c69c8b94d715b104844aa4725753116a8a",
+  "vibetracks_committed": "2026-11-25T09:20:48Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane C subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:22:02Z",
+  "tags": []
+}
