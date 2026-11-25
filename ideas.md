@@ -142,6 +142,12 @@ loading come first because every other item reads them.
     Cause: Claude Code now sets `CLAUDE_CODE_CHILD_SESSION` in every shell, so `vt brief` took every chat for a subagent
     and never bound it; a subagent is now decided on evidence (PEP 0011 §2.4, amended). `vt claim` still doesn't bind
     (decided: binding on claim would move a chat onto any track it only audits).
+- [ ] **The Agents column counts the chats on a box.** In Zach's Preview every box reads 0 agents, even ones whose
+  state is Working: the box roll-up (PEP 0025) counts a box's own `agents/*.md`, which his boxes don't write. Count the
+  live chats bound to the box (they bind again since vibetracks bd459dc), summed over the subtree as today. Seen
+  2026-11-25 over his eight real boxes.
+  - Rung: roll-ups
+  - Needs: nothing
 - [x] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`
