@@ -2,7 +2,7 @@
 
 - **Status:** accepted 2026-11-25 by the dispatcher, because it is Zach's own ask in his words
   ([`feedback/2026-11-25-pause-a-track.md`](../../feedback/2026-11-25-pause-a-track.md)). It freezes into ruler v2
-  once the boxes-as-tracks lane's ruler-v1 run is scored: that run reads `ruler/` from this working tree, so the ruler
+  once the boxes-as-tracks lane's ruler-v1 run is scored: that run reads [`ruler/`](../../ruler/) from this working tree, so the ruler
   files change only after it ends. Undo: set this line back to "proposed" before the freeze, or revert the freeze commit.
 - **Date:** 2026-11-25
 - **Does not include** [PEP 0001](0001-ruler-v2-use-number.md) (the use number): that one changes his success
@@ -47,14 +47,14 @@ active. One record:
 {"at": "2026-11-25T09:00:00Z", "status": "active", "by": {"person": "zach@…", "agent": "claude-code", "model": "claude-opus-5-5", "sid": "…", "via": "cli"}}
 ```
 
-`by` is vibetracks' existing stamp (`vibetracks/core/records.py` `stamp()`): `person` always; `agent`, `model`,
+`by` is vibetracks' existing stamp ([`vibetracks/core/records.py`](https://github.com/zacharyyamaoka/vibetracks/blob/main/vibetracks/core/records.py) `stamp()`): `person` always; `agent`, `model`,
 `sid` and `account` only when an agent's session ran the verb; `via` is `page` or `cli`. **A person's pause = the
 latest record is `paused` and its `by` has no `agent`.** The tree file's path and its other keys are the
-boxes-as-tracks PEP's to name (vibetracks `docs/peps/`); this PEP fixes only the `status` list's shape.
+boxes-as-tracks PEP's to name ([vibetracks `docs/peps/`](https://github.com/zacharyyamaoka/vibetracks/tree/main/docs/peps)); this PEP fixes only the `status` list's shape.
 
 ## What it costs
 
 - One spec note (`specs/S2.10-pause-and-resume.md`), the S2.3 note's list, one check group (`ruler/suite/groups/pause.mjs`) and
-  S2.3's expected list in `menu.mjs`; `tools/freeze_ruler.py` re-pins the manifest; every solution is re-scored on v2
+  S2.3's expected list in `menu.mjs`; [`tools/freeze_ruler.py`](../../tools/freeze_ruler.py) re-pins the manifest; every solution is re-scored on v2
   (OBJECTIVES §11).
 - The shall count goes 19 → 20.
