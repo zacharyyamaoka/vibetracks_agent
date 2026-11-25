@@ -9,7 +9,7 @@ or folder of this repo (a `<placeholder>` tail like `solutions/<id>/` reads as i
 (a folder on Zach's machine, which must link to where a reader can open it, e.g. its GitHub repo; `~/.cache` and
 other dot paths are machine state with nothing to open).
 
-WHY OBJECTIVES.md and specs/ are exempt: they are the frozen ruler v1 (sha256 in ruler/manifest.json, `vta verify`);
+WHY OBJECTIVES.md and specs/ are exempt: they are the frozen ruler (v2 since 2026-11-25; sha256 in ruler/manifest.json, `vta verify`);
 they gain links only through a ruler bump. Lift this into `blackbox check` so every box gets it (the feedback sent to
 the blackbox agent the same night).
 """

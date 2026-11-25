@@ -3,8 +3,12 @@
     read(path)                 # every row, in file order (a line that is not a JSON object raises ValueError)
     append(row, path)          # one row; only `vta evaluate` calls it
     latest(rows)               # the newest row per (solution, split, ruler)
-    rank(rows, split="dev")    # OBJECTIVES §8's order over that split's latest rows
+    rank(rows, split="dev")    # OBJECTIVES §8's order over that split's latest rows of the current ruler (RULER)
     best(rows)                 # the first admissible row in rank order, else None
+
+A row carries the ruler it was scored on (`ruler`). WHY rank only within one ruler (OBJECTIVES §11): a new ruler
+changes what is counted (v2 adds S2.10, so the shall total goes 19 -> 20), so a v1 number and a v2 number are not the
+same quantity; a v1 row is kept, labelled, and never compared against a v2 one (`rank(rows, ruler="v1")` reads it).
 
 Shapes follow claude_party_agent `src/claude_party_agent/ledger.py` @ bdd812a (read, append, latest, rank_key).
 """
@@ -17,7 +21,7 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
-RULER = "v1"
+RULER = "v2"  # the ruler this code scores: OBJECTIVES §11, ruler/manifest.json `ruler`
 SPLITS = ("dev", "holdout")
 ROW_KEYS = (
     "t", "solution", "parent", "split", "ruler", "objective", "tiebreak", "tiebreak2", "admissible", "gate_pass_rate",
@@ -25,7 +29,8 @@ ROW_KEYS = (
     "task_objectives",
 )  # fmt: skip
 
-__all__ = ["ROW_KEYS", "RULER", "SPLITS", "append", "best", "finite", "latest", "rank", "rank_key", "read"]
+__all__ = ["ROW_KEYS", "RULER", "SPLITS", "append", "best", "finite", "latest", "rank", "rank_key", "read",
+           "rulers"]
 
 
 def finite(value: Any) -> float | None:
@@ -95,13 +100,20 @@ def rank_key(row: Mapping[str, Any]) -> tuple:
     return (1, -(finite(row.get("gate_pass_rate")) or 0.0), *numbers, str(row.get("solution")))
 
 
-def rank(rows: Iterable[Mapping[str, Any]], split: str = "dev") -> list[dict[str, Any]]:
-    mine = [row for row in latest(rows) if row.get("split") == split and row.get("ruler") == RULER]
+def rank(rows: Iterable[Mapping[str, Any]], split: str = "dev", ruler: str = RULER) -> list[dict[str, Any]]:
+    """That split's latest rows scored on `ruler` (default: the current one), in OBJECTIVES §8's order; a row of any
+    other ruler, or with none, is left out."""
+    mine = [row for row in latest(rows) if row.get("split") == split and row.get("ruler") == ruler]
     return sorted(mine, key=rank_key)
 
 
-def best(rows: Iterable[Mapping[str, Any]], split: str = "dev") -> dict[str, Any] | None:
-    for row in rank(rows, split):
+def rulers(rows: Iterable[Mapping[str, Any]]) -> list[str]:
+    """Every ruler a row names, in the order first seen (a row with none reads as "unknown")."""
+    return list(dict.fromkeys(str(row.get("ruler") or "unknown") for row in rows))
+
+
+def best(rows: Iterable[Mapping[str, Any]], split: str = "dev", ruler: str = RULER) -> dict[str, Any] | None:
+    for row in rank(rows, split, ruler):
         if row.get("admissible") is True and finite(row.get("objective")) is not None:
             return row
     return None

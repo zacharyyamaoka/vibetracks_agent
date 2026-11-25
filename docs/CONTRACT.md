@@ -12,7 +12,7 @@ commit ([`~/vibetracks`](https://github.com/zacharyyamaoka/vibetracks)), never c
 
 | Path | Written by | Notes |
 |---|---|---|
-| [`OBJECTIVES.md`](../OBJECTIVES.md), `specs/*.md` | Zach + dispatcher | ruler v1, frozen; sha256s in [`ruler/manifest.json`](../ruler/manifest.json) |
+| [`OBJECTIVES.md`](../OBJECTIVES.md), `specs/*.md` | Zach + dispatcher | the ruler, frozen (v2 since 2026-11-25, v1 2026-11-24; OBJECTIVES §11); sha256s in [`ruler/manifest.json`](../ruler/manifest.json) |
 | [`ruler/manifest.json`](../ruler/manifest.json) | [`tools/freeze_ruler.py`](../tools/freeze_ruler.py), once per ruler version | sha256 of every file under [`ruler/`](../ruler/), of [`OBJECTIVES.md`](../OBJECTIVES.md) and each spec note, of [`package.json`](../package.json) + [`package-lock.json`](../package-lock.json); the frozen refs (blackbox_agent, vibetracks baseline, claude-hub, Playwright) |
 | [`ruler/checks.json`](../ruler/checks.json) | [`tools/freeze_ruler.py`](../tools/freeze_ruler.py) | every check the suite runs (`node ruler/suite/run.mjs --list`); a check missing from a run counts as failing |
 | [`ruler/fixture.py`](../ruler/fixture.py), [`ruler/stage.py`](../ruler/stage.py), `ruler/suite/**` | frozen | the acceptance run (§5 below) |
@@ -43,7 +43,7 @@ scoring.case_id(classname, name) -> "ruler/suite/<group>.py::S2.3 …"         #
 scoring.matches(check_id, patterns) -> bool                                  # a note's tests: patterns, fnmatch
 scoring.expected_checks(ruler/checks.json) -> [check id]
 scoring.score(items, expected, [RunResult(junit, finished, timed_out, wall_s)]) -> dict   # §3 scorecard fields
-ledger.read / append / latest / rank / best
+ledger.read / append / latest / rank(rows, split, ruler=RULER) / best / rulers   # rank and best: one ruler's rows only
 ruler.problems(root) -> [str]                                                # [] = the ruler is intact
 evaluate.evaluate(id, split="dev", runs=2, with_vt_gate=False) -> scorecard
 ```
@@ -64,7 +64,7 @@ evaluate.evaluate(id, split="dev", runs=2, with_vt_gate=False) -> scorecard
   check on passed / not passed. `admissible` = both exactly `true`.
 
 **scorecard.json** (`vta evaluate`; `scorecard_holdout.json` for holdout):
-`{solution, split, ruler: "v1", objective (= shall_failing), objective_name: "shall_failing", tiebreak
+`{solution, split, ruler: "v2" (the ruler it ran, ledger.RULER), objective (= shall_failing), objective_name: "shall_failing", tiebreak
 (= should_failing), tiebreak_name, tiebreak2 (= checks_failing), tiebreak2_name, shall_failing, shall_total,
 should_failing, should_total, checks_failing, checks_total, admissible, gate_pass_rate, gates: {completed,
 deterministic}, failed_gates: {completed: 0|1, deterministic: 0|1}, diagnostics: {shall_passing,
@@ -79,16 +79,19 @@ groups}], code: {ruler, blackbox_agent_ref, playwright, repo_commit}}`
   sidebar's Review row that changes the address (first run); `vt_gate_failed` = failures of vibetracks' own
   `pytest tests` on the tree when `--vt-gate` ran it, else null.
 
-**ledger.jsonl row:** `{t, solution, parent, split: "dev"|"holdout", ruler: "v1", objective, tiebreak, tiebreak2,
+**ledger.jsonl row:** `{t, solution, parent, split: "dev"|"holdout", ruler: "v1"|"v2", objective, tiebreak, tiebreak2,
 admissible, gate_pass_rate, failed_gates, diagnostics, wall_time_s, repo_commit, vibetracks_sha, proposed_by: {agent,
 model, session}, change, task_objectives}`. Rank (`ledger.rank`): admissible rows first by (objective, tiebreak,
 tiebreak2) ascending; then the rest by gate pass rate descending and the same three; a missing number sorts last.
+It ranks one ruler's rows (default the current one, `ledger.RULER`): a row scored on another ruler is kept, labelled
+with the ruler it names, listed apart in [`PROGRESS.md`](../PROGRESS.md) ("Earlier rulers") and never compared with the current one; `vta verify`
+fails when [`ruler/manifest.json`](../ruler/manifest.json) or [`ruler/checks.json`](../ruler/checks.json) names another ruler than the scorer's.
 
 **meta.json:** `{id, parent, change, vibetracks_sha, vibetracks_ref, vibetracks_committed, proposed_by: {agent,
 model, session}, created, tags: []}`. `vta new` refuses without `--agent` and `--model`, an existing id, an unknown
 parent, or a ref ~/vibetracks cannot resolve.
 
-**status.json:** `ai-team-status/1` (shape as claude_party_agent's): `kpi` = shall items failing of 19 for the best
+**status.json:** `ai-team-status/1` (shape as claude_party_agent's): `kpi` = shall items failing of 20 (ruler v2) for the best
 admissible version (else the top of the board, named "not admissible"), direction down, target 0; `counter_kpi` =
 that version's checks failing; `todo` from [`ideas.md`](../ideas.md)'s `## I'll try`.
 
@@ -112,7 +115,7 @@ Run as `uv run --directory ~/vibetracks_agent vta <verb>`.
 | `vta new <id> --ref <ref> --change "…" --agent A --model M [--parent P] [--session S] [--tags a,b]` | writes [`solutions/<id>/meta.json`](../solutions/) |
 | `vta evaluate <id> [--split dev\|holdout] [--runs 2] [--timeout 1200] [--vt-gate] [--only S2.3,…] [--no-progress]` | the acceptance run (§5), `--runs` times; the scorecard, the junit copies, one ledger row, then `vta progress`. Refuses when `vta verify` would fail. `--only` is for debugging a check: its scorecard fails every unselected check (fail closed) |
 | `vta progress` | [`PROGRESS.md`](../PROGRESS.md), [`status.json`](../status.json) |
-| `vta leaderboard [--n N] [--split dev\|holdout]` | the ranked table |
+| `vta leaderboard [--n N] [--split dev\|holdout] [--ruler v1]` | the ranked table of one ruler's rows (default the current) |
 
 ## 5. The stage (one acceptance run)
 
@@ -149,7 +152,8 @@ Stable and Preview included) and killed at 1200 s: `python3 ruler/stage.py run` 
    c. else nothing, and every check that needs a track row fails saying it found none.
    **A track is named on the command line by its box folder's basename** (`--parent kestrel_grasp_agent`).
 5. `<run>/pristine` = HOME as it then stands.
-6. **The suite** (`node ruler/suite/run.mjs`, Playwright 1.64.1, headless Chromium 1400×900): 11 groups; before each,
+6. **The suite** (`node ruler/suite/run.mjs`, Playwright 1.64.1, headless Chromium 1400×900): 12 groups (v2 adds
+   [`pause`](../ruler/suite/groups/pause.mjs), run last, so every v1 group runs exactly as in v1); before each,
    `vt serve` is stopped, HOME is put back from pristine/, `vt serve --port 4811` (inside the namespace; a free port
    outside 4390-4397 when no namespace) is started detached and stopped by its pid's process group, and a new browser
    context opens the page. The page is read as a person sees it: visible text, ARIA roles, measured boxes and computed
@@ -244,5 +248,48 @@ Where a note's "How it is checked" was impossible or ambiguous as written, the c
 21. **S4.3, signed out "no folder made":** no new git repo and no new folder in HOME whose name contains the title.
 22. **Holdout:** run twice like dev; its `deterministic` gate is its own two runs; [`site/data/junit.xml`](../site/data/junit.xml) is written
     from dev runs only.
-23. **S5.1** lists no test, so it is failing in every v1 score: `should_failing` is at least 1 until a ruler v2 gives
-    it a check.
+23. **S5.1** lists no test, so it is failing in every v1 and v2 score: `should_failing` is at least 1 until a ruler
+    version gives it a check.
+
+Added in ruler v2 ([PEP 0002](peps/0002-ruler-v2-pause-resume.md); S2.10's checks are in
+[`ruler/suite/groups/pause.mjs`](../ruler/suite/groups/pause.mjs), S2.3's `Z` in [`ruler/suite/groups/menu.mjs`](../ruler/suite/groups/menu.mjs)). Where PEP 0002's table
+leaves a measurement open, the closest honest one, frozen in v2:
+
+24. **S2.3, Pause / Resume in the list:** either spelling passes the order check (the row's state decides; S2.10
+    checks which one shows). `Z` runs on a track no other letter touched (else U's): with the menu open, `Z`, then the
+    menu reads Resume; `Z` again, then it reads Pause.
+25. **S2.10, the tree file and the record:** the file is `$VT_HOME/tree.json`, else `~/.vibetracks/tree.json` under the
+    run's HOME ([vibetracks PEP 0024](https://github.com/zacharyyamaoka/vibetracks/tree/main/docs/peps) §2); the entry
+    is the one whose `id` is the box folder's basename or whose `path` is the box's folder; no `status` key reads as an
+    empty list. A record passes with `status`, an `at` that parses as a time within an hour of the run, `by.person` =
+    the machine's person (the fixture person), `by.via` = `page` from the page and `cli` from `vt`; a person's record
+    has none of `agent`, `model`, `sid`, `account`; `why` only from `--why`, byte for byte (the texts carry quotes, a
+    colon and a non-ASCII letter). Each verb must add exactly one record. Resume's record reads `active`, the value
+    PEP 0024 §2 names (PEP 0002's examples show only `paused`). A track never paused passes when its latest record, if
+    any, is not `paused` (PEP 0002 does not forbid an initial `active` record).
+26. **S2.10, "`vt pause` run inside an agent's session":** the stage runs in no agent session (§5 step 3), so for that
+    one run the ruler sets Claude Code's own session variable `CLAUDE_CODE_SESSION_ID` (what vibetracks'
+    `core/records.py` `agent_session()` reads through its claude-code adapter, the way a real session is seen). Pass =
+    `by.agent` set and `by.sid` naming that id. No transcript is staged, so `model` is not required. "The caller
+    can't" (stamp it) is not measured: no generic forgery to try.
+27. **S2.10, "a pause glyph in the status-dot slot":** the slot = the centre of the row's status dot while active
+    (S2.9's reading: round, painted, 3-12 px, left of the title), measured before the pause; with no dot, anywhere left
+    of the title. A glyph = a visible element at most 24 px, centred within 8 px of the slot and left of the title,
+    that is (a) a pause character (⏸ ‖ ❚ ▮ `||`, as text or a `::before`/`::after` content) in a colour that is not
+    transparent, (b) an icon whose `aria-label`, `title` or SVG `<title>` says paused, or (c) two painted vertical bars
+    (each 1-6 px wide, 4-16 px tall and at least 1.6× as tall as wide, level within 1.5 px, 0.5-6 px apart). A glyph the
+    active row already shows there marks no pause, and fails.
+28. **S2.10, "a muted title":** the title's WCAG contrast with what is painted behind it (its colour's alpha and every
+    `opacity` and `filter: opacity()` above it applied) is at most 85 % of the same row's contrast while active, both
+    measured with the pointer off the row. **Resume returns the state colour:** the dot at the slot again with its
+    colour within 3 per channel of before, no pause glyph, the title's contrast within 5 % of before.
+29. **S2.10, "survives a reload and a `vt serve` restart":** after `page.goto`, and after `vt serve` is stopped and
+    started: the glyph, the muted title, the ··· menu reading Resume and the latest record `paused`.
+30. **S2.10, "CLI then page agree within one tick":** 5 s with no reload (the window S1.3 and S4.4 give a file change;
+    a reload = a marker set on `window` before the verb is gone): after `vt pause`, the row's pause glyph and its ···
+    menu reading Resume; after `vt resume --why`, no glyph and the menu reading Pause.
+31. **S2.10, "pausing changes nothing in the box":** every fixture box's files (each one's sha256, `.git` aside),
+    `git status --porcelain` and HEAD, before the group's first verb and after its last; it needs a `paused` record to
+    have been written, else nothing was proved (as S1.2's deviation 4).
+32. **S2.10's tracks:** the page's is the fixture's `rollup_working` box; the shell's and the agent's are the first two
+    other open leaf boxes with a site, in fixture order.

@@ -1,7 +1,7 @@
 [project]
 name = "vibetracks-agent"
 version = "0.1.0"
-description = "Vibe Tracks as a black box: the frozen spec (ruler v1), its acceptance run, and a committed ledger of scored vibetracks commits."
+description = "Vibe Tracks as a black box: the frozen spec (ruler v2), its acceptance run, and a committed ledger of scored vibetracks commits."
 requires-python = ">=3.11"
 dependencies = []
 

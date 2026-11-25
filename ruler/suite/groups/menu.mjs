@@ -1,4 +1,5 @@
-// S2.3 the ··· menu has Claude's items in Claude's order with its letters; S2.4 a right-click opens the same menu.
+// S2.3 the ··· menu has Claude's items in Claude's order with its letters (ruler v2: Pause / Resume Z right before
+// Archive, PEP 0002); S2.4 a right-click opens the same menu.
 import { existsSync } from 'node:fs'
 import { group, need, sleep, waitFor, row, rows, sideText, openRowMenu, rightClickRow, closeMenus, labels, menusNow, dialogs, clickItem } from '../lib.mjs'
 import { one, byRole } from './common.mjs'
@@ -7,11 +8,14 @@ import { order } from '../lib.mjs'
 const S24 = ['S2.4 a right-click on a track opens a menu at the pointer', "S2.4 the right-click menu's items equal the ··· menu's"]
 const S23 = ["S2.3 a middle row's menu items are Claude's, in Claude's order", 'S2.3 Move up is absent on the first row',
   'S2.3 P pins the track', 'S2.3 U marks it unread or read', 'S2.3 R starts a rename', 'S2.3 F forks the box',
-  'S2.3 A archives the track', 'S2.3 D deletes the track', "S2.3 Delete leaves the box's folder on disk"]
+  'S2.3 A archives the track', 'S2.3 D deletes the track', "S2.3 Delete leaves the box's folder on disk",
+  'S2.3 Z pauses the track, and Z on a paused track resumes it']
 
-// Claude's row menu (Zach's screenshot, Nov 24; spec note S2.3), for an unpinned row; one entry may have two spellings
+// Claude's row menu (Zach's screenshot, Nov 24; spec note S2.3), for an unpinned row; one entry may have two spellings.
+// Ruler v2 (PEP 0002, Zach Nov 25: "in the 3 button menu You can give like a pause/resume, archive, delete"): Pause on an
+// active track, Resume on a paused one, right before Archive; which one a row shows is S2.10's to check.
 const CLAUDE = [['Open in'], ['Pin'], ['Mark as unread', 'Mark as read'], ['Rename'], ['Fork'], ['Move up'], ['Move down'],
-  ['Move to section'], ['Archive'], ['Delete']]
+  ['Move to section'], ['Pause', 'Resume'], ['Archive'], ['Delete']]
 function sameAsClaude(menu, { first = false } = {}) {
   const want = CLAUDE.filter(([w]) => !(first && w === 'Move up'))
   const got = menu.items.map((i) => i.label)
@@ -163,5 +167,27 @@ export default group('menu', [...S24, ...S23], async (ctx, t) => {
     const head = ctx.stage.git(deleted.path, ['rev-parse', 'HEAD'])
     need(head.out === deleted.head, `its HEAD moved: ${deleted.head.slice(0, 7)} → ${head.out.slice(0, 7)}`)
     need(st.code === 0 && st.out === '', `its working tree changed: ${st.out || st.err}`)
+  })
+  // v2: Z on its own row, after every v1 letter (so nothing above runs on a different state than in v1)
+  await t(S23[9], async () => {
+    const used = new Set([0, 1, 2, 3, 4, 5].map((i) => pick(i).slug))
+    // a track no letter above touched (each fixture seed has one), else U's (marking it read leaves it active)
+    const box = pool.find((b) => !used.has(b.slug)) || pick(1)
+    const item = (m, re) => (m ? m.items.find((i) => re.test(i.label)) : null)
+    const before = await openRowMenu(page, box.title)
+    need(before, `no ··· menu on ${box.title}`)
+    need(item(before, /^Pause$/), `no Pause item on the active track ${box.title}: ${labels(before).join(', ')}`)
+    await page.keyboard.press('z')
+    await sleep(600)
+    await closeMenus(page)
+    const paused = await waitFor(async () => { const m = await openRowMenu(page, box.title); await closeMenus(page); return item(m, /^Resume$/) ? m : null }, 3000, 300)
+    need(paused, `after Z the menu of ${box.title} does not read Resume`)
+    const again = await openRowMenu(page, box.title)
+    need(again, `no ··· menu on ${box.title} the second time`)
+    await page.keyboard.press('z')
+    await sleep(600)
+    await closeMenus(page)
+    const resumed = await waitFor(async () => { const m = await openRowMenu(page, box.title); await closeMenus(page); return item(m, /^Pause$/) ? m : null }, 3000, 300)
+    need(resumed, `after Z on the paused ${box.title} the menu does not read Pause again`)
   })
 })

@@ -1,0 +1,15 @@
+{
+  "id": "boxes-as-tracks-1-v2",
+  "parent": "boxes-as-tracks-1",
+  "change": "re-score on ruler v2",
+  "vibetracks_sha": "4c7437a3d70245a790bd4e88e3a9c54188a913a8",
+  "vibetracks_ref": "4c7437a",
+  "vibetracks_committed": "2026-11-25T07:47:33Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane R subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T08:29:06Z",
+  "tags": []
+}

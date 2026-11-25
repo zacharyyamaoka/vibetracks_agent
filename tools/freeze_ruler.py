@@ -2,9 +2,10 @@
 """Freeze the ruler (OBJECTIVES §11): write ruler/checks.json (every check the suite declares) and ruler/manifest.json
 (a sha256 for every ruler file, OBJECTIVES.md, each spec note and the Playwright pin, plus the frozen refs).
 
-    uv run --directory ~/vibetracks_agent python tools/freeze_ruler.py --blackbox-ref b25a20c [--force]
+    uv run --directory ~/vibetracks_agent python tools/freeze_ruler.py --blackbox-ref b25a20c --frozen <date> [--force]
 
-Run once per ruler version. It refuses to overwrite an existing manifest without --force: changing the ruler is a new
+Run once per ruler version; the version it writes is the scorer's (`vibetracks_agent.ledger.RULER`), so the manifest,
+checks.json and every scorecard name one ruler. v1: 2026-11-24; v2 (PEP 0002): 2026-11-25, `--force`. It refuses to overwrite an existing manifest without --force: changing the ruler is a new
 version (a section in OBJECTIVES.md), and every solution is re-scored on it.
 """
 
@@ -19,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from vibetracks_agent import ruler  # noqa: E402
+from vibetracks_agent import ledger, ruler  # noqa: E402
 
 
 def git(repo: Path, *args: str) -> str:
@@ -34,7 +35,7 @@ def main() -> int:
     parser.add_argument("--baseline", default="d0cb827")
     parser.add_argument("--claude-hub", type=Path, default=Path.home() / "claude-hub")
     parser.add_argument("--claude-hub-sha", default="8adddc6faa19796d196a6ab500930cfe5e50120d")
-    parser.add_argument("--frozen", default="2026-11-24")
+    parser.add_argument("--frozen", default="2026-11-25", help="the date this ruler version is frozen")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
     manifest_path = ROOT / "ruler" / "manifest.json"
@@ -46,7 +47,7 @@ def main() -> int:
         print("node ruler/suite/run.mjs --list failed", file=sys.stderr)
         return 1
     (ROOT / "ruler" / "checks.json").write_text(json.dumps({
-        "schema": "vibetracks-agent/checks-1", "ruler": "v1",
+        "schema": "vibetracks-agent/checks-1", "ruler": ledger.RULER,
         "what": "Every check the acceptance suite runs (node ruler/suite/run.mjs --list), frozen with it: a check missing "
                 "from a run's junit counts as failing, and an item none of these match has no check (OBJECTIVES §8).",
         "checks": checks}, indent=1) + "\n")
@@ -70,7 +71,7 @@ def main() -> int:
         "checks": len(checks),
     }
     manifest_path.write_text(json.dumps(ruler.build(ROOT, refs), indent=1) + "\n")
-    print(f"froze {len(checks)} checks and {len(ruler.ruler_files(ROOT))} ruler files")
+    print(f"froze ruler {ledger.RULER}: {len(checks)} checks and {len(ruler.ruler_files(ROOT))} ruler files")
     return 0
 
 

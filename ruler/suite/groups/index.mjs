@@ -10,5 +10,7 @@ import rollup from './rollup.mjs'
 import review from './review.mjs'
 import newtrack from './newtrack.mjs'
 import cli from './cli.mjs'
+import pause from './pause.mjs'
 
-export const GROUPS = [sidebar, open, menu, pin, view, drag, verbs, rollup, review, newtrack, cli]
+// pause (ruler v2, S2.10) runs last, so every v1 group runs exactly as it did in v1
+export const GROUPS = [sidebar, open, menu, pin, view, drag, verbs, rollup, review, newtrack, cli, pause]

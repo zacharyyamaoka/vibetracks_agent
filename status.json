@@ -2,33 +2,33 @@
   "schema": "ai-team-status/1",
   "member": "Vibe Tracks Agent",
   "team": "AI Team",
-  "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his Nov 24 spec true (ruler v1, OBJECTIVES.md)",
+  "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true (ruler v2, OBJECTIVES.md)",
   "kpi": {
-    "name": "shall items failing, of 19 (ruler v1, dev)",
-    "value": 13.0,
+    "name": "shall items failing, of 20 (ruler v2, dev)",
+    "value": 14.0,
     "unit": "items",
     "direction": "down",
     "target": 0,
-    "level": "13 of 19 shall failing",
-    "level_name": "ruler v1, dev, best boxes-as-tracks-1",
-    "next_gate": "a version with fewer than 13 shall items failing",
+    "level": "14 of 20 shall failing",
+    "level_name": "ruler v2, dev, best boxes-as-tracks-1-v2",
+    "next_gate": "a version with fewer than 14 shall items failing",
     "on_track": null
   },
   "counter_kpi": {
     "name": "checks failing (the third tie-break), same version",
-    "value": 42.0,
+    "value": 57.0,
     "unit": "checks",
     "owner": "Vibe Tracks Agent"
   },
   "status": "idle",
   "blocked_on": null,
   "todo": {
-    "open": 12,
-    "done_7d": 1,
+    "open": 10,
+    "done_7d": 3,
     "top": [
-      "Boxes as tracks, the tree in Vibe Tracks' own file.",
-      "`vt add <folder | github url> [--parent]` and the page's Add box.",
-      "Live box pages."
+      "Live box pages.",
+      "Swap the sidebar's tree model for Headless Tree's core",
+      "Claude's \u00b7\u00b7\u00b7 menu"
     ]
   },
   "links": {
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795594039.7588603
+  "updated_t": 1795596094.1239161
 }

@@ -1,7 +1,7 @@
 {
  "schema": "vibetracks-agent/ruler-manifest-1",
- "ruler": "v1",
- "frozen": "2026-11-24",
+ "ruler": "v2",
+ "frozen": "2026-11-25",
  "blackbox_agent": {
   "repo": "~/blackbox_agent",
   "ref": "b25a20cf14791e9eb7293a0f8d8e43ffb8f3a79f",
@@ -37,9 +37,9 @@
   }
  },
  "time_limit_s": 1200,
- "checks": 104,
+ "checks": 119,
  "files": {
-  "checks.json": "999f9a09cd5ad28fcc03df4a4d40c9685ecebb84aa892eb85d3b718e6e068ec5",
+  "checks.json": "d71862ff4e30e858a93ff64be11725032708a3a2496876f3e05bf11e1f7b1038",
   "fixture.py": "bcf5e5238ba21b6ffd229b2c652fc21e8349b92c68e546b95fb32facbaca92d0",
   "reference/box-components.json": "89526e5d35d5ac056c8a2b908db24b16c4830083722c439e371c8f173b13a8a9",
   "reference/claude-sidebar.json": "de6a2136872c488164b90571b1a6f5ee861adf07fc199171b71f5d36c1a6f8c4",
@@ -48,10 +48,11 @@
   "suite/groups/cli.mjs": "81f14c2ea18a7291c0080215da8622cb5e0f53984ee87a5f5998c91a845e75a0",
   "suite/groups/common.mjs": "890f412780e349af583539f2c3d58a37294f0832cce9d4ede9c0cef23736478a",
   "suite/groups/drag.mjs": "589c6df939e870720aa0f2ccd94ad6681d85c0c28c2ed5829724e74c8ec052bd",
-  "suite/groups/index.mjs": "5dfcc52b534dca7ffd41e3a68325e6c1f3fba77b17c8f01633dd7243fe7cd735",
-  "suite/groups/menu.mjs": "78f6631f66ff14ed7095ee8ab3a71104cf508bda81a2f39770f55b8703ec3db1",
+  "suite/groups/index.mjs": "a68ffb92159d4e647470f088e780ae16e4e881460145d2a3f6c8fec5faa1ce86",
+  "suite/groups/menu.mjs": "84bc3b3f8a548092479a29bc9d9624baf707b887a69973749db9448a02474358",
   "suite/groups/newtrack.mjs": "8a2c792a5d8de8d86ebf4486201e32129ca80153c1e99cf410c1e95950604f7f",
   "suite/groups/open.mjs": "a1ba68f7535f6bb57f8783b3aafe8a81b7a6dc960ef5f926dacc81e28e341b7d",
+  "suite/groups/pause.mjs": "b6636fc34463de806ca82e797bcaa809cc5bd7f643155964300d53513e444f47",
   "suite/groups/pin.mjs": "6c2988e1fc010a2812566bf94ea45fa45dbb037b6855418a187a72be42eb6383",
   "suite/groups/review.mjs": "e5dd96beaf2c02a81d89c75ab4a83618ba5ef38f18408e68f2f000f3aba073a4",
   "suite/groups/rollup.mjs": "b4fd86897bf3a72ae80e50a7539127bfcbe1fb97587e9aa301d65d1b8ef1d763",
@@ -59,18 +60,19 @@
   "suite/groups/verbs.mjs": "3d2e4936869a46aa7231b0b65370c7bb45529a75b203e0c4424c4c7c8f11f2dc",
   "suite/groups/view.mjs": "10e20872e7fca17a7ed12ccc07b956f83a75533308fe3631e7b8103988a4580d",
   "suite/lib.mjs": "cee55eb55697a5a0875452f9f918e3d3146c4eaef2c9f60f59f1bbefde514adc",
-  "suite/run.mjs": "e6b710536aadec64dd50d2280d963408bbbb95a45a6b78ca2f30cff2740efa8b"
+  "suite/run.mjs": "53bf9057244812bdb20b142d80ea96adae9b40d92a16cbed287d7521dc0a4c05"
  },
  "spec_files": {
-  "OBJECTIVES.md": "2b7a1d294b03cc0a38a4d8a8b7d9700a27cdd797e1ad5c3b942813bb7c2ae585",
+  "OBJECTIVES.md": "d0092498eac3f6e98d37bf9b3414dced024ecac8023a2e2513fd38440ea48ce1",
   "specs/S1.1-a-track-is-a-box.md": "00ef21565256159878061f700f93ae99cc32a85c0f54c4762d402e7901e5ef89",
   "specs/S1.2-a-box-holds-nothing-for-vibetracks.md": "fb13be1c7c73a35d838b1cac3bd18bbeab3970ae6f99b44949e3d0fa95e7e53e",
   "specs/S1.3-vibetracks-owns-the-tree.md": "0f3402ef05cdc1fe9a1a59851c69744262af206bd1cbb5633f8abb56740bdc3e",
   "specs/S1.4-live-local-data.md": "a477f546624bafc1ce7ddeac2827cfb9de1f1738c9fdde12b5fbb17db9df70f2",
   "specs/S1.5-add-an-existing-box.md": "8540c2bdc011673a6c8d4935dcf7e0e19da49076a170e6db2843ff9e7c9f482b",
   "specs/S2.1-top-rows.md": "db0ea5033d49cb9892b6b82bab6278cef5a836a8b8daec399bf1b9ab3a417031",
+  "specs/S2.10-pause-and-resume.md": "99bf0e7f6c8f297659766559bcf8db30f1078084968944ca3cd712b99dddfdbd",
   "specs/S2.2-pixel-parity-with-claude.md": "dad2928edc63717d63baa2b9f9361674b1ca757bec4e1a77a673d39408c7b837",
-  "specs/S2.3-row-menu-has-claudes-items.md": "30dcb56bd3ab87d117f916edc49a09e9fca278d64354f1fb629bc3962b656a9d",
+  "specs/S2.3-row-menu-has-claudes-items.md": "03012a9f166336632a2d09b49fbe0eda3a1d82f58a33755698139fe4061a6553",
   "specs/S2.4-right-click-is-the-row-menu.md": "3b3b610f5c0e4ea00c280462a4421662270cb0e5759e9d1136e61c5ed8b42c4e",
   "specs/S2.5-pin-and-the-pinned-section.md": "d8bb6a584fc746a693ca7dde7baec44409922e4011d145b502848356c0bddd6d",
   "specs/S2.6-the-view-menu.md": "5da3ec575266a28e213c750e2a0df9e3d33f36d1082d714a39718280aa06d3ac",

@@ -160,13 +160,15 @@ def test_gates_are_admissible_only_when_both_are_true():
 # ── the real spec notes ──────────────────────────────────────────────────────────────────────────────────────
 
 
-def test_the_frozen_spec_has_19_shall_and_4_should_and_s5_1_has_no_check():
+def test_the_frozen_spec_has_20_shall_and_4_should_and_s5_1_has_no_check():
+    """Ruler v2 (PEP 0002) adds S2.10, a shall: 19 -> 20."""
     items = specs.load_items(REPO / "specs")
-    assert len([i for i in items if i.kind == "shall"]) == 19
+    assert len([i for i in items if i.kind == "shall"]) == 20
     assert len([i for i in items if i.kind == "should"]) == 4
     by_id = {i.id: i for i in items}
     assert by_id["S5.1"].tests == ()
     assert by_id["S2.3"].tests == ("*::S2.3 *",)
+    assert by_id["S2.10"].kind == "shall" and by_id["S2.10"].tests == ("*::S2.10 *",)
 
 
 def test_every_spec_item_but_s5_1_has_at_least_one_ruler_check():
@@ -174,3 +176,35 @@ def test_every_spec_item_but_s5_1_has_at_least_one_ruler_check():
     expected = scoring.expected_checks(REPO / "ruler" / "checks.json")
     unchecked = [i.id for i in items if not [c for c in expected if scoring.matches(c, i.tests)]]
     assert unchecked == ["S5.1"]
+
+
+def test_s2_1_never_claims_an_s2_10_check():
+    assert not scoring.matches("ruler/suite/pause.py::S2.10 a paused row's title is muted", ("*::S2.1 *",))
+    assert scoring.matches("ruler/suite/pause.py::S2.10 a paused row's title is muted", ("*::S2.10 *",))
+
+
+# PEP 0002's check table, row by row: words each row's check name must carry (a dropped row turns this red)
+PEP_0002_ROWS = {
+    "the menus show Pause on an active track": "menus show Pause",
+    "and Resume on a paused one": "menus show Resume",
+    "pausing changes nothing in the box": "leave every box untouched",
+    "a pause glyph in the status-dot slot": "pause glyph in its status-dot slot",
+    "a muted title": "title is muted",
+    "it survives a reload": "survives a reload",
+    "and a vt serve restart": "survives a vt serve restart",
+    "from the page, a person record": "Pause in the ··· menu writes a person record",
+    "from vt pause in an agent's session, an agent record": "inside an agent session writes an agent record",
+    "vt pause and the menu agree within one tick": "shows on the page within 5 s",
+    "--why stored verbatim": "verbatim",
+    "without --why no why key": "no why",
+    "Resume returns the state colour and Pause": "Resume returns the row to its state colour and the menu to Pause",
+}
+
+
+def test_every_row_of_pep_0002s_check_table_has_an_s2_10_check():
+    names = [c.split("::", 1)[1] for c in scoring.expected_checks(REPO / "ruler" / "checks.json")]
+    s210 = [n for n in names if n.startswith("S2.10 ")]
+    missing = [row for row, words in PEP_0002_ROWS.items() if not any(words in n for n in s210)]
+    assert not missing, f"PEP 0002 rows with no S2.10 check: {missing}"
+    # S2.3's amended list: Z runs Pause / Resume (the letter is read, as every other letter is)
+    assert any(n.startswith("S2.3 Z ") for n in names)

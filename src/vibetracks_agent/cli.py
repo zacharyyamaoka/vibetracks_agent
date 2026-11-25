@@ -4,7 +4,7 @@
     vta new <id> --ref <ref> --change "…" --agent A --model M [--parent P] [--session S] [--tags a,b]
     vta evaluate <id> [--split dev|holdout] [--runs 2] [--vt-gate]   # the acceptance run -> scorecard + ledger row
     vta progress                                  # PROGRESS.md, status.json
-    vta leaderboard [--n N]
+    vta leaderboard [--n N] [--split dev|holdout] [--ruler v1]   # the current ruler's board unless --ruler names another
 
 Shapes follow claude_party_agent `src/claude_party_agent/cli.py` @ bdd812a.
 """
@@ -96,10 +96,11 @@ def cmd_progress(_: argparse.Namespace) -> int:
 
 
 def cmd_leaderboard(args: argparse.Namespace) -> int:
-    rows = ledger.rank(ledger.read(paths.repo_root() / "ledger.jsonl"), args.split)
+    rows = ledger.rank(ledger.read(paths.repo_root() / "ledger.jsonl"), args.split, ruler=args.ruler)
     if not rows:
-        print("no version scored yet")
+        print(f"no version scored on ruler {args.ruler} yet")
         return 0
+    print(f"ruler {args.ruler}, {args.split}")
     print(f"{'#':>3}  {'version':<24} {'shall':>5} {'should':>6} {'checks':>6} {'adm':>4}  change")
     metas = solutions.all_meta()
     for n, row in enumerate(rows[: args.n], start=1):
@@ -110,7 +111,7 @@ def cmd_leaderboard(args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="vta", description="The Vibe Tracks Agent (ruler v1, OBJECTIVES.md)")
+    parser = argparse.ArgumentParser(prog="vta", description=f"The Vibe Tracks Agent (ruler {ledger.RULER}, OBJECTIVES.md)")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("verify", help="the ruler is intact; the ledger parses").set_defaults(run=cmd_verify)
     new = commands.add_parser("new", help="a solution for a vibetracks ref")
@@ -136,6 +137,7 @@ def main(argv: list[str] | None = None) -> int:
     board = commands.add_parser("leaderboard", help="the ranked table")
     board.add_argument("--n", type=int, default=20)
     board.add_argument("--split", choices=("dev", "holdout"), default="dev")
+    board.add_argument("--ruler", default=ledger.RULER, help=f"the ruler whose rows to rank (default {ledger.RULER})")
     board.set_defaults(run=cmd_leaderboard)
     args = parser.parse_args(argv)
     started = time.monotonic()

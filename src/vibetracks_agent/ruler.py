@@ -16,7 +16,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from vibetracks_agent import paths
+from vibetracks_agent import ledger, paths
 
 SCHEMA = "vibetracks-agent/ruler-manifest-1"
 SKIP_PARTS = ("__pycache__", "node_modules")
@@ -52,7 +52,7 @@ def manifest(root: Path | None = None) -> dict[str, Any]:
 
 
 def build(root: Path, refs: dict[str, Any]) -> dict[str, Any]:
-    return {"schema": SCHEMA, "ruler": "v1", "frozen": refs.pop("frozen"), **refs, "files": ruler_files(root),
+    return {"schema": SCHEMA, "ruler": ledger.RULER, "frozen": refs.pop("frozen"), **refs, "files": ruler_files(root),
             "spec_files": spec_files(root), "pins": pin_files(root)}
 
 
@@ -86,6 +86,10 @@ def problems(root: Path | None = None) -> list[str]:
     found = []
     if m.get("schema") != SCHEMA:
         found.append(f"ruler/manifest.json: schema {m.get('schema')!r}")
+    # WHY: a scorecard and a ledger row say which ruler scored them (ledger.RULER); a manifest or checks.json of
+    # another version would label a v2 score v1, or the reverse, and ledger.rank would compare across rulers
+    if m.get("ruler") != ledger.RULER:
+        found.append(f"ruler/manifest.json names ruler {m.get('ruler')!r}; the scorer scores {ledger.RULER!r}")
     found += _diff("ruler/", m.get("files") or {}, ruler_files(root))
     found += _diff("spec", m.get("spec_files") or {}, spec_files(root))
     found += _diff("pin", m.get("pins") or {}, pin_files(root))
@@ -94,10 +98,14 @@ def problems(root: Path | None = None) -> list[str]:
         found.append("node ruler/suite/run.mjs --list failed (is node installed?)")
     else:
         try:
-            frozen = json.loads((root / "ruler" / "checks.json").read_text())["checks"]
+            data = json.loads((root / "ruler" / "checks.json").read_text())
+            frozen = data["checks"]
         except (OSError, ValueError, KeyError) as error:
             frozen = None
             found.append(f"ruler/checks.json: {error}")
+        else:
+            if data.get("ruler") != ledger.RULER:
+                found.append(f"ruler/checks.json names ruler {data.get('ruler')!r}; the scorer scores {ledger.RULER!r}")
         if frozen is not None and [c["id"] for c in frozen] != [c["id"] for c in listed]:
             found.append("ruler/checks.json differs from the checks the suite declares (node ruler/suite/run.mjs --list)")
     if not (root / "node_modules" / "playwright" / "package.json").exists():

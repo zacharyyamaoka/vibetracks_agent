@@ -19,8 +19,10 @@ REPO = Path(__file__).resolve().parents[1]
 BLACKBOX = Path.home() / "blackbox_agent"
 
 
-def row(sid, objective, tiebreak=0, tiebreak2=0, admissible=True, rate=1.0, t="2026-11-24T00:00:00Z", split="dev"):
-    return {"t": t, "solution": sid, "parent": None, "split": split, "ruler": "v1", "objective": objective,
+def row(sid, objective, tiebreak=0, tiebreak2=0, admissible=True, rate=1.0, t="2026-11-24T00:00:00Z", split="dev",
+        ruler_version=None):
+    return {"t": t, "solution": sid, "parent": None, "split": split, "ruler": ruler_version or ledger.RULER,
+            "objective": objective,
             "tiebreak": tiebreak, "tiebreak2": tiebreak2, "admissible": admissible, "gate_pass_rate": rate,
             "failed_gates": {}, "diagnostics": {}, "wall_time_s": 1.0, "repo_commit": None, "vibetracks_sha": "x",
             "proposed_by": {"agent": "a", "model": "m"}, "change": "c", "task_objectives": {}}
@@ -38,6 +40,33 @@ def test_latest_keeps_the_newest_row_per_solution_and_split():
     rows = [row("a", 5, t="2026-11-24T01:00:00Z"), row("a", 4, t="2026-11-24T02:00:00Z"), row("a", 9, split="holdout")]
     newest = ledger.latest(rows)
     assert [(r["split"], r["objective"]) for r in newest] == [("dev", 4), ("holdout", 9)]
+
+
+# ── ruler versions (OBJECTIVES §11): rank within the current ruler; an earlier ruler's row is kept and labelled ──
+
+
+def test_the_code_and_the_frozen_ruler_name_one_version():
+    """The scorer, the manifest and checks.json all say v2 (PEP 0002), so a scorecard's `ruler` is the ruler it ran."""
+    assert ledger.RULER == "v2"
+    assert ruler.manifest(REPO)["ruler"] == ledger.RULER
+    assert json.loads((REPO / "ruler" / "checks.json").read_text())["ruler"] == ledger.RULER
+
+
+def test_rank_and_best_compare_only_rows_of_the_current_ruler():
+    old = row("old", 0, 0, 0, ruler_version="v1")  # better on paper, scored on another ruler
+    new = row("new", 5, 1, 30)
+    assert [r["solution"] for r in ledger.rank([old, new])] == ["new"]
+    assert ledger.best([old, new])["solution"] == "new"
+    assert ledger.best([old]) is None
+    assert [r["solution"] for r in ledger.rank([old, new], ruler="v1")] == ["old"]
+    unlabelled = row("bare", 0)
+    del unlabelled["ruler"]
+    assert ledger.rank([unlabelled]) == []
+
+
+def test_latest_keeps_one_row_per_ruler():
+    rows = [row("a", 13, ruler_version="v1", t="2026-11-25T01:00:00Z"), row("a", 14, t="2026-11-25T02:00:00Z")]
+    assert sorted((r["ruler"], r["objective"]) for r in ledger.latest(rows)) == [("v1", 13), (ledger.RULER, 14)]
 
 
 def test_append_refuses_a_row_missing_a_key_or_a_bad_split(tmp_path):
@@ -84,6 +113,16 @@ def test_verify_fails_when_checks_json_drifts_from_the_suite(ruler_copy):
     path.write_text(json.dumps(data))
     found = "\n".join(ruler.problems(ruler_copy))
     assert "checks.json differs" in found and "checks.json: sha256" in found
+
+
+@pytest.mark.parametrize("where", ["manifest", "checks"])
+def test_verify_fails_when_the_frozen_ruler_names_another_version(ruler_copy, where):
+    path = ruler_copy / "ruler" / ("manifest.json" if where == "manifest" else "checks.json")
+    data = json.loads(path.read_text())
+    data["ruler"] = "v1"
+    path.write_text(json.dumps(data))
+    found = "\n".join(ruler.problems(ruler_copy))
+    assert f"names ruler 'v1'; the scorer scores {ledger.RULER!r}" in found
 
 
 def test_verify_fails_with_no_manifest(tmp_path):
@@ -157,3 +196,26 @@ def test_the_published_scorecard_names_no_run_dir_and_no_home():
     out = evaluate.public_text(card, [run_dir])
     assert str(Path.home()) not in out and "/home/" not in out
     assert json.loads(out) == {"message": "vt add <fixture-home>/kestrel_agent exited 1", "other": "<run>"}
+
+
+def test_progress_ranks_the_current_ruler_and_lists_an_earlier_one_apart(tmp_path):
+    """A v1 row is kept and labelled, never compared against v2 (OBJECTIVES §11): it is on no leaderboard, it is not
+    the KPI, and the evaluations table says which ruler each row ran."""
+    shutil.copytree(REPO / "specs", tmp_path / "specs")
+    for sid in ("old", "new"):
+        (tmp_path / "solutions" / sid).mkdir(parents=True)
+        (tmp_path / "solutions" / sid / "meta.json").write_text(json.dumps({"id": sid, "change": sid, "proposed_by": {}}))
+    ledger.append(row("old", 13, 2, 42, ruler_version="v1", t="2026-11-25T01:00:00Z"), tmp_path / "ledger.jsonl")
+    ledger.append(row("new", 14, 2, 50, t="2026-11-25T02:00:00Z"), tmp_path / "ledger.jsonl")
+    progress.write_all(tmp_path, now_s=1.0)
+    text = (tmp_path / "PROGRESS.md").read_text()
+    status = json.loads((tmp_path / "status.json").read_text())
+    assert status["kpi"]["value"] == 14 and f"ruler {ledger.RULER}" in status["kpi"]["name"]
+    assert "of 20" in status["kpi"]["name"]
+    board = text.split("## Leaderboard (dev)", 1)[1].split("\n## ", 1)[0]
+    assert "`new`" in board and "`old`" not in board
+    earlier = text.split("## Earlier rulers", 1)[1].split("\n## ", 1)[0]
+    assert "`old`" in earlier and "v1" in earlier and "`new`" not in earlier
+    last = text.split("## Last 10 evaluations", 1)[1]
+    assert "| ruler |" in last and "| v1 |" in last and f"| {ledger.RULER} |" in last
+    assert f"Ruler {ledger.RULER}" in text

@@ -71,9 +71,16 @@ loading come first because every other item reads them.
 - [ ] **Pause / Resume** in the ··· and right-click menus, before Archive; a paused row shows a pause glyph and a
   muted title; `vt pause|resume <track>`; an append-only `status` list in the tree file, stamped `by` (person, or
   agent when an agent's session ran it). Zach's words: [`feedback/2026-11-25-pause-a-track.md`](feedback/2026-11-25-pause-a-track.md).
-  Expect (ruler v2): S2.10 → pass, S2.3 stays green. Spec: [PEP 0002](docs/peps/0002-ruler-v2-pause-resume.md).
+  Expect (ruler v2): S2.10 → pass, and S2.3's `Z` check; S2.3 itself stays red until its v1 misses (Open in, Mark as
+  unread, Fork) land. Spec: [PEP 0002](docs/peps/0002-ruler-v2-pause-resume.md).
   - Rung: sidebar
-  - Needs: the tree file (boxes-as-tracks) and ruler v2 frozen
+  - Needs: the tree file (boxes-as-tracks, landed) and ruler v2 (frozen 2026-11-25).
+  - Seams (lane R's throwaway positive control on 4c7437a passed all 14 S2.10 checks and `Z` with ~45 added lines):
+    `pause` / `resume` ops in `core.boxes.apply` appending `{at, status, by[, why]}` to the entry's `status`;
+    `boxes.act` stamping `by` with `records.stamp(config, None, "page")`; `vt pause|resume <id> [--why]` stamping with
+    `records.agent_session()` and `via "cli"`; `paused` in the tree view; the ··· item (Z) before Archive in
+    boxes.js; a pause glyph in the row's lead and a lower-opacity title in sidebar.js. How each is measured:
+    [`docs/CONTRACT.md`](docs/CONTRACT.md) §7, items 24-32.
 - [ ] **Add this box to Zach's Vibe Tracks** once `vt add` exists. Expect: S5.1 verified by hand.
   - Rung: meta
   - Needs: `vt add`

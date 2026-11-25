@@ -59,7 +59,7 @@ boxes-as-tracks PEP's to name ([vibetracks `docs/peps/`](https://github.com/zach
 
 ## What it costs
 
-- One spec note (`specs/S2.10-pause-and-resume.md`), the S2.3 note's list, one check group (`ruler/suite/groups/pause.mjs`) and
+- One spec note ([`specs/S2.10-pause-and-resume.md`](../../specs/S2.10-pause-and-resume.md)), the S2.3 note's list, one check group ([`ruler/suite/groups/pause.mjs`](../../ruler/suite/groups/pause.mjs)) and
   S2.3's expected list in `menu.mjs`; [`tools/freeze_ruler.py`](../../tools/freeze_ruler.py) re-pins the manifest; every solution is re-scored on v2
   (OBJECTIVES §11).
 - The shall count goes 19 → 20.

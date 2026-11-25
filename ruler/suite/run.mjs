@@ -58,7 +58,7 @@ function writeJunit(final = true) {
     body += '  </testsuite>\n'
   }
   const n = results.length, f = results.filter((r) => r.state === 'fail').length, e = results.filter((r) => r.state === 'error').length
-  const head = `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites name="vibetracks_agent ruler v1" tests="${n}" failures="${f}" errors="${e}" seed="${fixture.seed}">\n`
+  const head = `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites name="vibetracks_agent ruler v2" tests="${n}" failures="${f}" errors="${e}" seed="${fixture.seed}">\n`
   writeFileSync(join(runDir, final ? 'junit.xml' : 'junit.partial.xml'), head + body + '</testsuites>\n')
   writeFileSync(join(runDir, 'diagnostics.json'), JSON.stringify(diag, null, 1) + '\n')
 }

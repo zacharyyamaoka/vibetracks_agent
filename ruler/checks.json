@@ -1,6 +1,6 @@
 {
  "schema": "vibetracks-agent/checks-1",
- "ruler": "v1",
+ "ruler": "v2",
  "what": "Every check the acceptance suite runs (node ruler/suite/run.mjs --list), frozen with it: a check missing from a run's junit counts as failing, and an item none of these match has no check (OBJECTIVES \u00a78).",
  "checks": [
   {
@@ -227,6 +227,11 @@
    "id": "ruler/suite/menu.py::S2.3 Delete leaves the box's folder on disk",
    "group": "menu",
    "name": "S2.3 Delete leaves the box's folder on disk"
+  },
+  {
+   "id": "ruler/suite/menu.py::S2.3 Z pauses the track, and Z on a paused track resumes it",
+   "group": "menu",
+   "name": "S2.3 Z pauses the track, and Z on a paused track resumes it"
   },
   {
    "id": "ruler/suite/pin.py::S2.5 two pinned tracks sit under Pinned, in pin order, above the rest",
@@ -522,6 +527,76 @@
    "id": "ruler/suite/cli.py::S1.5 vt add lists an existing box under its parent in the sidebar",
    "group": "cli",
    "name": "S1.5 vt add lists an existing box under its parent in the sidebar"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 an active track's \u00b7\u00b7\u00b7 and right-click menus show Pause",
+   "group": "pause",
+   "name": "S2.10 an active track's \u00b7\u00b7\u00b7 and right-click menus show Pause"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 Pause in the \u00b7\u00b7\u00b7 menu writes a person record to the tree file, with no agent and no why",
+   "group": "pause",
+   "name": "S2.10 Pause in the \u00b7\u00b7\u00b7 menu writes a person record to the tree file, with no agent and no why"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 a paused track's \u00b7\u00b7\u00b7 and right-click menus show Resume",
+   "group": "pause",
+   "name": "S2.10 a paused track's \u00b7\u00b7\u00b7 and right-click menus show Resume"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 a paused row shows a pause glyph in its status-dot slot",
+   "group": "pause",
+   "name": "S2.10 a paused row shows a pause glyph in its status-dot slot"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 a paused row's title is muted",
+   "group": "pause",
+   "name": "S2.10 a paused row's title is muted"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 the pause survives a reload",
+   "group": "pause",
+   "name": "S2.10 the pause survives a reload"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 the pause survives a vt serve restart",
+   "group": "pause",
+   "name": "S2.10 the pause survives a vt serve restart"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 Resume returns the row to its state colour and the menu to Pause",
+   "group": "pause",
+   "name": "S2.10 Resume returns the row to its state colour and the menu to Pause"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 vt pause writes a person record via cli with no why",
+   "group": "pause",
+   "name": "S2.10 vt pause writes a person record via cli with no why"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 vt pause shows on the page within 5 s, with no reload",
+   "group": "pause",
+   "name": "S2.10 vt pause shows on the page within 5 s, with no reload"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s",
+   "group": "pause",
+   "name": "S2.10 vt resume --why stores the text verbatim, and the page shows Pause within 5 s"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim",
+   "group": "pause",
+   "name": "S2.10 vt pause --why inside an agent session writes an agent record with the text verbatim"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 the status list is append-only and a track never paused reads active",
+   "group": "pause",
+   "name": "S2.10 the status list is append-only and a track never paused reads active"
+  },
+  {
+   "id": "ruler/suite/pause.py::S2.10 pausing and resuming leave every box untouched",
+   "group": "pause",
+   "name": "S2.10 pausing and resuming leave every box untouched"
   }
  ]
 }

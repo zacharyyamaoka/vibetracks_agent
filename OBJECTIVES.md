@@ -1,15 +1,15 @@
-# Objectives & Gates (ruler v1, frozen 2026-11-24)
+# Objectives & Gates (ruler v2, frozen 2026-11-25)
 
 The outside of the black box: what Vibe Tracks is for, how a version of it is scored, and where every number comes
-from. Nothing here says how Vibe Tracks does it. Changing anything in this file, `specs/` or `ruler/` makes **ruler
-v2**: a new section at the bottom, and every solution is re-scored on it. A solution (a vibetracks commit) never
+from. Nothing here says how Vibe Tracks does it. Changing anything in this file, `specs/` or `ruler/` makes a **new ruler
+version** (v3 next): a new entry in §11, and every solution is re-scored on it. A solution (a vibetracks commit) never
 edits this file, `specs/` or `ruler/`.
 
 WHY this file exists (Zach, 2026-11-24, Daily Note "# Vibe tracks"): *"Please make a blackbox agent for vibe tracks it
 self."* and *"all of this stuff is Spec and context btw that should be relfected on the black box page for
 vibetracks!"* The spec he gave that evening is §1-§5; each item has its own note in `specs/` with his words.
 
-**§1-§5 are the spec**: 19 *shall*, 4 *should*, each linking to its note (Zach's words, what it means, why, how
+**§1-§5 are the spec**: 20 *shall*, 4 *should*, each linking to its note (Zach's words, what it means, why, how
 it is checked); a spec id `S<n>.<m>` is item m of §n. **§6-§8 say how a version is scored.**
 
 ## 1. Tracks are independent boxes
@@ -28,13 +28,14 @@ it is checked); a spec id `S<n>.<m>` is item m of §n. **§6-§8 say how a versi
 |---|---|---|
 | [S2.1](specs/S2.1-top-rows.md) | shall | Top rows: Home, Review, Feedback, New track |
 | [S2.2](specs/S2.2-pixel-parity-with-claude.md) | shall | Pixel parity with the Claude desktop app's sidebar |
-| [S2.3](specs/S2.3-row-menu-has-claudes-items.md) | shall | The ··· menu has Claude's items, in Claude's order, with its shortcut letters |
+| [S2.3](specs/S2.3-row-menu-has-claudes-items.md) | shall | The ··· menu has Claude's items, in Claude's order, with its shortcut letters, and Pause / Resume before Archive |
 | [S2.4](specs/S2.4-right-click-is-the-row-menu.md) | shall | Right-click on a track opens the same menu as its ··· |
 | [S2.5](specs/S2.5-pin-and-the-pinned-section.md) | shall | Pin a track; pinned tracks sit in a Pinned section at the top |
 | [S2.6](specs/S2.6-the-view-menu.md) | shall | The view menu: Group by, Sort by, Show, New section, Reset to defaults, View all |
 | [S2.7](specs/S2.7-groupings.md) | shall | Groupings: flat by recent, and the parent tree |
 | [S2.8](specs/S2.8-drag-to-reorder-on-a-stock-tree.md) | shall | Drag to reorder and to move under another track, on a stock tree component |
 | [S2.9](specs/S2.9-row-anatomy.md) | should | Row anatomy: status dot, badges, fold chevron on hover |
+| [S2.10](specs/S2.10-pause-and-resume.md) | shall | Pause a track; a paused track looks paused and stays paused until resumed |
 
 ## 3. Roll-up pages
 
@@ -91,7 +92,7 @@ Nothing touches Zach's spaces, his Stable or Preview, his Claude app or his GitH
 
 ## 8. The score
 
-**Objective (one number, lower is better): `shall_failing`** = how many of the 19 *shall* items in §1-§5 the version
+**Objective (one number, lower is better): `shall_failing`** = how many of the 20 *shall* items in §1-§5 the version
 does not meet on the `dev` run. Target **0**. An item is met only when it has at least one check and every one of
 its checks passed. **Fail closed:** an item with no check, a skipped check, a check that crashed or a run that did not
 finish counts as failing.
@@ -124,7 +125,7 @@ version fixes or breaks without reading its code.
 
 ## 10. Open tensions (defaults taken; Zach's to overrule)
 
-Each default is in force for ruler v1; overruling one is a ruler v2.
+Each default is in force for ruler v2 (as it was for v1); overruling one is a new ruler version.
 
 1. **Hover chevron (Oct 16) vs pixel-perfect Claude (Nov 24).** Claude's rows have no hover fold chevron. Default:
    S2.9 is a *should*, and S2.2 wins where the two clash.
@@ -141,3 +142,11 @@ Each default is in force for ruler v1; overruling one is a ruler v2.
 
 - **v1**, frozen 2026-11-24: §1-§8 and `specs/` at the commit that adds this file; `ruler/` at the commit that adds
   `ruler/manifest.json`.
+- **v2**, frozen 2026-11-25: [PEP 0002](docs/peps/0002-ruler-v2-pause-resume.md). What changed: §2 gains **S2.10**
+  (shall: pause a track from the ··· menu or `vt pause`; a paused row looks paused, survives a reload and a restart,
+  and the tree file records who paused it and, with `--why`, why), so the spec is 20 *shall*, 4 *should*; **S2.3**'s
+  list gains **Pause / Resume `Z`** right before Archive, and its letter is checked like the others; `ruler/` gains
+  the `pause` group and S2.3's `Z` check, re-pinned in `ruler/manifest.json` (every other check, the fixture and the
+  frozen refs are as in v1). Why: Zach, 2026-11-25 ([`feedback/2026-11-25-pause-a-track.md`](feedback/2026-11-25-pause-a-track.md)): *"I should be able to like
+  pause a track. I think in the 3 button menu You can give like a pause/resume, archive, delete"*. Every solution is
+  re-scored on v2; a v1 row stays in the ledger, labelled v1, and is never ranked against a v2 one.

@@ -21,8 +21,8 @@ from vibetracks_agent import ledger, paths, solutions, specs
 from vibetracks_agent.ledger import finite
 
 MEMBER = "Vibe Tracks Agent"
-REMIT = ("make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his Nov 24 spec true "
-         "(ruler v1, OBJECTIVES.md)")
+REMIT = ("make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true "
+         f"(ruler {ledger.RULER}, OBJECTIVES.md)")
 DASH = "—"
 
 
@@ -66,6 +66,18 @@ def gather(root: Path | None = None) -> dict[str, Any]:
                       "change": record.get("change", row.get("change")),
                       "model": (record.get("proposed_by") or row.get("proposed_by") or {}).get("model"),
                       "evaluated": row.get("t")})
+    # WHY a separate list (OBJECTIVES §11): an earlier ruler's rows are kept and labelled, never ranked with the
+    # current ones (a v1 "13 of 19" is not a v2 "13 of 20")
+    earlier = []
+    for version in ledger.rulers(rows):
+        if version == ledger.RULER:
+            continue
+        for row in ledger.rank(rows, "dev", ruler=version):
+            record = metas.get(row["solution"]) or {}
+            earlier.append({"ruler": version, "solution": row["solution"], "shall_failing": row.get("objective"),
+                            "should_failing": row.get("tiebreak"), "checks_failing": row.get("tiebreak2"),
+                            "admissible": row.get("admissible") is True,
+                            "change": record.get("change", row.get("change")), "evaluated": row.get("t")})
     orders = []
     if subject:
         card = _card(root, subject["solution"]) or {}
@@ -80,9 +92,9 @@ def gather(root: Path | None = None) -> dict[str, Any]:
                                "failed": len(task.get("failed_checks") or []), "checks": len(task.get("checks") or []),
                                "why": task.get("why")})
     return {"as_of": max((str(r.get("t") or "") for r in rows), default=None) or None, "rows": len(rows),
-            "ranked": board, "best": top, "subject": subject, "work_orders": orders,
-            "evaluations": [{k: r.get(k) for k in ("t", "solution", "split", "objective", "tiebreak", "tiebreak2",
-                                                    "admissible", "wall_time_s")} for r in rows[-10:]],
+            "ranked": board, "earlier": earlier, "best": top, "subject": subject, "work_orders": orders,
+            "evaluations": [{k: r.get(k) for k in ("t", "solution", "split", "ruler", "objective", "tiebreak",
+                                                    "tiebreak2", "admissible", "wall_time_s")} for r in rows[-10:]],
             "shall_total": sum(1 for i in items.values() if i.kind == "shall"),
             "should_total": sum(1 for i in items.values() if i.kind == "should")}
 
@@ -96,7 +108,7 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
     shall, should = data["shall_total"], data["should_total"]
     # WHY every id is a link (Zach, 2026-11-24: "/rate bad these files should have been linked..."): a reader opens
     # the solution, the spec note or the ledger in one click (tests/test_docs_link_what_they_name.py holds it).
-    lines = ["# Progress", "", f"Ruler v1 ([`OBJECTIVES.md`](OBJECTIVES.md) §8). Generated {generated} by "
+    lines = ["# Progress", "", f"Ruler {ledger.RULER} ([`OBJECTIVES.md`](OBJECTIVES.md) §8, §11). Generated {generated} by "
              "`vta progress` from [`ledger.jsonl`](ledger.jsonl); never edit by hand.", "", "## Where it stands", ""]
     best, subject = data["best"], data["subject"]
     if best:
@@ -110,7 +122,8 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
     else:
         lines.append("- **No version scored yet:** `vta new` then `vta evaluate`.")
     lines += ["", "## Leaderboard (dev)", "",
-              "Admissible versions by shall failing, then should failing, then checks failing; then the rest (§8).", "",
+              f"Ruler {ledger.RULER} only. Admissible versions by shall failing, then should failing, then checks "
+              "failing; then the rest (§8).", "",
               "| rank | id | shall failing | should failing | checks failing | admissible | holdout shall | change | model |",
               "|---|---|---|---|---|---|---|---|---|"]
     for r in data["ranked"][:15]:
@@ -122,6 +135,18 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
                      f"{_cell(r['model'])} |")
     if not data["ranked"]:
         lines.append(f"| {DASH} | no version scored yet | | | | | | | |")
+    if data["earlier"]:
+        lines += ["", "## Earlier rulers", "",
+                  f"Scored on an earlier ruler: kept and labelled, never ranked against ruler {ledger.RULER} "
+                  "(OBJECTIVES §11); re-score one with `vta new` + `vta evaluate` to compare it.", "",
+                  "| ruler | id | shall failing | should failing | checks failing | admissible | change |",
+                  "|---|---|---|---|---|---|---|"]
+        for r in data["earlier"]:
+            change = r["change"] or ""
+            change = change if len(change) <= 80 else change[:79] + "…"
+            lines.append(f"| {_cell(r['ruler'])} | {_sol(r['solution'])} | {fmt(r['shall_failing'])} | "
+                         f"{fmt(r['should_failing'])} | {fmt(r['checks_failing'])} | {'yes' if r['admissible'] else 'no'} | "
+                         f"{_cell(change)} |")
     lines += ["", "## Open work orders", ""]
     if subject:
         lines += [f"The spec items {_sol(subject['solution'])} does not meet ({len(data['work_orders'])}); each is "
@@ -132,13 +157,15 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
                          f"{w['failed']} of {w['checks']}" + (f" ({_cell(w['why'])})" if not w['checks'] else "") + " |")
     else:
         lines.append("None yet: no version scored.")
-    lines += ["", "## Last 10 evaluations", "", "| t | id | split | shall | should | checks | admissible | wall s |",
-              "|---|---|---|---|---|---|---|---|"]
+    lines += ["", "## Last 10 evaluations", "",
+              "| t | id | split | ruler | shall | should | checks | admissible | wall s |",
+              "|---|---|---|---|---|---|---|---|---|"]
     for r in data["evaluations"]:
-        lines.append(f"| {r['t']} | {_sol(r['solution'])} | {r['split']} | {fmt(r['objective'])} | {fmt(r['tiebreak'])} | "
-                     f"{fmt(r['tiebreak2'])} | {'yes' if r['admissible'] else 'no'} | {fmt(r['wall_time_s'])} |")
+        lines.append(f"| {r['t']} | {_sol(r['solution'])} | {r['split']} | {_cell(r.get('ruler') or 'unknown')} | "
+                     f"{fmt(r['objective'])} | {fmt(r['tiebreak'])} | {fmt(r['tiebreak2'])} | "
+                     f"{'yes' if r['admissible'] else 'no'} | {fmt(r['wall_time_s'])} |")
     if not data["evaluations"]:
-        lines.append(f"| {DASH} | | | | | | | |")
+        lines.append(f"| {DASH} | | | | | | | | |")
     lines.append("")
     return "\n".join(lines)
 
@@ -178,13 +205,13 @@ def status_record(data: Mapping[str, Any], root: Path, now_s: float) -> dict[str
         "team": "AI Team",
         "remit": REMIT,
         "kpi": {
-            "name": f"shall items failing, of {shall} (ruler v1, dev)",
+            "name": f"shall items failing, of {shall} (ruler {ledger.RULER}, dev)",
             "value": None if shown is None else finite(shown.get("objective")),
             "unit": "items",
             "direction": "down",
             "target": 0,
             "level": None if shown is None else f"{fmt(shown.get('objective'))} of {shall} shall failing",
-            "level_name": "ruler v1, dev" + ("" if shown is None else f", {'best' if best else 'top (not admissible)'} "
+            "level_name": f"ruler {ledger.RULER}, dev" + ("" if shown is None else f", {'best' if best else 'top (not admissible)'} "
                                                                        f"{shown['solution']}"),
             "next_gate": ("an admissible version (completed and deterministic)" if best is None
                           else f"a version with fewer than {fmt(best.get('objective'))} shall items failing"),

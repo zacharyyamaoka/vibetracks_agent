@@ -5,13 +5,13 @@
 Vibe Tracks as a black box. Vibe Tracks ([`~/vibetracks`](https://github.com/zacharyyamaoka/vibetracks)) is, since Zach's Nov 24 redesign, **just a sidebar** over the
 black-box agent repos on his machine: click a track and you see that box's own site, live; above the tracks sit three
 roll-up pages (Home, Review, Feedback) over all of them. The sidebar is a pixel-perfect copy of the Claude desktop
-app's, so there is nothing new to learn. This repo freezes that spec ([`OBJECTIVES.md`](OBJECTIVES.md), ruler v1, one note per item in
+app's, so there is nothing new to learn. This repo freezes that spec ([`OBJECTIVES.md`](OBJECTIVES.md), ruler v2 since 2026-11-25, one note per item in
 [`specs/`](specs/)), scores every version of Vibe Tracks against it in a headless browser, and keeps every result in one
 committed ledger. Yes, it is Vibe Tracks tracking itself.
 
 | The number | Direction · target | Where it's measured |
 |---|---|---|
-| **Spec items not met** (`shall_failing`, headline) | ↓ · 0 of 19 | the acceptance run, per vibetracks commit, dev fixture |
+| **Spec items not met** (`shall_failing`, headline) | ↓ · 0 of 20 | the acceptance run, per vibetracks commit, dev fixture |
 | **Should items not met** (`should_failing`, tie-break) | ↓ · 0 of 4 | same run |
 | **Sidebar style properties off Claude's** (diagnostic) | ↓ · 0 | S2.2's measured reference |
 
