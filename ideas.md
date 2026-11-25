@@ -63,12 +63,12 @@ loading come first because every other item reads them.
 ## Suggestions for Zach
 
 - [ ] **Rule on the hover chevron.** Claude's rows have no hover fold chevron (your Oct 16 Notion ask); Nov 24 says
-  pixel-perfect Claude. Default: Claude wins, S2.9 stays a *should*. OBJECTIVES §6.1.
+  pixel-perfect Claude. Default: Claude wins, S2.9 stays a *should*. OBJECTIVES §10.1.
 - [ ] **Sync and accounts.** Oct 25 asked for built-in sync and an online account; local boxes travel by their own git
-  remotes. Default: the tree file is per machine in v1. OBJECTIVES §6.2.
+  remotes. Default: the tree file is per machine in v1. OBJECTIVES §10.2.
 - [ ] **A use number for ruler v2.** Your W2 retro found Vibe Tracks "not that helpful". Scoring only the spec could
   ship a version that passes and still goes unused; candidate: days you opened it, or boxes opened from it per day,
-  read from `vt serve`'s own log. OBJECTIVES §6.3.
+  read from `vt serve`'s own log. OBJECTIVES §10.3.
 - [ ] **A full starter box in blackbox_agent's `template/`**, so `vt new` (and anyone) can copy one: README,
   OBJECTIVES, AGENTS, PROGRESS, ledger.jsonl, ideas.md, REFERENCES.md, status.json, specs/, feedback/, site/. This
   repo is a working example to start it from.

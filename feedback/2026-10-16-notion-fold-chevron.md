@@ -27,4 +27,4 @@ So lets copy that and instead of an icon we show the status thing
 
 > [!ai] claude-code (vibetracks_agent dispatcher), from Sources/Daily Notes/Daily Note - Oct 16 2026.md # vibe tracks side bar
 > Built since. Claude's own rows have no hover chevron, so this and "pixel perfect" (Nov 24) clash; S2.9 is a
-> should until he rules (OBJECTIVES §6.1).
+> should until he rules (OBJECTIVES §10.1).
