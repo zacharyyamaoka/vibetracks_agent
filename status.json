@@ -5,18 +5,18 @@
   "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his Nov 24 spec true (ruler v1, OBJECTIVES.md)",
   "kpi": {
     "name": "shall items failing, of 19 (ruler v1, dev)",
-    "value": 17.0,
+    "value": 13.0,
     "unit": "items",
     "direction": "down",
     "target": 0,
-    "level": "17 of 19 shall failing",
-    "level_name": "ruler v1, dev, best sidebar-style-1",
-    "next_gate": "a version with fewer than 17 shall items failing",
+    "level": "13 of 19 shall failing",
+    "level_name": "ruler v1, dev, best boxes-as-tracks-1",
+    "next_gate": "a version with fewer than 13 shall items failing",
     "on_track": null
   },
   "counter_kpi": {
     "name": "checks failing (the third tie-break), same version",
-    "value": 71.0,
+    "value": 42.0,
     "unit": "checks",
     "owner": "Vibe Tracks Agent"
   },
@@ -24,7 +24,7 @@
   "blocked_on": null,
   "todo": {
     "open": 12,
-    "done_7d": 0,
+    "done_7d": 1,
     "top": [
       "Boxes as tracks, the tree in Vibe Tracks' own file.",
       "`vt add <folder | github url> [--parent]` and the page's Add box.",
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795591255.6215005
+  "updated_t": 1795594039.7588603
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="vibetracks_agent ruler v1" tests="104" failures="71" errors="0" seed="1">
-  <testsuite name="ruler.suite.sidebar" tests="29" failures="1" errors="0" skipped="0" time="13.490">
-    <testcase classname="ruler.suite.sidebar" name="S2.1 Home, Review, Feedback, New track in this order above the first track row" time="1.312"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.1 Feedback shows its open count" time="0.139">
+<testsuites name="vibetracks_agent ruler v1" tests="104" failures="42" errors="0" seed="1">
+  <testsuite name="ruler.suite.sidebar" tests="29" failures="1" errors="0" skipped="0" time="7.174">
+    <testcase classname="ruler.suite.sidebar" name="S2.1 Home, Review, Feedback, New track in this order above the first track row" time="0.255"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.1 Feedback shows its open count" time="0.024">
       <failure message="the Feedback row reads &quot;Feedback&quot;; the fixture has 3 open feedback notes">the Feedback row reads &quot;Feedback&quot;; the fixture has 3 open feedback notes</failure>
     </testcase>
-    <testcase classname="ruler.suite.sidebar" name="S2.1 each top row opens its page" time="4.282"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.1 each top row opens its page" time="2.905"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 light: row height 32 px" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 light: row pitch 34 px" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 light: title font 14 px" time="0.000"/>
@@ -28,208 +28,154 @@
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: hovered row fill rgb(48,48,48)" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: selected row fill rgb(64,64,64)" time="0.000"/>
     <testcase classname="ruler.suite.sidebar" name="S2.2 dark: ··· button hover fill rgb(78,78,78)" time="0.000"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 the status dot is in the leading slot" time="0.040"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 a parent&apos;s fold chevron is hidden until hover" time="1.000"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 a title click opens the track" time="3.555"/>
-    <testcase classname="ruler.suite.sidebar" name="S2.9 a chevron click folds without opening" time="3.162"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 the status dot is in the leading slot" time="0.009"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a parent&apos;s fold chevron is hidden until hover" time="0.700"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a title click opens the track" time="1.468"/>
+    <testcase classname="ruler.suite.sidebar" name="S2.9 a chevron click folds without opening" time="1.813"/>
   </testsuite>
-  <testsuite name="ruler.suite.open" tests="5" failures="5" errors="0" skipped="0" time="32.974">
-    <testcase classname="ruler.suite.open" name="S1.1 each of three boxes opens its own site in the main pane" time="10.794">
-      <failure message="Heron Belt Agent: its site&apos;s marker &quot;VTA site marker heron_belt_agent 04972e4a&quot; is not on screen right of the sidebar after the click (address http://127.0.0.1:4811/#/track/heron-belt-agent)">Heron Belt Agent: its site&apos;s marker &quot;VTA site marker heron_belt_agent 04972e4a&quot; is not on screen right of the sidebar after the click (address http://127.0.0.1:4811/#/track/heron-belt-agent)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.open" name="S1.1 the address bar names the track" time="0.001">
-      <failure message="the boxes were not all opened">the boxes were not all opened</failure>
-    </testcase>
-    <testcase classname="ruler.suite.open" name="S1.1 a box with no site shows its README&apos;s first heading" time="10.946">
-      <failure message="Bittern Pick Agent (no site/): its README (heading &quot;Bittern Pick Agent&quot; and the line &quot;VTA readme marker bittern_pick_agent 85da4142&quot;) is not shown right of the sidebar; heading shown, README line not shown">Bittern Pick Agent (no site/): its README (heading &quot;Bittern Pick Agent&quot; and the line &quot;VTA readme marker bittern_pick_agent 85da4142&quot;) is not shown right of the sidebar; heading shown, README line not shown</failure>
-    </testcase>
-    <testcase classname="ruler.suite.open" name="S1.4 a box&apos;s site changed on disk shows on its page within 5 s" time="11.233">
+  <testsuite name="ruler.suite.open" tests="5" failures="2" errors="0" skipped="0" time="13.801">
+    <testcase classname="ruler.suite.open" name="S1.1 each of three boxes opens its own site in the main pane" time="2.055"/>
+    <testcase classname="ruler.suite.open" name="S1.1 the address bar names the track" time="0.000"/>
+    <testcase classname="ruler.suite.open" name="S1.1 a box with no site shows its README&apos;s first heading" time="0.678"/>
+    <testcase classname="ruler.suite.open" name="S1.4 a box&apos;s site changed on disk shows on its page within 5 s" time="11.067">
       <failure message="Brambling Lidar Agent&apos;s site is not shown to begin with (S1.1), so there is no page to watch">Brambling Lidar Agent&apos;s site is not shown to begin with (S1.1), so there is no page to watch</failure>
     </testcase>
-    <testcase classname="ruler.suite.open" name="S1.4 no reload: history length and the sidebar scroll position are kept" time="0.000">
+    <testcase classname="ruler.suite.open" name="S1.4 no reload: history length and the sidebar scroll position are kept" time="0.001">
       <failure message="the box&apos;s page was not open (S1.4&apos;s first check)">the box&apos;s page was not open (S1.4&apos;s first check)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="ruler.suite.menu" tests="11" failures="9" errors="0" skipped="0" time="35.024">
-    <testcase classname="ruler.suite.menu" name="S2.4 a right-click on a track opens a menu at the pointer" time="0.765"/>
-    <testcase classname="ruler.suite.menu" name="S2.4 the right-click menu&apos;s items equal the ··· menu&apos;s" time="0.000"/>
+  <testsuite name="ruler.suite.menu" tests="11" failures="4" errors="0" skipped="0" time="16.753">
+    <testcase classname="ruler.suite.menu" name="S2.4 a right-click on a track opens a menu at the pointer" time="0.535"/>
+    <testcase classname="ruler.suite.menu" name="S2.4 the right-click menu&apos;s items equal the ··· menu&apos;s" time="0.001"/>
     <testcase classname="ruler.suite.menu" name="S2.3 a middle row&apos;s menu items are Claude&apos;s, in Claude&apos;s order" time="0.000">
-      <failure message="items: Rename, New sub-track…, Share…; Claude&apos;s: Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move up, Move down, Move to section, Archive, Delete">items: Rename, New sub-track…, Share…; Claude&apos;s: Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move up, Move down, Move to section, Archive, Delete</failure>
+      <failure message="items: Pin, Rename, Move up, Move down, Move to section, Archive, Delete; Claude&apos;s: Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move up, Move down, Move to section, Archive, Delete">items: Pin, Rename, Move up, Move down, Move to section, Archive, Delete; Claude&apos;s: Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move up, Move down, Move to section, Archive, Delete</failure>
     </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 Move up is absent on the first row" time="0.625">
-      <failure message="first row: Rename, New sub-track…, Share…; want Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move down, Move to section, Archive, Delete">first row: Rename, New sub-track…, Share…; want Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move down, Move to section, Archive, Delete</failure>
+    <testcase classname="ruler.suite.menu" name="S2.3 Move up is absent on the first row" time="0.513">
+      <failure message="first row: Pin, Rename, Move down, Move to section, Archive, Delete; want Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move down, Move to section, Archive, Delete">first row: Pin, Rename, Move down, Move to section, Archive, Delete; want Open in, Pin, Mark as unread / Mark as read, Rename, Fork, Move down, Move to section, Archive, Delete</failure>
     </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 P pins the track" time="4.248">
-      <failure message="after P, Petrel Planner Agent is not under a Pinned header above the other tracks">after P, Petrel Planner Agent is not under a Pinned header above the other tracks</failure>
+    <testcase classname="ruler.suite.menu" name="S2.3 P pins the track" time="0.988"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 U marks it unread or read" time="0.328">
+      <failure message="no Mark as unread / read item: Pin, Rename, Move down, Move to section, Archive, Delete">no Mark as unread / read item: Pin, Rename, Move down, Move to section, Archive, Delete</failure>
     </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 U marks it unread or read" time="0.401">
-      <failure message="no Mark as unread / read item: Rename, New sub-track…, Share…">no Mark as unread / read item: Rename, New sub-track…, Share…</failure>
-    </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 R starts a rename" time="3.405">
-      <failure message="after R no text field has focus on Shrike Suction Agent&apos;s row">after R no text field has focus on Shrike Suction Agent&apos;s row</failure>
-    </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 F forks the box" time="11.448">
+    <testcase classname="ruler.suite.menu" name="S2.3 R starts a rename" time="1.221"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 F forks the box" time="11.253">
       <failure message="after F no new row naming Dunlin Bin Agent and no dialog appeared within 10 s">after F no new row naming Dunlin Bin Agent and no dialog appeared within 10 s</failure>
     </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 A archives the track" time="6.310">
-      <failure message="after A Avocet Calibration Agent is still in the sidebar">after A Avocet Calibration Agent is still in the sidebar</failure>
-    </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 D deletes the track" time="7.821">
-      <failure message="after D Linnet Reach Agent is still in the sidebar">after D Linnet Reach Agent is still in the sidebar</failure>
-    </testcase>
-    <testcase classname="ruler.suite.menu" name="S2.3 Delete leaves the box&apos;s folder on disk" time="0.001">
-      <failure message="Delete did not run (the check before), so there is nothing to look at">Delete did not run (the check before), so there is nothing to look at</failure>
-    </testcase>
+    <testcase classname="ruler.suite.menu" name="S2.3 A archives the track" time="0.887"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 D deletes the track" time="1.018"/>
+    <testcase classname="ruler.suite.menu" name="S2.3 Delete leaves the box&apos;s folder on disk" time="0.009"/>
   </testsuite>
-  <testsuite name="ruler.suite.pin" tests="4" failures="4" errors="0" skipped="0" time="0.556">
-    <testcase classname="ruler.suite.pin" name="S2.5 two pinned tracks sit under Pinned, in pin order, above the rest" time="0.556">
-      <failure message="no Pin item in Plover Wrist Agent&apos;s ··· menu">no Pin item in Plover Wrist Agent&apos;s ··· menu</failure>
-    </testcase>
-    <testcase classname="ruler.suite.pin" name="S2.5 folding Pinned hides them" time="0.000">
-      <failure message="nothing pinned (the check before)">nothing pinned (the check before)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.pin" name="S2.5 pins survive a vt serve restart" time="0.000">
-      <failure message="nothing pinned (the first check)">nothing pinned (the first check)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.pin" name="S2.5 unpin returns each to its old parent and place" time="0.000">
-      <failure message="nothing pinned (the first check)">nothing pinned (the first check)</failure>
-    </testcase>
+  <testsuite name="ruler.suite.pin" tests="4" failures="0" errors="0" skipped="0" time="6.316">
+    <testcase classname="ruler.suite.pin" name="S2.5 two pinned tracks sit under Pinned, in pin order, above the rest" time="1.656"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 folding Pinned hides them" time="0.611"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 pins survive a vt serve restart" time="2.355"/>
+    <testcase classname="ruler.suite.pin" name="S2.5 unpin returns each to its old parent and place" time="1.694"/>
   </testsuite>
-  <testsuite name="ruler.suite.view" tests="12" failures="12" errors="0" skipped="0" time="0.001">
+  <testsuite name="ruler.suite.view" tests="12" failures="10" errors="0" skipped="0" time="10.867">
     <testcase classname="ruler.suite.view" name="S2.6 the view menu&apos;s entries in order" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+      <failure message="entries: New section, Show archived; want Group by, Sort by, Show, New section, Reset to defaults, View all">entries: New section, Show archived; want Group by, Sort by, Show, New section, Reset to defaults, View all</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.6 Group by offers None, Parent, State" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.6 Group by offers None, Parent, State" time="0.708">
+      <failure message="no Group by entry">no Group by entry</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.6 Sort by offers Manual, Last updated, Created, Name" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.6 Sort by offers Manual, Last updated, Created, Name" time="0.793">
+      <failure message="no Sort by entry">no Sort by entry</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.6 Show offers archived and done" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.6 Show offers archived and done" time="0.706">
+      <failure message="no Show entry">no Show entry</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.6 each submenu shows its current pick on the right" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.6 each submenu shows its current pick on the right" time="0.651">
+      <failure message="Group by shows &quot;&quot;, Sort by shows &quot;&quot;; the defaults are Parent and Manual">Group by shows &quot;&quot;, Sort by shows &quot;&quot;; the defaults are Parent and Manual</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.7 flat by last updated: newest first, every row at one indent" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.7 flat by last updated: newest first, every row at one indent" time="0.730">
+      <failure message="could not pick Group by › None">could not pick Group by › None</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.7 State grouping puts each track under its state" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.7 State grouping puts each track under its state" time="0.690">
+      <failure message="could not pick Group by › State">could not pick Group by › State</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.6 the choice survives a restart" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.6 the choice survives a restart" time="0.689">
+      <failure message="could not pick Group by › None">could not pick Group by › None</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.6 Reset to defaults restores Parent and Manual" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.6 Reset to defaults restores Parent and Manual" time="0.583">
+      <failure message="no Reset to defaults entry">no Reset to defaults entry</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.7 Parent grouping shows the tree from Vibe Tracks&apos; file" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.7 Parent grouping shows the tree from Vibe Tracks&apos; file" time="3.070"/>
+    <testcase classname="ruler.suite.view" name="S2.7 switching groupings keeps the selection" time="1.635">
+      <failure message="could not pick Group by › None">could not pick Group by › None</failure>
     </testcase>
-    <testcase classname="ruler.suite.view" name="S2.7 switching groupings keeps the selection" time="0.001">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.view" name="S2.6 New section asks for a name and adds an empty section" time="0.000">
-      <failure message="no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)">no view menu (looked for a control named filter/view/group/sort/display/options in the sidebar above the tracks)</failure>
+    <testcase classname="ruler.suite.view" name="S2.6 New section asks for a name and adds an empty section" time="0.612"/>
+  </testsuite>
+  <testsuite name="ruler.suite.drag" tests="11" failures="1" errors="0" skipped="0" time="12.047">
+    <testcase classname="ruler.suite.drag" name="S2.8 dragging a row between two rows reorders it" time="2.233"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 a drop indicator shows mid-drag" time="0.000"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 dropping onto a row makes it that row&apos;s child" time="2.198"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 the file that changed lives outside every box" time="0.030"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 dragging out to the left makes it top-level" time="2.223"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 a drop into its own child is refused" time="2.171"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the moves survive a vt serve restart" time="0.000"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 the tree set by a drag survives a restart" time="0.000"/>
+    <testcase classname="ruler.suite.drag" name="S1.3 a hand edit of that file moves the row within 5 s, with no reload" time="1.324"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the keyboard path does one reorder" time="1.838"/>
+    <testcase classname="ruler.suite.drag" name="S2.8 the page loads a stock tree package" time="0.030">
+      <failure message="none of @headless-tree/core, @atlaskit/pragmatic-drag-and-drop, @atlaskit/pragmatic-drag-and-drop-hitbox, react-arborist, react-complex-tree, wunderbaum, @atlaskit/tree, jstree, jquery.fancytree, @minoru/react-dnd-treeview among the 65 scripts the page loaded">none of @headless-tree/core, @atlaskit/pragmatic-drag-and-drop, @atlaskit/pragmatic-drag-and-drop-hitbox, react-arborist, react-complex-tree, wunderbaum, @atlaskit/tree, jstree, jquery.fancytree, @minoru/react-dnd-treeview among the 65 scripts the page loaded</failure>
     </testcase>
   </testsuite>
-  <testsuite name="ruler.suite.drag" tests="11" failures="11" errors="0" skipped="0" time="26.359">
-    <testcase classname="ruler.suite.drag" name="S2.8 dragging a row between two rows reorders it" time="3.346">
-      <failure message="Redshank Conveyor Agent was dropped between Bittern Pick Agent and Curlew Gripper Agent; after the drag: Bittern Pick Agent@44|Brambling Lidar Agent@44|Avocet Calibration Agent@58|Dunlin Bin Agent@58|Garganey Vision Agent@58|Curlew Gripper Agent@44|Godwit Torque Agent@44|Heron Belt Agent@44|Petrel Planner Agent@58|Plover Wrist Agent@58|Shrike Suction Agent@58|Siskin Motion Agent@58|Kestrel Fleet Agent@44|Linnet Reach Agent@44|Redshank Conveyor Agent@44">Redshank Conveyor Agent was dropped between Bittern Pick Agent and Curlew Gripper Agent; after the drag: Bittern Pick Agent@44|Brambling Lidar Agent@44|Avocet Calibration Agent@58|Dunlin Bin Agent@58|Garganey Vision Agent@58|Curlew Gripper Agent@44|Godwit Torque Agent@44|Heron Belt Agent@44|Petrel Planner Agent@58|Plover Wrist Agent@58|Shrike Suction Agent@58|Siskin Motion Agent@58|Kestrel Fleet Agent@44|Linnet Reach Agent@44|Redshank Conveyor Agent@44</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S2.8 a drop indicator shows mid-drag" time="0.000">
-      <failure message="no drop line (a bar ≤ 4 px tall, ≥ 40 px wide) near the drop point while dragging">no drop line (a bar ≤ 4 px tall, ≥ 40 px wide) near the drop point while dragging</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S2.8 dropping onto a row makes it that row&apos;s child" time="5.406">
-      <failure message="Linnet Reach Agent is not under Bittern Pick Agent: Bittern Pick Agent@44|Brambling Lidar Agent@44|Avocet Calibration Agent@58|Dunlin Bin Agent@58|Garganey Vision Agent@58|Curlew Gripper Agent@44|Godwit Torque Agent@44|Heron Belt Agent@44|Petrel Planner Agent@58|Plover Wrist Agent@58|Shrike Suction Agent@58|Siskin Motion Agent@58|Kestrel Fleet Agent@44|Linnet Reach Agent@44|Redshank Conveyor Agent@44">Linnet Reach Agent is not under Bittern Pick Agent: Bittern Pick Agent@44|Brambling Lidar Agent@44|Avocet Calibration Agent@58|Dunlin Bin Agent@58|Garganey Vision Agent@58|Curlew Gripper Agent@44|Godwit Torque Agent@44|Heron Belt Agent@44|Petrel Planner Agent@58|Plover Wrist Agent@58|Shrike Suction Agent@58|Siskin Motion Agent@58|Kestrel Fleet Agent@44|Linnet Reach Agent@44|Redshank Conveyor Agent@44</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S1.3 the file that changed lives outside every box" time="0.000">
-      <failure message="the drag onto a row did not move it (S2.8), so nothing was set">the drag onto a row did not move it (S2.8), so nothing was set</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S2.8 dragging out to the left makes it top-level" time="2.840">
-      <failure message="Plover Wrist Agent is not top-level: Bittern Pick Agent@44|Brambling Lidar Agent@44|Avocet Calibration Agent@58|Dunlin Bin Agent@58|Garganey Vision Agent@58|Curlew Gripper Agent@44|Godwit Torque Agent@44|Heron Belt Agent@44|Petrel Planner Agent@58|Plover Wrist Agent@58|Shrike Suction Agent@58|Siskin Motion Agent@58|Kestrel Fleet Agent@44|Linnet Reach Agent@44|Redshank Conveyor Agent@44">Plover Wrist Agent is not top-level: Bittern Pick Agent@44|Brambling Lidar Agent@44|Avocet Calibration Agent@58|Dunlin Bin Agent@58|Garganey Vision Agent@58|Curlew Gripper Agent@44|Godwit Torque Agent@44|Heron Belt Agent@44|Petrel Planner Agent@58|Plover Wrist Agent@58|Shrike Suction Agent@58|Siskin Motion Agent@58|Kestrel Fleet Agent@44|Linnet Reach Agent@44|Redshank Conveyor Agent@44</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S2.8 a drop into its own child is refused" time="0.000">
-      <failure message="precondition: a drop onto a row works (S2.8), else a refusal cannot be told from no drag at all">precondition: a drop onto a row works (S2.8), else a refusal cannot be told from no drag at all</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S2.8 the moves survive a vt serve restart" time="0.000">
-      <failure message="precondition: the reorder and the drop onto a row both moved a row (reorder false, onto false)">precondition: the reorder and the drop onto a row both moved a row (reorder false, onto false)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S1.3 the tree set by a drag survives a restart" time="0.000">
-      <failure message="the drag onto a row did not move it">the drag onto a row did not move it</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S1.3 a hand edit of that file moves the row within 5 s, with no reload" time="0.000">
-      <failure message="no tree file was found (the check before)">no tree file was found (the check before)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S2.8 the keyboard path does one reorder" time="14.619">
-      <failure message="no keyboard path moved Dunlin Bin Agent above Avocet Calibration Agent (tried: Alt+ArrowUp; Control+Shift+ArrowUp; Meta+ArrowUp; Control+Shift+KeyD ArrowUp ArrowUp Enter; menu)">no keyboard path moved Dunlin Bin Agent above Avocet Calibration Agent (tried: Alt+ArrowUp; Control+Shift+ArrowUp; Meta+ArrowUp; Control+Shift+KeyD ArrowUp ArrowUp Enter; menu)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.drag" name="S2.8 the page loads a stock tree package" time="0.148">
-      <failure message="none of @headless-tree/core, @atlaskit/pragmatic-drag-and-drop, @atlaskit/pragmatic-drag-and-drop-hitbox, react-arborist, react-complex-tree, wunderbaum, @atlaskit/tree, jstree, jquery.fancytree, @minoru/react-dnd-treeview among the 64 scripts the page loaded">none of @headless-tree/core, @atlaskit/pragmatic-drag-and-drop, @atlaskit/pragmatic-drag-and-drop-hitbox, react-arborist, react-complex-tree, wunderbaum, @atlaskit/tree, jstree, jquery.fancytree, @minoru/react-dnd-treeview among the 64 scripts the page loaded</failure>
-    </testcase>
+  <testsuite name="ruler.suite.verbs" tests="4" failures="0" errors="0" skipped="0" time="6.598">
+    <testcase classname="ruler.suite.verbs" name="S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete" time="0.000"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 after them each box&apos;s git status is clean and its HEAD unchanged" time="0.190"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 no file under any box is named like vibetracks or vibe-tracks" time="0.013"/>
+    <testcase classname="ruler.suite.verbs" name="S1.2 a vibetracks.toml dropped into a box changes nothing on the page" time="6.395"/>
   </testsuite>
-  <testsuite name="ruler.suite.verbs" tests="4" failures="3" errors="0" skipped="0" time="7.494">
-    <testcase classname="ruler.suite.verbs" name="S1.2 every sidebar verb ran: drag, pin, rename, archive, move to section, delete" time="0.000">
-      <failure message="these verbs found no control or had no effect in the sidebar: drag, pin, archive, section, delete">these verbs found no control or had no effect in the sidebar: drag, pin, archive, section, delete</failure>
+  <testsuite name="ruler.suite.rollup" tests="7" failures="6" errors="0" skipped="0" time="5.172">
+    <testcase classname="ruler.suite.rollup" name="S3.4 the parent&apos;s sidebar row shows a pip for its blocked child" time="0.104">
+      <failure message="Heron Belt Agent (own state idle) with a blocked child shows 1 dot(s) (a idle leaf shows 1) and no label naming it blocked (labels: Idle across 4 sub-tracks · own state Idle: status.json says idle · double-click to rename | Heron Belt Agent)">Heron Belt Agent (own state idle) with a blocked child shows 1 dot(s) (a idle leaf shows 1) and no label naming it blocked (labels: Idle across 4 sub-tracks · own state Idle: status.json says idle · double-click to rename | Heron Belt Agent)</failure>
     </testcase>
-    <testcase classname="ruler.suite.verbs" name="S1.2 after them each box&apos;s git status is clean and its HEAD unchanged" time="0.000">
-      <failure message="precondition: every verb runs first (drag, pin, archive, section, delete did not)">precondition: every verb runs first (drag, pin, archive, section, delete did not)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.verbs" name="S1.2 no file under any box is named like vibetracks or vibe-tracks" time="0.000">
-      <failure message="precondition: every verb runs first (drag, pin, archive, section, delete did not)">precondition: every verb runs first (drag, pin, archive, section, delete did not)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.verbs" name="S1.2 a vibetracks.toml dropped into a box changes nothing on the page" time="7.494"/>
-  </testsuite>
-  <testsuite name="ruler.suite.rollup" tests="7" failures="6" errors="0" skipped="0" time="6.260">
-    <testcase classname="ruler.suite.rollup" name="S3.4 the parent&apos;s sidebar row shows a pip for its blocked child" time="0.351">
-      <failure message="Heron Belt Agent (own state idle) with a blocked child shows 1 dot(s) (a idle leaf shows 1) and no label naming it blocked (labels: Stale across 4 sub-tracks · subtree Stale (5 stale) · own state Stale: no activity observed (vibe-stall-hours 24) · double-click to rename | Heron Belt Agent)">Heron Belt Agent (own state idle) with a blocked child shows 1 dot(s) (a idle leaf shows 1) and no label naming it blocked (labels: Stale across 4 sub-tracks · subtree Stale (5 stale) · own state Stale: no activity observed (vibe-stall-hours 24) · double-click to rename | Heron Belt Agent)</failure>
-    </testcase>
-    <testcase classname="ruler.suite.rollup" name="S3.4 the parent shows 3 agents working in its subtree" time="1.696">
+    <testcase classname="ruler.suite.rollup" name="S3.4 the parent shows 3 agents working in its subtree" time="1.659">
       <failure message="neither Heron Belt Agent&apos;s sidebar row (&quot;Heron Belt Agent&quot;) nor its Home row shows 3 agents (2 + 1 working in its children)">neither Heron Belt Agent&apos;s sidebar row (&quot;Heron Belt Agent&quot;) nor its Home row shows 3 agents (2 + 1 working in its children)</failure>
     </testcase>
-    <testcase classname="ruler.suite.rollup" name="S3.4 a child&apos;s status.json changed on disk updates the parent within 5 s" time="0.001">
+    <testcase classname="ruler.suite.rollup" name="S3.4 a child&apos;s status.json changed on disk updates the parent within 5 s" time="0.000">
       <failure message="there is no pip to begin with (the first S3.4 check)">there is no pip to begin with (the first S3.4 check)</failure>
     </testcase>
-    <testcase classname="ruler.suite.rollup" name="S3.1 Home holds a data-views element" time="0.038">
+    <testcase classname="ruler.suite.rollup" name="S3.1 Home holds a data-views element" time="0.012">
       <failure message="no visible &lt;data-views&gt; element right of the sidebar on Home">no visible &lt;data-views&gt; element right of the sidebar on Home</failure>
     </testcase>
-    <testcase classname="ruler.suite.rollup" name="S3.1 its presets are Active, Done, All tracks in that order" time="0.143">
+    <testcase classname="ruler.suite.rollup" name="S3.1 its presets are Active, Done, All tracks in that order" time="0.070">
       <failure message="they are not presets of a data-views element (there is none)">they are not presets of a data-views element (there is none)</failure>
     </testcase>
-    <testcase classname="ruler.suite.rollup" name="S3.1 folding a parent hides exactly its descendants" time="3.088"/>
-    <testcase classname="ruler.suite.rollup" name="S3.1 the Done preset shows only done boxes" time="0.943">
-      <failure message="Done shows nothing; the done boxes are Siskin Motion Agent, Garganey Vision Agent, Redshank Conveyor Agent, Kestrel Fleet Agent">Done shows nothing; the done boxes are Siskin Motion Agent, Garganey Vision Agent, Redshank Conveyor Agent, Kestrel Fleet Agent</failure>
+    <testcase classname="ruler.suite.rollup" name="S3.1 folding a parent hides exactly its descendants" time="2.253"/>
+    <testcase classname="ruler.suite.rollup" name="S3.1 the Done preset shows only done boxes" time="1.074">
+      <failure message="Done shows Heron Belt Agent, Siskin Motion Agent, Brambling Lidar Agent, Garganey Vision Agent, Redshank Conveyor Agent, Kestrel Fleet Agent; the done boxes are Siskin Motion Agent, Garganey Vision Agent, Redshank Conveyor Agent, Kestrel Fleet Agent">Done shows Heron Belt Agent, Siskin Motion Agent, Brambling Lidar Agent, Garganey Vision Agent, Redshank Conveyor Agent, Kestrel Fleet Agent; the done boxes are Siskin Motion Agent, Garganey Vision Agent, Redshank Conveyor Agent, Kestrel Fleet Agent</failure>
     </testcase>
   </testsuite>
-  <testsuite name="ruler.suite.review" tests="6" failures="6" errors="0" skipped="0" time="27.321">
-    <testcase classname="ruler.suite.review" name="S3.2 both waits are on Review, each labelled with its track" time="10.994">
+  <testsuite name="ruler.suite.review" tests="6" failures="6" errors="0" skipped="0" time="27.194">
+    <testcase classname="ruler.suite.review" name="S3.2 both waits are on Review, each labelled with its track" time="10.979">
       <failure message="&quot;Decide the pick limits for Bittern (wait 2dec66)&quot; not on Review; &quot;Decide the torque limits for Godwit (wait 947e68)&quot; not on Review">&quot;Decide the pick limits for Bittern (wait 2dec66)&quot; not on Review; &quot;Decide the torque limits for Godwit (wait 947e68)&quot; not on Review</failure>
     </testcase>
-    <testcase classname="ruler.suite.review" name="S3.2 the waits sit in the element a box&apos;s own site uses" time="0.033">
+    <testcase classname="ruler.suite.review" name="S3.2 the waits sit in the element a box&apos;s own site uses" time="0.007">
       <failure message="&quot;Decide the pick limits for Bittern (wait 2dec66)&quot; is not inside &lt;bb-needs-you&gt;; &quot;Decide the torque limits for Godwit (wait 947e68)&quot; is not inside &lt;bb-needs-you&gt;">&quot;Decide the pick limits for Bittern (wait 2dec66)&quot; is not inside &lt;bb-needs-you&gt;; &quot;Decide the torque limits for Godwit (wait 947e68)&quot; is not inside &lt;bb-needs-you&gt;</failure>
     </testcase>
-    <testcase classname="ruler.suite.review" name="S3.2 clicking a wait opens its box&apos;s page" time="0.024">
+    <testcase classname="ruler.suite.review" name="S3.2 clicking a wait opens its box&apos;s page" time="0.006">
       <failure message="&quot;Decide the pick limits for Bittern (wait 2dec66)&quot; not on Review">&quot;Decide the pick limits for Bittern (wait 2dec66)&quot; not on Review</failure>
     </testcase>
-    <testcase classname="ruler.suite.review" name="S3.3 every feedback note is listed with its track" time="16.152">
+    <testcase classname="ruler.suite.review" name="S3.3 every feedback note is listed with its track" time="16.130">
       <failure message="&quot;Plover feedback f5dd0e&quot; not listed; &quot;Shrike feedback a3e197&quot; not listed; &quot;Shrike feedback bcb0dc&quot; not listed">&quot;Plover feedback f5dd0e&quot; not listed; &quot;Shrike feedback a3e197&quot; not listed; &quot;Shrike feedback bcb0dc&quot; not listed</failure>
     </testcase>
-    <testcase classname="ruler.suite.review" name="S3.3 the side panel opens the note" time="0.012">
+    <testcase classname="ruler.suite.review" name="S3.3 the side panel opens the note" time="0.008">
       <failure message="&quot;Plover feedback f5dd0e&quot; not listed">&quot;Plover feedback f5dd0e&quot; not listed</failure>
     </testcase>
-    <testcase classname="ruler.suite.review" name="S3.3 adding feedback writes one new file in the chosen box&apos;s feedback/ and nothing else" time="0.106">
+    <testcase classname="ruler.suite.review" name="S3.3 adding feedback writes one new file in the chosen box&apos;s feedback/ and nothing else" time="0.064">
       <failure message="no New / Add feedback button on the Feedback page">no New / Add feedback button on the Feedback page</failure>
     </testcase>
   </testsuite>
-  <testsuite name="ruler.suite.newtrack" tests="4" failures="3" errors="0" skipped="0" time="3.723">
-    <testcase classname="ruler.suite.newtrack" name="S4.2 the command follows the name, the parent and Publish" time="2.668">
+  <testsuite name="ruler.suite.newtrack" tests="4" failures="3" errors="0" skipped="0" time="2.419">
+    <testcase classname="ruler.suite.newtrack" name="S4.2 the command follows the name, the parent and Publish" time="1.750">
       <failure message="no Publish to GitHub switch">no Publish to GitHub switch</failure>
     </testcase>
-    <testcase classname="ruler.suite.newtrack" name="S4.2 Copy puts the command on the clipboard" time="0.564"/>
-    <testcase classname="ruler.suite.newtrack" name="S4.2 Create makes the box and shows it under its parent within 5 s" time="0.059">
+    <testcase classname="ruler.suite.newtrack" name="S4.2 Copy puts the command on the clipboard" time="0.427"/>
+    <testcase classname="ruler.suite.newtrack" name="S4.2 Create makes the box and shows it under its parent within 5 s" time="0.015">
       <failure message="no Create button in the dialog">no Create button in the dialog</failure>
     </testcase>
-    <testcase classname="ruler.suite.newtrack" name="S4.4 vt new from a shell shows the row under its parent within 5 s" time="0.432">
+    <testcase classname="ruler.suite.newtrack" name="S4.4 vt new from a shell shows the row under its parent within 5 s" time="0.227">
       <failure message="vt new exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
               [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
               [--body BODY] [--json]
@@ -238,8 +184,8 @@ vt new: error: the following arguments are required: id, --title
 </failure>
     </testcase>
   </testsuite>
-  <testsuite name="ruler.suite.cli" tests="11" failures="11" errors="0" skipped="0" time="5.327">
-    <testcase classname="ruler.suite.cli" name="S4.1 vt new exits 0 offline and makes a new box folder" time="0.233">
+  <testsuite name="ruler.suite.cli" tests="11" failures="9" errors="0" skipped="0" time="5.583">
+    <testcase classname="ruler.suite.cli" name="S4.1 vt new exits 0 offline and makes a new box folder" time="0.197">
       <failure message="vt new &quot;Whimbrel Camera Agent&quot; --parent heron_belt_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new &quot;Whimbrel Camera Agent&quot; --parent heron_belt_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
               [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
               [--body BODY] [--json]
@@ -259,7 +205,7 @@ vt new: error: the following arguments are required: id, --title
     <testcase classname="ruler.suite.cli" name="S4.1 the track is in the tree under the parent" time="0.000">
       <failure message="no box was made">no box was made</failure>
     </testcase>
-    <testcase classname="ruler.suite.cli" name="S4.1 --from copies the source box&apos;s files without its history" time="0.233">
+    <testcase classname="ruler.suite.cli" name="S4.1 --from copies the source box&apos;s files without its history" time="0.181">
       <failure message="vt new &quot;Ouzel Sort Agent&quot; --from plover_wrist_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new &quot;Ouzel Sort Agent&quot; --from plover_wrist_agent exited 2: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
               [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
               [--body BODY] [--json]
@@ -267,7 +213,7 @@ vt new: error: the following arguments are required: id, --title
 vt new: error: the following arguments are required: --title
 </failure>
     </testcase>
-    <testcase classname="ruler.suite.cli" name="S4.3 without --publish gh is never called" time="0.228">
+    <testcase classname="ruler.suite.cli" name="S4.3 without --publish gh is never called" time="0.169">
       <failure message="vt new without --publish did not make a box (exit 2): usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">vt new without --publish did not make a box (exit 2): usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
               [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
               [--body BODY] [--json]
@@ -275,7 +221,7 @@ vt new: error: the following arguments are required: --title
 vt new: error: the following arguments are required: id, --title
 </failure>
     </testcase>
-    <testcase classname="ruler.suite.cli" name="S4.3 signed out, --publish stops, names gh auth login and makes nothing" time="0.244">
+    <testcase classname="ruler.suite.cli" name="S4.3 signed out, --publish stops, names gh auth login and makes nothing" time="0.178">
       <failure message="the message does not name gh auth login: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">the message does not name gh auth login: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
               [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
               [--body BODY] [--json]
@@ -283,7 +229,7 @@ vt new: error: the following arguments are required: id, --title
 vt new: error: the following arguments are required: id, --title
 </failure>
     </testcase>
-    <testcase classname="ruler.suite.cli" name="S4.3 signed in, --publish creates a private repo from the folder and pushes once" time="0.253">
+    <testcase classname="ruler.suite.cli" name="S4.3 signed in, --publish creates a private repo from the folder and pushes once" time="0.200">
       <failure message="exit 2 while gh is signed in: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]">exit 2 while gh is signed in: usage: vt new [-h] --title TITLE [--parent PARENT] [--goal GOAL]
               [--done-when DONE_WHEN] [--target TARGET] [--priority PRIORITY]
               [--body BODY] [--json]
@@ -291,13 +237,7 @@ vt new: error: the following arguments are required: id, --title
 vt new: error: the following arguments are required: id, --title
 </failure>
     </testcase>
-    <testcase classname="ruler.suite.cli" name="S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged" time="3.969">
-      <failure message="the message names nothing missing: vt: no command &apos;add&apos;. `vt --help` lists them.">the message names nothing missing: vt: no command &apos;add&apos;. `vt --help` lists them.
-</failure>
-    </testcase>
-    <testcase classname="ruler.suite.cli" name="S1.5 vt add lists an existing box under its parent in the sidebar" time="0.167">
-      <failure message="vt add &lt;fixture-home&gt;/sanderling_grasp_agent --parent linnet_reach_agent exited 1: vt: no command &apos;add&apos;. `vt --help` lists them.">vt add &lt;fixture-home&gt;/sanderling_grasp_agent --parent linnet_reach_agent exited 1: vt: no command &apos;add&apos;. `vt --help` lists them.
-</failure>
-    </testcase>
+    <testcase classname="ruler.suite.cli" name="S1.5 adding a plain folder exits non-zero, names what is missing and leaves the tree unchanged" time="3.849"/>
+    <testcase classname="ruler.suite.cli" name="S1.5 vt add lists an existing box under its parent in the sidebar" time="0.809"/>
   </testsuite>
 </testsuites>

@@ -6,19 +6,27 @@ loading come first because every other item reads them.
 
 ## I'll try
 
-- [ ] **Boxes as tracks, the tree in Vibe Tracks' own file.** A per-machine tree file outside every box (id, folder,
+- [x] **Boxes as tracks, the tree in Vibe Tracks' own file.** A per-machine tree file outside every box (id, folder,
   parent, order, pinned, section, archived, label); `vt serve` lists each box from it and serves the box's own [`site/`](site/)
   in the main pane (README when it has none). Expect: S1.1, S1.2, S1.3 → pass; S2.1 stays green.
   - Rung: boxes
   - Needs: nothing
-- [ ] **`vt add <folder | github url> [--parent]` and the page's Add box.** Clone a URL first; refuse a folder that is
+  - **Done: [`boxes-as-tracks-1`](solutions/boxes-as-tracks-1/)** with the next item: S1.1, S1.2, S1.3, S1.5 and S2.5
+    met, shall 17 → 13, should 3 → 2, checks 71 → 42, no regressions; landed on
+    [vibetracks main @ 8ba03b2](https://github.com/zacharyyamaoka/vibetracks/commit/8ba03b2)
+    ([PEP 0024](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0024-boxes-are-the-tracks.md): `<vt home>/tree.json`, `vt-tree/1`).
+- [x] **`vt add <folder | github url> [--parent]` and the page's Add box.** Clone a URL first; refuse a folder that is
   not a box and say what is missing. Expect: S1.5 → pass.
   - Rung: boxes
   - Needs: the tree file
+  - **Done in `boxes-as-tracks-1`** (above).
 - [ ] **Live box pages.** Watch each open box's folder and push a reload of the main pane only (the sidebar keeps its
   scroll and selection). Expect: S1.4 → pass; nothing else moves.
   - Rung: boxes
   - Needs: the tree file
+  - **Built, still failing** in `boxes-as-tracks-1`: the reload works (it passed before the rebase), but with Claude's
+    34 px rows the row S1.4 clicks sits under the account footer in its 420 px window, so the click misses. Next:
+    scroll the selected row into view, or less chrome above the tree.
 - [ ] **Swap the sidebar's tree model for Headless Tree's core** (vanilla, rows still drawn by `sidebar.js`): drag to
   reorder, onto a row to reparent, out to the left to un-nest; keyboard moves; refuse a drop into its own subtree.
   Spike the vanilla path for 30 minutes first (its docs are React-first); Pragmatic drag and drop is the fallback.
