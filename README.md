@@ -1,6 +1,6 @@
 # Vibe Tracks Agent
 
-**[▶ Live landing page](https://zacharyyamaoka.github.io/vibetracks_agent/)**: not published yet. The box is local only (S4.3's local-only track), so view it with `blackbox serve` below · a black-box agent repo built by the [blackbox_agent](https://github.com/zacharyyamaoka/blackbox_agent) package
+**[▶ Live landing page](https://zacharyyamaoka.github.io/vibetracks_agent/)**: not live yet. The repo is private, and Pages on a private repo needs a paid plan, so view it with `blackbox serve` below · a black-box agent repo built by the [blackbox_agent](https://github.com/zacharyyamaoka/blackbox_agent) package
 
 Vibe Tracks as a black box. Vibe Tracks (`~/vibetracks`) is, since Zach's Nov 24 redesign, **just a sidebar** over the
 black-box agent repos on his machine: click a track and you see that box's own site, live; above the tracks sit three

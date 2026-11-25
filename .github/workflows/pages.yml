@@ -1,0 +1,11 @@
+# The blackbox_agent package builds and deploys this box's site (its README, "Deploy").
+# WHY manual-only (2026-11-24): the repo is private and GitHub Pages on a private repo needs a paid plan, so a push
+# trigger would fail every push (claude_party_agent's reason, same day). Making the repo public is Zach's call; then put
+# `push: {branches: [main]}` back and set Pages' source to "GitHub Actions".
+# Until then the view is local: uvx --from git+https://github.com/zacharyyamaoka/blackbox_agent@v0 blackbox serve --box .
+name: pages
+on: {workflow_dispatch: {}}
+permissions: {contents: read, pages: write, id-token: write}
+jobs:
+  site:
+    uses: zacharyyamaoka/blackbox_agent/.github/workflows/site.yml@v0
