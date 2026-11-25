@@ -1,0 +1,15 @@
+{
+  "id": "menus-1",
+  "parent": "new-track-1",
+  "change": "Claude's \u00b7\u00b7\u00b7 menu over the boxes and Pause / Resume (PEP 0027 \u00a72-\u00a73): Open in \u203a | Pin P, Mark as unread U, Rename R, Fork F (New track's dialog with --from) | Move up/down, Move to section \u203a | Pause/Resume Z, Archive A, Delete D; vt pause|resume [--why] and act/tree pause|resume append a signed record to the track's status list; a paused row wears a pause glyph and a muted title",
+  "vibetracks_sha": "a51799170f9462c303254b635971467849f9d8d7",
+  "vibetracks_ref": "a51799170f9462c303254b635971467849f9d8d7",
+  "vibetracks_committed": "2026-11-25T09:05:46Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane C subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:06:55Z",
+  "tags": []
+}

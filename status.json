@@ -5,26 +5,26 @@
   "remit": "make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true (ruler v2, OBJECTIVES.md)",
   "kpi": {
     "name": "shall items failing, of 20 (ruler v2, dev)",
-    "value": 9.0,
+    "value": 5.0,
     "unit": "items",
     "direction": "down",
     "target": 0,
-    "level": "9 of 20 shall failing",
-    "level_name": "ruler v2, dev, best rollups-1",
-    "next_gate": "a version with fewer than 9 shall items failing",
+    "level": "5 of 20 shall failing",
+    "level_name": "ruler v2, dev, best rollups-2",
+    "next_gate": "a version with fewer than 5 shall items failing",
     "on_track": null
   },
   "counter_kpi": {
     "name": "checks failing (the third tie-break), same version",
-    "value": 44.0,
+    "value": 32.0,
     "unit": "checks",
     "owner": "Vibe Tracks Agent"
   },
   "status": "idle",
   "blocked_on": null,
   "todo": {
-    "open": 14,
-    "done_7d": 3,
+    "open": 13,
+    "done_7d": 4,
     "top": [
       "Live box pages.",
       "Swap the sidebar's tree model for Headless Tree's core",
@@ -37,5 +37,5 @@
     "wandb": null,
     "vault": "PROJECT - Vibe Tracks"
   },
-  "updated_t": 1795597088.963108
+  "updated_t": 1795597679.1975
 }

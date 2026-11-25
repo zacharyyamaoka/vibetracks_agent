@@ -49,19 +49,25 @@ loading come first because every other item reads them.
   - **Done: [`sidebar-style-1`](solutions/sidebar-style-1/)**, S2.2 met, props off 14 → 0 of 22, shall 18 → 17, checks
     85 → 71, no regressions; landed on [vibetracks main @ edbfc4e](https://github.com/zacharyyamaoka/vibetracks/commit/edbfc4e)
     (rows 32/34 px, 14 px titles, radius 8, dark fills 31/48/64, a 13 px "Tracks" list header).
-- [ ] **Home as one data-ui `<data-views>`** over one row per box, nested by the tree, presets Active / Done / All
+- [x] **Home as one data-ui `<data-views>`** over one row per box, nested by the tree, presets Active / Done / All
   tracks. Expect: S3.1 → pass.
   - Rung: roll-ups
   - Needs: the tree file
-- [ ] **Roll-ups from [`status.json`](status.json)**: a parent's own dot plus a pip when a descendant is worse, and agents summed
+  - **Done: [`rollups-2`](solutions/rollups-2/)**, with the two items below it: S3.1-S3.4 and S2.1 met, shall 10 → 5
+    (ruler v2), checks 45 → 32, no regressions; landed on
+    [vibetracks main @ 6a73de5](https://github.com/zacharyyamaoka/vibetracks/commit/6a73de5)
+    ([PEP 0025](https://github.com/zacharyyamaoka/vibetracks/blob/main/docs/peps/0025-roll-up-pages-over-the-boxes.md)).
+- [x] **Roll-ups from [`status.json`](status.json)**: a parent's own dot plus a pip when a descendant is worse, and agents summed
   over its subtree, on the sidebar and Home. Expect: S3.4 → pass.
   - Rung: roll-ups
   - Needs: the tree file
-- [ ] **Review and Feedback with the viewer's own components** (blackbox_agent's Needs-you and Feedback tabs) over the
+  - **Done in `rollups-2`** (above).
+- [x] **Review and Feedback with the viewer's own components** (blackbox_agent's Needs-you and Feedback tabs) over the
   union of every box, plus a Track column and a by-track preset; Add feedback writes one note into the chosen box.
   Expect: S3.2, S3.3 → pass.
   - Rung: roll-ups
   - Needs: the tree file
+  - **Done in `rollups-2`** (above).
 - [x] **`vt new "<title>" [--parent] [--dir] [--from] [--publish [--public]]`** copying blackbox_agent's starter box,
   git init + first commit, private GitHub only with `--publish` after `gh auth status`; the New track dialog writes
   the command and gets a Create button running it. Expect: S4.1-S4.4 → pass.

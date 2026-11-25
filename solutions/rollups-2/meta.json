@@ -1,0 +1,15 @@
+{
+  "id": "rollups-2",
+  "parent": "new-track-1",
+  "change": "rollups-1 rebased on vibetracks main ecf4dd6 (vt new, PEP 0026): the roll-up pages over the boxes (PEP 0025) on top of New track",
+  "vibetracks_sha": "52b397b21c8830e919caee9816735795f266eec3",
+  "vibetracks_ref": "52b397b",
+  "vibetracks_committed": "2026-11-25T09:00:55Z",
+  "proposed_by": {
+    "agent": "Claude Code (lane E subagent)",
+    "model": "claude-opus-5-5",
+    "session": null
+  },
+  "created": "2026-11-25T09:01:48Z",
+  "tags": []
+}
