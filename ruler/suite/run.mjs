@@ -58,7 +58,7 @@ function writeJunit(final = true) {
     body += '  </testsuite>\n'
   }
   const n = results.length, f = results.filter((r) => r.state === 'fail').length, e = results.filter((r) => r.state === 'error').length
-  const head = `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites name="vibetracks_agent ruler v2" tests="${n}" failures="${f}" errors="${e}" seed="${fixture.seed}">\n`
+  const head = `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites name="vibetracks_agent ruler v3" tests="${n}" failures="${f}" errors="${e}" seed="${fixture.seed}">\n`
   writeFileSync(join(runDir, final ? 'junit.xml' : 'junit.partial.xml'), head + body + '</testsuites>\n')
   writeFileSync(join(runDir, 'diagnostics.json'), JSON.stringify(diag, null, 1) + '\n')
 }
@@ -139,7 +139,8 @@ for (const g of GROUPS) {
     await stage.start()
     await ctx.open()
     let timer
-    const budget = new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(`group ${g.name} ran out of its ${GROUP_BUDGET_MS / 1000} s`)), GROUP_BUDGET_MS) })
+    const budgetMs = g.budgetMs || GROUP_BUDGET_MS
+    const budget = new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(`group ${g.name} ran out of its ${budgetMs / 1000} s`)), budgetMs) })
     try { await Promise.race([g.run(ctx, t), budget]) } finally { clearTimeout(timer) }
   } catch (e) {
     setupError = e

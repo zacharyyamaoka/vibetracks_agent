@@ -5,14 +5,15 @@
 Vibe Tracks as a black box. Vibe Tracks ([`~/vibetracks`](https://github.com/zacharyyamaoka/vibetracks)) is, since Zach's Nov 24 redesign, **just a sidebar** over the
 black-box agent repos on his machine: click a track and you see that box's own site, live; above the tracks sit three
 roll-up pages (Home, Review, Feedback) over all of them. The sidebar is a pixel-perfect copy of the Claude desktop
-app's, so there is nothing new to learn. This repo freezes that spec ([`OBJECTIVES.md`](OBJECTIVES.md), ruler v2 since 2026-11-25, one note per item in
-[`specs/`](specs/)), scores every version of Vibe Tracks against it in a headless browser, and keeps every result in one
-committed ledger. Yes, it is Vibe Tracks tracking itself.
+app's, so there is nothing new to learn. This repo freezes that spec ([`OBJECTIVES.md`](OBJECTIVES.md), ruler v3 since 2026-11-25, one note per item in
+[`specs/`](specs/)), scores every version of Vibe Tracks against it in a headless browser, times how fast a track's page
+appears when it is clicked, and keeps every result in one committed ledger. Yes, it is Vibe Tracks tracking itself.
 
 | The number | Direction · target | Where it's measured |
 |---|---|---|
-| **Spec items not met** (`shall_failing`, headline) | ↓ · 0 of 20 | the acceptance run, per vibetracks commit, dev fixture |
-| **Should items not met** (`should_failing`, tie-break) | ↓ · 0 of 4 | same run |
+| **Spec items not met** (`shall_failing`, the ranked objective) | ↓ · 0 of 23 | the acceptance run, per vibetracks commit, dev fixture |
+| **Track open time** (`open_ms`, the tracked KPI and first tie-break) | ↓ · 100 ms (S1.6: ≤ 400) | same run: the click on a track's row to its box's page on screen, timed in the page, package boxes' median |
+| **Should items not met** (`should_failing`, tie-break) | ↓ · 0 of 3 | same run |
 | **Sidebar style properties off Claude's** (diagnostic) | ↓ · 0 | S2.2's measured reference |
 
 Where it stands right now: [`PROGRESS.md`](PROGRESS.md) (generated) and the [live page](https://zacharyyamaoka.github.io/vibetracks_agent/).
@@ -22,7 +23,7 @@ Where it stands right now: [`PROGRESS.md`](PROGRESS.md) (generated) and the [liv
 - **A track is a box.** Each black-box agent repo is self-contained and knows nothing of the others; no
   `vibetracks.toml`. Vibe Tracks alone owns the tree (parent, order, pins, sections) and rolls up the children's
   state and agent counts.
-- **The sidebar is Claude's:** pins, a view menu (Group by, Sort by, Show, New section, Reset to defaults, View all),
+- **The sidebar is Claude's:** a Search row and palette (Ctrl+K, Ctrl+O, Ctrl+P; the open track's hits first), pins, a view menu (Group by, Sort by, Show, New section, Reset to defaults, View all),
   the ··· and right-click menu (Open in, Pin, Mark as unread, Rename, Fork, Move, Archive, Delete), drag to reorder and
   reparent on a stock tree.
 - **Home** is a stock data-ui table, folding by parent, with Active / Done / All tracks presets. **Review** and
@@ -34,6 +35,12 @@ Where it stands right now: [`PROGRESS.md`](PROGRESS.md) (generated) and the [liv
 
 ```bash
 uv run --directory ~/vibetracks_agent vta progress
+```
+
+Time how fast tracks open in a running Vibe Tracks (read-only; his Preview here):
+
+```bash
+uv run --directory ~/vibetracks_agent vta speed --base http://127.0.0.1:4396/
 ```
 
 The site (landing page and dashboard) is built by the blackbox_agent package from this repo's git history:

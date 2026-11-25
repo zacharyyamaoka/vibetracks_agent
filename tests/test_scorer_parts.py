@@ -17,23 +17,79 @@ from vibetracks_agent import evaluate, ledger, progress, ruler
 
 REPO = Path(__file__).resolve().parents[1]
 BLACKBOX = Path.home() / "blackbox_agent"
+# the first three dev boxes' commits as ruler v2's fixture made them (ruler/fixture.py at f4cff77): v3 must not move them
+V2_DEV_HEADS = ["4cd90b932a5539498155caf4289b738cbf58de4e", "3f9ee1232d8bce5da423435af88a087b9bec71e5",
+                "d0251f342176ceaa66353e2a40b23bf595c1fb5b"]
 
 
-def row(sid, objective, tiebreak=0, tiebreak2=0, admissible=True, rate=1.0, t="2026-11-24T00:00:00Z", split="dev",
-        ruler_version=None):
-    return {"t": t, "solution": sid, "parent": None, "split": split, "ruler": ruler_version or ledger.RULER,
-            "objective": objective,
-            "tiebreak": tiebreak, "tiebreak2": tiebreak2, "admissible": admissible, "gate_pass_rate": rate,
-            "failed_gates": {}, "diagnostics": {}, "wall_time_s": 1.0, "repo_commit": None, "vibetracks_sha": "x",
-            "proposed_by": {"agent": "a", "model": "m"}, "change": "c", "task_objectives": {}}
+def row(sid, objective, tiebreak=0, tiebreak2=0, tiebreak3=0, *, admissible=True, rate=1.0, t="2026-11-24T00:00:00Z",
+        split="dev", ruler_version=None, open_ms=None):
+    """A ledger row. On v3 (the default) the slots are open_ms rounded to 10 ms, should, checks (OBJECTIVES §8); a v1/v2
+    row has only two slots, should and checks."""
+    version = ruler_version or ledger.RULER
+    out = {"t": t, "solution": sid, "parent": None, "split": split, "ruler": version, "objective": objective,
+           "tiebreak": tiebreak, "tiebreak2": tiebreak2, "admissible": admissible, "gate_pass_rate": rate,
+           "failed_gates": {}, "diagnostics": {}, "wall_time_s": 1.0, "repo_commit": None, "vibetracks_sha": "x",
+           "proposed_by": {"agent": "a", "model": "m"}, "change": "c", "task_objectives": {}}
+    if version not in ("v1", "v2"):
+        out.update(tiebreak3=tiebreak3, open_ms=open_ms if open_ms is not None else tiebreak, should_failing=tiebreak2,
+                   checks_failing=tiebreak3)
+    return out
 
 
-def test_rank_is_shall_then_should_then_checks_admissible_first():
-    rows = [row("a", 3, 1, 9), row("b", 3, 1, 5), row("c", 2, 4, 50), row("d", 0, 0, 0, admissible=False, rate=0.5),
-            row("e", math.nan, 0, 0), row("f", 3, 0, 99)]
-    assert [r["solution"] for r in ledger.rank(rows)] == ["c", "f", "b", "a", "e", "d"]
+def test_rank_is_shall_then_open_ms_then_should_then_checks_admissible_first():
+    rows = [row("a", 3, 300, 1, 9), row("b", 3, 300, 1, 5), row("c", 2, 900, 4, 50),
+            row("d", 0, 0, 0, admissible=False, rate=0.5), row("e", math.nan, 0, 0), row("f", 3, 300, 0, 99),
+            row("g", 3, 290, 2, 99), row("h", 3, None, 0, 0)]
+    # c: fewest shall; g: same shall, 10 ms faster; then f, b, a on should and checks; h has no open_ms (last of the 3s)
+    assert [r["solution"] for r in ledger.rank(rows)] == ["c", "g", "f", "b", "a", "h", "e", "d"]
     assert ledger.best(rows)["solution"] == "c"
     assert ledger.best([row("d", 0, admissible=False)]) is None
+
+
+def test_a_v2_rows_rank_is_unchanged_by_the_third_slot():
+    """v2 rows have two slots (should, checks) and no third: their order is what it was (OBJECTIVES §11)."""
+    rows = [row("a", 3, 1, 9, ruler_version="v2"), row("b", 3, 1, 5, ruler_version="v2"),
+            row("c", 2, 4, 50, ruler_version="v2"), row("f", 3, 0, 99, ruler_version="v2")]
+    assert [r["solution"] for r in ledger.rank(rows, ruler="v2")] == ["c", "f", "b", "a"]
+
+
+def test_open_ms_ranks_rounded_to_10_ms_and_named_reads_any_ruler():
+    assert [ledger.tenth(x) for x in (284.9, 285.0, 294.9, None, math.nan)] == [280.0, 290.0, 290.0, None, None]
+    v2 = row("old", 1, 2, 30, ruler_version="v2")
+    v3 = row("new", 1, 290, 2, 30, open_ms=287.4)
+    assert [ledger.named(v2, k) for k in ("shall_failing", "should_failing", "checks_failing", "open_ms")] == [1, 2, 30, None]
+    assert [ledger.named(v3, k) for k in ("shall_failing", "should_failing", "checks_failing", "open_ms")] == [1, 2, 30, 287.4]
+
+
+# ── open_ms from the runs' speed reports (OBJECTIVES §8): package boxes only, both runs pooled, fail closed ──
+
+
+def _speed(*opens, **extra):
+    return {"opens": [{"kind": k, "phase": ph, "ms": ms, "requests": rq, "bytes": by, "builds": bu}
+                      for k, ph, ms, rq, by, bu in opens], **extra}
+
+
+def test_open_ms_is_the_pooled_median_of_package_opens_and_a_missing_page_counts_as_the_cap():
+    one = _speed(("package", "cold", 2000.0, 95, 2.5e6, 1), ("package", "warm", 300.0, 95, 3e3, 0),
+                 ("files", "cold", 50.0, 3, 3e3, 0), open_ms=1150.0, p95=2000.0)
+    two = _speed(("package", "cold", None, None, None, None), ("package", "warm", 320.0, 95, 3e3, 0),
+                 ("files", "warm", 60.0, 3, 3e3, 0), open_ms=5160.0, p95=9000.0)
+    out = evaluate.speed_summary([one, two])
+    # package opens: 2000, 300, 10000 (never shown: the cap), 320 -> median 1160; the files opens never count
+    assert out["open_ms"] == 1160.0
+    assert out["open_ms_runs"] == [1150.0, 5160.0] and out["open_ms_spread"] == 4010.0
+    assert out["opens"] == 6 and out["opens_failed"] == 1 and out["open_max"] == 10000.0
+    assert out["open_cold_p50"] == 6000.0 and out["open_warm_p50"] == 310.0
+    assert out["open_p50_by_kind"] == {"files": 55.0, "package": 1160.0}
+    assert out["requests_per_open"] == 95.0 and out["builds_waited"] == 1
+
+
+@pytest.mark.parametrize("speeds", [[], [None, None], [_speed(("package", "warm", 300.0, 1, 1, 0)), None],
+                                    [_speed(("package", "warm", 300.0, 1, 1, 0)), {"opens": []}],
+                                    [_speed(("files", "warm", 30.0, 1, 1, 0)), _speed(("files", "warm", 30.0, 1, 1, 0))]])
+def test_open_ms_is_missing_unless_every_run_timed_package_opens(speeds):
+    assert evaluate.speed_summary(speeds)["open_ms"] is None
 
 
 def test_latest_keeps_the_newest_row_per_solution_and_split():
@@ -46,8 +102,8 @@ def test_latest_keeps_the_newest_row_per_solution_and_split():
 
 
 def test_the_code_and_the_frozen_ruler_name_one_version():
-    """The scorer, the manifest and checks.json all say v2 (PEP 0002), so a scorecard's `ruler` is the ruler it ran."""
-    assert ledger.RULER == "v2"
+    """The scorer, the manifest and checks.json all say v3 (PEP 0003), so a scorecard's `ruler` is the ruler it ran."""
+    assert ledger.RULER == "v3"
     assert ruler.manifest(REPO)["ruler"] == ledger.RULER
     assert json.loads((REPO / "ruler" / "checks.json").read_text())["ruler"] == ledger.RULER
 
@@ -175,18 +231,43 @@ def test_the_fixture_is_seeded_dev_and_holdout_differ_and_a_seed_repeats(tmp_pat
         assert all(not (Path(b["path"]) / "vibetracks.toml").exists() for b in fx["boxes"])
         assert set(fx["starter_files"]) <= {p.relative_to(fx["boxes"][0]["path"]).as_posix()
                                             for p in Path(fx["boxes"][0]["path"]).rglob("*") if p.is_file()}
+        # ruler v3: six package boxes, a parent with sub-tracks two levels deep; the package's workflow, no site/
+        # index.html, the marker in OBJECTIVES.md (what the built landing and dashboard print) and nowhere in README
+        pkg = fx["package_boxes"]
+        assert len(pkg) == 6 and all(b["kind"] == "package" for b in pkg)
+        parent = next(b for b in pkg if "pkg_parent" in b["roles"])
+        kids = [b for b in pkg if b["parent"] == parent["slug"]]
+        assert len(kids) == 2 and any(b["parent"] in {k["slug"] for k in kids} for b in pkg)
+        assert sorted((b["state"], b["agents"]) for b in pkg if b["agents"]) == [("blocked", 2), ("working", 1)]
+        latest = max(b["activity"] for b in fx["boxes"])
+        assert all(latest < b["activity"] < fx["extra"]["activity"] for b in pkg)
+        for b in pkg:
+            folder = Path(b["path"])
+            assert "blackbox_agent/.github/workflows/site.yml@" in (folder / ".github" / "workflows" / "pages.yml").read_text()
+            assert not (folder / "site" / "index.html").exists()
+            assert f"`{b['marker']}`" in (folder / "OBJECTIVES.md").read_text()
+            assert b["marker"] not in (folder / "README.md").read_text()
+        assert not {b["title"] for b in pkg} & {b["title"] for b in fx["boxes"] + [fx["extra"]]}
+    assert [b["head"] for b in one["package_boxes"]] == [b["head"] for b in again["package_boxes"]]
+    # the v2 boxes are byte-identical to v2's: the package boxes draw from their own random stream
+    assert [b["head"] for b in one["boxes"]][:3] == V2_DEV_HEADS
 
 
 def test_progress_writes_status_and_progress_from_the_ledger(tmp_path):
+    """status.json's headline kpi is open_ms (down, target 100 ms) and its counter_kpi shall_failing (PEP 0003)."""
     shutil.copytree(REPO / "specs", tmp_path / "specs")
     (tmp_path / "solutions" / "s").mkdir(parents=True)
     (tmp_path / "solutions" / "s" / "meta.json").write_text(json.dumps({"id": "s", "change": "base", "proposed_by": {}}))
-    ledger.append(row("s", 17, 4, 90, admissible=True), tmp_path / "ledger.jsonl")
+    ledger.append(row("s", 17, 1290, 4, 90, admissible=True, open_ms=1287.5), tmp_path / "ledger.jsonl")
     changed = progress.write_all(tmp_path, now_s=1.0)
     assert {p.name for p in changed} == {"PROGRESS.md", "status.json"}
     status = json.loads((tmp_path / "status.json").read_text())
-    assert status["schema"] == "ai-team-status/1" and status["kpi"]["value"] == 17 and status["kpi"]["target"] == 0
-    assert "`s`" in (tmp_path / "PROGRESS.md").read_text()
+    assert status["schema"] == "ai-team-status/1"
+    assert (status["kpi"]["value"], status["kpi"]["unit"], status["kpi"]["direction"], status["kpi"]["target"]) == (1287.5, "ms", "down", 100)
+    assert status["kpi"]["name"].startswith("open_ms")
+    assert status["counter_kpi"]["value"] == 17 and "must be 0" in status["counter_kpi"]["name"]
+    text = (tmp_path / "PROGRESS.md").read_text()
+    assert "`s`" in text and "| open ms |" in text and "`open_ms` 1,288 ms" in text
     assert progress.write_all(tmp_path, now_s=2.0) == []
 
 
@@ -210,8 +291,8 @@ def test_progress_ranks_the_current_ruler_and_lists_an_earlier_one_apart(tmp_pat
     progress.write_all(tmp_path, now_s=1.0)
     text = (tmp_path / "PROGRESS.md").read_text()
     status = json.loads((tmp_path / "status.json").read_text())
-    assert status["kpi"]["value"] == 14 and f"ruler {ledger.RULER}" in status["kpi"]["name"]
-    assert "of 20" in status["kpi"]["name"]
+    assert status["counter_kpi"]["value"] == 14 and f"ruler {ledger.RULER}" in status["kpi"]["name"]
+    assert "of 23" in status["counter_kpi"]["name"]
     board = text.split("## Leaderboard (dev)", 1)[1].split("\n## ", 1)[0]
     assert "`new`" in board and "`old`" not in board
     earlier = text.split("## Earlier rulers", 1)[1].split("\n## ", 1)[0]

@@ -21,9 +21,11 @@ from vibetracks_agent import ledger, paths, solutions, specs
 from vibetracks_agent.ledger import finite
 
 MEMBER = "Vibe Tracks Agent"
-REMIT = ("make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true "
-         f"(ruler {ledger.RULER}, OBJECTIVES.md)")
+REMIT = ("make Vibe Tracks the sidebar Zach opens his black-box agents from: every item of his spec true, and every "
+         f"track's page on screen fast (ruler {ledger.RULER}, OBJECTIVES.md)")
 DASH = "—"
+OPEN_TARGET_MS = 100  # OBJECTIVES §8: open_ms is driven toward Nielsen's "instantaneous"
+named = ledger.named
 
 
 def fmt(value: Any, digits: int = 0, suffix: str = "") -> str:
@@ -59,7 +61,8 @@ def gather(root: Path | None = None) -> dict[str, Any]:
         record = metas.get(row["solution"]) or {}
         held = holdout.get(row["solution"])
         board.append({"rank": n, "solution": row["solution"], "shall_failing": row.get("objective"),
-                      "should_failing": row.get("tiebreak"), "checks_failing": row.get("tiebreak2"),
+                      "open_ms": named(row, "open_ms"),
+                      "should_failing": named(row, "should_failing"), "checks_failing": named(row, "checks_failing"),
                       "admissible": row.get("admissible") is True,
                       "failed_gates": sorted(g for g, v in (row.get("failed_gates") or {}).items() if v),
                       "holdout_shall_failing": None if held is None else held.get("objective"),
@@ -75,12 +78,16 @@ def gather(root: Path | None = None) -> dict[str, Any]:
         for row in ledger.rank(rows, "dev", ruler=version):
             record = metas.get(row["solution"]) or {}
             earlier.append({"ruler": version, "solution": row["solution"], "shall_failing": row.get("objective"),
-                            "should_failing": row.get("tiebreak"), "checks_failing": row.get("tiebreak2"),
+                            "should_failing": named(row, "should_failing"), "checks_failing": named(row, "checks_failing"),
                             "admissible": row.get("admissible") is True,
                             "change": record.get("change", row.get("change")), "evaluated": row.get("t")})
     orders = []
+    speed = None
     if subject:
         card = _card(root, subject["solution"]) or {}
+        runs = [r.get("speed") for r in card.get("runs") or [] if isinstance(r.get("speed"), dict)]
+        speed = {"diagnostics": subject.get("diagnostics") or {}, "open_ms": named(subject, "open_ms"),
+                 "boxes": (runs[0].get("boxes") if runs else None) or {}}
         tasks = {t["id"]: t for t in card.get("tasks") or []}
         for sid, value in (subject.get("task_objectives") or {}).items():
             if value != 0:
@@ -92,9 +99,11 @@ def gather(root: Path | None = None) -> dict[str, Any]:
                                "failed": len(task.get("failed_checks") or []), "checks": len(task.get("checks") or []),
                                "why": task.get("why")})
     return {"as_of": max((str(r.get("t") or "") for r in rows), default=None) or None, "rows": len(rows),
-            "ranked": board, "earlier": earlier, "best": top, "subject": subject, "work_orders": orders,
-            "evaluations": [{k: r.get(k) for k in ("t", "solution", "split", "ruler", "objective", "tiebreak",
-                                                    "tiebreak2", "admissible", "wall_time_s")} for r in rows[-10:]],
+            "ranked": board, "earlier": earlier, "best": top, "subject": subject, "work_orders": orders, "speed": speed,
+            "evaluations": [{**{k: r.get(k) for k in ("t", "solution", "split", "ruler", "objective", "admissible",
+                                                       "wall_time_s")},
+                             "open_ms": named(r, "open_ms"), "should_failing": named(r, "should_failing"),
+                             "checks_failing": named(r, "checks_failing")} for r in rows[-10:]],
             "shall_total": sum(1 for i in items.values() if i.kind == "shall"),
             "should_total": sum(1 for i in items.values() if i.kind == "should")}
 
@@ -113,28 +122,42 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
     best, subject = data["best"], data["subject"]
     if best:
         lines.append(f"- **Best admissible: {_sol(best['solution'])}**, **{fmt(best.get('objective'))} of {shall} shall "
-                     f"items failing** (target 0), {fmt(best.get('tiebreak'))} of {should} should, "
-                     f"{fmt(best.get('tiebreak2'))} checks failing.")
+                     f"items failing** (target 0), {fmt(named(best, 'should_failing'))} of {should} should, "
+                     f"{fmt(named(best, 'checks_failing'))} checks failing.")
     elif subject:
         failed = ", ".join(g for g, v in (subject.get("failed_gates") or {}).items() if v) or "none"
         lines.append(f"- **No admissible version yet.** Top of the board: {_sol(subject['solution'])}, "
                      f"{fmt(subject.get('objective'))} of {shall} shall items failing, gates failed: {failed}.")
     else:
         lines.append("- **No version scored yet:** `vta new` then `vta evaluate`.")
+    speed = data.get("speed")
+    if speed:
+        d = speed["diagnostics"]
+        runs = " and ".join(fmt(x, 0, " ms") for x in d.get("open_ms_runs") or []) or DASH
+        kinds = ", ".join(f"{k} {fmt(v, 0, ' ms')}" for k, v in (d.get("open_p50_by_kind") or {}).items()) or DASH
+        mb = lambda b: DASH if finite(b) is None else f"{finite(b) / 1e6:,.2f} MB"  # noqa: E731
+        lines.append(f"- **Opening a track: `open_ms` {fmt(speed['open_ms'], 0, ' ms')}** (target {OPEN_TARGET_MS} ms; S1.6 "
+                     "wants it within 400 ms and nineteen opens in twenty within 1000 ms): the median of the package "
+                     f"boxes' opens over both dev runs (each run: {runs}; spread {fmt(d.get('open_ms_spread'), 0, ' ms')}). "
+                     f"A package box's first open {fmt(d.get('open_cold_p50'), 0, ' ms')}, later opens "
+                     f"{fmt(d.get('open_warm_p50'), 0, ' ms')}; every kind's median: {kinds}; p95 of all "
+                     f"{fmt(d.get('opens'))} opens {fmt(d.get('open_p95'), 0, ' ms')}, slowest {fmt(d.get('open_max'), 0, ' ms')}. "
+                     f"Per package open {fmt(d.get('requests_per_open'))} requests, {mb(d.get('bytes_first_open'))} the "
+                     f"first time and {mb(d.get('bytes_later_open'))} after; {fmt(d.get('builds_waited'))} builds waited on.")
     lines += ["", "## Leaderboard (dev)", "",
-              f"Ruler {ledger.RULER} only. Admissible versions by shall failing, then should failing, then checks "
-              "failing; then the rest (§8).", "",
-              "| rank | id | shall failing | should failing | checks failing | admissible | holdout shall | change | model |",
-              "|---|---|---|---|---|---|---|---|---|"]
+              f"Ruler {ledger.RULER} only. Admissible versions by shall failing, then `open_ms` (rounded to 10 ms), then "
+              "should failing, then checks failing; then the rest (§8).", "",
+              "| rank | id | shall failing | open ms | should failing | checks failing | admissible | holdout shall | change | model |",
+              "|---|---|---|---|---|---|---|---|---|---|"]
     for r in data["ranked"][:15]:
         adm = "yes" if r["admissible"] else "no (" + ", ".join(r["failed_gates"]) + ")"
         change = r["change"] or ""
         change = change if len(change) <= 80 else change[:79] + "…"
-        lines.append(f"| {r['rank']} | {_sol(r['solution'])} | {fmt(r['shall_failing'])} | {fmt(r['should_failing'])} | "
-                     f"{fmt(r['checks_failing'])} | {adm} | {fmt(r['holdout_shall_failing'])} | {_cell(change)} | "
-                     f"{_cell(r['model'])} |")
+        lines.append(f"| {r['rank']} | {_sol(r['solution'])} | {fmt(r['shall_failing'])} | {fmt(r['open_ms'])} | "
+                     f"{fmt(r['should_failing'])} | {fmt(r['checks_failing'])} | {adm} | {fmt(r['holdout_shall_failing'])} | "
+                     f"{_cell(change)} | {_cell(r['model'])} |")
     if not data["ranked"]:
-        lines.append(f"| {DASH} | no version scored yet | | | | | | | |")
+        lines.append(f"| {DASH} | no version scored yet | | | | | | | | |")
     if data["earlier"]:
         lines += ["", "## Earlier rulers", "",
                   f"Scored on an earlier ruler: kept and labelled, never ranked against ruler {ledger.RULER} "
@@ -147,6 +170,18 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
             lines.append(f"| {_cell(r['ruler'])} | {_sol(r['solution'])} | {fmt(r['shall_failing'])} | "
                          f"{fmt(r['should_failing'])} | {fmt(r['checks_failing'])} | {'yes' if r['admissible'] else 'no'} | "
                          f"{_cell(change)} |")
+    if speed and speed["boxes"]:
+        lines += ["", "## Opening each box (`open_ms`, S1.6)", "",
+                  f"{_sol(subject['solution'])}'s first dev run, one row per box of the speed group's click sequence "
+                  "(round 1 is a box's first open; [`ruler/suite/groups/speed.mjs`](ruler/suite/groups/speed.mjs)). "
+                  "Requests and bytes: what the browser fetched between the press and the page showing.", "",
+                  "| box | kind | first open ms | p50 ms | p95 ms | first open: requests, bytes | later: requests, bytes (p50) |",
+                  "|---|---|---|---|---|---|---|"]
+        kb = lambda b: DASH if finite(b) is None else f"{finite(b) / 1e3:,.0f} kB"  # noqa: E731
+        for slug, b in sorted(speed["boxes"].items(), key=lambda kv: -(finite(kv[1].get("p50")) or 0)):
+            lines.append(f"| {_cell(slug)} | {_cell(b.get('kind'))} | {fmt(b.get('cold'))} | {fmt(b.get('p50'))} | "
+                         f"{fmt(b.get('p95'))} | {fmt(b.get('cold_requests'))}, {kb(b.get('cold_bytes'))} | "
+                         f"{fmt(b.get('warm_requests_p50'))}, {kb(b.get('warm_bytes_p50'))} |")
     lines += ["", "## Open work orders", ""]
     if subject:
         lines += [f"The spec items {_sol(subject['solution'])} does not meet ({len(data['work_orders'])}); each is "
@@ -158,14 +193,14 @@ def progress_markdown(data: Mapping[str, Any], generated: str) -> str:
     else:
         lines.append("None yet: no version scored.")
     lines += ["", "## Last 10 evaluations", "",
-              "| t | id | split | ruler | shall | should | checks | admissible | wall s |",
-              "|---|---|---|---|---|---|---|---|---|"]
+              "| t | id | split | ruler | shall | open ms | should | checks | admissible | wall s |",
+              "|---|---|---|---|---|---|---|---|---|---|"]
     for r in data["evaluations"]:
         lines.append(f"| {r['t']} | {_sol(r['solution'])} | {r['split']} | {_cell(r.get('ruler') or 'unknown')} | "
-                     f"{fmt(r['objective'])} | {fmt(r['tiebreak'])} | {fmt(r['tiebreak2'])} | "
+                     f"{fmt(r['objective'])} | {fmt(r['open_ms'])} | {fmt(r['should_failing'])} | {fmt(r['checks_failing'])} | "
                      f"{'yes' if r['admissible'] else 'no'} | {fmt(r['wall_time_s'])} |")
     if not data["evaluations"]:
-        lines.append(f"| {DASH} | | | | | | | | |")
+        lines.append(f"| {DASH} | | | | | | | | | |")
     lines.append("")
     return "\n".join(lines)
 
@@ -199,26 +234,32 @@ def status_record(data: Mapping[str, Any], root: Path, now_s: float) -> dict[str
     except (OSError, ValueError):
         previous = {}
     shall = data["shall_total"]
+    # WHY open_ms is the headline and shall_failing the counter (ruler v3, PEP 0003): Zach asked for the open speed as
+    # the objective he tracks ("Please add this an an objective you track", 2026-11-25); shall_failing stays the
+    # ranked objective (OBJECTIVES §8) and the counter that must reach and stay 0, so a faster version that breaks one
+    # of his items reads as a loss here too
+    open_ms = None if shown is None else finite(named(shown, "open_ms"))
     return {
         "schema": "ai-team-status/1",
         "member": MEMBER,
         "team": "AI Team",
         "remit": REMIT,
         "kpi": {
-            "name": f"shall items failing, of {shall} (ruler {ledger.RULER}, dev)",
-            "value": None if shown is None else finite(shown.get("objective")),
-            "unit": "items",
+            "name": f"open_ms: ms from a click on a track to its page on screen, package boxes' median (ruler {ledger.RULER}, dev)",
+            "value": open_ms,
+            "unit": "ms",
             "direction": "down",
-            "target": 0,
-            "level": None if shown is None else f"{fmt(shown.get('objective'))} of {shall} shall failing",
+            "target": OPEN_TARGET_MS,
+            "level": None if open_ms is None else f"{fmt(open_ms)} ms (S1.6: within 400, and 19 opens in 20 within 1000)",
             "level_name": f"ruler {ledger.RULER}, dev" + ("" if shown is None else f", {'best' if best else 'top (not admissible)'} "
                                                                        f"{shown['solution']}"),
-            "next_gate": ("an admissible version (completed and deterministic)" if best is None
-                          else f"a version with fewer than {fmt(best.get('objective'))} shall items failing"),
+            "next_gate": ("a version with an open_ms (the speed group ran on both dev runs)" if open_ms is None
+                          else "open_ms at most 400 ms, nineteen opens in twenty within 1000 ms (S1.6)" if open_ms > 400
+                          else f"open_ms at most {OPEN_TARGET_MS} ms"),
             "on_track": None,
         },
-        "counter_kpi": {"name": "checks failing (the third tie-break), same version",
-                        "value": None if shown is None else finite(shown.get("tiebreak2")), "unit": "checks",
+        "counter_kpi": {"name": f"shall items failing, of {shall}: must be 0 (the ranked objective, same version)",
+                        "value": None if shown is None else finite(shown.get("objective")), "unit": "items",
                         "owner": MEMBER},
         "status": previous.get("status", "idle"),
         "blocked_on": previous.get("blocked_on"),

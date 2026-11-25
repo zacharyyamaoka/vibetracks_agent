@@ -12,7 +12,7 @@ commit ([`~/vibetracks`](https://github.com/zacharyyamaoka/vibetracks)), never c
 
 | Path | Written by | Notes |
 |---|---|---|
-| [`OBJECTIVES.md`](../OBJECTIVES.md), `specs/*.md` | Zach + dispatcher | the ruler, frozen (v2 since 2026-11-25, v1 2026-11-24; OBJECTIVES §11); sha256s in [`ruler/manifest.json`](../ruler/manifest.json) |
+| [`OBJECTIVES.md`](../OBJECTIVES.md), `specs/*.md` | Zach + dispatcher | the ruler, frozen (v3 since 2026-11-25, v2 and v1 before it; OBJECTIVES §11); sha256s in [`ruler/manifest.json`](../ruler/manifest.json) |
 | [`ruler/manifest.json`](../ruler/manifest.json) | [`tools/freeze_ruler.py`](../tools/freeze_ruler.py), once per ruler version | sha256 of every file under [`ruler/`](../ruler/), of [`OBJECTIVES.md`](../OBJECTIVES.md) and each spec note, of [`package.json`](../package.json) + [`package-lock.json`](../package-lock.json); the frozen refs (blackbox_agent, vibetracks baseline, claude-hub, Playwright) |
 | [`ruler/checks.json`](../ruler/checks.json) | [`tools/freeze_ruler.py`](../tools/freeze_ruler.py) | every check the suite runs (`node ruler/suite/run.mjs --list`); a check missing from a run counts as failing |
 | [`ruler/fixture.py`](../ruler/fixture.py), [`ruler/stage.py`](../ruler/stage.py), `ruler/suite/**` | frozen | the acceptance run (§5 below) |
@@ -64,25 +64,39 @@ evaluate.evaluate(id, split="dev", runs=2, with_vt_gate=False) -> scorecard
   check on passed / not passed. `admissible` = both exactly `true`.
 
 **scorecard.json** (`vta evaluate`; `scorecard_holdout.json` for holdout):
-`{solution, split, ruler: "v2" (the ruler it ran, ledger.RULER), objective (= shall_failing), objective_name: "shall_failing", tiebreak
-(= should_failing), tiebreak_name, tiebreak2 (= checks_failing), tiebreak2_name, shall_failing, shall_total,
+`{solution, split, ruler: "v3" (the ruler it ran, ledger.RULER), objective (= shall_failing), objective_name: "shall_failing", tiebreak
+(= open_ms rounded to 10 ms, `ledger.tenth`), tiebreak_name, tiebreak2 (= should_failing), tiebreak2_name, tiebreak3
+(= checks_failing), tiebreak3_name, open_ms, open_ms_unit: "ms", open_ms_target: 100, shall_failing, shall_total,
 should_failing, should_total, checks_failing, checks_total, admissible, gate_pass_rate, gates: {completed,
 deterministic}, failed_gates: {completed: 0|1, deterministic: 0|1}, diagnostics: {shall_passing,
 sidebar_style_props_off, sidebar_style_props_measured, page_ready_ms, vt_gate_failed, wall_time_s, checks_total,
-registration, stock_tree}, tasks: [{id, kind, title, met, why, checks: [{id, name, states: [per run], passed,
+registration, stock_tree, open_ms_runs, open_ms_spread, open_cold_p50, open_warm_p50, open_p50_by_kind, open_p95,
+open_p95_runs, open_max, opens, opens_failed, requests_per_open, bytes_first_open, bytes_later_open, builds_waited,
+page_crashes}, tasks: [{id, kind, title, met, why, checks: [{id, name, states: [per run], passed,
 message}], failed_checks: [names]}], task_objectives: {spec id: 0 met | 1 not met}, vibetracks_sha,
 vibetracks_committed, seed, evaluated, wall_time_s, runs: [{n, exit, timed_out, wall_s, junit, network, reaped_pids,
-groups}], code: {ruler, blackbox_agent_ref, playwright, repo_commit}}`
+groups, speed}], code: {ruler, blackbox_agent_ref, playwright, repo_commit}}`. A run's `speed` is the speed group's
+report ([`ruler/suite/groups/speed.mjs`](../ruler/suite/groups/speed.mjs)): its definition (thresholds, times, viewport), the `vt add`s, the two commits,
+every open `{round, phase: cold|warm, box, kind: package|files|readme, ms (null: not shown within 10 s), requests,
+bytes, builds, why}`, its statistics and a per-box table.
 
 - `sidebar_style_props_off` = S2.2 checks not passed in the first run, of `sidebar_style_props_measured` (the measured
   properties × themes in [`ruler/reference/claude-sidebar.json`](../ruler/reference/claude-sidebar.json)); `page_ready_ms` = load to the first click on the
   sidebar's Review row that changes the address (first run); `vt_gate_failed` = failures of vibetracks' own
   `pytest tests` on the tree when `--vt-gate` ran it, else null.
+- `open_ms` (ruler v3, OBJECTIVES §8, `evaluate.speed_summary`) = the median of every package box's open of both
+  dev runs pooled, an open never shown counting 10 000 ms; null unless every run has a speed report with opens. The
+  `open_*` diagnostics pool the runs the same way (`open_ms_runs`: each run's own value; `open_p95` and `open_max`:
+  every kind's opens).
 
-**ledger.jsonl row:** `{t, solution, parent, split: "dev"|"holdout", ruler: "v1"|"v2", objective, tiebreak, tiebreak2,
-admissible, gate_pass_rate, failed_gates, diagnostics, wall_time_s, repo_commit, vibetracks_sha, proposed_by: {agent,
-model, session}, change, task_objectives}`. Rank (`ledger.rank`): admissible rows first by (objective, tiebreak,
-tiebreak2) ascending; then the rest by gate pass rate descending and the same three; a missing number sorts last.
+**ledger.jsonl row:** `{t, solution, parent, split: "dev"|"holdout", ruler: "v1"|"v2"|"v3", objective, tiebreak,
+tiebreak2, tiebreak3, open_ms, should_failing, checks_failing, admissible, gate_pass_rate, failed_gates, diagnostics,
+wall_time_s, repo_commit, vibetracks_sha, proposed_by: {agent, model, session}, change, task_objectives}`. Up to v2 a
+row has two slots (tiebreak = should_failing, tiebreak2 = checks_failing) and none of the named fields; since v3,
+tiebreak = open_ms rounded to 10 ms, tiebreak2 = should, tiebreak3 = checks (the blackbox_agent fold ranks equal
+objectives by the slots in this order); `ledger.named(row, key)` reads should, checks and open_ms from a row of any
+ruler. Rank (`ledger.rank`): admissible rows first by (objective, tiebreak, tiebreak2, tiebreak3) ascending; then the
+rest by gate pass rate descending and the same; a missing number sorts last.
 It ranks one ruler's rows (default the current one, `ledger.RULER`): a row scored on another ruler is kept, labelled
 with the ruler it names, listed apart in [`PROGRESS.md`](../PROGRESS.md) ("Earlier rulers") and never compared with the current one; `vta verify`
 fails when [`ruler/manifest.json`](../ruler/manifest.json) or [`ruler/checks.json`](../ruler/checks.json) names another ruler than the scorer's.
@@ -91,19 +105,22 @@ fails when [`ruler/manifest.json`](../ruler/manifest.json) or [`ruler/checks.jso
 model, session}, created, tags: []}`. `vta new` refuses without `--agent` and `--model`, an existing id, an unknown
 parent, or a ref ~/vibetracks cannot resolve.
 
-**status.json:** `ai-team-status/1` (shape as claude_party_agent's): `kpi` = shall items failing of 20 (ruler v2) for the best
-admissible version (else the top of the board, named "not admissible"), direction down, target 0; `counter_kpi` =
-that version's checks failing; `todo` from [`ideas.md`](../ideas.md)'s `## I'll try`.
+**status.json:** `ai-team-status/1` (shape as claude_party_agent's), for the best admissible version (else the top of
+the board, named "not admissible"): `kpi` = `open_ms` (ruler v3), unit ms, direction down, target 100; `counter_kpi` =
+that version's shall items failing of 23, which must be 0. WHY (PEP 0003): Zach asked for the open speed as the
+objective he tracks; shall_failing stays the ranked objective. `todo` from [`ideas.md`](../ideas.md)'s `## I'll try`.
 
 **junit:** one XML per run, `<testsuites>` with one `<testsuite name="ruler.suite.<group>">` per group; each
 `<testcase classname="ruler.suite.<group>" name="S<id> <what>">` with a `<failure message>` (what it looked for and
-what it found) or an `<error message>` (it crashed, its group could not start, ran out of its 240 s, or never reached
-it). Its id is [`ruler/suite/<group>.py::S<id> <what>`](../ruler/suite/), so a note's `tests: "*::S2.3 *"` matches it.
+what it found) or an `<error message>` (it crashed, its group could not start, ran out of its budget (240 s; the speed
+group 420 s), or never reached it). Its id is [`ruler/suite/<group>.py::S<id> <what>`](../ruler/suite/), so a note's `tests: "*::S2.3 *"` matches it.
 
 **fixture.json** ([`ruler/fixture.py`](../ruler/fixture.py), in each run dir): `{schema: "vibetracks-agent/fixture-1", seed, home, person,
 boxes: [{title, slug, parent, state, agents, roles, waits, feedback, site, activity, marker, readme_marker, path,
-head}] (parents first), extra (S1.5's unlisted box), plain_folder, s15_parent, new_titles, section_name,
-starter_files, blackbox: {path, ref, head}, gh: {path, log, state, remotes}, track_naming}`.
+head}] (parents first), extra (S1.5's unlisted box), package_boxes (ruler v3: six boxes like `boxes`' plus
+`kind: "package"`, roles `package` and `pkg_parent` / `pkg_child` / `pkg_blocked` / `pkg_grandchild` / `pkg_leaf`, a
+marker that is their OBJECTIVES.md objective name; not in the tree handed over), plain_folder, s15_parent, new_titles,
+section_name, starter_files, blackbox: {path, ref, head}, gh: {path, log, state, remotes}, track_naming}`.
 
 ## 4. CLI `vta`
 
@@ -115,7 +132,8 @@ Run as `uv run --directory ~/vibetracks_agent vta <verb>`.
 | `vta new <id> --ref <ref> --change "…" --agent A --model M [--parent P] [--session S] [--tags a,b]` | writes [`solutions/<id>/meta.json`](../solutions/) |
 | `vta evaluate <id> [--split dev\|holdout] [--runs 2] [--timeout 1200] [--vt-gate] [--only S2.3,…] [--no-progress]` | the acceptance run (§5), `--runs` times; the scorecard, the junit copies, one ledger row, then `vta progress`. Refuses when `vta verify` would fail. `--only` is for debugging a check: its scorecard fails every unselected check (fail closed) |
 | `vta progress` | [`PROGRESS.md`](../PROGRESS.md), [`status.json`](../status.json) |
-| `vta leaderboard [--n N] [--split dev\|holdout] [--ruler v1]` | the ranked table of one ruler's rows (default the current) |
+| `vta leaderboard [--n N] [--split dev\|holdout] [--ruler v1]` | the ranked table of one ruler's rows (default the current), with `open_ms` |
+| `vta speed --base <url> [--rounds 2] [--vt-home DIR] [--json]` | [`tools/speed.mjs`](../tools/speed.mjs): S1.6's timer against a running `vt serve` (Zach's Preview: `http://127.0.0.1:4396/`). Read-only: it starts nothing, and its own headless browser clicks track rows only; it counts any non-GET request it sees. Prints `open_ms` and a per-track table (first open, p50, p95, requests, bytes). Its marker is each track's title inside a frame of the main pane, so a README fallback counts there |
 
 ## 5. The stage (one acceptance run)
 
@@ -152,8 +170,10 @@ Stable and Preview included) and killed at 1200 s: `python3 ruler/stage.py run` 
    c. else nothing, and every check that needs a track row fails saying it found none.
    **A track is named on the command line by its box folder's basename** (`--parent kestrel_grasp_agent`).
 5. `<run>/pristine` = HOME as it then stands.
-6. **The suite** (`node ruler/suite/run.mjs`, Playwright 1.64.1, headless Chromium 1400×900): 12 groups (v2 adds
-   [`pause`](../ruler/suite/groups/pause.mjs), run last, so every v1 group runs exactly as in v1); before each,
+6. **The suite** (`node ruler/suite/run.mjs`, Playwright 1.64.1, headless Chromium 1400×900): 15 groups (v2 adds
+   [`pause`](../ruler/suite/groups/pause.mjs), v3 [`fold`](../ruler/suite/groups/fold.mjs), [`search`](../ruler/suite/groups/search.mjs) and [`speed`](../ruler/suite/groups/speed.mjs), each run after every group before it, which run exactly as in
+   their own ruler; fold and speed hand the version the six package boxes and the extra box with `vt add` and restart
+   `vt serve`, and speed opens its own fresh browser); before each,
    `vt serve` is stopped, HOME is put back from pristine/, `vt serve --port 4811` (inside the namespace; a free port
    outside 4390-4397 when no namespace) is started detached and stopped by its pid's process group, and a new browser
    context opens the page. The page is read as a person sees it: visible text, ARIA roles, measured boxes and computed
@@ -293,3 +313,42 @@ leaves a measurement open, the closest honest one, frozen in v2:
     have been written, else nothing was proved (as S1.2's deviation 4).
 32. **S2.10's tracks:** the page's is the fixture's `rollup_working` box; the shell's and the agent's are the first two
     other open leaf boxes with a site, in fixture order.
+
+Added in ruler v3 ([PEP 0003](peps/0003-ruler-v3-open-speed-and-fold.md); S1.6's checks are in [`ruler/suite/groups/speed.mjs`](../ruler/suite/groups/speed.mjs) with the timer
+in [`ruler/suite/timer.mjs`](../ruler/suite/timer.mjs), S2.9's new ones in [`ruler/suite/groups/fold.mjs`](../ruler/suite/groups/fold.mjs)). The closest honest measurement where his words or
+the PEP leave one open, frozen in v3:
+
+33. **S1.6, "the box's own page":** a files box's site marker, a package box's objective name (its built landing and
+    dashboard both print it near the top), the README marker for the box with no site. The marker must be visible
+    inside the frame's viewport (1400×900 page), so a version that shows the box's page scrolled away from its top
+    reads as not shown.
+34. **S1.6, "the slowest open":** read as the p95 of each run's opens (about a hundred), the slowest reported; the
+    single maximum is one stall away from flipping run to run, which the deterministic gate would turn into an
+    inadmissible version. `open_ms` counts the package boxes' opens only, the kind every box of Zach's is.
+35. **S1.6, a crashed page:** under memory pressure the kernel or fleet-throttle kills a Chrome renderer first; the
+    speed group then loads a fresh page and retries that open once, and counts every crash (`page_crashes`).
+36. **S1.6, requests and bytes:** what the browser's own network events record from the press to the page showing,
+    by each request's start time, the URLs the page fetched during the 10 s quiet before round 1 (its polls) left out;
+    bytes are response bodies as received (a 304 revalidation is 0). Builds = the version's PEP 0028 build records
+    (`<vt home>/cache/box-sites/*/build.json` `at`) inside that window; null for a version that keeps none there.
+37. **S2.9, "the dot turns into a chevron in the same slot":** the slot = the centre of the parent's status dot before
+    hover (S2.9's dot reading); on hover the topmost element there, or its nearest button-like ancestor (a `button`, a
+    `role="button"`, or an `aria-label`/`title` naming fold, unfold, collapse or expand), must be visible with its
+    centre within 6 px of the dot's, and invisible again once the pointer leaves the row.
+38. **S2.9, "Fold N sub-tracks (← →)":** the chevron's `aria-label` and `title` (and those of its ancestors up to the
+    row, and any visible `role="tooltip"`), read together, must hold "Fold N sub-tracks" (N the direct sub-tracks, 2)
+    and "← →"; folded, "Unfold N sub-tracks". A native tooltip is not in the page, so the attribute is what is read.
+39. **S2.9, "the rows below move up":** the first row below the parent's subtree on screen (the extra box, added after
+    the package boxes) moves up by at least two row heights and sits within 0.6 of a row height under the parent;
+    after the second click it is back within 2 px.
+40. **S2.9, "a focused row":** focused by a real click on its title (which also opens it), then real ← and → keys.
+41. **S2.11, "the palette is open":** a visible text input (an `input` of a text type, a `textarea`, a contenteditable,
+    or a `combobox`/`searchbox`/`textbox` role) holds the focus in the page itself (not in a box's frame), within
+    1.5 s of the key or click, starting with nothing focused; "closed" = that input no longer visible.
+42. **S2.11, a hit:** a row on screen (at most 72 px tall) holding README.md once (the box's file); its track is a fixture title or
+    folder name in the row, else the nearest title above it within 240 px (a group heading); its line reads as
+    `README.md:7`, `README.md #7`, `README.md (7`, `README.md, line 7`, `README.md L7` or `line 7`. "First" = the
+    topmost hit row naming a track. Enter is pressed once the hit shows; if the address does not move within 2 s, ↓
+    then Enter (a palette that highlights nothing until an arrow key).
+43. **S2.11, "the open track first":** the track opened by a click on its title just before; the phrase is "ruler v1",
+    which every fixture box's README holds on line 5; at least two tracks' hits must show within 6 s.

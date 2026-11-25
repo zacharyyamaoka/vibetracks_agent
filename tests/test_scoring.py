@@ -160,15 +160,19 @@ def test_gates_are_admissible_only_when_both_are_true():
 # ── the real spec notes ──────────────────────────────────────────────────────────────────────────────────────
 
 
-def test_the_frozen_spec_has_20_shall_and_4_should_and_s5_1_has_no_check():
-    """Ruler v2 (PEP 0002) adds S2.10, a shall: 19 -> 20."""
+def test_the_frozen_spec_has_23_shall_and_3_should_and_s5_1_has_no_check():
+    """Ruler v2 (PEP 0002) adds S2.10, a shall: 19 -> 20. Ruler v3 (PEP 0003) adds S1.6 and S2.11, shalls, and makes
+    S2.9 one: 23 shall, 3 should."""
     items = specs.load_items(REPO / "specs")
-    assert len([i for i in items if i.kind == "shall"]) == 20
-    assert len([i for i in items if i.kind == "should"]) == 4
+    assert len([i for i in items if i.kind == "shall"]) == 23
+    assert len([i for i in items if i.kind == "should"]) == 3
     by_id = {i.id: i for i in items}
     assert by_id["S5.1"].tests == ()
     assert by_id["S2.3"].tests == ("*::S2.3 *",)
     assert by_id["S2.10"].kind == "shall" and by_id["S2.10"].tests == ("*::S2.10 *",)
+    assert by_id["S1.6"].kind == "shall" and by_id["S1.6"].tests == ("*::S1.6 *",)
+    assert by_id["S2.9"].kind == "shall" and by_id["S2.9"].tests == ("*::S2.9 *",)
+    assert by_id["S2.11"].kind == "shall" and by_id["S2.11"].tests == ("*::S2.11 *",)
 
 
 def test_every_spec_item_but_s5_1_has_at_least_one_ruler_check():
@@ -208,3 +212,44 @@ def test_every_row_of_pep_0002s_check_table_has_an_s2_10_check():
     assert not missing, f"PEP 0002 rows with no S2.10 check: {missing}"
     # S2.3's amended list: Z runs Pause / Resume (the letter is read, as every other letter is)
     assert any(n.startswith("S2.3 Z ") for n in names)
+
+
+# PEP 0003's fold behaviours (Zach, 2026-11-25), each with a fold-group S2.9 check, and S1.6's two bounds
+PEP_0003_FOLD = {
+    "the dot turns into the chevron in the same slot": "turns its status dot into the fold chevron, in the same slot",
+    "Fold N sub-tracks (← →) / Unfold N sub-tracks": '"Fold N sub-tracks (← →)", and "Unfold N sub-tracks"',
+    "a chevron click folds every level and the rows below move up; a second unfolds": "folds every level below and the rows below move up; a second click unfolds",
+    "a title click opens without folding": "title click on a parent opens it and leaves it unfolded",
+    "← and → fold and unfold a focused row": "← folds a focused row and → unfolds it",
+    "the fold survives a reload": "a fold survives a reload",
+    "a folded parent keeps its roll-up": "a folded parent still shows its roll-up",
+}
+
+
+def test_every_fold_behaviour_of_pep_0003_has_an_s2_9_check_and_s1_6_has_both_bounds():
+    checks = scoring.expected_checks(REPO / "ruler" / "checks.json")
+    fold = [c.split("::", 1)[1] for c in checks if c.startswith("ruler/suite/fold.py::S2.9 ")]
+    missing = [b for b, words in PEP_0003_FOLD.items() if not any(words in n for n in fold)]
+    assert not missing, f"PEP 0003 fold behaviours with no check: {missing}"
+    s16 = [c.split("::", 1)[1] for c in checks if c.startswith("ruler/suite/speed.py::S1.6 ")]
+    assert any("package box" in n and "400 ms" in n for n in s16) and any("nineteen opens in twenty" in n and "1000 ms" in n for n in s16)
+
+
+# S2.11's behaviours (Zach, 2026-11-25), each with a search-group check; S2.1 never claims one of them
+PEP_0003_SEARCH = {
+    "Ctrl+K opens a palette": "Ctrl+K opens the search palette",
+    "Ctrl+O and Ctrl+P too": "Ctrl+O and Ctrl+P open the search palette too",
+    "Escape closes it": "Escape closes the search palette",
+    "a Search row with Ctrl+K at the right end, in the top rows": "the sidebar shows Search with Ctrl+K at its right end",
+    "a hit names its track, file and line": "lists that hit with its track, file and line",
+    "the open track's hits first": "with a track open, its hits come first",
+    "Enter opens the page showing the hit": "Enter on a hit opens its track on the page that shows it",
+}
+
+
+def test_every_search_behaviour_of_pep_0003_has_an_s2_11_check_and_s2_1_claims_none():
+    checks = scoring.expected_checks(REPO / "ruler" / "checks.json")
+    s211 = [c.split("::", 1)[1] for c in checks if c.startswith("ruler/suite/search.py::S2.11 ")]
+    missing = [b for b, words in PEP_0003_SEARCH.items() if not any(words in n for n in s211)]
+    assert not missing, f"PEP 0003 search behaviours with no check: {missing}"
+    assert not [c for c in checks if "search.py" in c and scoring.matches(c, ("*::S2.1 *",))]

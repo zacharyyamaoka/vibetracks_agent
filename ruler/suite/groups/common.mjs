@@ -114,6 +114,24 @@ export async function thinBars(page) {
   })
 }
 
+// ── the ruler v3 stage boxes (fold, speed) ──────────────────────────────────────────────────────────────────────
+/** Ruler v3: stop vt serve, hand the version the four package boxes (a parent, two sub-tracks, a grandchild) and then
+ *  the extra box with its own `vt add` (S1.5's verb, parents first, as ruler/stage.py hands over the rest), start a
+ *  fresh vt serve. Only the fold and speed groups do this, so every v2 group sees the v2 tree. Returns each `vt add`'s
+ *  {args, code, out}; a version without `vt add` gets nothing added (its checks fail saying so). */
+export async function addStageBoxes(ctx) {
+  const { stage, F } = ctx
+  await stage.stop()
+  const steps = []
+  for (const box of [...(F.package_boxes || []), F.extra]) {
+    const args = ['add', box.path.replace(F.home, stage.home), ...(box.parent ? ['--parent', box.parent] : [])]
+    const out = stage.vtRun(args)
+    steps.push({ args: args.slice(0, 1).concat(box.slug, args.slice(2)), code: out.code, out: out.out.slice(-300) })
+  }
+  await stage.start()
+  return steps
+}
+
 // ── box files ───────────────────────────────────────────────────────────────────────────────────────────────────
 export function walkNames(dir) {
   const out = []

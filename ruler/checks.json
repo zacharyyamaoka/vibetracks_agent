@@ -1,6 +1,6 @@
 {
  "schema": "vibetracks-agent/checks-1",
- "ruler": "v2",
+ "ruler": "v3",
  "what": "Every check the acceptance suite runs (node ruler/suite/run.mjs --list), frozen with it: a check missing from a run's junit counts as failing, and an item none of these match has no check (OBJECTIVES \u00a78).",
  "checks": [
   {
@@ -597,6 +597,86 @@
    "id": "ruler/suite/pause.py::S2.10 pausing and resuming leave every box untouched",
    "group": "pause",
    "name": "S2.10 pausing and resuming leave every box untouched"
+  },
+  {
+   "id": "ruler/suite/fold.py::S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot",
+   "group": "fold",
+   "name": "S2.9 hovering a parent turns its status dot into the fold chevron, in the same slot"
+  },
+  {
+   "id": "ruler/suite/fold.py::S2.9 the chevron reads \"Fold N sub-tracks (\u2190 \u2192)\", and \"Unfold N sub-tracks\" when folded, N its sub-tracks",
+   "group": "fold",
+   "name": "S2.9 the chevron reads \"Fold N sub-tracks (\u2190 \u2192)\", and \"Unfold N sub-tracks\" when folded, N its sub-tracks"
+  },
+  {
+   "id": "ruler/suite/fold.py::S2.9 a chevron click folds every level below and the rows below move up; a second click unfolds",
+   "group": "fold",
+   "name": "S2.9 a chevron click folds every level below and the rows below move up; a second click unfolds"
+  },
+  {
+   "id": "ruler/suite/fold.py::S2.9 a title click on a parent opens it and leaves it unfolded",
+   "group": "fold",
+   "name": "S2.9 a title click on a parent opens it and leaves it unfolded"
+  },
+  {
+   "id": "ruler/suite/fold.py::S2.9 \u2190 folds a focused row and \u2192 unfolds it",
+   "group": "fold",
+   "name": "S2.9 \u2190 folds a focused row and \u2192 unfolds it"
+  },
+  {
+   "id": "ruler/suite/fold.py::S2.9 a fold survives a reload",
+   "group": "fold",
+   "name": "S2.9 a fold survives a reload"
+  },
+  {
+   "id": "ruler/suite/fold.py::S2.9 a folded parent still shows its roll-up: a pip for its blocked sub-track and its 3 agents",
+   "group": "fold",
+   "name": "S2.9 a folded parent still shows its roll-up: a pip for its blocked sub-track and its 3 agents"
+  },
+  {
+   "id": "ruler/suite/search.py::S2.11 Ctrl+K opens the search palette with its input focused",
+   "group": "search",
+   "name": "S2.11 Ctrl+K opens the search palette with its input focused"
+  },
+  {
+   "id": "ruler/suite/search.py::S2.11 Ctrl+O and Ctrl+P open the search palette too",
+   "group": "search",
+   "name": "S2.11 Ctrl+O and Ctrl+P open the search palette too"
+  },
+  {
+   "id": "ruler/suite/search.py::S2.11 Escape closes the search palette",
+   "group": "search",
+   "name": "S2.11 Escape closes the search palette"
+  },
+  {
+   "id": "ruler/suite/search.py::S2.11 the sidebar shows Search with Ctrl+K at its right end, below New track and above the tracks; a click opens the palette",
+   "group": "search",
+   "name": "S2.11 the sidebar shows Search with Ctrl+K at its right end, below New track and above the tracks; a click opens the palette"
+  },
+  {
+   "id": "ruler/suite/search.py::S2.11 a phrase from one box's files lists that hit with its track, file and line",
+   "group": "search",
+   "name": "S2.11 a phrase from one box's files lists that hit with its track, file and line"
+  },
+  {
+   "id": "ruler/suite/search.py::S2.11 with a track open, its hits come first",
+   "group": "search",
+   "name": "S2.11 with a track open, its hits come first"
+  },
+  {
+   "id": "ruler/suite/search.py::S2.11 Enter on a hit opens its track on the page that shows it",
+   "group": "search",
+   "name": "S2.11 Enter on a hit opens its track on the page that shows it"
+  },
+  {
+   "id": "ruler/suite/speed.py::S1.6 the median open of a package box shows its page within 400 ms",
+   "group": "speed",
+   "name": "S1.6 the median open of a package box shows its page within 400 ms"
+  },
+  {
+   "id": "ruler/suite/speed.py::S1.6 nineteen opens in twenty, of any box, show their page within 1000 ms",
+   "group": "speed",
+   "name": "S1.6 nineteen opens in twenty, of any box, show their page within 1000 ms"
   }
  ]
 }

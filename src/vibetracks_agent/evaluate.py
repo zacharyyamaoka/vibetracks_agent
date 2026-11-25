@@ -10,6 +10,9 @@
 4. Score the runs (scoring.score), write solutions/<id>/scorecard.json (dev) or scorecard_holdout.json, the first
    run's junit to solutions/<id>/junit-<split>.xml and, for dev, site/data/junit.xml (paths made relative), and
    append one ledger row.
+5. open_ms (OBJECTIVES §8, ruler v3): the median of every package box's open the speed group timed, both runs
+   pooled (an open whose page never showed counts as its 10 s cap); missing when a run has no speed result.
+   speed_summary() holds the rule and the diagnostics beside it.
 """
 
 from __future__ import annotations
@@ -21,6 +24,7 @@ import re
 import shutil
 import signal
 import socket
+import statistics
 import subprocess
 import time
 from pathlib import Path
@@ -30,6 +34,7 @@ from vibetracks_agent import ledger, paths, ruler, scoring, solutions, specs
 
 SEEDS = {"dev": 1, "holdout": 2}
 FORBIDDEN_PORTS = range(4390, 4398)
+OPEN_CAP_MS = 10000.0  # ruler/suite/timer.mjs OPEN_TIMEOUT_MS: an open whose page never showed counts as this
 
 
 def now_iso() -> str:
@@ -205,6 +210,60 @@ def style_off(junit: str | None) -> dict[str, int | None]:
     return {"off": sum(1 for c in style if c.state != "pass"), "measured": len(style)}
 
 
+def _ms(open_: dict) -> float:
+    value = ledger.finite(open_.get("ms"))
+    return OPEN_CAP_MS if value is None else value
+
+
+def speed_summary(speeds: list[dict | None]) -> dict[str, Any]:
+    """open_ms and its diagnostics from each run's speed report (diagnostics.json `speed`, ruler/suite/groups/speed.mjs).
+    open_ms = the median of every package box's open of every run, pooled (OBJECTIVES §8); None unless every run has a
+    speed report with opens (fail closed: one run's number alone is not the KPI). An open whose page never showed
+    counts as its 10 s cap. The diagnostics pool the runs the same way."""
+    runs = [s for s in speeds if isinstance(s, dict) and isinstance(s.get("opens"), list) and s["opens"]]
+    complete = bool(speeds) and len(runs) == len(speeds)
+    pooled = [o for s in runs for o in s["opens"]]
+    package = [o for o in pooled if o.get("kind") == "package"]
+
+    def med(xs: list[float]) -> float | None:
+        xs = [x for x in xs if x is not None]
+        return round(statistics.median(xs), 1) if xs else None
+
+    def nums(opens: list[dict], key: str) -> list[float]:
+        return [v for v in (ledger.finite(o.get(key)) for o in opens) if v is not None]
+
+    def p95(xs: list[float]) -> float | None:
+        if not xs:
+            return None
+        xs = sorted(xs)
+        pos = (len(xs) - 1) * 0.95
+        lo, hi = int(pos), min(int(pos) + 1, len(xs) - 1)
+        return round(xs[lo] + (xs[hi] - xs[lo]) * (pos - lo), 1)
+
+    values = [_ms(o) for o in pooled]
+    per_run = [ledger.finite(s.get("open_ms")) for s in speeds if isinstance(s, dict)]
+    builds = nums(pooled, "builds")
+    kinds = sorted({str(o.get("kind")) for o in pooled})
+    return {
+        "open_ms": med([_ms(o) for o in package]) if complete and package else None,
+        "open_ms_runs": per_run,
+        "open_ms_spread": (round(max(per_run) - min(per_run), 1) if len(per_run) >= 2 and None not in per_run else None),
+        "open_cold_p50": med([_ms(o) for o in package if o.get("phase") == "cold"]),
+        "open_warm_p50": med([_ms(o) for o in package if o.get("phase") == "warm"]),
+        "open_p50_by_kind": {k: med([_ms(o) for o in pooled if str(o.get("kind")) == k]) for k in kinds},
+        "open_p95": p95(values),
+        "open_p95_runs": [ledger.finite(s.get("p95")) for s in speeds if isinstance(s, dict)],
+        "open_max": max(values) if values else None,
+        "opens": len(pooled),
+        "opens_failed": sum(1 for o in pooled if ledger.finite(o.get("ms")) is None),
+        "requests_per_open": med(nums(package, "requests")),
+        "bytes_first_open": med(nums([o for o in package if o.get("phase") == "cold"], "bytes")),
+        "bytes_later_open": med(nums([o for o in package if o.get("phase") == "warm"], "bytes")),
+        "builds_waited": sum(builds) if builds else None,
+        "page_crashes": sum(int(s.get("crashes") or 0) for s in runs),
+    }
+
+
 def evaluate(sid: str, *, split: str = "dev", runs: int = 2, timeout_s: float = scoring.TIME_LIMIT_S,
              with_vt_gate: bool = False, only: str = "") -> dict[str, Any]:
     if split not in SEEDS:
@@ -232,6 +291,8 @@ def evaluate(sid: str, *, split: str = "dev", runs: int = 2, timeout_s: float = 
     wall = time.monotonic() - started
     first = results[0] if results else {}
     off = style_off(first.get("junit"))
+    speeds = [(r.get("diagnostics") or {}).get("speed") for r in results]
+    speed = speed_summary(speeds)
     diagnostics = {
         "shall_passing": scored["shall_total"] - scored["shall_failing"],
         "sidebar_style_props_off": off["off"],
@@ -242,13 +303,17 @@ def evaluate(sid: str, *, split: str = "dev", runs: int = 2, timeout_s: float = 
         "checks_total": scored["checks_total"],
         "registration": (first.get("diagnostics") or {}).get("registration"),
         "stock_tree": (first.get("diagnostics") or {}).get("stock_tree"),
+        **{k: v for k, v in speed.items() if k != "open_ms"},
     }
+    open_ms = speed["open_ms"]
     manifest = ruler.manifest(root)
     card = {
         "solution": sid, "split": split, "ruler": ledger.RULER,
         "objective": scored["shall_failing"], "objective_name": "shall_failing",
-        "tiebreak": scored["should_failing"], "tiebreak_name": "should_failing",
-        "tiebreak2": scored["checks_failing"], "tiebreak2_name": "checks_failing",
+        "tiebreak": ledger.tenth(open_ms), "tiebreak_name": "open_ms (rounded to 10 ms)",
+        "tiebreak2": scored["should_failing"], "tiebreak2_name": "should_failing",
+        "tiebreak3": scored["checks_failing"], "tiebreak3_name": "checks_failing",
+        "open_ms": open_ms, "open_ms_unit": "ms", "open_ms_target": 100,
         "shall_failing": scored["shall_failing"], "shall_total": scored["shall_total"],
         "should_failing": scored["should_failing"], "should_total": scored["should_total"],
         "checks_failing": scored["checks_failing"], "checks_total": scored["checks_total"],
@@ -259,7 +324,8 @@ def evaluate(sid: str, *, split: str = "dev", runs: int = 2, timeout_s: float = 
         "evaluated": now_iso(), "wall_time_s": wall,
         "runs": [{"n": i + 1, "exit": r["exit"], "timed_out": r["timed_out"], "wall_s": round(r["wall_s"], 1),
                   "junit": r["junit"] is not None, "network": "loopback-only namespace" if r["isolated"] else "not isolated",
-                  "reaped_pids": r["reaped"], "groups": (r.get("diagnostics") or {}).get("groups")} for i, r in enumerate(results)],
+                  "reaped_pids": r["reaped"], "groups": (r.get("diagnostics") or {}).get("groups"),
+                  "speed": (r.get("diagnostics") or {}).get("speed")} for i, r in enumerate(results)],
         "code": {"ruler": ledger.RULER, "blackbox_agent_ref": manifest["blackbox_agent"]["ref"],
                  "playwright": manifest.get("playwright", {}).get("version"), "repo_commit": paths.repo_commit(root)},
     }
@@ -275,7 +341,8 @@ def evaluate(sid: str, *, split: str = "dev", runs: int = 2, timeout_s: float = 
             (root / "site" / "data" / "junit.xml").write_text(published)
     row = {"t": now_iso(), "solution": sid, "parent": record.get("parent"), "split": split, "ruler": ledger.RULER,
            "objective": card["objective"], "tiebreak": card["tiebreak"], "tiebreak2": card["tiebreak2"],
-           "admissible": card["admissible"], "gate_pass_rate": card["gate_pass_rate"],
+           "tiebreak3": card["tiebreak3"], "open_ms": open_ms, "should_failing": card["should_failing"],
+           "checks_failing": card["checks_failing"], "admissible": card["admissible"], "gate_pass_rate": card["gate_pass_rate"],
            "failed_gates": card["failed_gates"], "diagnostics": diagnostics, "wall_time_s": wall,
            "repo_commit": paths.repo_commit(root), "vibetracks_sha": sha, "proposed_by": record.get("proposed_by"),
            "change": record.get("change"), "task_objectives": card["task_objectives"]}

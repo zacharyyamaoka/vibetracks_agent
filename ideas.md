@@ -120,7 +120,19 @@ loading come first because every other item reads them.
   - Rung: roll-ups
   - Needs: nothing
   - **Done: [`states-1`](solutions/states-1/)**: `core/box_states.py` maps running/on_track → Working, watching → Idle, waiting_on_zach/blocked → Needs you, keeping the box's own word.
-- [ ] **Ruler v3 candidates** (Zach's call, like any ruler change): S2.2 measures row pitch across the section header,
+- [ ] **Package boxes open in under 400 ms (S1.6, `open_ms`, ruler v3).** What 940b507 does on the speed group
+  (scratch runs while ruler v3 was built; the scored row is [`main-940b507-v3`](solutions/main-940b507-v3/)): a files box opens in about
+  0.2 s, a package box's later opens in 0.5-0.7 s, its first open in about 3.2 s (it waits for `blackbox build`).
+  Every package open makes about 95 requests: 1.7 MB the first time, then 95 `304` revalidations of about 3 kB in all,
+  because the dashboard viewer's ~90 ES modules are served `Cache-Control: no-cache` per box. Three levers, each its
+  own version: (1) build every package box when `vt serve` starts and when a box's HEAD moves (lane `vt/speed-prebuild`);
+  (2) keep opened box frames alive and start loading on press (lane `vt/speed-frames`); (3) serve the viewer's
+  modules as immutable under a versioned path shared by every box (or bundle them), so a later open makes a handful of
+  requests. Expect: S1.6 → pass, `open_ms` down; S1.1 and S1.4 must stay green.
+  - Rung: speed
+  - Needs: nothing
+- [ ] **Ruler v3 candidates** (Zach's call, like any ruler change). *Ruler v3 (PEP 0003) took his two asks of Nov 25
+  (S1.6, S2.9 a shall) and none of these; they wait for v4.* S2.2 measures row pitch across the section header,
   so a Pinned header above the other tracks fails it (boxes-as-tracks-1 merged the headers to pass; Claude has
   separate ones); S1.4 clicks a row that sits under the account footer at its 420 px window.
   - Rung: meta

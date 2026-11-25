@@ -478,5 +478,6 @@ export function boxesTitled(home, title) {
 export const isDir = (p) => { try { return statSync(p).isDirectory() } catch (e) { return false } }
 
 // ── checks ────────────────────────────────────────────────────────────────────────────────────────────────────
-/** A group of checks that share one fresh state (HOME restored, a new vt serve, a new page). */
-export function group(name, checks, run) { return { name, checks, run } }
+/** A group of checks that share one fresh state (HOME restored, a new vt serve, a new page). `budgetMs`: its own time
+ *  budget when it needs more than run.mjs's default (ruler v3's speed group). */
+export function group(name, checks, run, { budgetMs = null } = {}) { return { name, checks, run, budgetMs } }

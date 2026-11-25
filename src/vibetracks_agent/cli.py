@@ -5,6 +5,7 @@
     vta evaluate <id> [--split dev|holdout] [--runs 2] [--vt-gate]   # the acceptance run -> scorecard + ledger row
     vta progress                                  # PROGRESS.md, status.json
     vta leaderboard [--n N] [--split dev|holdout] [--ruler v1]   # the current ruler's board unless --ruler names another
+    vta speed --base <url> [--rounds N] [--json]  # open_ms against any running vt serve, read-only (tools/speed.mjs)
 
 Shapes follow claude_party_agent `src/claude_party_agent/cli.py` @ bdd812a.
 """
@@ -13,8 +14,11 @@ from __future__ import annotations
 
 import argparse
 import os
+import shutil
+import subprocess
 import sys
 import time
+from pathlib import Path
 
 from vibetracks_agent import ledger, paths, progress, ruler, scoring, solutions
 from vibetracks_agent.progress import fmt
@@ -101,13 +105,31 @@ def cmd_leaderboard(args: argparse.Namespace) -> int:
         print(f"no version scored on ruler {args.ruler} yet")
         return 0
     print(f"ruler {args.ruler}, {args.split}")
-    print(f"{'#':>3}  {'version':<24} {'shall':>5} {'should':>6} {'checks':>6} {'adm':>4}  change")
+    print(f"{'#':>3}  {'version':<24} {'shall':>5} {'open ms':>7} {'should':>6} {'checks':>6} {'adm':>4}  change")
     metas = solutions.all_meta()
     for n, row in enumerate(rows[: args.n], start=1):
         change = str((metas.get(row["solution"]) or {}).get("change") or row.get("change") or "")
-        print(f"{n:>3}  {row['solution']:<24} {fmt(row.get('objective')):>5} {fmt(row.get('tiebreak')):>6} "
-              f"{fmt(row.get('tiebreak2')):>6} {'yes' if row.get('admissible') else 'no':>4}  {change[:70]}")
+        print(f"{n:>3}  {row['solution']:<24} {fmt(row.get('objective')):>5} {fmt(ledger.named(row, 'open_ms')):>7} "
+              f"{fmt(ledger.named(row, 'should_failing')):>6} {fmt(ledger.named(row, 'checks_failing')):>6} "
+              f"{'yes' if row.get('admissible') else 'no':>4}  {change[:70]}")
     return 0
+
+
+def cmd_speed(args: argparse.Namespace) -> int:
+    """open_ms against a running vt serve: tools/speed.mjs with this repo's Playwright. Read-only: it starts no server
+    and clicks track rows only (OBJECTIVES §8's timer, ruler/suite/timer.mjs)."""
+    node = "/usr/bin/node" if Path("/usr/bin/node").exists() else shutil.which("node")
+    if not node:
+        _err("vta speed: node is not installed")
+        return 2
+    root = paths.repo_root()
+    cmd = [node, str(root / "tools" / "speed.mjs"), "--base", args.base, "--rounds", str(args.rounds)]
+    if args.json:
+        cmd.append("--json")
+    if args.vt_home:
+        cmd += ["--vt-home", args.vt_home]
+    env = {**os.environ, "PLAYWRIGHT_BROWSERS_PATH": str(paths.browsers_dir())}
+    return subprocess.run(cmd, cwd=root, env=env).returncode
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -139,6 +161,12 @@ def main(argv: list[str] | None = None) -> int:
     board.add_argument("--split", choices=("dev", "holdout"), default="dev")
     board.add_argument("--ruler", default=ledger.RULER, help=f"the ruler whose rows to rank (default {ledger.RULER})")
     board.set_defaults(run=cmd_leaderboard)
+    speed = commands.add_parser("speed", help="time track opens on a running vt serve (read-only)")
+    speed.add_argument("--base", required=True, help="the vt serve to time, e.g. http://127.0.0.1:4396/ (Zach's Preview)")
+    speed.add_argument("--rounds", type=int, default=2, help="rounds over every track row (the first is the cold one)")
+    speed.add_argument("--vt-home", default=None, help="its vt home, to count the builds it finished (read-only)")
+    speed.add_argument("--json", action="store_true", help="the full report as JSON")
+    speed.set_defaults(run=cmd_speed)
     args = parser.parse_args(argv)
     started = time.monotonic()
     code = int(args.run(args))

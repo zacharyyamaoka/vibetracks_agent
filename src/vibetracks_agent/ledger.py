@@ -4,11 +4,18 @@
     append(row, path)          # one row; only `vta evaluate` calls it
     latest(rows)               # the newest row per (solution, split, ruler)
     rank(rows, split="dev")    # OBJECTIVES §8's order over that split's latest rows of the current ruler (RULER)
+    named(row, key)            # shall_failing / should_failing / checks_failing / open_ms of a row of any ruler
     best(rows)                 # the first admissible row in rank order, else None
 
 A row carries the ruler it was scored on (`ruler`). WHY rank only within one ruler (OBJECTIVES §11): a new ruler
-changes what is counted (v2 adds S2.10, so the shall total goes 19 -> 20), so a v1 number and a v2 number are not the
-same quantity; a v1 row is kept, labelled, and never compared against a v2 one (`rank(rows, ruler="v1")` reads it).
+changes what is counted (v2 adds S2.10, so the shall total goes 19 -> 20; v3 adds S1.6 and makes S2.9 a shall,
+22 shall and 3 should), so a v1 number and a v2 number are not the same quantity; a row is kept, labelled, and never
+compared against another ruler's (`rank(rows, ruler="v1")` reads v1's).
+
+The tie-break slots are ordered (`tiebreak`, `tiebreak2`, `tiebreak3`: the blackbox_agent fold ranks equal objectives
+by them in that order). Up to v2: should_failing, checks_failing. Since v3 (PEP 0003): `open_ms` rounded to 10 ms,
+should_failing, checks_failing, and a v3 row also names each (`open_ms`, `should_failing`, `checks_failing`), which
+`named()` reads for any ruler.
 
 Shapes follow claude_party_agent `src/claude_party_agent/ledger.py` @ bdd812a (read, append, latest, rank_key).
 """
@@ -21,16 +28,17 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
-RULER = "v2"  # the ruler this code scores: OBJECTIVES §11, ruler/manifest.json `ruler`
+RULER = "v3"  # the ruler this code scores: OBJECTIVES §11, ruler/manifest.json `ruler`
 SPLITS = ("dev", "holdout")
 ROW_KEYS = (
     "t", "solution", "parent", "split", "ruler", "objective", "tiebreak", "tiebreak2", "admissible", "gate_pass_rate",
     "failed_gates", "diagnostics", "wall_time_s", "repo_commit", "vibetracks_sha", "proposed_by", "change",
     "task_objectives",
 )  # fmt: skip
+V3_KEYS = ("tiebreak3", "open_ms", "should_failing", "checks_failing")  # a row of ruler v3 or later also names these
 
-__all__ = ["ROW_KEYS", "RULER", "SPLITS", "append", "best", "finite", "latest", "rank", "rank_key", "read",
-           "rulers"]
+__all__ = ["ROW_KEYS", "RULER", "SPLITS", "V3_KEYS", "append", "best", "finite", "latest", "named", "rank", "rank_key", "read",
+           "rulers", "tenth"]
 
 
 def finite(value: Any) -> float | None:
@@ -63,7 +71,8 @@ def read(path: Path | str) -> list[dict[str, Any]]:
 
 
 def append(row: Mapping[str, Any], path: Path | str) -> None:
-    missing = [key for key in ROW_KEYS if key not in row]
+    needed = ROW_KEYS + (() if row.get("ruler") in ("v1", "v2") else V3_KEYS)
+    missing = [key for key in needed if key not in row]
     if missing:
         raise ValueError(f"a ledger row needs {missing}")
     if row.get("split") not in SPLITS:
@@ -91,10 +100,30 @@ def _num(value: Any) -> float:
     return math.inf if number is None else number
 
 
+def tenth(ms: Any) -> float | None:
+    """open_ms as it ranks (OBJECTIVES §8): rounded to 10 ms, half up; None when missing."""
+    number = finite(ms)
+    return None if number is None else float(math.floor(number / 10 + 0.5) * 10)
+
+
+def named(row: Mapping[str, Any], key: str) -> Any:
+    """A row's shall_failing, should_failing, checks_failing or open_ms, whichever ruler scored it (a v1/v2 row keeps
+    should and checks in its tie-break slots and has no open_ms)."""
+    if key == "shall_failing":
+        return row.get("objective")
+    if key in row:
+        return row.get(key)
+    if row.get("ruler") in ("v1", "v2", None):
+        return {"should_failing": row.get("tiebreak"), "checks_failing": row.get("tiebreak2")}.get(key)
+    return None
+
+
 def rank_key(row: Mapping[str, Any]) -> tuple:
-    """OBJECTIVES §8: admissible first, by shall_failing, then should_failing, then checks_failing (lower first);
-    then the rest by gate pass rate (higher first) and the same three. A missing number sorts last."""
-    numbers = (_num(row.get("objective")), _num(row.get("tiebreak")), _num(row.get("tiebreak2")))
+    """OBJECTIVES §8: admissible first, by the objective (shall_failing), then the tie-break slots in order (lower
+    first): since v3 open_ms rounded to 10 ms, should_failing, checks_failing; up to v2 should_failing, checks_failing.
+    Then the rest by gate pass rate (higher first) and the same. A missing number sorts last."""
+    numbers = (_num(row.get("objective")), _num(row.get("tiebreak")), _num(row.get("tiebreak2")),
+               _num(row.get("tiebreak3")))
     if row.get("admissible") is True:
         return (0, 0.0, *numbers, str(row.get("solution")))
     return (1, -(finite(row.get("gate_pass_rate")) or 0.0), *numbers, str(row.get("solution")))

@@ -14,6 +14,12 @@ Makes, inside a temporary HOME that holds nothing else:
 - the parent tree those boxes form (fixture.json `boxes[].parent`, siblings in manual order); the ruler hands it to the
   version under test through that version's own CLI (ruler/stage.py), never by writing a Vibe Tracks file;
 - one more box that is not in the tree (S1.5's `vt add`), and a plain folder that is not a box;
+- (ruler v3) six **package** boxes: a parent with two sub-tracks and a grandchild, and two top-level leaves
+  (fixture.json `package_boxes`):
+  boxes whose Pages workflow builds the site with the blackbox_agent package, as Zach's boxes do since blackbox-agent
+  0.1 (2026-11-24), so a version builds them with its own `blackbox build` and the real dashboard viewer loads (S1.6).
+  They commit no site/; each one's objective name (OBJECTIVES.md) is its marker, which its built landing and dashboard
+  both show. Not in the tree: the fold and speed groups add them with `vt add`, so every v2 group runs as it did;
 - `~/blackbox_agent`: blackbox_agent at the frozen ref (README.md, template/, tools/apply_template.py), a git repo, so
   a `vt new` that copies the starter box works offline;
 - `~/.gitconfig` (a fixture person), and a fake `gh` in --bin that records its arguments and plays signed in or out.
@@ -46,6 +52,16 @@ TOPICS = ["Grasp", "Sort", "Reach", "Vision", "Gripper", "Conveyor", "Calibratio
 STATES = ("working", "blocked", "idle", "done")
 TEMPLATE_FILES = (".github/workflows/pages.yml", "site/nav.json", "tests/test_readme_landing_link.py")
 # The blackbox_agent README's format table ("one box = one repo"), files only (a folder with no file has no place in git)
+# The package's own Pages workflow (blackbox-agent 0.1.12 scaffold/github/workflows/pages.yml, as vendored in vibetracks
+# 940b507): the line a version reads to know the box builds with the package (vibetracks PEP 0028 "package").
+PACKAGE_WORKFLOW = """name: pages
+on: {push: {branches: [main]}, workflow_dispatch: {}}
+permissions: {contents: read, pages: write, id-token: write}
+jobs:
+  site:
+    uses: zacharyyamaoka/blackbox_agent/.github/workflows/site.yml@v0
+    secrets: {CLOUDFLARE_API_TOKEN: "${{ secrets.CLOUDFLARE_API_TOKEN }}", CLOUDFLARE_ACCOUNT_ID: "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"}
+"""
 FORMAT_FILES = ("README.md", "OBJECTIVES.md", "AGENTS.md", "PROGRESS.md", "ledger.jsonl", "ideas.md", "REFERENCES.md",
                 "status.json")
 STARTER_FILES = tuple(sorted(FORMAT_FILES + TEMPLATE_FILES))
@@ -171,9 +187,46 @@ def plan(seed: int) -> dict:
     new_titles = {key: f"{titles[len(boxes) + 1 + i]}" for i, key in
                   enumerate(["s41", "s41_from", "s43_local", "s43_out", "s43_in", "s42", "s44"])}
     plain = f"plain_folder_{hashlib.sha256(f'plain{seed}'.encode()).hexdigest()[:6]}"
+    latest = max(dt.datetime.fromisoformat(b["activity"].replace("Z", "+00:00")) for b in boxes)
+    package = package_plan(seed, titles[len(boxes) + 1 + len(new_titles):], latest)
     return {"seed": seed, "boxes": boxes, "extra": extra, "new_titles": new_titles, "plain_folder": plain,
+            "package_boxes": package,
             "s15_parent": next(b for b in boxes if "top_leaf" in b["roles"])["slug"],
             "section_name": f"Section {pool[-1]}"}
+
+
+def package_plan(seed: int, titles: list[str], latest: dt.datetime) -> list[dict]:
+    """Ruler v3: the six package boxes, from their own random stream (the boxes above draw exactly as in v2, so every
+    v2 box, title and marker is unchanged), and two top-level leaves (S1.6: six package boxes, the kind every box of
+    Zach's is, so open_ms has six of them a round). A parent (S2.9: two sub-tracks, one with a sub-track of its own; S3.4: a
+    blocked one with 2 agents and a working one with 1 below it) whose activity is newer than every box above (`latest`
+    is theirs) and, in both seeds, older than the extra box, so whichever order a version sorts by, a row sits below its
+    subtree once the extra box is added after it."""
+    rng = random.Random(seed * 104729 + 3)
+    boxes: list[dict] = []
+
+    def add(parent: dict | None, state: str, agents: int, *roles: str) -> dict:
+        title = titles[len(boxes)]
+        slug = slugify(title)
+        token = hashlib.sha256(f"{seed}-package-{slug}".encode()).hexdigest()[:8]
+        box = {"title": title, "slug": slug, "parent": parent["slug"] if parent else None, "state": state,
+               "agents": agents, "roles": ["package", *roles], "waits": [], "feedback": [], "site": False,
+               "kind": "package", "marker": f"vta_page_{token}", "readme_marker": f"VTA readme marker {slug} {token}"}
+        boxes.append(box)
+        return box
+
+    top = add(None, "idle", 0, "pkg_parent")
+    middle = add(top, "blocked", 2, "pkg_child", "pkg_blocked")
+    add(middle, "working", 1, "pkg_grandchild")
+    add(top, "idle", 0, "pkg_child")
+    add(None, rng.choice(["idle", "working"]), 0, "pkg_leaf")
+    add(None, rng.choice(["idle", "working"]), 0, "pkg_leaf")
+    # 10-400 minutes after the newest box above (seed 1: Nov 22 04:29; seed 2: Nov 21 19:09), so before the extra box's
+    # Nov 23 05:00; the parent newest, the leaves oldest
+    minutes = sorted(rng.sample(range(10, 400), len(boxes)), reverse=True)
+    for box, minute in zip(boxes, minutes):
+        box["activity"] = iso(latest + dt.timedelta(minutes=minute))
+    return boxes
 
 
 def preorder(boxes: list[dict]) -> list[dict]:
@@ -209,7 +262,13 @@ def write_box(folder: Path, box: dict, seed: int, blackbox: Path, ref: str, home
           f"# {title}\n\n**[▶ Live landing page](https://fixture-owner.github.io/{slug}/)**, redeployed from `main` on "
           f"every push · a black-box agent repo in the [blackbox_agent](https://github.com/zacharyyamaoka/blackbox_agent) "
           f"format\n\nA fixture box for the vibetracks_agent acceptance run (ruler v1, seed {seed}).\n\n{box['readme_marker']}\n")
-    write(folder / "OBJECTIVES.md", f"# Objectives & Gates\n\nObjective: `fixture_metric`, lower is better, target 0.\n")
+    if box.get("kind") == "package":
+        # WHY the marker is the objective's name: the package's landing and dashboard both print it at the top
+        # ("<box> · <objective> (dev, lower is better)"), the box's README never does, nor does a "building" page
+        write(folder / "OBJECTIVES.md", f"# Objectives & Gates\n\n**Objective (one number, lower is better): "
+                                        f"`{box['marker']}`**, target 0.\n")
+    else:
+        write(folder / "OBJECTIVES.md", f"# Objectives & Gates\n\nObjective: `fixture_metric`, lower is better, target 0.\n")
     write(folder / "AGENTS.md", "# How an agent works here\n\nRead OBJECTIVES.md, propose, evaluate, commit.\n")
     write(folder / "PROGRESS.md", f"# Progress\n\nGenerated from ledger.jsonl. Last activity {box['activity']}.\n")
     write(folder / "REFERENCES.md", "# References\n\n- blackbox_agent: the format.\n")
@@ -242,6 +301,8 @@ def write_box(folder: Path, box: dict, seed: int, blackbox: Path, ref: str, home
         "created": box["activity"]}, indent=2) + "\n")
     for path in TEMPLATE_FILES:
         write(folder / path, fill(template_text(blackbox, ref, path), box))
+    if box.get("kind") == "package":
+        write(folder / ".github" / "workflows" / "pages.yml", PACKAGE_WORKFLOW)
     if box["site"]:
         write(folder / "site" / "index.html",
               f"<!doctype html>\n<html><head><meta charset=\"utf-8\"><title>{title}</title></head>\n<body>\n"
@@ -352,11 +413,15 @@ def build(seed: int, home: Path, bin_dir: Path, state_dir: Path, blackbox: Path,
     extra = p["extra"]
     extra["path"] = str(home / extra["slug"])
     extra["head"] = write_box(home / extra["slug"], extra, seed, blackbox, ref, home)
+    for box in p["package_boxes"]:
+        box["path"] = str(home / box["slug"])
+        box["head"] = write_box(home / box["slug"], box, seed, blackbox, ref, home)
     plain = home / p["plain_folder"]
     write(plain / "notes.txt", "A plain folder: not a black-box agent repo.\n")
     return {
         "schema": "vibetracks-agent/fixture-1", "seed": seed, "home": str(home), "person": PERSON,
-        "boxes": ordered, "extra": extra, "plain_folder": str(plain), "s15_parent": p["s15_parent"],
+        "boxes": ordered, "extra": extra, "package_boxes": p["package_boxes"], "plain_folder": str(plain),
+        "s15_parent": p["s15_parent"],
         "new_titles": p["new_titles"], "section_name": p["section_name"],
         "starter_files": list(STARTER_FILES), "blackbox": write_blackbox(home, blackbox, ref),
         "gh": write_fake_gh(bin_dir, state_dir),

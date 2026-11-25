@@ -16,6 +16,8 @@ inside the gates. You do it by proposing versions of Vibe Tracks (vibetracks com
    touch its Stable/Preview ports 4394-4397), then here:
    `vta new <id> --ref <branch or sha> --parent <id> --change "…" --agent "<agent>" --model "<model id>"`.
 7. `vta evaluate <id>` (dev). It writes the scorecard, appends [`ledger.jsonl`](ledger.jsonl) and refreshes the generated files.
+   For speed work (S1.6, `open_ms`), `vta speed --base <your lane's vt serve URL>` times its track opens the ruler's way
+   in a minute, read-only, before the full run.
 8. Commit, win or lose, by pathspec: `git add -- solutions/<id>` then
    `git commit -- solutions/<id> ledger.jsonl PROGRESS.md status.json site ideas.md`.
 9. Cross the idea off in [`ideas.md`](ideas.md) with the id and the result; add what the result suggests.
